@@ -1,0 +1,45 @@
+
+can_write_console_log: False
+working_dir_path: /tmp/biobb/unitests
+
+
+
+topology:
+  paths:
+    input_pdb_path: file:test_data_dir/haddock/1kim_h.pdb
+    output_grd_path: output_grd.grd
+    output_cube_path: output_cube.cube
+    ref_output_haddock_mip_cube_path: file:test_reference_dir/haddock/haddock_mip.cube
+    ref_output_haddock_mip_grd_path: file:test_reference_dir/haddock/haddock_mip.grd
+  properties:
+    remove_tmp: True
+    execution_type: mip
+
+topology_docker:
+  paths:
+    input_pdb_path: file:test_data_dir/haddock/1kim_h.pdb
+    output_grd_path: output_grd.grd
+    output_cube_path: output_cube.cube
+    ref_output_haddock_mip_cube_path: file:test_reference_dir/haddock/haddock_mip.cube
+    ref_output_haddock_mip_grd_path: file:test_reference_dir/haddock/haddock_mip.grd
+  properties:
+    remove_tmp: True
+    execution_type: mip
+    container_path: docker
+    container_image: quay.io/biocontainers/haddock:2.7.0--h8c3ec31_0
+    container_volume_path: /inout
+
+topology_singularity:
+  paths:
+    input_pdb_path: file:test_data_dir/haddock/1kim_h.pdb
+    output_grd_path: output_grd.grd
+    output_cube_path: output_cube.cube
+    ref_output_haddock_mip_cube_path: file:test_reference_dir/haddock/haddock_mip.cube
+    ref_output_haddock_mip_grd_path: file:test_reference_dir/haddock/haddock_mip.grd
+  properties:
+    remove_tmp: True
+    execution_type: mip
+    container_path: singularity
+    container_image: haddock.simg
+    container_volume_path: /inout
+

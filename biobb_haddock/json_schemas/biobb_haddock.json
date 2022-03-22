@@ -1,0 +1,64 @@
+{
+    "_id": "biobb_haddock",
+    "desc": "biobb_haddock is the Biobb module collection to compute classical molecular interaction potentials.",
+    "github": "https://github.com/bioexcel/biobb_haddock",
+    "readthedocs": "https://biobb-haddock.readthedocs.io/en/latest/",
+    "conda": "https://anaconda.org/bioconda/biobb_haddock",
+    "docker": "https://quay.io/biocontainers/biobb_haddock:3.7.8--pyhdfd78af_0",
+    "singularity": "https://www.singularity-hub.org/collections/",
+    "version": "3.7.8",
+    "tools" : [
+        {
+            "block" : "haddock",
+            "tool" : "haddock haddock",
+            "desc" : "haddock haddock module compute classical molecular interaction potentials.",
+            "exec" : "haddock",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.haddock"
+        },
+        {
+            "block" : "Titration",
+            "tool" : "haddock titration",
+            "desc" : "haddock haddock module compute classical molecular interaction potentials.",
+            "exec" : "titration",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-titration.titration"
+        },
+        {
+            "block" : "PrepareStructure",
+            "tool" : "Prepare Structure",
+            "desc" : "Creates a haddock suitable PDB from an standar structure file",
+            "exec" : "prepare_structure",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-prepare_structure.prepare_structure"
+        },
+        {
+            "block" : "PreparePDB",
+            "tool" : "Prepare PDB",
+            "desc" : "Creates a haddock suitable PDB from an standar PDB file",
+            "exec" : "prepare_pdb",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-prepare_pdb.prepare_pdb"
+        },
+        {
+            "block" : "IgnoreResidues",
+            "tool" : "Ignore Residues",
+            "desc" : "Mark residues which charges will be ignored in the haddock potential calculations.",
+            "exec" : "ignore_residues",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-ignore_residues.ignore_residues"
+        }
+    ],
+    "dep_pypi" : [
+        "install_requires=['biobb_common==3.7.0', 'mdanalysis==2.0.0', 'biobb_structure_checking==3.9.11']",
+        "python_requires='==3.7.*'"
+    ],
+    "dep_conda" : [
+        "python ==3.7.*",
+        "biobb_common ==3.7.0",
+        "haddock ==2.7.0",
+        "mdanalysis==2.0.0",
+        "biobb_structure_checking==3.9.11"
+    ],
+    "keywords" : [
+        "classical",
+        "molecular",
+        "interaction",
+        "potentials"
+    ]
+}
