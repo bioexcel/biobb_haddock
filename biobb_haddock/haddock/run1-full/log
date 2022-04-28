@@ -1,0 +1,26 @@
+[2022-04-28 16:15:22,388 cli INFO] 
+##############################################
+#                                            #
+#                 HADDOCK 3                  #
+#                                            #
+##############################################
+
+Starting HADDOCK 3.0.0 on 2022-04-28 16:15:00
+
+Python 3.9.0 | packaged by conda-forge | (default, Nov 26 2020, 07:54:06) 
+[Clang 11.0.0 ]
+
+[2022-04-28 16:15:22,424 libworkflow INFO] Reading instructions of [topoaa] step
+[2022-04-28 16:15:22,446 base_cns_module INFO] Running [topoaa] module
+[2022-04-28 16:15:22,446 __init__ INFO] [topoaa] Molecule 1: e2aP_1F3G.pdb
+[2022-04-28 16:15:22,448 __init__ INFO] [topoaa] Sanitizing molecule e2aP_1F3G.pdb
+[2022-04-28 16:15:22,462 __init__ INFO] [topoaa] Topology CNS input created in e2aP_1F3G.inp
+[2022-04-28 16:15:22,462 __init__ INFO] [topoaa] Running CNS Jobs n=1
+[2022-04-28 16:15:22,462 libparallel INFO] Using 1 cores
+[2022-04-28 16:15:24,544 libparallel INFO] >> /e2aP_1F3G.inp completed 100% 
+[2022-04-28 16:15:24,544 libparallel INFO] 1 tasks finished
+[2022-04-28 16:15:24,545 __init__ INFO] [topoaa] CNS jobs have finished
+[2022-04-28 16:15:24,547 base_cns_module INFO] Module [topoaa] finished.
+[2022-04-28 16:15:24,547 __init__ INFO] [topoaa] took 2 seconds
+[2022-04-28 16:15:24,547 cli INFO] This HADDOCK3 run took: 2 seconds
+[2022-04-28 16:15:24,547 cli INFO] Finished at 28/04/2022 16:15:24. Dovidenia! Até logo! Good bye!

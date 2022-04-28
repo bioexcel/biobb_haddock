@@ -1,0 +1,79 @@
+{
+    "input": [],
+    "output": [
+        {
+            "0": {
+                "clt_id": null,
+                "clt_model_rank": null,
+                "clt_rank": null,
+                "created": "2022-04-28 16:15:24",
+                "file_name": "e2aP_1F3G_haddock.pdb",
+                "file_type": {
+                    "py/reduce": [
+                        {
+                            "py/type": "haddock.libs.libontology.Format"
+                        },
+                        {
+                            "py/tuple": [
+                                "pdb"
+                            ]
+                        }
+                    ]
+                },
+                "full_name": "e2aP_1F3G_haddock.pdb",
+                "len": NaN,
+                "ori_name": "e2aP_1F3G",
+                "path": "/Users/pau/projects/biobb_haddock/biobb_haddock/haddock/run1-full/00_topoaa",
+                "py/object": "haddock.libs.libontology.PDBFile",
+                "rel_path": {
+                    "py/reduce": [
+                        {
+                            "py/type": "pathlib.PosixPath"
+                        },
+                        {
+                            "py/tuple": [
+                                "..",
+                                "00_topoaa",
+                                "e2aP_1F3G_haddock.pdb"
+                            ]
+                        }
+                    ]
+                },
+                "score": NaN,
+                "topology": {
+                    "created": "2022-04-28 16:15:24",
+                    "file_name": "e2aP_1F3G_haddock.psf",
+                    "file_type": {
+                        "py/reduce": [
+                            {
+                                "py/type": "haddock.libs.libontology.Format"
+                            },
+                            {
+                                "py/tuple": [
+                                    "psf"
+                                ]
+                            }
+                        ]
+                    },
+                    "full_name": "e2aP_1F3G_haddock.psf",
+                    "path": "/Users/pau/projects/biobb_haddock/biobb_haddock/haddock/run1-full/00_topoaa",
+                    "py/object": "haddock.libs.libontology.TopologyFile",
+                    "rel_path": {
+                        "py/reduce": [
+                            {
+                                "py/type": "pathlib.PosixPath"
+                            },
+                            {
+                                "py/tuple": [
+                                    "..",
+                                    "00_topoaa",
+                                    "e2aP_1F3G_haddock.psf"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}
