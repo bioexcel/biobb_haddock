@@ -8,9 +8,9 @@ class TestTopology():
 
     def tearDown(self):
         pass
-        # fx.test_teardown(self)
+        #fx.test_teardown(self)
 
     def test_topology(self):
         topology(properties=self.properties, **self.paths)
-        assert fx.not_empty(self.paths['output_pdb_path'])
-        assert fx.equal(self.paths['output_pdb_path'], self.paths['ref_output_pdb_path'])
+        assert fx.not_empty(self.paths['output_top_zip'])
+        assert fx.equal(self.paths['output_top_zip'], self.paths['ref_output_top_zip'])
