@@ -8,10 +8,11 @@ topology:
   paths:
     mol1_input_pdb_path: file:test_data_dir/haddock/e2aP_1F3G.pdb
     mol2_input_pdb_path: file:test_data_dir/haddock/hpr_ensemble.pdb
+
     output_haddock_wf_data_zip: haddock_wf_data.zip
     mol1_output_top_zip_path: mol1_top.zip
     mol2_output_top_zip_path: mol2_top.zip
-    ref_output_haddock_wf_data_zip: file:test_reference_dir/haddock/ref_topology.zip
+
     ref_mol1_output_top_zip_path: file:test_reference_dir/haddock/ref_mol1_top.zip
     ref_mol2_output_top_zip_path: file:test_reference_dir/haddock/ref_mol2_top.zip
   properties:
@@ -23,11 +24,24 @@ rigid_body:
   paths:
     input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_topology.zip
     restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
+
     docking_output_zip_path: docking_output.zip
     output_haddock_wf_data_zip: haddock_wf_data.zip
 
-    ref_output_haddock_wf_data_zip: file:test_reference_dir/haddock/ref_haddock_wf_data_rigid.zip
     ref_docking_output_zip_path: file:test_reference_dir/haddock/ref_rigidbody.zip
+  properties:
+    binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
+    remove_tmp: False
+
+capri_eval:
+  paths:
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_rigid.zip
+    reference_pdb_path: file:test_data_dir/haddock/e2a-hpr_1GGR.pdb
+
+    output_evaluation_zip_path: caprieval_output.zip
+    output_haddock_wf_data_zip: haddock_wf_data.zip
+
+    ref_output_evaluation_zip_path: file:test_reference_dir/haddock/ref_caprieval.zip
   properties:
     binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
     remove_tmp: False
