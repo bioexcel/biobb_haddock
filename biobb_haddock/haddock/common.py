@@ -28,9 +28,13 @@ def create_cfg(output_cfg_path: str, workflow_dict: Mapping[str, str], input_cfg
 
 
 def write_cfg(output_cfg_path: str, workflow_dict: Mapping[str, str], cfg_dict: Mapping[str, str]):
-    cfg_list: List[str] = [f"run_dir = '{workflow_dict['run_dir']}'",
-                           f"molecules = {workflow_dict['molecules']}",
-                           f"\n[{workflow_dict['haddock_step_name']}]"]
+    cfg_list: List[str] = []
+    if workflow_dict.get('run_dir'):
+        cfg_list.append(f"run_dir = '{workflow_dict['run_dir']}'")
+    if workflow_dict.get('molecules'):
+        cfg_list.append(f"molecules = {workflow_dict['molecules']}")
+    cfg_list.append(f"\n[{workflow_dict['haddock_step_name']}]")
+
     for k, v in cfg_dict.items():
         if isinstance(v, str):
             cfg_list.append(k + ' = ' + f"'{v}'")
@@ -76,4 +80,30 @@ def cfg_preset(haddock_step_name: str) -> Dict[str, str]:
         cfg_dict['limit'] = True
         cfg_dict['tolerance'] = 0
 
+    elif haddock_step_name == 'rigidbody':
+        cfg_dict['sampling'] = 20
+        cfg_dict['tolerance'] = 20
+
     return cfg_dict
+
+
+def unzip_workflow_data(zip_file: str, out_log: logging.Logger = None) -> str:
+    """ Extract all files in the zip_file and return the directory.
+
+    Args:
+        zip_file (str): Input topology zipball file path.
+        out_log (:obj:`logging.Logger`): Input log object.
+
+    Returns:
+        str: Path to the extracted directory.
+
+    """
+    extract_dir = fu.create_unique_dir()
+    zip_list = fu.unzip_list(zip_file, extract_dir, out_log)
+    if out_log:
+        out_log.info('Unzipping: ')
+        out_log.info(zip_file)
+        out_log.info('To: ')
+        for file_name in zip_list:
+            out_log.info(file_name)
+    return extract_dir

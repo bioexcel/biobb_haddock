@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Module containing the haddock Topology class and the command line interface."""
+"""Module containing the haddock RigidBody class and the command line interface."""
 import os
 import json
 import argparse
@@ -12,19 +12,19 @@ from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from biobb_haddock.haddock.common import create_cfg
 from biobb_haddock.haddock.common import cfg_preset
+from biobb_haddock.haddock.common import unzip_workflow_data
 
 
-class Topology(BiobbObject):
+class RigidBody(BiobbObject):
     """
-    | biobb_haddock Topology
-    | Wrapper class for the Haddock Topology module.
-    | The  Topology module. haddock haddock module compute classical molecular interaction potentials.
+    | biobb_haddock RigidBody
+    | Wrapper class for the Haddock RigidBody module.
+    | The RigidBody module. Haddock RigidBody  module compute rigid body docking between two molecules.
 
     Args:
-        mol1_input_pdb_path: (str): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        mol1_output_top_zip_path (str): Path to the output PDB file collection in zip format. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol1_top.zip>`_. Accepted formats: zip (edam:format_3987).
-        mol2_input_pdb_path: (str) (Optional): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/hpr_ensemble.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        mol2_output_top_zip_path (str) (Optional): Path to the output PDB file collection in zip format. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol2_top.zip>`_. Accepted formats: zip (edam:format_3987).
+        input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: input. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip>`_. Accepted formats: zip (edam:format_3987).
+        docking_output_zip_path (str): Path to the output PDB file collection in zip format. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_rigidbody.zip>`_. Accepted formats: zip (edam:format_3987).
+        restraints_table_path: (str) (Optional): Path to the input TBL file containing a list of restraints for docking. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl>`_. Accepted formats: tbl (edam:format_2330).
         output_haddock_wf_data_zip (str) (Optional): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip>`_. Accepted formats: zip (edam:format_3987).
         haddock_config_path (str) (Optional): Haddock configuration CFG file path. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg>`_. Accepted formats: cfg (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
@@ -43,11 +43,11 @@ class Topology(BiobbObject):
     Examples:
         This is a use example of how to use the building block from Python::
 
-            from biobb_haddock.haddock.Topology import topology
+            from biobb_haddock.haddock.rigid_body import rigid_body
             prop = { 'binary_path': 'haddock' }
-            topology(mol1_input_pdb_path='/path/to/myStructure.pdb',
-                     mol1_output_top_zip_path='/path/to/topology.zip',
-                     properties=prop)
+            rigid_body(input_haddock_wf_data_zip='/path/to/myworkflowdata.zip',
+                       docking_output_zip_path='/path/to/mydockingstructures.zip',
+                       properties=prop)
 
     Info:
         * wrapped_software:
@@ -59,10 +59,9 @@ class Topology(BiobbObject):
             * schema: http://edamontology.org/EDAM.owl
     """
 
-    def __init__(self, mol1_input_pdb_path: str, mol1_output_top_zip_path: str,
-                 mol2_input_pdb_path: str = None, mol2_output_top_zip_path: str = None,
-                 output_haddock_wf_data_zip: str = None, haddock_config_path: str = None,
-                 properties: dict = None, **kwargs) -> None:
+    def __init__(self, input_haddock_wf_data_zip: str, docking_output_zip_path: str,
+                 restraints_table_path: str = None, output_haddock_wf_data_zip: str = None,
+                 haddock_config_path: str = None, properties: dict = None, **kwargs) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -70,18 +69,18 @@ class Topology(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            "in": {"mol1_input_pdb_path": mol1_input_pdb_path,
-                   "mol2_input_pdb_path": mol2_input_pdb_path,
+            "in": {"restraints_table_path": restraints_table_path,
                    "haddock_config_path": haddock_config_path
                    },
             "out": {"output_haddock_wf_data_zip": output_haddock_wf_data_zip,
-                    "mol1_output_top_zip_path": mol1_output_top_zip_path,
-                    "mol2_output_top_zip_path": mol2_output_top_zip_path
+                    "docking_output_zip_path": docking_output_zip_path
                     }
         }
+        # Should not be copied inside container
+        self.input_haddock_wf_data_zip = input_haddock_wf_data_zip
 
         # Properties specific for BB
-        self.haddock_step_name = 'topoaa'
+        self.haddock_step_name = 'rigidbody'
         self.output_cfg_path = properties.get('output_cfg_path', 'haddock.cfg')
         self.cfg = {k: str(v) for k, v in properties.get('cfg', dict()).items()}
 
@@ -101,12 +100,13 @@ class Topology(BiobbObject):
         if self.check_restart(): return 0
         self.stage_files()
 
-        workflow_dict = {'run_dir': fu.create_unique_dir(),
-                         'molecules': [self.stage_io_dict['in']['mol1_input_pdb_path']],
-                         'haddock_step_name': self.haddock_step_name}
+        # Unzip workflow data to workflow_data_out
+        run_dir = unzip_workflow_data(zip_file=self.input_haddock_wf_data_zip, out_log=self.out_log)
 
-        if self.stage_io_dict['in'].get('mol2_input_pdb_path'):
-            workflow_dict['molecules'].append(self.stage_io_dict['in'].get('mol2_input_pdb_path'))
+        workflow_dict = {'haddock_step_name': self.haddock_step_name}
+
+        if self.stage_io_dict['in'].get('restraints_table_path'):
+            self.cfg['ambig_fname'] = self.stage_io_dict['in'].get('restraints_table_path')
 
         # Create data dir
         cfg_dir = fu.create_unique_dir()
@@ -122,7 +122,10 @@ class Topology(BiobbObject):
             shutil.copy2(self.output_cfg_path, self.stage_io_dict.get("unique_dir"))
             self.output_cfg_path = str(Path(self.container_volume_path).joinpath(Path(self.output_cfg_path).name))
 
-        self.cmd = [self.binary_path, self.output_cfg_path]
+            shutil.copytree(run_dir, str(Path(self.stage_io_dict.get("unique_dir")).joinpath(Path(run_dir).name)))
+            run_dir = str(Path(self.stage_io_dict.get("unique_dir")).joinpath(Path(run_dir).name))
+
+        self.cmd = [self.binary_path, self.output_cfg_path, '--extend-run', run_dir]
 
         # Run Biobb block
         self.run_biobb()
@@ -131,20 +134,16 @@ class Topology(BiobbObject):
         # self.copy_to_host()
 
         # Copy output
-        haddock_output_path = Path(workflow_dict['run_dir'], '0_'+self.haddock_step_name)
-        mol1_name = str(Path(self.io_dict['in']['mol1_input_pdb_path']).stem)
-        mol1_output_file_list = list(haddock_output_path.glob(mol1_name + r'*_haddock.pdb'))
-        fu.zip_list(self.io_dict['out']['mol1_output_top_zip_path'], mol1_output_file_list, self.out_log)
 
-        if self.io_dict['out'].get('mol1_output_top_zip_path'):
-            mol2_name = str(Path(self.io_dict['in']['mol2_input_pdb_path']).stem)
-            mol2_output_file_list = list(haddock_output_path.glob(mol2_name + r'*_haddock.pdb'))
-            fu.zip_list(self.io_dict['out']['mol2_output_top_zip_path'], mol2_output_file_list, self.out_log)
+        haddock_output_list = [str(path) for path in Path(run_dir).iterdir() if path.is_dir() and str(path).endswith(workflow_dict['haddock_step_name'])]
+        haddock_output_list.sort(reverse=True)
+        output_file_list = list(Path(haddock_output_list[0]).glob(workflow_dict['haddock_step_name'] + r'*.pdb'))
+        fu.zip_list(self.io_dict['out']['docking_output_zip_path'], output_file_list, self.out_log)
 
         # Create zip output
         if self.io_dict['out'].get('output_haddock_wf_data_zip'):
-            fu.log(f"Zipping {workflow_dict['run_dir']} to {str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix(''))} ", self.out_log, self.global_log)
-            shutil.make_archive(str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix('')), 'zip', workflow_dict['run_dir'])
+            fu.log(f"Zipping {run_dir} to {str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix(''))} ", self.out_log, self.global_log)
+            shutil.make_archive(str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix('')), 'zip', run_dir)
 
         # Remove temporal files
         self.tmp_files.extend([self.output_cfg_path])
@@ -153,34 +152,32 @@ class Topology(BiobbObject):
         return self.return_code
 
 
-def topology(mol1_input_pdb_path: str, mol1_output_top_zip_path: str,
-             mol2_input_pdb_path: str = None, mol2_output_top_zip_path: str = None,
-             output_haddock_wf_data_zip: str = None, haddock_config_path: str = None,
-             properties: dict = None, **kwargs) -> int:
+def rigid_body(input_haddock_wf_data_zip: str, docking_output_zip_path: str,
+               restraints_table_path: str = None, output_haddock_wf_data_zip: str = None,
+               haddock_config_path: str = None,
+               properties: dict = None, **kwargs) -> int:
     """Create :class:`haddock <haddock.haddock.haddock>` class and
     execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
 
-    return Topology(mol1_input_pdb_path=mol1_input_pdb_path,
-                    mol1_output_top_zip_path=mol1_output_top_zip_path,
-                    mol2_output_top_zip_path=mol2_output_top_zip_path,
-                    mol2_input_pdb_path=mol2_input_pdb_path,
-                    output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-                    haddock_config_path=haddock_config_path,
-                    properties=properties, **kwargs).launch()
+    return RigidBody(input_haddock_wf_data_zip=input_haddock_wf_data_zip,
+                     docking_output_zip_path=docking_output_zip_path,
+                     restraints_table_path=restraints_table_path,
+                     output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+                     haddock_config_path=haddock_config_path,
+                     properties=properties, **kwargs).launch()
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Wrapper of the haddock haddock module.",
+    parser = argparse.ArgumentParser(description="Wrapper of the haddock RigidBody module.",
                                      formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
     # Specific args of each building block
     required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--mol1_input_pdb_path', required=True)
-    required_args.add_argument('--mol1_output_top_zip_path', required=True)
-    parser.add_argument('--mol2_input_pdb_path', required=False)
+    required_args.add_argument('--input_haddock_wf_data_zip', required=True)
+    required_args.add_argument('--docking_output_zip_path', required=True)
+    parser.add_argument('--restraints_table_path', required=False)
     parser.add_argument('--output_haddock_wf_data_zip', required=False)
-    parser.add_argument('--mol2_output_top_zip_path', required=False)
     parser.add_argument('--haddock_config_path', required=False)
 
     args = parser.parse_args()
@@ -188,13 +185,12 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    topology(mol1_input_pdb_path=args.mol1_input_pdb_path,
-             mol1_output_top_zip_path=args.mol1_output_top_zip_path,
-             mol2_output_top_zip_path=args.mol2_output_top_zip_path,
-             mol2_input_pdb_path=args.mol2_input_pdb_path,
-             output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
-             haddock_config_path=args.haddock_config_path,
-             properties=properties)
+    rigid_body(input_haddock_wf_data_zip=args.input_haddock_wf_data_zip,
+               docking_output_zip_path=args.docking_output_zip_path,
+               restraints_table_path=args.restraints_table_path,
+               output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
+               haddock_config_path=args.haddock_config_path,
+               properties=properties)
 
 
 if __name__ == '__main__':
