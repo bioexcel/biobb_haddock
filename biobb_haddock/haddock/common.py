@@ -84,6 +84,15 @@ def cfg_preset(haddock_step_name: str) -> Dict[str, str]:
         cfg_dict['sampling'] = 20
         cfg_dict['tolerance'] = 20
 
+    elif haddock_step_name == 'seletop':
+        cfg_dict['select'] = 5
+
+    elif haddock_step_name == 'flexref':
+        cfg_dict['tolerance'] = 20
+
+    elif haddock_step_name == 'emref':
+        cfg_dict['tolerance'] = 20
+
     return cfg_dict
 
 

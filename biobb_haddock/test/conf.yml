@@ -45,3 +45,54 @@ capri_eval:
   properties:
     binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
     remove_tmp: False
+
+sele_top:
+  paths:
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_caprieval.zip
+
+    output_selection_zip_path: seletop_output.zip
+    output_haddock_wf_data_zip: haddock_wf_data.zip
+
+    ref_output_selection_zip_path: file:test_reference_dir/haddock/ref_seletop.zip
+  properties:
+    binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
+    remove_tmp: False
+
+flex_ref:
+  paths:
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_seletop.zip
+    restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
+
+    refinement_output_zip_path: refinement_output.zip
+    output_haddock_wf_data_zip: haddock_wf_data.zip
+
+    ref_refinement_output_zip_path: file:test_reference_dir/haddock/ref_flexref.zip
+  properties:
+    binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
+    remove_tmp: False
+
+em_ref:
+  paths:
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_seletop.zip
+    restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
+
+    refinement_output_zip_path: refinement_output.zip
+    output_haddock_wf_data_zip: haddock_wf_data.zip
+
+    ref_refinement_output_zip_path: file:test_reference_dir/haddock/ref_emref.zip
+  properties:
+    binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
+    remove_tmp: False
+
+clust_fcc:
+  paths:
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_caprieval.zip
+    restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
+
+    output_cluster_zip_path: cluster_output.zip
+    output_haddock_wf_data_zip: haddock_wf_data.zip
+
+    ref_output_cluster_zip_path: file:test_reference_dir/haddock/ref_clustfcc.zip
+  properties:
+    binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
+    remove_tmp: False

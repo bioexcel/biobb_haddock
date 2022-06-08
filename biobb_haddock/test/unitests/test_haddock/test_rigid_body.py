@@ -10,7 +10,7 @@ class TestRigidBody():
         pass
         #fx.test_teardown(self)
 
-    def test_topology(self):
+    def test_rigid_body(self):
         rigid_body(properties=self.properties, **self.paths)
         assert fx.not_empty(self.paths['docking_output_zip_path'])
         assert fx.not_empty(self.paths['output_haddock_wf_data_zip'])
