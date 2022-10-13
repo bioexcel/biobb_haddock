@@ -19,11 +19,17 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     include_package_data=True,
-    install_requires=['biobb_common==3.8.0'],
-    python_requires='==3.7.*',
+    install_requires=['biobb_common==3.8.1'],
+    python_requires='>=3.7',
     entry_points={
         "console_scripts": [
-            "haddock = biobb_haddock.haddock.haddock:main"
+            "haddock = biobb_haddock.haddock.capri_eval:main",
+            "haddock = biobb_haddock.haddock.clust_fcc:main",
+            "haddock = biobb_haddock.haddock.em_ref:main",
+            "haddock = biobb_haddock.haddock.flex_ref:main",
+            "haddock = biobb_haddock.haddock.rigid_body:main",
+            "haddock = biobb_haddock.haddock.sele_top:main",
+            "haddock = biobb_haddock.haddock.topology:main"
         ]
     },
     classifiers=[

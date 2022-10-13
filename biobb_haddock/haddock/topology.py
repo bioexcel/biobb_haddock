@@ -18,7 +18,8 @@ class Topology(BiobbObject):
     """
     | biobb_haddock Topology
     | Wrapper class for the Haddock Topology module.
-    | The  Topology module. haddock haddock module compute classical molecular interaction potentials.
+    | The Topology module. The Haddock Topology module creates a topology from a system to be used for docking.
+
 
     Args:
         mol1_input_pdb_path: (str): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb>`_. Accepted formats: pdb (edam:format_1476).
@@ -79,6 +80,7 @@ class Topology(BiobbObject):
                     "mol2_output_top_zip_path": mol2_output_top_zip_path
                     }
         }
+
 
         # Properties specific for BB
         self.haddock_step_name = 'topoaa'

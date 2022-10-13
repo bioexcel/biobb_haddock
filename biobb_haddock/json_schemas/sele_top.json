@@ -1,9 +1,9 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/topology",
-    "name": "biobb_haddock Topology",
-    "title": "Wrapper class for the Haddock Topology module.",
-    "description": "The Topology module. The Haddock Topology module creates a topology from a system to be used for docking.",
+    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/sele_top",
+    "name": "biobb_haddock SeleTop",
+    "title": "Wrapper class for the Haddock SeleTop module.",
+    "description": "The SeleTop module. Haddock SeleTop  module computes Selects the top  structures of a docking.",
     "type": "object",
     "info": {
         "wrapped_software": {
@@ -17,47 +17,31 @@
         }
     },
     "required": [
-        "",
-        "mol1_output_top_zip_path"
+        "input_haddock_wf_data_zip",
+        "output_selection_zip_path"
     ],
     "properties": {
-        "": {
+        "input_haddock_wf_data_zip": {
             "type": "string",
-            "description": "Path to the input PDB file",
+            "description": "Path to the input zipball containing all the current Haddock workflow data",
             "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/hpr_ensemble.pdb",
-            "enum": [
-                ".*\\.pdb$"
-            ],
-            "file_formats": [
-                {
-                    "extension": ".*\\.pdb$",
-                    "description": "Path to the input PDB file",
-                    "edam": "format_1476"
-                }
-            ]
-        },
-        "mol1_output_top_zip_path": {
-            "type": "string",
-            "description": "Path to the output PDB file collection in zip format",
-            "filetype": "output",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol1_top.zip",
+            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip",
             "enum": [
                 ".*\\.zip$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.zip$",
-                    "description": "Path to the output PDB file collection in zip format",
+                    "description": "Path to the input zipball containing all the current Haddock workflow data",
                     "edam": "format_3987"
                 }
             ]
         },
-        "mol2_output_top_zip_path": {
+        "output_selection_zip_path": {
             "type": "string",
             "description": "Path to the output PDB file collection in zip format",
             "filetype": "output",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol2_top.zip",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_seletop.zip",
             "enum": [
                 ".*\\.zip$"
             ],

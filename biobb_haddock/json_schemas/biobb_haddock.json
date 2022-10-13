@@ -9,56 +9,67 @@
     "version": "3.7.8",
     "tools" : [
         {
-            "block" : "haddock",
-            "tool" : "haddock haddock",
-            "desc" : "haddock haddock module compute classical molecular interaction potentials.",
-            "exec" : "haddock",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.haddock"
+            "block" : "CapriEval",
+            "tool" : "Haddock CapriEval",
+            "desc" : "The CapriEval module. Haddock CapriEval  module computes Capri evaluation for a docking.",
+            "exec" : "capri_eval",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-capri_eval.capri_eval"
         },
         {
-            "block" : "Titration",
-            "tool" : "haddock titration",
-            "desc" : "haddock haddock module compute classical molecular interaction potentials.",
-            "exec" : "titration",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-titration.titration"
+            "block" : "ClustFCC",
+            "tool" : "Haddock ClustFCC",
+            "desc" : "The ClustFCC module. Haddock ClustFCC  module computes clusters of structures using FCC.",
+            "exec" : "clust_fcc",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-clust_fcc.clust_fcc"
         },
         {
-            "block" : "PrepareStructure",
-            "tool" : "Prepare Structure",
-            "desc" : "Creates a haddock suitable PDB from an standar structure file",
-            "exec" : "prepare_structure",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-prepare_structure.prepare_structure"
+            "block" : "EMRef",
+            "tool" : "Haddock EMRef",
+            "desc" : "The EMRef module. Haddock EMRef module computes an energy minimization refinement over selected structures.",
+            "exec" : "em_ref",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-em_ref.em_ref"
         },
         {
-            "block" : "PreparePDB",
-            "tool" : "Prepare PDB",
-            "desc" : "Creates a haddock suitable PDB from an standar PDB file",
-            "exec" : "prepare_pdb",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-prepare_pdb.prepare_pdb"
+            "block" : "FlexRef",
+            "tool" : "Haddock FlexRef",
+            "desc" : "The FlexRef module. Haddock FlexRef module computes a flexible refinement over selected structures.",
+            "exec" : "flex_ref",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-flex_ref.flex_ref"
         },
         {
-            "block" : "IgnoreResidues",
-            "tool" : "Ignore Residues",
-            "desc" : "Mark residues which charges will be ignored in the haddock potential calculations.",
-            "exec" : "ignore_residues",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-ignore_residues.ignore_residues"
+            "block" : "RigidBody",
+            "tool" : "Haddock RigidBody",
+            "desc" : "The RigidBody module. Haddock RigidBody  module compute rigid body docking between two molecules.",
+            "exec" : "rigid_body",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-rigid_body.rigid_body"
+        },
+        {
+            "block" : "SeleTop",
+            "tool" : "Haddock SeleTop",
+            "desc" : "The SeleTop module. Haddock SeleTop  module computes Selects the top  structures of a docking.",
+            "exec" : "sele_top",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-sele_top.sele_top"
+        },
+        {
+            "block" : "Topology",
+            "tool" : "Haddock Topology",
+            "desc" : "The Topology module. The Haddock Topology module creates a topology from a system to be used for docking.",
+            "exec" : "topology",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-topology.topology"
         }
     ],
     "dep_pypi" : [
-        "install_requires=['biobb_common==3.7.0', 'mdanalysis==2.0.0', 'biobb_structure_checking==3.9.11']",
-        "python_requires='==3.7.*'"
+        "install_requires=['biobb_common==3.8.1']",
+        "python_requires='>=3.7'"
     ],
     "dep_conda" : [
-        "python ==3.7.*",
-        "biobb_common ==3.7.0",
-        "haddock ==2.7.0",
-        "mdanalysis==2.0.0",
-        "biobb_structure_checking==3.9.11"
+        "python >=3.7",
+        "biobb_common ==3.8.1"
     ],
     "keywords" : [
-        "classical",
-        "molecular",
+        "haddock",
+        "protein-protein",
         "interaction",
-        "potentials"
+        "docking"
     ]
 }
