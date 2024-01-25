@@ -3,10 +3,10 @@ from biobb_haddock.haddock.flex_ref import flex_ref
 
 
 class TestFlexRef():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'flex_ref')
 
-    def tearDown(self):
+    def teardown_class(self):
         pass
         #fx.test_teardown(self)
 

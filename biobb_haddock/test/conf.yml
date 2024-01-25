@@ -16,7 +16,6 @@ topology:
     ref_mol1_output_top_zip_path: file:test_reference_dir/haddock/ref_mol1_top.zip
     ref_mol2_output_top_zip_path: file:test_reference_dir/haddock/ref_mol2_top.zip
   properties:
-    binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
     remove_tmp: False
 
 
@@ -30,7 +29,6 @@ rigid_body:
 
     ref_docking_output_zip_path: file:test_reference_dir/haddock/ref_rigidbody.zip
   properties:
-    binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
     remove_tmp: False
 
 capri_eval:
@@ -43,7 +41,6 @@ capri_eval:
 
     ref_output_evaluation_zip_path: file:test_reference_dir/haddock/ref_caprieval.zip
   properties:
-    binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
     remove_tmp: False
 
 sele_top:
@@ -55,7 +52,17 @@ sele_top:
 
     ref_output_selection_zip_path: file:test_reference_dir/haddock/ref_seletop.zip
   properties:
-    binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
+    remove_tmp: False
+
+sele_top_clusts:
+  paths:
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_clustfcc.zip
+
+    output_selection_zip_path: seletopclusts_output.zip
+    output_haddock_wf_data_zip: haddock_wf_data.zip
+
+    ref_output_selection_zip_path: file:test_reference_dir/haddock/ref_seletopclusts.zip
+  properties:
     remove_tmp: False
 
 flex_ref:
@@ -68,7 +75,6 @@ flex_ref:
 
     ref_refinement_output_zip_path: file:test_reference_dir/haddock/ref_flexref.zip
   properties:
-    binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
     remove_tmp: False
 
 em_ref:
@@ -81,7 +87,6 @@ em_ref:
 
     ref_refinement_output_zip_path: file:test_reference_dir/haddock/ref_emref.zip
   properties:
-    binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
     remove_tmp: False
 
 clust_fcc:
@@ -94,5 +99,4 @@ clust_fcc:
 
     ref_output_cluster_zip_path: file:test_reference_dir/haddock/ref_clustfcc.zip
   properties:
-    binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
     remove_tmp: False

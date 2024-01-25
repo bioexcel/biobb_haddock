@@ -22,6 +22,8 @@ def create_cfg(output_cfg_path: str, workflow_dict: Mapping[str, str], input_cfg
             cfg_dict[k] = v
     if cfg_properties_dict:
         for k, v in cfg_properties_dict.items():
+            print("CFG: " + str(k))
+            print("CFG: " + str(v))
             cfg_dict[k] = v
 
     return write_cfg(output_cfg_path, workflow_dict, cfg_dict)
@@ -36,7 +38,10 @@ def write_cfg(output_cfg_path: str, workflow_dict: Mapping[str, str], cfg_dict: 
     cfg_list.append(f"\n[{workflow_dict['haddock_step_name']}]")
 
     for k, v in cfg_dict.items():
-        if isinstance(v, str):
+        # cfg_list.append(k + ' = ' + str(v))
+        if isinstance(v, int):
+            cfg_list.append(k + ' = ' + str(v))
+        elif isinstance(v, str):
             cfg_list.append(k + ' = ' + f"'{v}'")
         else:
             cfg_list.append(k + ' = ' + str(v))
@@ -92,6 +97,9 @@ def cfg_preset(haddock_step_name: str) -> Dict[str, str]:
 
     elif haddock_step_name == 'emref':
         cfg_dict['tolerance'] = 20
+
+#    elif haddock_step_name == 'seletopclusts':
+#        cfg_dict['select'] = 5
 
     return cfg_dict
 

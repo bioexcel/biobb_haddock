@@ -3,10 +3,10 @@ from biobb_haddock.haddock.sele_top import sele_top
 
 
 class TestSeleTop():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'sele_top')
 
-    def tearDown(self):
+    def teardown_class(self):
         pass
         #fx.test_teardown(self)
 

@@ -49,7 +49,7 @@ class ClustFCC(BiobbObject):
     Info:
         * wrapped_software:
             * name: Haddock
-            * version: 2.7.0
+            * version: 3.0.0
             * license: Apache-2.0
         * ontology:
             * name: EDAM
@@ -80,8 +80,7 @@ class ClustFCC(BiobbObject):
         self.cfg = {k: str(v) for k, v in properties.get('cfg', dict()).items()}
 
         # Properties specific for BB
-        self.binary_path = properties.get('binary_path', 'haddock')
-        self.autohis = properties.get('autohis', True)
+        self.binary_path = properties.get('binary_path', 'haddock3')
 
         # Check the properties
         self.check_properties(properties)
@@ -104,7 +103,7 @@ class ClustFCC(BiobbObject):
         cfg_dir = fu.create_unique_dir()
         self.output_cfg_path = create_cfg(output_cfg_path=str(Path(cfg_dir).joinpath(self.output_cfg_path)),
                                           workflow_dict=workflow_dict,
-                                          input_cfg_path=self.stage_io_dict['in']['haddock_config_path'],
+                                          input_cfg_path=self.stage_io_dict['in'].get('haddock_config_path'),
                                           preset_dict=cfg_preset(workflow_dict['haddock_step_name']),
                                           cfg_properties_dict=self.cfg)
 

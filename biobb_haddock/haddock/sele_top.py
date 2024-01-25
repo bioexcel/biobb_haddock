@@ -16,8 +16,8 @@ from biobb_haddock.haddock.common import unzip_workflow_data
 class SeleTop(BiobbObject):
     """
     | biobb_haddock SeleTop
-    | Wrapper class for the Haddock SeleTop module.
-    | The SeleTop module. Haddock SeleTop  module computes Selects the top  structures of a docking.
+    | Wrapper class for the Haddock SeleTop module https://www.bonvinlab.org/haddock3/modules/analysis/seletop.html
+    | The SeleTop module. Haddock SeleTop module selects the top models of a docking.
 
     Args:
         input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: input. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip>`_. Accepted formats: zip (edam:format_3987).
@@ -49,7 +49,7 @@ class SeleTop(BiobbObject):
     Info:
         * wrapped_software:
             * name: Haddock
-            * version: 2.7.0
+            * version: 3.0.0
             * license: Apache-2.0
         * ontology:
             * name: EDAM
@@ -80,8 +80,7 @@ class SeleTop(BiobbObject):
         self.cfg = {k: str(v) for k, v in properties.get('cfg', dict()).items()}
 
         # Properties specific for BB
-        self.binary_path = properties.get('binary_path', 'haddock')
-        self.autohis = properties.get('autohis', True)
+        self.binary_path = properties.get('binary_path', 'haddock3')
 
         # Check the properties
         self.check_properties(properties)
@@ -104,7 +103,7 @@ class SeleTop(BiobbObject):
         cfg_dir = fu.create_unique_dir()
         self.output_cfg_path = create_cfg(output_cfg_path=str(Path(cfg_dir).joinpath(self.output_cfg_path)),
                                           workflow_dict=workflow_dict,
-                                          input_cfg_path=self.stage_io_dict['in']['haddock_config_path'],
+                                          input_cfg_path=self.stage_io_dict['in'].get('haddock_config_path'),
                                           preset_dict=cfg_preset(workflow_dict['haddock_step_name']),
                                           cfg_properties_dict=self.cfg)
 

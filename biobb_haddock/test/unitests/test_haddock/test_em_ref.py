@@ -3,10 +3,10 @@ from biobb_haddock.haddock.em_ref import em_ref
 
 
 class TestEMRef():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'em_ref')
 
-    def tearDown(self):
+    def teardown_class(self):
         pass
         #fx.test_teardown(self)
 
