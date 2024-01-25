@@ -1,3 +1,3 @@
 name = "biobb_haddock"
 __all__ = ["haddock"]
-__version__ = "3.8.0"
+__version__ = "4.1.0"
