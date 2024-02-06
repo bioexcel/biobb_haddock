@@ -1,7 +1,26 @@
-[![](https://readthedocs.org/projects/biobb-haddock/badge/?version=latest)](https://biobb-haddock.readthedocs.io/en/latest/?badge=latest)
-[![](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://anaconda.org/bioconda/biobb_haddock)
-[![](https://img.shields.io/badge/docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_haddock)
+[![](https://img.shields.io/github/v/tag/bioexcel/biobb_haddock?label=Version)](https://GitHub.com/bioexcel/biobb_haddock/tags/)
+[![](https://img.shields.io/pypi/v/biobb-haddock.svg?label=Pypi)](https://pypi.python.org/pypi/biobb-haddock/)
+[![](https://img.shields.io/conda/vn/bioconda/biobb_haddock?label=Conda)](https://anaconda.org/bioconda/biobb_haddock)
+[![](https://img.shields.io/conda/dn/bioconda/biobb_haddock?label=Conda%20Downloads)](https://anaconda.org/bioconda/biobb_haddock)
+[![](https://img.shields.io/badge/Docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_haddock?tab=tags)
+[![](https://img.shields.io/badge/Singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_haddock:4.1.0--pyhdfd78af_0)
+
+[![](https://img.shields.io/badge/OS-Unix%20%7C%20MacOS-blue)](https://github.com/bioexcel/biobb_haddock)
+[![](https://img.shields.io/pypi/pyversions/biobb-haddock.svg?label=Python%20Versions)](https://pypi.org/project/biobb-haddock/)
 [![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![](https://img.shields.io/badge/Open%20Source%3f-Yes!-blue)](https://github.com/bioexcel/biobb_haddock)
+
+[![](https://readthedocs.org/projects/biobb-haddock/badge/?version=latest&label=Docs)](https://biobb-haddock.readthedocs.io/en/latest/?badge=latest)
+[![](https://img.shields.io/website?down_message=Offline&label=Biobb%20Website&up_message=Online&url=https%3A%2F%2Fmmb.irbbarcelona.org%2Fbiobb%2F)](https://mmb.irbbarcelona.org/biobb/)
+[![](https://img.shields.io/badge/Youtube-tutorial-blue?logo=youtube&logoColor=red)](https://www.youtube.com/watch?v=ou1DOGNs0xM)
+[![](https://zenodo.org/badge/DOI/10.1038/s41597-019-0177-4.svg)](https://doi.org/10.1038/s41597-019-0177-4)
+[![](https://img.shields.io/endpoint?color=brightgreen&url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1038%2Fs41597-019-0177-4)](https://www.nature.com/articles/s41597-019-0177-4#citeas)
+
+[![](https://docs.bioexcel.eu/biobb_haddock/junit/testsbadge.svg)](https://docs.bioexcel.eu/biobb_haddock/junit/report.html)
+[![](https://docs.bioexcel.eu/biobb_haddock/coverage/coveragebadge.svg)](https://docs.bioexcel.eu/biobb_haddock/coverage/)
+[![](https://docs.bioexcel.eu/biobb_haddock/flake8/flake8badge.svg)](https://docs.bioexcel.eu/biobb_haddock/flake8/)
+[![](https://img.shields.io/github/last-commit/bioexcel/biobb_haddock?label=Last%20Commit)](https://github.com/bioexcel/biobb_haddock/commits/master)
+[![](https://img.shields.io/github/issues/bioexcel/biobb_haddock.svg?color=brightgreen&label=Issues)](https://GitHub.com/bioexcel/biobb_haddock/issues/)
 
 # biobb_haddock
 
@@ -14,7 +33,7 @@ The latest documentation of this package can be found in our readthedocs site:
 [latest API documentation](http://biobb-haddock.readthedocs.io/en/latest/).
 
 ### Version
-v4.1.0 2023.3
+v4.1.0 2024.1
 
 ### Installation
 Using PIP:
