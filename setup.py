@@ -19,8 +19,8 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     include_package_data=True,
-    install_requires=['biobb_common==3.8.1'],
-    python_requires='>=3.7',
+    install_requires=['biobb_common==4.1.0'],
+    python_requires='>=3.8',
     entry_points={
         "console_scripts": [
             "haddock = biobb_haddock.haddock.capri_eval:main",
@@ -33,10 +33,13 @@ setuptools.setup(
         ]
     },
     classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Programming Language :: Python :: 3.7",
+        "Development Status :: 5 - Production/Stable",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: POSIX",
+        "Operating System :: Unix"
     ],
 )
