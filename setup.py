@@ -23,13 +23,13 @@ setuptools.setup(
     python_requires='>=3.8',
     entry_points={
         "console_scripts": [
-            "haddock = biobb_haddock.haddock.capri_eval:main",
-            "haddock = biobb_haddock.haddock.clust_fcc:main",
-            "haddock = biobb_haddock.haddock.em_ref:main",
-            "haddock = biobb_haddock.haddock.flex_ref:main",
-            "haddock = biobb_haddock.haddock.rigid_body:main",
-            "haddock = biobb_haddock.haddock.sele_top:main",
-            "haddock = biobb_haddock.haddock.topology:main"
+            "capri_eval = biobb_haddock.haddock.capri_eval:main",
+            "clust_fcc = biobb_haddock.haddock.clust_fcc:main",
+            "em_ref = biobb_haddock.haddock.em_ref:main",
+            "flex_ref = biobb_haddock.haddock.flex_ref:main",
+            "rigid_body = biobb_haddock.haddock.rigid_body:main",
+            "sele_top = biobb_haddock.haddock.sele_top:main",
+            "topology = biobb_haddock.haddock.topology:main"
         ]
     },
     classifiers=[
