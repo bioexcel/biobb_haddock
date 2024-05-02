@@ -1,9 +1,9 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/capri_eval",
-    "name": "biobb_haddock CapriEval",
-    "title": "Wrapper class for the Haddock CapriEval module.",
-    "description": "The CapriEval module. Haddock CapriEval  module computes Capri evaluation for a docking.",
+    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/sele_top_clusts",
+    "name": "biobb_haddock SeleTopClusts",
+    "title": "Wrapper class for the Haddock SeleTopClusts module https://www.bonvinlab.org/haddock3/modules/analysis/seletopclusts.html.",
+    "description": "The SeleTopClusts module. Haddock SeleTopClusts module selects the top clusters of a docking.",
     "type": "object",
     "info": {
         "wrapped_software": {
@@ -18,7 +18,7 @@
     },
     "required": [
         "input_haddock_wf_data_zip",
-        "output_evaluation_zip_path"
+        "output_selection_zip_path"
     ],
     "properties": {
         "input_haddock_wf_data_zip": {
@@ -37,11 +37,11 @@
                 }
             ]
         },
-        "output_evaluation_zip_path": {
+        "output_selection_zip_path": {
             "type": "string",
             "description": "Path to the output PDB file collection in zip format",
             "filetype": "output",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_caprieval.zip",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_seletop.zip",
             "enum": [
                 ".*\\.zip$"
             ],
@@ -50,22 +50,6 @@
                     "extension": ".*\\.zip$",
                     "description": "Path to the output PDB file collection in zip format",
                     "edam": "format_3987"
-                }
-            ]
-        },
-        "reference_pdb_path": {
-            "type": "string",
-            "description": "Path to the input PDB file containing an structure for reference",
-            "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_1GGR.pdb",
-            "enum": [
-                ".*\\.pdb$"
-            ],
-            "file_formats": [
-                {
-                    "extension": ".*\\.pdb$",
-                    "description": "Path to the input PDB file containing an structure for reference",
-                    "edam": "format_1476"
                 }
             ]
         },

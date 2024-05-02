@@ -92,10 +92,11 @@ class EMRef(BiobbObject):
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
-        tmp_files = []
+        # tmp_files = []
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Unzip workflow data to workflow_data_out
@@ -151,17 +152,17 @@ class EMRef(BiobbObject):
 
 
 def em_ref(input_haddock_wf_data_zip: str, refinement_output_zip_path: str,
-             restraints_table_path: str = None, output_haddock_wf_data_zip: str = None,
-             haddock_config_path: str = None, properties: dict = None, **kwargs) -> int:
+           restraints_table_path: str = None, output_haddock_wf_data_zip: str = None,
+           haddock_config_path: str = None, properties: dict = None, **kwargs) -> int:
     """Create :class:`haddock <haddock.haddock.haddock>` class and
     execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
 
     return EMRef(input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-                   refinement_output_zip_path=refinement_output_zip_path,
-                   restraints_table_path=restraints_table_path,
-                   output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-                   haddock_config_path=haddock_config_path,
-                   properties=properties, **kwargs).launch()
+                 refinement_output_zip_path=refinement_output_zip_path,
+                 restraints_table_path=restraints_table_path,
+                 output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+                 haddock_config_path=haddock_config_path,
+                 properties=properties, **kwargs).launch()
 
 
 def main():
@@ -183,11 +184,11 @@ def main():
 
     # Specific call of each building block
     em_ref(input_haddock_wf_data_zip=args.input_haddock_wf_data_zip,
-             refinement_output_zip_path=args.refinement_output_zip_path,
-             restraints_table_path=args.restraints_table_path,
-             output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
-             haddock_config_path=args.haddock_config_path,
-             properties=properties)
+           refinement_output_zip_path=args.refinement_output_zip_path,
+           restraints_table_path=args.restraints_table_path,
+           output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
+           haddock_config_path=args.haddock_config_path,
+           properties=properties)
 
 
 if __name__ == '__main__':

@@ -88,10 +88,11 @@ class SeleTop(BiobbObject):
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
-        tmp_files = []
+        # tmp_files = []
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Unzip workflow data to workflow_data_out
@@ -173,11 +174,11 @@ def main():
 
     # Specific call of each building block
     sele_top(input_haddock_wf_data_zip=args.input_haddock_wf_data_zip,
-               output_selection_zip_path=args.output_selection_zip_path,
-               reference_pdb_path=args.reference_pdb_path,
-               output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
-               haddock_config_path=args.haddock_config_path,
-               properties=properties)
+             output_selection_zip_path=args.output_selection_zip_path,
+             reference_pdb_path=args.reference_pdb_path,
+             output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
+             haddock_config_path=args.haddock_config_path,
+             properties=properties)
 
 
 if __name__ == '__main__':

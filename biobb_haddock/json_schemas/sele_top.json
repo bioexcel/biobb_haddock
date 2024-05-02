@@ -2,13 +2,13 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/sele_top",
     "name": "biobb_haddock SeleTop",
-    "title": "Wrapper class for the Haddock SeleTop module.",
-    "description": "The SeleTop module. Haddock SeleTop  module computes Selects the top  structures of a docking.",
+    "title": "Wrapper class for the Haddock SeleTop module https://www.bonvinlab.org/haddock3/modules/analysis/seletop.html",
+    "description": "The SeleTop module. Haddock SeleTop module selects the top models of a docking.",
     "type": "object",
     "info": {
         "wrapped_software": {
             "name": "Haddock",
-            "version": "2.7.0",
+            "version": "3.0.0",
             "license": "Apache-2.0"
         },
         "ontology": {

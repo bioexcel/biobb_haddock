@@ -36,13 +36,11 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
     'recommonmark'
-
 ]
 
 # Using Google docstring style
 napoleon_numpy_docstring = False
 napoleon_google_docstring = True
-
 
 
 # Add any paths that contain templates here, relative to this directory.
@@ -67,7 +65,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'biobb_haddock'
-copyright = u'2022, Bioexcel Project'
+copyright = u'2024, Bioexcel Project'
 author = u'Bioexcel Project'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -268,7 +266,7 @@ latex_documents = [
 #latex_appendices = []
 
 # If false, no module index is generated.
-#latex_domain_indices = True
+# latex_domain_indices = True
 
 
 # -- Options for manual page output ---------------------------------------
@@ -281,7 +279,7 @@ man_pages = [
 ]
 
 # If true, show URL addresses after external links.
-#man_show_urls = False
+# man_show_urls = False
 
 
 # -- Options for Texinfo output -------------------------------------------

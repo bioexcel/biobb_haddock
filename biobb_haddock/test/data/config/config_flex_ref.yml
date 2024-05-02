@@ -1,3 +1,2 @@
 properties:
-  binary_path: /Users/pau/anaconda3/envs/haddock3/bin/haddock3
   remove_tmp: false

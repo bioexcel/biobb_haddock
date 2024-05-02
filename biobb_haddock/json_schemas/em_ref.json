@@ -8,7 +8,7 @@
     "info": {
         "wrapped_software": {
             "name": "Haddock",
-            "version": "2.7.0",
+            "version": "3.0.0",
             "license": "Apache-2.0"
         },
         "ontology": {
@@ -53,7 +53,7 @@
                 }
             ]
         },
-        "": {
+        "restraints_table_path": {
             "type": "string",
             "description": "Path to the input TBL file containing a list of restraints for docking",
             "filetype": "input",

@@ -8,7 +8,7 @@
     "info": {
         "wrapped_software": {
             "name": "Haddock",
-            "version": "2.7.0",
+            "version": "3.0.0",
             "license": "Apache-2.0"
         },
         "ontology": {
@@ -53,9 +53,9 @@
                 }
             ]
         },
-        "": {
+        "ambig_restraints_table_path": {
             "type": "string",
-            "description": "Path to the input TBL file containing a list of restraints for docking",
+            "description": "Path to the input TBL file containing a list of ambiguous restraints for docking",
             "filetype": "input",
             "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl",
             "enum": [
@@ -64,7 +64,39 @@
             "file_formats": [
                 {
                     "extension": ".*\\.tbl$",
-                    "description": "Path to the input TBL file containing a list of restraints for docking",
+                    "description": "Path to the input TBL file containing a list of ambiguous restraints for docking",
+                    "edam": "format_2330"
+                }
+            ]
+        },
+        "unambig_restraints_table_path": {
+            "type": "string",
+            "description": "Path to the input TBL file containing a list of unambiguous restraints for docking",
+            "filetype": "input",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl",
+            "enum": [
+                ".*\\.tbl$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.tbl$",
+                    "description": "Path to the input TBL file containing a list of unambiguous restraints for docking",
+                    "edam": "format_2330"
+                }
+            ]
+        },
+        "hb_restraints_table_path": {
+            "type": "string",
+            "description": "Path to the input TBL file containing a list of hydrogen bond restraints for docking",
+            "filetype": "input",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl",
+            "enum": [
+                ".*\\.tbl$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.tbl$",
+                    "description": "Path to the input TBL file containing a list of hydrogen bond restraints for docking",
                     "edam": "format_2330"
                 }
             ]
