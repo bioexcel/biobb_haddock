@@ -111,19 +111,19 @@ jobs:
       #  shell: micromamba-shell {0}  # necessary for conda env to be active
       #  run: |
       #    genbadge tests --name "Tests" --input-file ./reports/junit/junit.xml  --output-file ./reports/junit/testsbadge.svg
+      
+      #- name: Generate Coverage badge
+      #  shell: micromamba-shell {0}  # necessary for conda env to be active
+      #  run: |
+      #    # Create directory for flake8 reports
+      #    mkdir -p ./reports/coverage
+
+      #    coverage xml -o ./reports/coverage/coverage.xml
+      #    coverage html -d ./reports/coverage/
+
+      #    genbadge coverage --name "Coverage" --input-file ./reports/coverage/coverage.xml  --output-file ./reports/coverage/coveragebadge.svg
       # TODO
       ########################
-
-      - name: Generate Coverage badge
-        shell: micromamba-shell {0}  # necessary for conda env to be active
-        run: |
-          # Create directory for flake8 reports
-          mkdir -p ./reports/coverage
-
-          coverage xml -o ./reports/coverage/coverage.xml
-          coverage html -d ./reports/coverage/
-
-          genbadge coverage --name "Coverage" --input-file ./reports/coverage/coverage.xml  --output-file ./reports/coverage/coveragebadge.svg
 
       - name: Publish coverage report to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
