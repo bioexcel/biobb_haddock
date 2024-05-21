@@ -2,8 +2,6 @@
 can_write_console_log: True
 working_dir_path: /tmp/biobb/unitests
 
-
-
 topology:
   paths:
     mol1_input_pdb_path: file:test_data_dir/haddock/e2aP_1F3G.pdb

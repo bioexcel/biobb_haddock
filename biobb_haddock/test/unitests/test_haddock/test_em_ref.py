@@ -8,11 +8,10 @@ class TestEMRef():
 
     def teardown_class(self):
         pass
-        #fx.test_teardown(self)
+        # fx.test_teardown(self)
 
     def test_em_ref(self):
         em_ref(properties=self.properties, **self.paths)
         assert fx.not_empty(self.paths['refinement_output_zip_path'])
         assert fx.not_empty(self.paths['output_haddock_wf_data_zip'])
         assert fx.equal(self.paths['refinement_output_zip_path'], self.paths['ref_refinement_output_zip_path'])
-

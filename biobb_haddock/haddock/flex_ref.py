@@ -92,10 +92,11 @@ class FlexRef(BiobbObject):
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
-        tmp_files = []
+        # tmp_files = []
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Unzip workflow data to workflow_data_out

@@ -8,7 +8,7 @@
     "info": {
         "wrapped_software": {
             "name": "Haddock",
-            "version": "2.7.0",
+            "version": "3.0.0",
             "license": "Apache-2.0"
         },
         "ontology": {
@@ -17,15 +17,15 @@
         }
     },
     "required": [
-        "",
+        "mol1_input_pdb_path",
         "mol1_output_top_zip_path"
     ],
     "properties": {
-        "": {
+        "mol1_input_pdb_path": {
             "type": "string",
             "description": "Path to the input PDB file",
             "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/hpr_ensemble.pdb",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],
@@ -50,6 +50,22 @@
                     "extension": ".*\\.zip$",
                     "description": "Path to the output PDB file collection in zip format",
                     "edam": "format_3987"
+                }
+            ]
+        },
+        "mol2_input_pdb_path": {
+            "type": "string",
+            "description": "Path to the input PDB file",
+            "filetype": "input",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/hpr_ensemble.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Path to the input PDB file",
+                    "edam": "format_1476"
                 }
             ]
         },

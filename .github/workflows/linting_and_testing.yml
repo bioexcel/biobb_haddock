@@ -32,7 +32,6 @@ jobs:
       - run: echo "Trigger event -> ${{ github.event_name }}"
       - run: echo "Runner OS -> ${{ runner.os }}"
 
-
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}

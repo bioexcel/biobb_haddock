@@ -88,10 +88,11 @@ class SeleTopClusts(BiobbObject):
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
-        tmp_files = []
+        # tmp_files = []
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Unzip workflow data to workflow_data_out
@@ -143,16 +144,16 @@ class SeleTopClusts(BiobbObject):
 
 
 def sele_top_clusts(input_haddock_wf_data_zip: str, output_selection_zip_path: str,
-             output_haddock_wf_data_zip: str = None, haddock_config_path: str = None,
-             properties: dict = None, **kwargs) -> int:
+                    output_haddock_wf_data_zip: str = None, haddock_config_path: str = None,
+                    properties: dict = None, **kwargs) -> int:
     """Create :class:`haddock <haddock.haddock.haddock>` class and
     execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
 
     return SeleTopClusts(input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-                   output_selection_zip_path=output_selection_zip_path,
-                   output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-                   addock_config_path=haddock_config_path,
-                   properties=properties, **kwargs).launch()
+                         output_selection_zip_path=output_selection_zip_path,
+                         output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+                         haddock_config_path=haddock_config_path,
+                         properties=properties, **kwargs).launch()
 
 
 def main():
@@ -173,11 +174,11 @@ def main():
 
     # Specific call of each building block
     sele_top_clusts(input_haddock_wf_data_zip=args.input_haddock_wf_data_zip,
-               output_selection_zip_path=args.output_selection_zip_path,
-               reference_pdb_path=args.reference_pdb_path,
-               output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
-               haddock_config_path=args.haddock_config_path,
-               properties=properties)
+                    output_selection_zip_path=args.output_selection_zip_path,
+                    reference_pdb_path=args.reference_pdb_path,
+                    output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
+                    haddock_config_path=args.haddock_config_path,
+                    properties=properties)
 
 
 if __name__ == '__main__':

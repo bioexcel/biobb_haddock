@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 """Module containing the haddock Topology class and the command line interface."""
-import os
-import json
+# import os
+# import json
 import argparse
 import shutil
 from pathlib import Path
@@ -81,7 +81,6 @@ class Topology(BiobbObject):
                     }
         }
 
-
         # Properties specific for BB
         self.haddock_step_name = 'topoaa'
         self.output_cfg_path = properties.get('output_cfg_path', 'haddock.cfg')
@@ -97,10 +96,11 @@ class Topology(BiobbObject):
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
-        tmp_files = []
+        # tmp_files = []
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         workflow_dict = {'run_dir': fu.create_unique_dir(),
