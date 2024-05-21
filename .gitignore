@@ -109,5 +109,15 @@ traj_comp.xtc
 # ipynb checkpoints
 .ipynb_checkpoints
 
-# Pycharm
+# pycharm
 .idea
+
+# vscode
+.vscode
+
+# Pytest
+__pycache__/
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
