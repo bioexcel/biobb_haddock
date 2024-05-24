@@ -99,31 +99,23 @@ jobs:
           mkdir -p ./reports/junit
 
           # Producction one
-          ########################
-          # TODO
-          # pytest biobb_haddock/test/unitests/ --cov=biobb_haddock/ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*docker.py --ignore-glob=*singularity.py --junit-xml=./reports/junit/junit.xml --html=./reports/junit/report.html
-          # TODO
-          ########################
+          pytest biobb_haddock/test/unitests/ --cov=biobb_haddock/ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*docker.py --ignore-glob=*singularity.py --junit-xml=./reports/junit/junit.xml --html=./reports/junit/report.html
 
-      ########################
-      # TODO
-      #- name: Generate Tests badge
-      #  shell: micromamba-shell {0}  # necessary for conda env to be active
-      #  run: |
-      #    genbadge tests --name "Tests" --input-file ./reports/junit/junit.xml  --output-file ./reports/junit/testsbadge.svg
+      - name: Generate Tests badge
+        shell: micromamba-shell {0}  # necessary for conda env to be active
+        run: |
+          genbadge tests --name "Tests" --input-file ./reports/junit/junit.xml  --output-file ./reports/junit/testsbadge.svg
       
-      #- name: Generate Coverage badge
-      #  shell: micromamba-shell {0}  # necessary for conda env to be active
-      #  run: |
-      #    # Create directory for flake8 reports
-      #    mkdir -p ./reports/coverage
+      - name: Generate Coverage badge
+        shell: micromamba-shell {0}  # necessary for conda env to be active
+        run: |
+          # Create directory for flake8 reports
+          mkdir -p ./reports/coverage
 
-      #    coverage xml -o ./reports/coverage/coverage.xml
-      #    coverage html -d ./reports/coverage/
+          coverage xml -o ./reports/coverage/coverage.xml
+          coverage html -d ./reports/coverage/
 
-      #    genbadge coverage --name "Coverage" --input-file ./reports/coverage/coverage.xml  --output-file ./reports/coverage/coveragebadge.svg
-      # TODO
-      ########################
+          genbadge coverage --name "Coverage" --input-file ./reports/coverage/coverage.xml  --output-file ./reports/coverage/coveragebadge.svg
 
       - name: Publish coverage report to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
