@@ -5,6 +5,7 @@ from . import flex_ref
 from . import rigid_body
 from . import sele_top
 from . import topology
+from . import sele_top_clusts
 
 name = "haddock"
 __all__ = ["capri_eval", "clust_fcc", "em_ref", "flex_ref", "rigid_body", "sele_top_clusts", "sele_top", "topology"]

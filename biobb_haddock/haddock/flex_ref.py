@@ -5,6 +5,7 @@
 import argparse
 import shutil
 from pathlib import Path
+from typing import Optional, Dict
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
@@ -59,8 +60,8 @@ class FlexRef(BiobbObject):
     """
 
     def __init__(self, input_haddock_wf_data_zip: str, refinement_output_zip_path: str,
-                 restraints_table_path: str = None, output_haddock_wf_data_zip: str = None,
-                 haddock_config_path: str = None, properties: dict = None, **kwargs) -> None:
+                 restraints_table_path: Optional[str] = None, output_haddock_wf_data_zip: Optional[str] = None,
+                 haddock_config_path: Optional[str] = None, properties: Optional[Dict] = None, **kwargs) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -118,11 +119,11 @@ class FlexRef(BiobbObject):
         if self.container_path:
             fu.log('Container execution enabled', self.out_log)
 
-            shutil.copy2(self.output_cfg_path, self.stage_io_dict.get("unique_dir"))
+            shutil.copy2(self.output_cfg_path, self.stage_io_dict.get("unique_dir", ""))
             self.output_cfg_path = str(Path(self.container_volume_path).joinpath(Path(self.output_cfg_path).name))
 
-            shutil.copytree(run_dir, str(Path(self.stage_io_dict.get("unique_dir")).joinpath(Path(run_dir).name)))
-            run_dir = str(Path(self.stage_io_dict.get("unique_dir")).joinpath(Path(run_dir).name))
+            shutil.copytree(run_dir, str(Path(self.stage_io_dict.get("unique_dir", "")).joinpath(Path(run_dir).name)))
+            run_dir = str(Path(self.stage_io_dict.get("unique_dir", "")).joinpath(Path(run_dir).name))
 
         self.cmd = [self.binary_path, self.output_cfg_path, '--extend-run', run_dir]
 
@@ -152,8 +153,8 @@ class FlexRef(BiobbObject):
 
 
 def flex_ref(input_haddock_wf_data_zip: str, refinement_output_zip_path: str,
-             restraints_table_path: str = None, output_haddock_wf_data_zip: str = None,
-             haddock_config_path: str = None, properties: dict = None, **kwargs) -> int:
+             restraints_table_path: Optional[str] = None, output_haddock_wf_data_zip: Optional[str] = None,
+             haddock_config_path: Optional[str] = None, properties: Optional[Dict] = None, **kwargs) -> int:
     """Create :class:`haddock <haddock.haddock.haddock>` class and
     execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
 

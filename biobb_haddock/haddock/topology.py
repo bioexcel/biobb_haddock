@@ -6,6 +6,7 @@
 import argparse
 import shutil
 from pathlib import Path
+from typing import Optional, Dict
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
@@ -61,9 +62,9 @@ class Topology(BiobbObject):
     """
 
     def __init__(self, mol1_input_pdb_path: str, mol1_output_top_zip_path: str,
-                 mol2_input_pdb_path: str = None, mol2_output_top_zip_path: str = None,
-                 output_haddock_wf_data_zip: str = None, haddock_config_path: str = None,
-                 properties: dict = None, **kwargs) -> None:
+                 mol2_input_pdb_path: Optional[str] = None, mol2_output_top_zip_path: Optional[str] = None,
+                 output_haddock_wf_data_zip: Optional[str] = None, haddock_config_path: Optional[str] = None,
+                 properties: Optional[Dict] = None, **kwargs) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -108,20 +109,20 @@ class Topology(BiobbObject):
                          'haddock_step_name': self.haddock_step_name}
 
         if self.stage_io_dict['in'].get('mol2_input_pdb_path'):
-            workflow_dict['molecules'].append(self.stage_io_dict['in'].get('mol2_input_pdb_path'))
+            list(workflow_dict['molecules']).append(self.stage_io_dict['in'].get('mol2_input_pdb_path'))
 
         # Create data dir
         cfg_dir = fu.create_unique_dir()
         self.output_cfg_path = create_cfg(output_cfg_path=str(Path(cfg_dir).joinpath(self.output_cfg_path)),
                                           workflow_dict=workflow_dict,
                                           input_cfg_path=self.stage_io_dict['in'].get('haddock_config_path'),
-                                          preset_dict=cfg_preset(workflow_dict['haddock_step_name']),
+                                          preset_dict=cfg_preset(str(workflow_dict['haddock_step_name'])),
                                           cfg_properties_dict=self.cfg)
 
         if self.container_path:
             fu.log('Container execution enabled', self.out_log)
 
-            shutil.copy2(self.output_cfg_path, self.stage_io_dict.get("unique_dir"))
+            shutil.copy2(self.output_cfg_path, self.stage_io_dict.get("unique_dir", ""))
             self.output_cfg_path = str(Path(self.container_volume_path).joinpath(Path(self.output_cfg_path).name))
 
         self.cmd = [self.binary_path, self.output_cfg_path]
@@ -133,7 +134,7 @@ class Topology(BiobbObject):
         # self.copy_to_host()
 
         # Copy output
-        haddock_output_path = Path(workflow_dict['run_dir'], '0_'+self.haddock_step_name)
+        haddock_output_path = Path(str(workflow_dict['run_dir']), '0_'+self.haddock_step_name)
         mol1_name = str(Path(self.io_dict['in']['mol1_input_pdb_path']).stem)
         mol1_output_file_list = list(haddock_output_path.glob(mol1_name + r'*_haddock.pdb'))
         fu.zip_list(self.io_dict['out']['mol1_output_top_zip_path'], mol1_output_file_list, self.out_log)
@@ -146,7 +147,7 @@ class Topology(BiobbObject):
         # Create zip output
         if self.io_dict['out'].get('output_haddock_wf_data_zip'):
             fu.log(f"Zipping {workflow_dict['run_dir']} to {str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix(''))} ", self.out_log, self.global_log)
-            shutil.make_archive(str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix('')), 'zip', workflow_dict['run_dir'])
+            shutil.make_archive(str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix('')), 'zip', str(workflow_dict['run_dir']))
 
         # Remove temporal files
         self.tmp_files.extend([self.output_cfg_path])
@@ -156,9 +157,9 @@ class Topology(BiobbObject):
 
 
 def topology(mol1_input_pdb_path: str, mol1_output_top_zip_path: str,
-             mol2_input_pdb_path: str = None, mol2_output_top_zip_path: str = None,
-             output_haddock_wf_data_zip: str = None, haddock_config_path: str = None,
-             properties: dict = None, **kwargs) -> int:
+             mol2_input_pdb_path: Optional[str] = None, mol2_output_top_zip_path: Optional[str] = None,
+             output_haddock_wf_data_zip: Optional[str] = None, haddock_config_path: Optional[str] = None,
+             properties: Optional[Dict] = None, **kwargs) -> int:
     """Create :class:`haddock <haddock.haddock.haddock>` class and
     execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
 

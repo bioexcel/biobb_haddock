@@ -1,17 +1,15 @@
 """ Common functions for package biobb_haddock.haddock """
 import re
-# import uuid
-# import json
 import logging
-# from pathlib import Path
-from typing import List, Dict, Mapping  # , Union, Tuple, Sequence
+from typing import List, Dict, Optional, Any
 import biobb_common.tools.file_utils as fu
 
 
-def create_cfg(output_cfg_path: str, workflow_dict: Mapping[str, str], input_cfg_path: str = None, preset_dict: Mapping[str, str] = None,
-               cfg_properties_dict: Mapping[str, str] = None) -> str:
+def create_cfg(output_cfg_path: str, workflow_dict: Dict[str, Any],
+               input_cfg_path: Optional[str] = None, preset_dict: Optional[Dict[str, str]] = None,
+               cfg_properties_dict: Optional[Dict[str, str]] = None) -> str:
     """Creates an CFG file using the following hierarchy  cfg_properties_dict > input_cfg_path > preset_dict"""
-    cfg_dict: Mapping[str, str] = {}
+    cfg_dict: Dict[str, str] = {}
 
     if preset_dict:
         for k, v in preset_dict.items():
@@ -29,7 +27,7 @@ def create_cfg(output_cfg_path: str, workflow_dict: Mapping[str, str], input_cfg
     return write_cfg(output_cfg_path, workflow_dict, cfg_dict)
 
 
-def write_cfg(output_cfg_path: str, workflow_dict: Mapping[str, str], cfg_dict: Mapping[str, str]):
+def write_cfg(output_cfg_path: str, workflow_dict: Dict[str, str], cfg_dict: Dict[str, str]):
     cfg_list: List[str] = []
     if workflow_dict.get('run_dir'):
         cfg_list.append(f"run_dir = '{workflow_dict['run_dir']}'")
@@ -70,8 +68,8 @@ def read_cfg(input_mdp_path: str) -> Dict[str, str]:
     return cfg_dict
 
 
-def cfg_preset(haddock_step_name: str) -> Dict[str, str]:
-    cfg_dict = {}
+def cfg_preset(haddock_step_name: str) -> Dict[str, Any]:
+    cfg_dict: Dict[str, Any] = {}
     if not haddock_step_name:
         return cfg_dict
 
@@ -104,7 +102,7 @@ def cfg_preset(haddock_step_name: str) -> Dict[str, str]:
     return cfg_dict
 
 
-def unzip_workflow_data(zip_file: str, out_log: logging.Logger = None) -> str:
+def unzip_workflow_data(zip_file: str, out_log: Optional[logging.Logger] = None) -> str:
     """ Extract all files in the zip_file and return the directory.
 
     Args:

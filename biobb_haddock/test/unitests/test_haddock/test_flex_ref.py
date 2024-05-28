@@ -1,3 +1,4 @@
+# type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_haddock.haddock.flex_ref import flex_ref
 
