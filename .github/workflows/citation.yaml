@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-          repository: bioexcel/biobb_wf_haddock
+          repository: bioexcel/biobb_haddock
           path: ./
 
       - name: Download file using wget
