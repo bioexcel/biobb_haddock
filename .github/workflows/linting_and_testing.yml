@@ -66,6 +66,7 @@ jobs:
       - name: Create soft link from CNS to Haddock
         shell: micromamba-shell {0}  # necessary for conda env to be active
         run: |
+          ls -l $CONDA_PREFIX/lib/python${{ matrix.python-version }}/
           ln -s /home/user/software/cns_solve_1.3/intel-x86_64bit-linux/source/cns_solve-2405281130.exe $CONDA_PREFIX/lib/python${{ matrix.python-version }}/bin/cns
 
       - name: Lint with flake8
