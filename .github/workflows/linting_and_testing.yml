@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         os: [self-hosted]
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.9", "3.10"]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repository code
@@ -62,6 +62,11 @@ jobs:
       - name: List installed package versions
         shell: micromamba-shell {0}  # necessary for conda env to be active
         run: micromamba list
+
+      - name: Create soft link from CNS to Haddock
+        shell: micromamba-shell {0}  # necessary for conda env to be active
+        run: |
+          ln -s /home/user/software/cns_solve_1.3/intel-x86_64bit-linux/source/cns_solve-2405281130.exe $CONDA_PREFIX/lib/python${{ matrix.python-version }}/bin/cns
 
       - name: Lint with flake8
         shell: micromamba-shell {0}  # necessary for conda env to be active
