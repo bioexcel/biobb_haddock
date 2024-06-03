@@ -1,6 +1,6 @@
 # Biobb haddock changelog
 
-## What's new in version [4.2.0](https://github.com/bioexcel/biobb_haddock/releases/tag/4.2.0)?
+## What's new in version [4.2.1](https://github.com/bioexcel/biobb_haddock/releases/tag/4.2.1)?
 First producction ready version of biobb_haddock
 
 ## What's new in version [4.1.0](https://github.com/bioexcel/biobb_haddock/releases/tag/4.1.0)?
