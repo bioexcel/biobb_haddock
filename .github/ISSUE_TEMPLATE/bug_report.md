@@ -18,7 +18,7 @@ A clear and concise description of what you expected to happen.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. ubuntu]
- - Python version: [e.g. 3.8]
+ - Python version: [e.g. 3.9]
  - BioBB version [e.g. 4.0.0]
 
 **Additional context**

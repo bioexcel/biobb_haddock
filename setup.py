@@ -20,7 +20,7 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     include_package_data=True,
     install_requires=['biobb_common==4.1.0'],
-    python_requires='>=3.8',
+    python_requires='>=3.9',
     entry_points={
         "console_scripts": [
             "capri_eval = biobb_haddock.haddock.capri_eval:main",
@@ -34,7 +34,6 @@ setuptools.setup(
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: Apache Software License",
