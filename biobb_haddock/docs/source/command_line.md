@@ -31,6 +31,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Path to the binary executable of your container..
 * **container_image** (*string*): (None) Container Image identifier..
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
@@ -86,6 +87,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Path to the binary executable of your container..
 * **container_image** (*string*): (None) Container Image identifier..
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
@@ -141,6 +143,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Path to the binary executable of your container..
 * **container_image** (*string*): (None) Container Image identifier..
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
@@ -197,6 +200,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Path to the binary executable of your container..
 * **container_image** (*string*): (None) Container Image identifier..
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
@@ -253,6 +257,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Path to the binary executable of your container..
 * **container_image** (*string*): (None) Container Image identifier..
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
@@ -311,6 +316,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Path to the binary executable of your container..
 * **container_image** (*string*): (None) Container Image identifier..
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
@@ -368,6 +374,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Path to the binary executable of your container..
 * **container_image** (*string*): (None) Container Image identifier..
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
@@ -423,6 +430,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Path to the binary executable of your container..
 * **container_image** (*string*): (None) Container Image identifier..
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
