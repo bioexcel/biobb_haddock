@@ -1,6 +1,7 @@
 
-can_write_console_log: True
-working_dir_path: /tmp/biobb/unitests
+global_properties:
+  can_write_console_log: True
+  working_dir_path: /tmp/biobb/unitests
 
 topology:
   paths:
