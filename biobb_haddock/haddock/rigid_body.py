@@ -4,9 +4,10 @@
 # import os
 # import json
 import argparse
+from typing import Optional
 import shutil
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
@@ -66,7 +67,7 @@ class RigidBody(BiobbObject):
     def __init__(self, input_haddock_wf_data_zip: str, docking_output_zip_path: str,
                  ambig_restraints_table_path: Optional[str] = None, unambig_restraints_table_path: Optional[str] = None,
                  hb_restraints_table_path: Optional[str] = None, output_haddock_wf_data_zip: Optional[str] = None,
-                 haddock_config_path: Optional[str] = None, properties: Optional[Dict] = None, **kwargs) -> None:
+                 haddock_config_path: Optional[str] = None, properties: Optional[dict] = None, **kwargs) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -170,7 +171,7 @@ def rigid_body(input_haddock_wf_data_zip: str, docking_output_zip_path: str,
                ambig_restraints_table_path: Optional[str] = None, unambig_restraints_table_path: Optional[str] = None,
                hb_restraints_table_path: Optional[str] = None, output_haddock_wf_data_zip: Optional[str] = None,
                haddock_config_path: Optional[str] = None,
-               properties: Optional[Dict] = None, **kwargs) -> int:
+               properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`haddock <haddock.haddock.haddock>` class and
     execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
 

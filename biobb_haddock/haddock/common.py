@@ -1,15 +1,15 @@
 """ Common functions for package biobb_haddock.haddock """
 import re
 import logging
-from typing import List, Dict, Optional, Any
+from typing import Optional, Any
 import biobb_common.tools.file_utils as fu
 
 
-def create_cfg(output_cfg_path: str, workflow_dict: Dict[str, Any],
-               input_cfg_path: Optional[str] = None, preset_dict: Optional[Dict[str, str]] = None,
-               cfg_properties_dict: Optional[Dict[str, str]] = None) -> str:
+def create_cfg(output_cfg_path: str, workflow_dict: dict[str, Any],
+               input_cfg_path: Optional[str] = None, preset_dict: Optional[dict[str, str]] = None,
+               cfg_properties_dict: Optional[dict[str, str]] = None) -> str:
     """Creates an CFG file using the following hierarchy  cfg_properties_dict > input_cfg_path > preset_dict"""
-    cfg_dict: Dict[str, str] = {}
+    cfg_dict: dict[str, str] = {}
 
     if preset_dict:
         for k, v in preset_dict.items():
@@ -27,8 +27,8 @@ def create_cfg(output_cfg_path: str, workflow_dict: Dict[str, Any],
     return write_cfg(output_cfg_path, workflow_dict, cfg_dict)
 
 
-def write_cfg(output_cfg_path: str, workflow_dict: Dict[str, str], cfg_dict: Dict[str, str]):
-    cfg_list: List[str] = []
+def write_cfg(output_cfg_path: str, workflow_dict: dict[str, str], cfg_dict: dict[str, str]):
+    cfg_list: list[str] = []
     if workflow_dict.get('run_dir'):
         cfg_list.append(f"run_dir = '{workflow_dict['run_dir']}'")
     if workflow_dict.get('molecules'):
@@ -51,12 +51,12 @@ def write_cfg(output_cfg_path: str, workflow_dict: Dict[str, str], cfg_dict: Dic
     return output_cfg_path
 
 
-def read_cfg(input_mdp_path: str) -> Dict[str, str]:
+def read_cfg(input_mdp_path: str) -> dict[str, str]:
 
     # https://github.com/Becksteinlab/GromacsWrapper/blob/master/gromacs/fileformats/mdp.py
     parameter_re = re.compile(r"\s*(?P<parameter>[^=]+?)\s*=\s*(?P<value>[^;]*)(?P<comment>\s*#.*)?", re.VERBOSE)
 
-    cfg_dict: Dict[str, str] = {}
+    cfg_dict: dict[str, str] = {}
     with open(input_mdp_path) as mdp_file:
         for line in mdp_file:
             re_match = parameter_re.match(line.strip())
@@ -68,8 +68,8 @@ def read_cfg(input_mdp_path: str) -> Dict[str, str]:
     return cfg_dict
 
 
-def cfg_preset(haddock_step_name: str) -> Dict[str, Any]:
-    cfg_dict: Dict[str, Any] = {}
+def cfg_preset(haddock_step_name: str) -> dict[str, Any]:
+    cfg_dict: dict[str, Any] = {}
     if not haddock_step_name:
         return cfg_dict
 

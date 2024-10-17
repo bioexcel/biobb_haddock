@@ -3,9 +3,10 @@
 """Module containing the haddock EMRef class and the command line interface."""
 
 import argparse
+from typing import Optional
 import shutil
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
@@ -62,7 +63,7 @@ class EMRef(BiobbObject):
 
     def __init__(self, input_haddock_wf_data_zip: str, refinement_output_zip_path: str,
                  restraints_table_path: Optional[str] = None, output_haddock_wf_data_zip: Optional[str] = None,
-                 haddock_config_path: Optional[str] = None, properties: Optional[Dict] = None, **kwargs) -> None:
+                 haddock_config_path: Optional[str] = None, properties: Optional[dict] = None, **kwargs) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -155,7 +156,7 @@ class EMRef(BiobbObject):
 
 def em_ref(input_haddock_wf_data_zip: str, refinement_output_zip_path: str,
            restraints_table_path: Optional[str] = None, output_haddock_wf_data_zip: Optional[str] = None,
-           haddock_config_path: Optional[str] = None, properties: Optional[Dict] = None, **kwargs) -> int:
+           haddock_config_path: Optional[str] = None, properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`haddock <haddock.haddock.haddock>` class and
     execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
 

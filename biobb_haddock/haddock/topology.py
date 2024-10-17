@@ -4,9 +4,10 @@
 # import os
 # import json
 import argparse
+from typing import Optional
 import shutil
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
@@ -65,7 +66,7 @@ class Topology(BiobbObject):
     def __init__(self, mol1_input_pdb_path: str, mol1_output_top_zip_path: str,
                  mol2_input_pdb_path: Optional[str] = None, mol2_output_top_zip_path: Optional[str] = None,
                  output_haddock_wf_data_zip: Optional[str] = None, haddock_config_path: Optional[str] = None,
-                 properties: Optional[Dict] = None, **kwargs) -> None:
+                 properties: Optional[dict] = None, **kwargs) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -160,7 +161,7 @@ class Topology(BiobbObject):
 def topology(mol1_input_pdb_path: str, mol1_output_top_zip_path: str,
              mol2_input_pdb_path: Optional[str] = None, mol2_output_top_zip_path: Optional[str] = None,
              output_haddock_wf_data_zip: Optional[str] = None, haddock_config_path: Optional[str] = None,
-             properties: Optional[Dict] = None, **kwargs) -> int:
+             properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`haddock <haddock.haddock.haddock>` class and
     execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
 
