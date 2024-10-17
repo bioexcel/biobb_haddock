@@ -13,7 +13,21 @@ Command:
 ```python
 em_ref -h
 ```
-    /bin/sh: em_ref: command not found
+    usage: em_ref [-h] [-c CONFIG] --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP --refinement_output_zip_path REFINEMENT_OUTPUT_ZIP_PATH [--restraints_table_path RESTRAINTS_TABLE_PATH] [--output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP] [--haddock_config_path HADDOCK_CONFIG_PATH]
+    
+    Wrapper of the haddock EMRef module.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+      --restraints_table_path RESTRAINTS_TABLE_PATH
+      --output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP
+      --haddock_config_path HADDOCK_CONFIG_PATH
+    
+    required arguments:
+      --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP
+      --refinement_output_zip_path REFINEMENT_OUTPUT_ZIP_PATH
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -70,7 +84,20 @@ Command:
 ```python
 sele_top -h
 ```
-    /bin/sh: sele_top: command not found
+    usage: sele_top [-h] [-c CONFIG] --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP --output_selection_zip_path OUTPUT_SELECTION_ZIP_PATH [--output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP] [--haddock_config_path HADDOCK_CONFIG_PATH]
+    
+    Wrapper of the haddock SeleTop module.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+      --output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP
+      --haddock_config_path HADDOCK_CONFIG_PATH
+    
+    required arguments:
+      --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP
+      --output_selection_zip_path OUTPUT_SELECTION_ZIP_PATH
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -126,7 +153,20 @@ Command:
 ```python
 sele_top_clusts -h
 ```
-    /bin/sh: sele_top_clusts: command not found
+    usage: sele_top_clusts [-h] [-c CONFIG] --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP --output_selection_zip_path OUTPUT_SELECTION_ZIP_PATH [--output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP] [--haddock_config_path HADDOCK_CONFIG_PATH]
+    
+    Wrapper of the haddock SeleTopClusts module.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+      --output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP
+      --haddock_config_path HADDOCK_CONFIG_PATH
+    
+    required arguments:
+      --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP
+      --output_selection_zip_path OUTPUT_SELECTION_ZIP_PATH
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -182,7 +222,21 @@ Command:
 ```python
 capri_eval -h
 ```
-    /bin/sh: capri_eval: command not found
+    usage: capri_eval [-h] [-c CONFIG] --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP --output_evaluation_zip_path OUTPUT_EVALUATION_ZIP_PATH [--reference_pdb_path REFERENCE_PDB_PATH] [--output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP] [--haddock_config_path HADDOCK_CONFIG_PATH]
+    
+    Wrapper of the haddock CapriEval module.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+      --reference_pdb_path REFERENCE_PDB_PATH
+      --output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP
+      --haddock_config_path HADDOCK_CONFIG_PATH
+    
+    required arguments:
+      --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP
+      --output_evaluation_zip_path OUTPUT_EVALUATION_ZIP_PATH
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -239,7 +293,21 @@ Command:
 ```python
 flex_ref -h
 ```
-    /bin/sh: flex_ref: command not found
+    usage: flex_ref [-h] [-c CONFIG] --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP --refinement_output_zip_path REFINEMENT_OUTPUT_ZIP_PATH [--restraints_table_path RESTRAINTS_TABLE_PATH] [--output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP] [--haddock_config_path HADDOCK_CONFIG_PATH]
+    
+    Wrapper of the haddock FlexRef module.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+      --restraints_table_path RESTRAINTS_TABLE_PATH
+      --output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP
+      --haddock_config_path HADDOCK_CONFIG_PATH
+    
+    required arguments:
+      --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP
+      --refinement_output_zip_path REFINEMENT_OUTPUT_ZIP_PATH
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -296,7 +364,23 @@ Command:
 ```python
 rigid_body -h
 ```
-    /bin/sh: rigid_body: command not found
+    usage: rigid_body [-h] [-c CONFIG] --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP --docking_output_zip_path DOCKING_OUTPUT_ZIP_PATH [--ambig_restraints_table_path AMBIG_RESTRAINTS_TABLE_PATH] [--unambig_restraints_table_path UNAMBIG_RESTRAINTS_TABLE_PATH] [--hb_restraints_table_path HB_RESTRAINTS_TABLE_PATH] [--output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP] [--haddock_config_path HADDOCK_CONFIG_PATH]
+    
+    Wrapper of the haddock RigidBody module.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+      --ambig_restraints_table_path AMBIG_RESTRAINTS_TABLE_PATH
+      --unambig_restraints_table_path UNAMBIG_RESTRAINTS_TABLE_PATH
+      --hb_restraints_table_path HB_RESTRAINTS_TABLE_PATH
+      --output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP
+      --haddock_config_path HADDOCK_CONFIG_PATH
+    
+    required arguments:
+      --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP
+      --docking_output_zip_path DOCKING_OUTPUT_ZIP_PATH
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -355,7 +439,22 @@ Command:
 ```python
 topology -h
 ```
-    /bin/sh: topology: command not found
+    usage: topology [-h] [-c CONFIG] --mol1_input_pdb_path MOL1_INPUT_PDB_PATH --mol1_output_top_zip_path MOL1_OUTPUT_TOP_ZIP_PATH [--mol2_input_pdb_path MOL2_INPUT_PDB_PATH] [--output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP] [--mol2_output_top_zip_path MOL2_OUTPUT_TOP_ZIP_PATH] [--haddock_config_path HADDOCK_CONFIG_PATH]
+    
+    Wrapper of the haddock haddock module.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+      --mol2_input_pdb_path MOL2_INPUT_PDB_PATH
+      --output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP
+      --mol2_output_top_zip_path MOL2_OUTPUT_TOP_ZIP_PATH
+      --haddock_config_path HADDOCK_CONFIG_PATH
+    
+    required arguments:
+      --mol1_input_pdb_path MOL1_INPUT_PDB_PATH
+      --mol1_output_top_zip_path MOL1_OUTPUT_TOP_ZIP_PATH
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -413,7 +512,20 @@ Command:
 ```python
 clust_fcc -h
 ```
-    /bin/sh: clust_fcc: command not found
+    usage: clust_fcc [-h] [-c CONFIG] --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP --output_cluster_zip_path OUTPUT_CLUSTER_ZIP_PATH [--output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP] [--haddock_config_path HADDOCK_CONFIG_PATH]
+    
+    Wrapper of the haddock ClustFCC module.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+      --output_haddock_wf_data_zip OUTPUT_HADDOCK_WF_DATA_ZIP
+      --haddock_config_path HADDOCK_CONFIG_PATH
+    
+    required arguments:
+      --input_haddock_wf_data_zip INPUT_HADDOCK_WF_DATA_ZIP
+      --output_cluster_zip_path OUTPUT_CLUSTER_ZIP_PATH
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
