@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_haddock",
-    version="4.2.1",
+    version="5.0.0",
     author="Biobb developers",
     author_email="pau.andrio@bsc.es",
     description="biobb_haddock is the Biobb module collection to compute information-driven flexible protein-protein docking.",
@@ -15,13 +15,13 @@ setuptools.setup(
     url="https://github.com/bioexcel/biobb_haddock",
     project_urls={
         "Documentation": "http://biobb_haddock.readthedocs.io/en/latest/",
-        "Bioexcel": "https://bioexcel.eu/"
+        "Bioexcel": "https://bioexcel.eu/",
     },
-    packages=setuptools.find_packages(exclude=['docs', 'test']),
-    package_data={'biobb_haddock': ['py.typed']},
+    packages=setuptools.find_packages(exclude=["docs", "test"]),
+    package_data={"biobb_haddock": ["py.typed"]},
     include_package_data=True,
-    install_requires=['biobb_common==4.2.0'],
-    python_requires='>=3.9',
+    install_requires=["biobb_common==5.0.0"],
+    python_requires=">=3.9",
     entry_points={
         "console_scripts": [
             "capri_eval = biobb_haddock.haddock.capri_eval:main",
@@ -30,16 +30,15 @@ setuptools.setup(
             "flex_ref = biobb_haddock.haddock.flex_ref:main",
             "rigid_body = biobb_haddock.haddock.rigid_body:main",
             "sele_top = biobb_haddock.haddock.sele_top:main",
-            "topology = biobb_haddock.haddock.topology:main"
+            "topology = biobb_haddock.haddock.topology:main",
         ]
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: POSIX",
-        "Operating System :: Unix"
+        "Operating System :: Unix",
     ],
 )

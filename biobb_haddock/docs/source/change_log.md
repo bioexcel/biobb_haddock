@@ -1,5 +1,17 @@
 # Biobb haddock changelog
 
+## What's new in version [5.0.0](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.0.0)?
+
+### Changes
+
+* [CI/CD](env.yaml): Update biobb_common version.
+* [CI/CD](linting_and_testing.yml): Update set-up micromamba.
+* [Typing](ALL): Update typing from python 3.8 style to python 3.9
+* [CI/CD](conf.yml): Adding global properties to test yaml configuration
+* [CI/CD](GITIGNORE): Update .gitignore to include the new file extensions to ignore
+* [CI/CD](conf.yml): Change test conf.yml to adapt to new settings configuration
+* [FEATURE] New sandbox_path property
+
 ## What's new in version [4.2.1](https://github.com/bioexcel/biobb_haddock/releases/tag/4.2.1)?
 First producction ready version of biobb_haddock
 

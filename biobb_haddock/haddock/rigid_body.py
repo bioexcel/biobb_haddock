@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 
 """Module containing the haddock RigidBody class and the command line interface."""
+
 # import os
 # import json
 import argparse
-from typing import Optional
 import shutil
 from pathlib import Path
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+
 from biobb_common.configuration import settings
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_haddock.haddock.common import create_cfg
-from biobb_haddock.haddock.common import cfg_preset
-from biobb_haddock.haddock.common import unzip_workflow_data
+
+from biobb_haddock.haddock.common import cfg_preset, create_cfg, unzip_workflow_data
 
 
 class RigidBody(BiobbObject):
@@ -64,10 +64,18 @@ class RigidBody(BiobbObject):
             * schema: http://edamontology.org/EDAM.owl
     """
 
-    def __init__(self, input_haddock_wf_data_zip: str, docking_output_zip_path: str,
-                 ambig_restraints_table_path: Optional[str] = None, unambig_restraints_table_path: Optional[str] = None,
-                 hb_restraints_table_path: Optional[str] = None, output_haddock_wf_data_zip: Optional[str] = None,
-                 haddock_config_path: Optional[str] = None, properties: Optional[dict] = None, **kwargs) -> None:
+    def __init__(
+        self,
+        input_haddock_wf_data_zip: str,
+        docking_output_zip_path: str,
+        ambig_restraints_table_path: Optional[str] = None,
+        unambig_restraints_table_path: Optional[str] = None,
+        hb_restraints_table_path: Optional[str] = None,
+        output_haddock_wf_data_zip: Optional[str] = None,
+        haddock_config_path: Optional[str] = None,
+        properties: Optional[dict] = None,
+        **kwargs,
+    ) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -75,26 +83,28 @@ class RigidBody(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            "in": {"ambig_restraints_table_path": ambig_restraints_table_path,
-                   "unambig_restraints_table_path": unambig_restraints_table_path,
-                   "hb_restraints_table_path": hb_restraints_table_path,
-                   "haddock_config_path": haddock_config_path
-                   },
-            "out": {"output_haddock_wf_data_zip": output_haddock_wf_data_zip,
-                    "docking_output_zip_path": docking_output_zip_path
-                    }
+            "in": {
+                "ambig_restraints_table_path": ambig_restraints_table_path,
+                "unambig_restraints_table_path": unambig_restraints_table_path,
+                "hb_restraints_table_path": hb_restraints_table_path,
+                "haddock_config_path": haddock_config_path,
+            },
+            "out": {
+                "output_haddock_wf_data_zip": output_haddock_wf_data_zip,
+                "docking_output_zip_path": docking_output_zip_path,
+            },
         }
         # Should not be copied inside container
         self.input_haddock_wf_data_zip = input_haddock_wf_data_zip
 
         # Properties specific for BB
-        self.haddock_step_name = 'rigidbody'
-        self.output_cfg_path = properties.get('output_cfg_path', 'haddock.cfg')
+        self.haddock_step_name = "rigidbody"
+        self.output_cfg_path = properties.get("output_cfg_path", "haddock.cfg")
         # self.cfg = {k: str(v) for k, v in properties.get('cfg', dict()).items()}
-        self.cfg = {k: v for k, v in properties.get('cfg', dict()).items()}
+        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
 
         # Properties specific for BB
-        self.binary_path = properties.get('binary_path', 'haddock3')
+        self.binary_path = properties.get("binary_path", "haddock3")
 
         # Check the properties
         self.check_properties(properties)
@@ -110,37 +120,62 @@ class RigidBody(BiobbObject):
         self.stage_files()
 
         # Unzip workflow data to workflow_data_out
-        run_dir = unzip_workflow_data(zip_file=self.input_haddock_wf_data_zip, out_log=self.out_log)
+        run_dir = unzip_workflow_data(
+            zip_file=self.input_haddock_wf_data_zip, out_log=self.out_log
+        )
 
-        workflow_dict = {'haddock_step_name': self.haddock_step_name}
+        workflow_dict = {"haddock_step_name": self.haddock_step_name}
 
-        if self.stage_io_dict['in'].get('ambig_restraints_table_path'):
-            self.cfg['ambig_fname'] = self.stage_io_dict['in'].get('ambig_restraints_table_path')
+        if self.stage_io_dict["in"].get("ambig_restraints_table_path"):
+            self.cfg["ambig_fname"] = self.stage_io_dict["in"].get(
+                "ambig_restraints_table_path"
+            )
 
-        if self.stage_io_dict['in'].get('unambig_restraints_table_path'):
-            self.cfg['unambig_fname'] = self.stage_io_dict['in'].get('unambig_restraints_table_path')
+        if self.stage_io_dict["in"].get("unambig_restraints_table_path"):
+            self.cfg["unambig_fname"] = self.stage_io_dict["in"].get(
+                "unambig_restraints_table_path"
+            )
 
-        if self.stage_io_dict['in'].get('hb_restraints_table_path'):
-            self.cfg['hbond_fname'] = self.stage_io_dict['in'].get('hb_restraints_table_path')
+        if self.stage_io_dict["in"].get("hb_restraints_table_path"):
+            self.cfg["hbond_fname"] = self.stage_io_dict["in"].get(
+                "hb_restraints_table_path"
+            )
 
         # Create data dir
         cfg_dir = fu.create_unique_dir()
-        self.output_cfg_path = create_cfg(output_cfg_path=str(Path(cfg_dir).joinpath(self.output_cfg_path)),
-                                          workflow_dict=workflow_dict,
-                                          input_cfg_path=self.stage_io_dict['in'].get('haddock_config_path'),
-                                          preset_dict=cfg_preset(workflow_dict['haddock_step_name']),
-                                          cfg_properties_dict=self.cfg)
+        self.output_cfg_path = create_cfg(
+            output_cfg_path=str(Path(cfg_dir).joinpath(self.output_cfg_path)),
+            workflow_dict=workflow_dict,
+            input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
+            preset_dict=cfg_preset(workflow_dict["haddock_step_name"]),
+            cfg_properties_dict=self.cfg,
+        )
 
         if self.container_path:
-            fu.log('Container execution enabled', self.out_log)
+            fu.log("Container execution enabled", self.out_log)
 
             shutil.copy2(self.output_cfg_path, self.stage_io_dict.get("unique_dir", ""))
-            self.output_cfg_path = str(Path(self.container_volume_path).joinpath(Path(self.output_cfg_path).name))
+            self.output_cfg_path = str(
+                Path(self.container_volume_path).joinpath(
+                    Path(self.output_cfg_path).name
+                )
+            )
 
-            shutil.copytree(run_dir, str(Path(self.stage_io_dict.get("unique_dir", "")).joinpath(Path(run_dir).name)))
-            run_dir = str(Path(self.stage_io_dict.get("unique_dir", "")).joinpath(Path(run_dir).name))
+            shutil.copytree(
+                run_dir,
+                str(
+                    Path(self.stage_io_dict.get("unique_dir", "")).joinpath(
+                        Path(run_dir).name
+                    )
+                ),
+            )
+            run_dir = str(
+                Path(self.stage_io_dict.get("unique_dir", "")).joinpath(
+                    Path(run_dir).name
+                )
+            )
 
-        self.cmd = [self.binary_path, self.output_cfg_path, '--extend-run', run_dir]
+        self.cmd = [self.binary_path, self.output_cfg_path, "--extend-run", run_dir]
 
         # Run Biobb block
         self.run_biobb()
@@ -150,15 +185,39 @@ class RigidBody(BiobbObject):
 
         # Copy output
 
-        haddock_output_list = [str(path) for path in Path(run_dir).iterdir() if path.is_dir() and str(path).endswith(workflow_dict['haddock_step_name'])]
+        haddock_output_list = [
+            str(path)
+            for path in Path(run_dir).iterdir()
+            if path.is_dir() and str(path).endswith(workflow_dict["haddock_step_name"])
+        ]
         haddock_output_list.sort(reverse=True)
-        output_file_list = list(Path(haddock_output_list[0]).glob(workflow_dict['haddock_step_name'] + r'*.pdb'))
-        fu.zip_list(self.io_dict['out']['docking_output_zip_path'], output_file_list, self.out_log)
+        output_file_list = list(
+            Path(haddock_output_list[0]).glob(
+                workflow_dict["haddock_step_name"] + r"*.pdb"
+            )
+        )
+        fu.zip_list(
+            self.io_dict["out"]["docking_output_zip_path"],
+            output_file_list,
+            self.out_log,
+        )
 
         # Create zip output
-        if self.io_dict['out'].get('output_haddock_wf_data_zip'):
-            fu.log(f"Zipping {run_dir} to {str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix(''))} ", self.out_log, self.global_log)
-            shutil.make_archive(str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix('')), 'zip', run_dir)
+        if self.io_dict["out"].get("output_haddock_wf_data_zip"):
+            fu.log(
+                f"Zipping {run_dir} to {str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix(''))} ",
+                self.out_log,
+                self.global_log,
+            )
+            shutil.make_archive(
+                str(
+                    Path(self.io_dict["out"]["output_haddock_wf_data_zip"]).with_suffix(
+                        ""
+                    )
+                ),
+                "zip",
+                run_dir,
+            )
 
         # Remove temporal files
         self.tmp_files.extend([self.output_cfg_path])
@@ -167,53 +226,71 @@ class RigidBody(BiobbObject):
         return self.return_code
 
 
-def rigid_body(input_haddock_wf_data_zip: str, docking_output_zip_path: str,
-               ambig_restraints_table_path: Optional[str] = None, unambig_restraints_table_path: Optional[str] = None,
-               hb_restraints_table_path: Optional[str] = None, output_haddock_wf_data_zip: Optional[str] = None,
-               haddock_config_path: Optional[str] = None,
-               properties: Optional[dict] = None, **kwargs) -> int:
+def rigid_body(
+    input_haddock_wf_data_zip: str,
+    docking_output_zip_path: str,
+    ambig_restraints_table_path: Optional[str] = None,
+    unambig_restraints_table_path: Optional[str] = None,
+    hb_restraints_table_path: Optional[str] = None,
+    output_haddock_wf_data_zip: Optional[str] = None,
+    haddock_config_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
     """Create :class:`haddock <haddock.haddock.haddock>` class and
     execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
 
-    return RigidBody(input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-                     docking_output_zip_path=docking_output_zip_path,
-                     ambig_restraints_table_path=ambig_restraints_table_path,
-                     unambig_restraints_table_path=unambig_restraints_table_path,
-                     hb_restraints_table_path=hb_restraints_table_path,
-                     output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-                     haddock_config_path=haddock_config_path,
-                     properties=properties, **kwargs).launch()
+    return RigidBody(
+        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
+        docking_output_zip_path=docking_output_zip_path,
+        ambig_restraints_table_path=ambig_restraints_table_path,
+        unambig_restraints_table_path=unambig_restraints_table_path,
+        hb_restraints_table_path=hb_restraints_table_path,
+        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+        haddock_config_path=haddock_config_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Wrapper of the haddock RigidBody module.",
-                                     formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
+    parser = argparse.ArgumentParser(
+        description="Wrapper of the haddock RigidBody module.",
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+    )
+    parser.add_argument(
+        "-c",
+        "--config",
+        required=False,
+        help="This file can be a YAML file, JSON file or JSON string",
+    )
 
     # Specific args of each building block
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_haddock_wf_data_zip', required=True)
-    required_args.add_argument('--docking_output_zip_path', required=True)
-    parser.add_argument('--ambig_restraints_table_path', required=False)
-    parser.add_argument('--unambig_restraints_table_path', required=False)
-    parser.add_argument('--hb_restraints_table_path', required=False)
-    parser.add_argument('--output_haddock_wf_data_zip', required=False)
-    parser.add_argument('--haddock_config_path', required=False)
+    required_args = parser.add_argument_group("required arguments")
+    required_args.add_argument("--input_haddock_wf_data_zip", required=True)
+    required_args.add_argument("--docking_output_zip_path", required=True)
+    parser.add_argument("--ambig_restraints_table_path", required=False)
+    parser.add_argument("--unambig_restraints_table_path", required=False)
+    parser.add_argument("--hb_restraints_table_path", required=False)
+    parser.add_argument("--output_haddock_wf_data_zip", required=False)
+    parser.add_argument("--haddock_config_path", required=False)
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    rigid_body(input_haddock_wf_data_zip=args.input_haddock_wf_data_zip,
-               docking_output_zip_path=args.docking_output_zip_path,
-               ambig_restraints_table_path=args.restraints_table_path,
-               unambig_restraints_table_path=args.restraints_table_path,
-               hb_restraints_table_path=args.restraints_table_path,
-               output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
-               haddock_config_path=args.haddock_config_path,
-               properties=properties)
+    rigid_body(
+        input_haddock_wf_data_zip=args.input_haddock_wf_data_zip,
+        docking_output_zip_path=args.docking_output_zip_path,
+        ambig_restraints_table_path=args.restraints_table_path,
+        unambig_restraints_table_path=args.restraints_table_path,
+        hb_restraints_table_path=args.restraints_table_path,
+        output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
+        haddock_config_path=args.haddock_config_path,
+        properties=properties,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
