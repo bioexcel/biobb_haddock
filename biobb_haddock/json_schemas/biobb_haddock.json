@@ -72,7 +72,7 @@
     "dep_conda": [
         "python >=3.9",
         "biobb_common ==5.0.0",
-        "haddock_biobb"
+        "haddock_biobb ==3.0.7"
     ],
     "keywords": [
         "haddock",
