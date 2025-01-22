@@ -77,7 +77,7 @@ flex_ref:
 
 em_ref:
   paths:
-    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_seletop.zip
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_emref_input.zip
     restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
 
     refinement_output_zip_path: refinement_output.zip
@@ -96,5 +96,28 @@ clust_fcc:
     output_haddock_wf_data_zip: haddock_wf_data.zip
 
     ref_output_cluster_zip_path: file:test_reference_dir/haddock/ref_clustfcc.zip
+  properties:
+    remove_tmp: False
+
+haddock3_accessibility:
+  paths:
+    input_pdb_path: file:test_data_dir/haddock/e2aP_1F3G_noH.pdb
+
+    output_accessibility_path: haddock_accessibility_report.txt
+    output_actpass_path: haddock_accessibility_actpass.txt
+
+    ref_output_accessibility_path: file:test_reference_dir/haddock_restraints/mol1_sasa.txt
+    ref_output_actpass_path: file:test_reference_dir/haddock_restraints/mol1_haddock_actpass.txt
+  properties:
+    remove_tmp: False
+
+haddock3_actpass_to_ambig:
+  paths:
+    input_actpass1_path: file:test_data_dir/haddock_restraints/haddock_actpass1.pass
+    input_actpass2_path: file:test_data_dir/haddock_restraints/haddock_actpass2.pass
+
+    output_tbl_path: haddock_actpass.tbl
+
+    ref_output_tbl_path: file:test_reference_dir/haddock_restraints/haddock_air.tbl
   properties:
     remove_tmp: False
