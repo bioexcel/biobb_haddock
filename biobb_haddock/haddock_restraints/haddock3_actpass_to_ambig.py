@@ -3,9 +3,6 @@
 """Module containing the haddock  class and the command line interface."""
 
 import argparse
-import glob
-import os
-import shutil
 from typing import Optional
 
 from biobb_common.configuration import settings
