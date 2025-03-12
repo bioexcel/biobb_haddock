@@ -1,2 +1,2 @@
 1     E231 missing whitespace after ','
-3     F401 'glob' imported but unused
+1     F401 'biobb_haddock.haddock.common.cfg_preset' imported but unused
