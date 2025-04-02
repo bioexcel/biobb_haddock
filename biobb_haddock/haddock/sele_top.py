@@ -2,6 +2,7 @@
 
 """Module containing the haddock  class and the command line interface."""
 
+import jsonpickle
 import argparse
 import shutil
 from pathlib import Path
@@ -88,7 +89,7 @@ class SeleTop(BiobbObject):
         # Properties specific for BB
         self.haddock_step_name = "seletop"
         self.output_cfg_path = properties.get("output_cfg_path", "haddock.cfg")
-        self.cfg = {k: str(v) for k, v in properties.get("cfg", dict()).items()}
+        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
 
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3")
@@ -167,6 +168,12 @@ class SeleTop(BiobbObject):
             for path in Path(haddock_output_list[0]).iterdir()
             if path.is_file() and str(path.name) not in ["io.json", "params.cfg"]
         ]
+        with open(haddock_output_list[0]+'/io.json') as json_file:
+            content = jsonpickle.decode(json_file.read())
+            output = content["output"]
+        for file in output:
+            f = "/".join([run_dir,*str(file.rel_path).split('/')[1:]])+'.gz'
+            output_file_list.append(f)
         fu.zip_list(
             self.io_dict["out"]["output_selection_zip_path"],
             output_file_list,
@@ -191,7 +198,10 @@ class SeleTop(BiobbObject):
             )
 
         # Remove temporal files
-        self.tmp_files.extend([self.output_cfg_path])
+        self.tmp_files.extend([run_dir,
+                               cfg_dir,
+                               self.stage_io_dict.get("unique_dir")
+                               ])
         self.remove_tmp_files()
 
         return self.return_code

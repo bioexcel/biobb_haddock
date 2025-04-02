@@ -122,10 +122,8 @@ class Topology(BiobbObject):
             "haddock_step_name": self.haddock_step_name,
         }
 
-        if self.stage_io_dict["in"].get("mol2_input_pdb_path"):
-            list(workflow_dict["molecules"]).append(
-                self.stage_io_dict["in"].get("mol2_input_pdb_path")
-            )
+        if mol2_input_pdb_path := self.stage_io_dict["in"].get("mol2_input_pdb_path"):
+            workflow_dict["molecules"].append(mol2_input_pdb_path)
 
         # Create data dir
         cfg_dir = fu.create_unique_dir()
@@ -161,7 +159,7 @@ class Topology(BiobbObject):
         )
         mol1_name = str(Path(self.io_dict["in"]["mol1_input_pdb_path"]).stem)
         mol1_output_file_list = list(
-            haddock_output_path.glob(mol1_name + r"*_haddock.pdb")
+            haddock_output_path.glob(mol1_name + r"*_haddock.pdb*")
         )
         fu.zip_list(
             self.io_dict["out"]["mol1_output_top_zip_path"],
@@ -172,7 +170,7 @@ class Topology(BiobbObject):
         if self.io_dict["out"].get("mol1_output_top_zip_path"):
             mol2_name = str(Path(self.io_dict["in"]["mol2_input_pdb_path"]).stem)
             mol2_output_file_list = list(
-                haddock_output_path.glob(mol2_name + r"*_haddock.pdb")
+                haddock_output_path.glob(mol2_name + r"*_haddock.pdb*")
             )
             fu.zip_list(
                 self.io_dict["out"]["mol2_output_top_zip_path"],
@@ -197,8 +195,11 @@ class Topology(BiobbObject):
                 str(workflow_dict["run_dir"]),
             )
 
-        # Remove temporal files
-        self.tmp_files.extend([self.output_cfg_path])
+        # Remove temporary files
+        self.tmp_files.extend([workflow_dict['run_dir'],
+                               cfg_dir,
+                               self.stage_io_dict.get("unique_dir")
+                               ])
         self.remove_tmp_files()
 
         return self.return_code

@@ -126,20 +126,14 @@ class RigidBody(BiobbObject):
 
         workflow_dict = {"haddock_step_name": self.haddock_step_name}
 
-        if self.stage_io_dict["in"].get("ambig_restraints_table_path"):
-            self.cfg["ambig_fname"] = self.stage_io_dict["in"].get(
-                "ambig_restraints_table_path"
-            )
+        if ambig_path := self.stage_io_dict["in"].get("ambig_restraints_table_path"):
+            self.cfg["ambig_fname"] = ambig_path
 
-        if self.stage_io_dict["in"].get("unambig_restraints_table_path"):
-            self.cfg["unambig_fname"] = self.stage_io_dict["in"].get(
-                "unambig_restraints_table_path"
-            )
+        if unambig_fname := self.stage_io_dict["in"].get("unambig_restraints_table_path"):
+            self.cfg["unambig_fname"] = unambig_fname
 
-        if self.stage_io_dict["in"].get("hb_restraints_table_path"):
-            self.cfg["hbond_fname"] = self.stage_io_dict["in"].get(
-                "hb_restraints_table_path"
-            )
+        if hbond_fname := self.stage_io_dict["in"].get("hb_restraints_table_path"):
+            self.cfg["hbond_fname"] = hbond_fname
 
         # Create data dir
         cfg_dir = fu.create_unique_dir()
@@ -193,7 +187,7 @@ class RigidBody(BiobbObject):
         haddock_output_list.sort(reverse=True)
         output_file_list = list(
             Path(haddock_output_list[0]).glob(
-                workflow_dict["haddock_step_name"] + r"*.pdb"
+                workflow_dict["haddock_step_name"] + r"*.pdb*"
             )
         )
         fu.zip_list(
@@ -220,7 +214,10 @@ class RigidBody(BiobbObject):
             )
 
         # Remove temporal files
-        self.tmp_files.extend([self.output_cfg_path])
+        self.tmp_files.extend([
+            run_dir,
+            cfg_dir,
+            self.stage_io_dict.get("unique_dir")])
         self.remove_tmp_files()
 
         return self.return_code

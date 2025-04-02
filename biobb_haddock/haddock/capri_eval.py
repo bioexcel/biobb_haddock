@@ -118,10 +118,8 @@ class CapriEval(BiobbObject):
 
         workflow_dict = {"haddock_step_name": self.haddock_step_name}
 
-        if self.stage_io_dict["in"].get("reference_pdb_path"):
-            self.cfg["reference_fname"] = self.stage_io_dict["in"].get(
-                "reference_pdb_path"
-            )
+        if reference_fname := self.stage_io_dict["in"].get("reference_pdb_path"):
+            self.cfg["reference_fname"] = reference_fname
 
         # Create data dir
         cfg_dir = fu.create_unique_dir()
@@ -201,7 +199,10 @@ class CapriEval(BiobbObject):
             )
 
         # Remove temporal files
-        self.tmp_files.extend([self.output_cfg_path])
+        self.tmp_files.extend([run_dir,
+                               cfg_dir,
+                               self.stage_io_dict.get("unique_dir")
+                               ])
         self.remove_tmp_files()
 
         return self.return_code

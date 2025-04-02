@@ -117,10 +117,8 @@ class FlexRef(BiobbObject):
 
         workflow_dict = {"haddock_step_name": self.haddock_step_name}
 
-        if self.stage_io_dict["in"].get("restraints_table_path"):
-            self.cfg["ambig_fname"] = self.stage_io_dict["in"].get(
-                "restraints_table_path"
-            )
+        if restraints_table_path := self.stage_io_dict["in"].get("restraints_table_path"):
+            self.cfg["ambig_fname"] = restraints_table_path
 
         # Create data dir
         cfg_dir = fu.create_unique_dir()
@@ -201,7 +199,10 @@ class FlexRef(BiobbObject):
             )
 
         # Remove temporal files
-        self.tmp_files.extend([self.output_cfg_path])
+        self.tmp_files.extend([run_dir,
+                               cfg_dir,
+                               self.stage_io_dict.get("unique_dir")
+                               ])
         self.remove_tmp_files()
 
         return self.return_code

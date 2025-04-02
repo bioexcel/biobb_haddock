@@ -82,6 +82,7 @@ def cfg_preset(haddock_step_name: str) -> dict[str, Any]:
     cfg_dict: dict[str, Any] = {}
     if not haddock_step_name:
         return cfg_dict
+    # cfg_dict["debug"] = True
 
     if haddock_step_name == "topoaa":
         cfg_dict["autohis"] = True
