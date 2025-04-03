@@ -172,8 +172,8 @@ class SeleTop(BiobbObject):
             content = jsonpickle.decode(json_file.read())
             output = content["output"]
         for file in output:
-            f = "/".join([run_dir,*str(file.rel_path).split('/')[1:]])+'.gz'
-            output_file_list.append(f)
+            rel_path = str(file.rel_path).split('/')
+            output_file_list.extend(list(Path(run_dir+'/'+rel_path[-2]).glob(rel_path[-1]+'*')))
         fu.zip_list(
             self.io_dict["out"]["output_selection_zip_path"],
             output_file_list,
