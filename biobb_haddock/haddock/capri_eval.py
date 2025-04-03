@@ -19,7 +19,7 @@ class CapriEval(BiobbObject):
     """
     | biobb_haddock CapriEval
     | Wrapper class for the Haddock CapriEval module.
-    | The CapriEval module. Haddock CapriEval  module computes Capri evaluation for a docking.
+    | The CapriEval module. `Haddock CapriEval module <https://www.bonvinlab.org/haddock3/modules/analysis/haddock.modules.analysis.caprieval.html>`_ computes Capri evaluation for a docking.
 
     Args:
         input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: input. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip>`_. Accepted formats: zip (edam:format_3987).
@@ -103,7 +103,7 @@ class CapriEval(BiobbObject):
 
     @launchlogger
     def launch(self) -> int:
-        """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
+        """Execute the :class:`CapriEval <biobb_haddock.haddock.capri_eval>` object."""
         # tmp_files = []
 
         # Setup Biobb
@@ -217,8 +217,8 @@ def capri_eval(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Create :class:`haddock <haddock.haddock.haddock>` class and
-    execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
+    """Create :class:`CapriEval <biobb_haddock.haddock.capri_eval>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.capri_eval.launch>` method."""
 
     return CapriEval(
         input_haddock_wf_data_zip=input_haddock_wf_data_zip,

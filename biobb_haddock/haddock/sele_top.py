@@ -19,8 +19,8 @@ from biobb_haddock.haddock.common import cfg_preset, create_cfg, unzip_workflow_
 class SeleTop(BiobbObject):
     """
     | biobb_haddock SeleTop
-    | Wrapper class for the Haddock SeleTop module https://www.bonvinlab.org/haddock3/modules/analysis/seletop.html
-    | The SeleTop module. Haddock SeleTop module selects the top models of a docking.
+    | Wrapper class for the Haddock SeleTop module.
+    | The SeleTop module. `Haddock SeleTop module <https://www.bonvinlab.org/haddock3/modules/analysis/haddock.modules.analysis.seletop.html>`_ selects the top models of a docking.
 
     Args:
         input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: input. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip>`_. Accepted formats: zip (edam:format_3987).
@@ -99,7 +99,7 @@ class SeleTop(BiobbObject):
 
     @launchlogger
     def launch(self) -> int:
-        """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
+        """Execute the :class:`SeleTop <biobb_haddock.haddock.sele_top>` object."""
         # tmp_files = []
 
         # Setup Biobb
@@ -215,8 +215,8 @@ def sele_top(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Create :class:`haddock <haddock.haddock.haddock>` class and
-    execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
+    """Create :class:`SeleTop <biobb_haddock.haddock.sele_top>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.sele_top.launch>` method."""
 
     return SeleTop(
         input_haddock_wf_data_zip=input_haddock_wf_data_zip,

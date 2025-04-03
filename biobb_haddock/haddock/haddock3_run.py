@@ -23,7 +23,6 @@ class Haddock3Run(BiobbObject):
     | Wrapper class for the Haddock3 run module.
     | The Haddock3 run module launches the HADDOCK3 execution for docking.
 
-
     Args:
         mol1_input_pdb_path (str): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb>`_. Accepted formats: pdb (edam:format_1476).
         mol2_input_pdb_path (str) (Optional): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/hpr_ensemble.pdb>`_. Accepted formats: pdb (edam:format_1476).
@@ -111,7 +110,7 @@ class Haddock3Run(BiobbObject):
 
     @launchlogger
     def launch(self) -> int:
-        """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
+        """Execute the :class:`Haddock3Run <biobb_haddock.haddock.haddock3_run>` object."""
         # tmp_files = []
 
         # Setup Biobb
@@ -186,8 +185,8 @@ def haddock3_run(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Create :class:`haddock <haddock.haddock.haddock>` class and
-    execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
+    """Create :class:`Haddock3Run <biobb_haddock.haddock.haddock3_run>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.haddock3_run.launch>` method."""
 
     return Haddock3Run(
         mol1_input_pdb_path=mol1_input_pdb_path,

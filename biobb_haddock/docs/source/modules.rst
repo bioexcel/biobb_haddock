@@ -5,3 +5,4 @@ biobb_haddock
    :maxdepth: 4
 
    haddock
+   haddock_restrains

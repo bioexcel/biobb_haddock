@@ -18,8 +18,8 @@ from biobb_haddock.haddock.common import cfg_preset, create_cfg, unzip_workflow_
 class SeleTopClusts(BiobbObject):
     """
     | biobb_haddock SeleTopClusts
-    | Wrapper class for the Haddock SeleTopClusts module https://www.bonvinlab.org/haddock3/modules/analysis/seletopclusts.html.
-    | The SeleTopClusts module. Haddock SeleTopClusts module selects the top clusters of a docking.
+    | Wrapper class for the Haddock SeleTopClusts module.
+    | The SeleTopClusts module. `Haddock SeleTopClusts module <https://www.bonvinlab.org/haddock3/modules/analysis/haddock.modules.analysis.seletopclusts.html>`_ selects the top clusters of a docking.
 
     Args:
         input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: input. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip>`_. Accepted formats: zip (edam:format_3987).
@@ -98,7 +98,7 @@ class SeleTopClusts(BiobbObject):
 
     @launchlogger
     def launch(self) -> int:
-        """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
+        """Execute the :class:`SeleTopClusts <biobb_haddock.haddock.sele_top_clusts>` object."""
         # tmp_files = []
 
         # Setup Biobb
@@ -208,8 +208,8 @@ def sele_top_clusts(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Create :class:`haddock <haddock.haddock.haddock>` class and
-    execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
+    """Create :class:`SeleTopClusts <biobb_haddock.haddock.sele_top_clusts>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.sele_top_clusts.launch>` method."""
 
     return SeleTopClusts(
         input_haddock_wf_data_zip=input_haddock_wf_data_zip,

@@ -14,7 +14,7 @@ class Haddock3ActpassToAmbig(BiobbObject):
     """
     | biobb_haddock Haddock3ActpassToAmbig
     | Wrapper class for the Haddock-Restraints active_passive_to_ambig module.
-    | Haddock-Restraints active_passive_to_ambig generates a corresponding ambig.tbl file to be used by HADDOCK from two given files containing active (in the first line) and passive (second line) residues.
+    | `Haddock-Restraints active_passive_to_ambig <https://www.bonvinlab.org/haddock3/clients/haddock.clis.restraints.active_passive_to_ambig.html>`_ generates a corresponding ambig.tbl file to be used by HADDOCK from two given files containing active (in the first line) and passive (second line) residues.
 
     Args:
         input_actpass1_path (str): Path to the first input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass.txt>`_. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), in (edam:format_2330), pass (edam:format_2330).
@@ -88,7 +88,7 @@ class Haddock3ActpassToAmbig(BiobbObject):
 
     @launchlogger
     def launch(self) -> int:
-        """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
+        """Execute the :class:`Haddock3ActpassToAmbig <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig>` object."""
 
         # Setup Biobb
         if self.check_restart():
@@ -121,8 +121,8 @@ def haddock3_actpass_to_ambig(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Create :class:`haddock <haddock.haddock.haddock>` class and
-    execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
+    """Create :class:`Haddock3ActpassToAmbig <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig.launch>` method."""
 
     return Haddock3ActpassToAmbig(
         input_actpass1_path=input_actpass1_path,

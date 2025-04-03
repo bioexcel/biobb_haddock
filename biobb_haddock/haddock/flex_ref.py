@@ -19,7 +19,7 @@ class FlexRef(BiobbObject):
     """
     | biobb_haddock FlexRef
     | Wrapper class for the Haddock FlexRef module.
-    | The FlexRef module. Haddock FlexRef module computes a flexible refinement over selected structures.
+    | The FlexRef module.`Haddock FlexRef module <https://www.bonvinlab.org/haddock3/modules/refinement/haddock.modules.refinement.flexref.html>`_ computes a flexible refinement over selected structures.
 
     Args:
         input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: input. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip>`_. Accepted formats: zip (edam:format_3987).
@@ -102,7 +102,7 @@ class FlexRef(BiobbObject):
 
     @launchlogger
     def launch(self) -> int:
-        """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
+        """Execute the :class:`FlexRef <biobb_haddock.haddock.flex_ref>` object."""
         # tmp_files = []
 
         # Setup Biobb
@@ -217,8 +217,8 @@ def flex_ref(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Create :class:`haddock <haddock.haddock.haddock>` class and
-    execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
+    """Create :class:`FlexRef <biobb_haddock.haddock.flex_ref>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.flex_ref.launch>` method."""
 
     return FlexRef(
         input_haddock_wf_data_zip=input_haddock_wf_data_zip,

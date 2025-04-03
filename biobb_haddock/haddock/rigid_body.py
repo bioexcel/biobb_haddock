@@ -21,7 +21,7 @@ class RigidBody(BiobbObject):
     """
     | biobb_haddock RigidBody
     | Wrapper class for the Haddock RigidBody module.
-    | The RigidBody module. Haddock RigidBody  module compute rigid body docking between two molecules.
+    | The RigidBody module. `Haddock RigidBody module <https://www.bonvinlab.org/haddock3/modules/analysis/haddock.modules.sampling.rigidbody.html>`_ compute rigid body docking between two molecules.
 
     Args:
         input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: input. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip>`_. Accepted formats: zip (edam:format_3987).
@@ -111,7 +111,7 @@ class RigidBody(BiobbObject):
 
     @launchlogger
     def launch(self) -> int:
-        """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
+        """Execute the :class:`RigidBody <biobb_haddock.haddock.rigid_body>` object."""
         # tmp_files = []
 
         # Setup Biobb
@@ -234,8 +234,8 @@ def rigid_body(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Create :class:`haddock <haddock.haddock.haddock>` class and
-    execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
+    """Create :class:`RigidBody <biobb_haddock.haddock.rigid_body>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.rigid_body.launch>` method."""
 
     return RigidBody(
         input_haddock_wf_data_zip=input_haddock_wf_data_zip,

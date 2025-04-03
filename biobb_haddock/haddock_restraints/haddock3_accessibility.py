@@ -17,7 +17,7 @@ class Haddock3Accessibility(BiobbObject):
     """
     | biobb_haddock Haddock3Accessibility
     | Wrapper class for the Haddock-Restraints Accessibility module.
-    | Haddock-Restraints Accessibility computes residues accessibility using freesasa included in the Haddock3 package.
+    | `Haddock-Restraints Accessibility <https://www.bonvinlab.org/haddock3/clients/haddock.clis.restraints.calc_accessibility.html>`_ computes residues accessibility using freesasa included in the Haddock3 package.
 
     Args:
         input_pdb_path (str): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb>`_. Accepted formats: pdb (edam:format_1476).
@@ -95,7 +95,7 @@ class Haddock3Accessibility(BiobbObject):
 
     @launchlogger
     def launch(self) -> int:
-        """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
+        """Execute the :class:`Haddock3Accessibility <biobb_haddock.haddock_restraints.haddock3_accessibility>` object."""
 
         # Setup Biobb
         if self.check_restart():
@@ -149,8 +149,8 @@ def haddock3_accessibility(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Create :class:`haddock <haddock.haddock.haddock>` class and
-    execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
+    """Create :class:`Haddock3Accessibility <biobb_haddock.haddock_restraints.haddock3_accessibility>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_accessibility.launch>` method."""
 
     return Haddock3Accessibility(
         input_pdb_path=input_pdb_path,

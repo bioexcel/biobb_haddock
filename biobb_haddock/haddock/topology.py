@@ -21,8 +21,7 @@ class Topology(BiobbObject):
     """
     | biobb_haddock Topology
     | Wrapper class for the Haddock Topology module.
-    | The Topology module. The Haddock Topology module creates a topology from a system to be used for docking.
-
+    | The Topology module. `Haddock Topology module <https://www.bonvinlab.org/haddock3/modules/topology/haddock.modules.topology.topoaa.html#haddock.modules.topology.topoaa.HaddockModule>`_ creates a topology from a system to be used for docking.
 
     Args:
         mol1_input_pdb_path (str): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb>`_. Accepted formats: pdb (edam:format_1476).
@@ -48,7 +47,7 @@ class Topology(BiobbObject):
     Examples:
         This is a use example of how to use the building block from Python::
 
-            from biobb_haddock.haddock.Topology import topology
+            from biobb_haddock.haddock.topology import topology
             prop = { 'binary_path': 'haddock' }
             topology(mol1_input_pdb_path='/path/to/myStructure.pdb',
                      mol1_output_top_zip_path='/path/to/topology.zip',
@@ -108,7 +107,7 @@ class Topology(BiobbObject):
 
     @launchlogger
     def launch(self) -> int:
-        """Execute the :class:`haddock <haddock.haddock.haddock>` object."""
+        """Execute the :class:`Topology <biobb_haddock.haddock.topology>` object."""
         # tmp_files = []
 
         # Setup Biobb
@@ -215,8 +214,8 @@ def topology(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Create :class:`haddock <haddock.haddock.haddock>` class and
-    execute the :meth:`launch() <haddock.haddock.haddock.launch>` method."""
+    """Create :class:`Topology <biobb_haddock.haddock.topology>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.topology.launch>` method."""
 
     return Topology(
         mol1_input_pdb_path=mol1_input_pdb_path,
