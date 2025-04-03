@@ -172,7 +172,7 @@ class EMRef(BiobbObject):
         haddock_output_list.sort(reverse=True)
         output_file_list = list(
             Path(haddock_output_list[0]).glob(
-                workflow_dict["haddock_step_name"] + r"*.pdb"
+                workflow_dict["haddock_step_name"] + r"*.pdb*"
             )
         )
         fu.zip_list(

@@ -88,7 +88,7 @@ class SeleTopClusts(BiobbObject):
         # Properties specific for BB
         self.haddock_step_name = "seletopclusts"
         self.output_cfg_path = properties.get("output_cfg_path", "haddock.cfg")
-        self.cfg = {k: str(v) for k, v in properties.get("cfg", dict()).items()}
+        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
 
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3")
