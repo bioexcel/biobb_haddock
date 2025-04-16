@@ -104,6 +104,13 @@ class Haddock3ActpassToAmbig(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
+        # Remove deprecation warning
+        # Open the output file and save all except the first line
+        with open(self.stage_io_dict['out']['output_tbl_path'], 'r') as file:
+            lines = file.readlines()
+        with open(self.stage_io_dict['out']['output_tbl_path'], 'w') as file:
+            file.writelines(lines[1:])
+    
         # Copy files to host
         self.copy_to_host()
 

@@ -108,6 +108,7 @@ class Haddock3Accessibility(BiobbObject):
         if self.io_dict["out"]["output_actpass_path"] is not None:
             self.cmd.append("--export_to_actpass")
 
+        self.cmd.append(f"-c {self.cutoff}")
         self.cmd.append("&>")
         self.cmd.append(self.stage_io_dict['out']['output_accessibility_path'])
 

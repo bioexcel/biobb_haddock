@@ -1,12 +1,12 @@
 haddock_restrains package
-=====================
+=========================
 
 Submodules
-----------
+-----------
 
 
 haddock_restrains.haddock3_accessibility module
-------------------------------
+-------------------------------------------------
 
 .. automodule:: haddock_restrains.haddock3_accessibility
     :members:
@@ -15,7 +15,7 @@ haddock_restrains.haddock3_accessibility module
 
 
 haddock_restrains.haddock3_actpass_to_ambig module
-------------------------------
+---------------------------------------------------
 
 .. automodule:: haddock_restrains.haddock3_actpass_to_ambig
     :members:
