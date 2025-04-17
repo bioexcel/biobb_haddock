@@ -27,6 +27,7 @@ class Haddock3Accessibility(BiobbObject):
             * **chain** (*str*) - ("A") Chain to be used from the input PDB file.
             * **cutoff** (*float*) - (0.4) Relative cutoff for sidechain accessibility.
             * **probe_radius** (*float*) - (1.4) Probe radius for the accessibility calculation.
+            * **pass_to_act** (*bool*) - (False) If True, the passive residues become active in the actpass file and vice versa.
             * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -86,6 +87,7 @@ class Haddock3Accessibility(BiobbObject):
         self.chain = properties.get("chain", "A")
         self.cutoff = properties.get("cutoff", 0.4)
         self.probe_radius = properties.get("probe_radius", 1.4)
+        self.pass_to_act = properties.get("pass_to_act", False)
 
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3-restraints")
@@ -127,7 +129,12 @@ class Haddock3Accessibility(BiobbObject):
             # Rename/Copy output file to the given output file name
             file_name = os.path.basename(self.io_dict['in']['input_pdb_path'])
             shutil.copyfile(f"{file_name[:-4]}_passive_{self.chain}.actpass", self.io_dict["out"]["output_actpass_path"])
-
+            if self.pass_to_act:
+                with open(self.io_dict["out"]["output_actpass_path"], 'r') as file:
+                    lines = file.readlines()
+                with open(self.io_dict["out"]["output_actpass_path"], 'w') as file:
+                    file.write(lines[1])
+                    file.write('\n\n')
         else:
             print(f"\nWARNING: Chain {self.chain} not found in input PDB file. Please check and modify the chain property accordingly.\n")
 
