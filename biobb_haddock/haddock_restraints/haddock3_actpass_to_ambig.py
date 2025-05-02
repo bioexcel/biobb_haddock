@@ -21,6 +21,9 @@ class Haddock3ActpassToAmbig(BiobbObject):
         input_actpass2_path (str): Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass.txt>`_. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), in (edam:format_2330), pass (edam:format_2330).
         output_tbl_path (str): Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/haddock_air.tbl>`_. Accepted formats: tbl (edam:format_2330), txt (edam:format_2330), out (edam:format_2330).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
+            * **pass_to_act** (*bool*) - (False) Path to the haddock haddock executable binary.
+            * **segid_one** (*str*) - (None) Segid of the first model.
+            * **segid_two** (*str*) - (None) Segid of the second model.
             * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -78,10 +81,10 @@ class Haddock3ActpassToAmbig(BiobbObject):
         }
 
         # Properties specific for BB
-        # self.chain = properties.get("chain", "A")
-
-        # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3-restraints")
+        self.pass_to_act = properties.get("pass_to_act", False)
+        self.segid_one = properties.get("segid_one", None)
+        self.segid_two = properties.get("segid_two", None)
 
         # Check the properties
         self.check_properties(properties)
@@ -95,8 +98,24 @@ class Haddock3ActpassToAmbig(BiobbObject):
             return 0
         self.stage_files()
 
+        if self.pass_to_act:
+            with open(self.stage_io_dict['in']['input_actpass1_path'], 'r') as file1, \
+                 open(self.stage_io_dict['in']['input_actpass2_path'], 'r') as file2:
+                actpass1_lines = file1.readlines()
+                actpass2_lines = file2.readlines()
+
+            with open(self.stage_io_dict['in']['input_actpass1_path'], 'w') as file1, \
+                 open(self.stage_io_dict['in']['input_actpass2_path'], 'w') as file2:
+                file1.writelines([actpass1_lines[1], actpass1_lines[0], '\n'])
+                file2.writelines([actpass2_lines[1], actpass2_lines[0], '\n'])
+                
         # haddock3-restraints active_passive_to_ambig haddock_actpass.txt
         self.cmd = [self.binary_path, "active_passive_to_ambig", self.stage_io_dict['in']['input_actpass1_path'], self.stage_io_dict['in']['input_actpass2_path']]
+
+        if self.segid_one is not None:
+            self.cmd.extend(["--segid-one", self.segid_one])
+        if self.segid_two is not None:
+            self.cmd.extend(["--segid-two", self.segid_two])
 
         self.cmd.append("&>")
         self.cmd.append(self.stage_io_dict['out']['output_tbl_path'])
@@ -104,12 +123,12 @@ class Haddock3ActpassToAmbig(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Remove deprecation warning
-        # Open the output file and save all except the first line
+        ## Remove deprecation warning if present
         with open(self.stage_io_dict['out']['output_tbl_path'], 'r') as file:
             lines = file.readlines()
-        with open(self.stage_io_dict['out']['output_tbl_path'], 'w') as file:
-            file.writelines(lines[1:])
+        if lines and "DEPRECATION NOTICE" in lines[0]:
+            with open(self.stage_io_dict['out']['output_tbl_path'], 'w') as file:
+                file.writelines(lines[1:])
     
         # Copy files to host
         self.copy_to_host()
