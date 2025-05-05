@@ -23,7 +23,7 @@ rigid_body:
     restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
 
     docking_output_zip_path: docking_output.zip
-    output_haddock_wf_data_zip: haddock_wf_data.zip
+    output_haddock_wf_data_zip: haddock_wf_data_rigid.zip
 
     ref_docking_output_zip_path: file:test_reference_dir/haddock/ref_rigidbody.zip
   properties:
@@ -35,7 +35,7 @@ capri_eval:
     reference_pdb_path: file:test_data_dir/haddock/e2a-hpr_1GGR.pdb
 
     output_evaluation_zip_path: caprieval_output.zip
-    output_haddock_wf_data_zip: haddock_wf_data.zip
+    output_haddock_wf_data_zip: haddock_wf_data_caprieval.zip
 
     ref_output_evaluation_zip_path: file:test_reference_dir/haddock/ref_caprieval.zip
   properties:

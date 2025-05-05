@@ -131,7 +131,7 @@ class Haddock3Run(BiobbObject):
             input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
             cfg_properties_dict=self.cfg,
         )
-        return
+
         if self.container_path:
             fu.log("Container execution enabled", self.out_log)
 

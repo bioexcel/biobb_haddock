@@ -5,7 +5,7 @@ import re
 from typing import Any, Optional
 
 import biobb_common.tools.file_utils as fu
-
+from haddock.gear.config import load, save
 
 def create_cfg(
     output_cfg_path: str,
@@ -22,7 +22,7 @@ def create_cfg(
         for k, v in preset_dict.items():
             cfg_dict[k] = v
     if input_cfg_path:
-        input_cfg_dict = read_cfg(input_cfg_path)
+        input_cfg_dict = load(input_cfg_path)['final_cfg']
         for k, v in input_cfg_dict.items():
             cfg_dict[k] = v
     if cfg_properties_dict:
@@ -30,59 +30,21 @@ def create_cfg(
             print("CFG: " + str(k))
             print("CFG: " + str(v))
             cfg_dict[k] = v
-
-    return write_cfg(output_cfg_path, workflow_dict, cfg_dict)
-
-
-def write_cfg(
-    output_cfg_path: str, workflow_dict: dict[str, str], cfg_dict: dict[str, str]
-):
-    cfg_list: list[str] = []
-    if workflow_dict.get("run_dir"):
-        cfg_list.append(f"run_dir = '{workflow_dict['run_dir']}'")
+            
+    if haddock_step_name:
+        cfg_dict = {haddock_step_name: cfg_dict}
     if workflow_dict.get("molecules"):
-        cfg_list.append(f"molecules = {workflow_dict['molecules']}")
-    cfg_list.append(f"\n[{workflow_dict['haddock_step_name']}]")
-
-    for k, v in cfg_dict.items():
-        # cfg_list.append(k + ' = ' + str(v))
-        if isinstance(v, int):
-            cfg_list.append(k + " = " + str(v))
-        elif isinstance(v, str):
-            cfg_list.append(k + " = " + f"'{v}'")
-        else:
-            cfg_list.append(k + " = " + str(v))
-
-    with open(output_cfg_path, "w") as cfg_file:
-        for line in cfg_list:
-            cfg_file.write(line + "\n")
-
+        cfg_dict["molecules"] = workflow_dict["molecules"]
+    if workflow_dict.get("run_dir"):
+        cfg_dict["run_dir"] = workflow_dict["run_dir"]
+    # Use haddock save
+    save(cfg_dict, output_cfg_path)
+    
     return output_cfg_path
-
-
-def read_cfg(input_mdp_path: str) -> dict[str, str]:
-    # https://github.com/Becksteinlab/GromacsWrapper/blob/master/gromacs/fileformats/mdp.py
-    parameter_re = re.compile(
-        r"\s*(?P<parameter>[^=]+?)\s*=\s*(?P<value>[^;]*)(?P<comment>\s*#.*)?",
-        re.VERBOSE,
-    )
-
-    cfg_dict: dict[str, str] = {}
-    with open(input_mdp_path) as mdp_file:
-        for line in mdp_file:
-            re_match = parameter_re.match(line.strip())
-            if re_match:
-                parameter = re_match.group("parameter")
-                value = re_match.group("value")
-                cfg_dict[parameter] = value
-
-    return cfg_dict
 
 
 def cfg_preset(haddock_step_name: str) -> dict[str, Any]:
     cfg_dict: dict[str, Any] = {}
-    if not haddock_step_name:
-        return cfg_dict
     # cfg_dict["debug"] = True
 
     if haddock_step_name == "topoaa":
