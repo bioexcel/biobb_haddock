@@ -12,7 +12,7 @@ from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 
-from biobb_haddock.haddock.common import cfg_preset, create_cfg, unzip_workflow_data
+from biobb_haddock.haddock.common import create_cfg, unzip_workflow_data
 
 
 class FlexRef(BiobbObject):
@@ -126,7 +126,6 @@ class FlexRef(BiobbObject):
             output_cfg_path=str(Path(cfg_dir).joinpath(self.output_cfg_path)),
             workflow_dict=workflow_dict,
             input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
-            preset_dict=cfg_preset(workflow_dict["haddock_step_name"]),
             cfg_properties_dict=self.cfg,
         )
 

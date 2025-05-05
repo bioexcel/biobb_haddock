@@ -17,7 +17,8 @@ def create_cfg(
     """Creates an CFG file using the following hierarchy  cfg_properties_dict > input_cfg_path > preset_dict"""
     cfg_dict: dict[str, str] = {}
 
-    if preset_dict:
+    if haddock_step_name := workflow_dict.get("haddock_step_name"):
+        preset_dict = cfg_preset(haddock_step_name)
         for k, v in preset_dict.items():
             cfg_dict[k] = v
     if input_cfg_path:

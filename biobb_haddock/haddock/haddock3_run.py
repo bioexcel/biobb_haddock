@@ -14,7 +14,7 @@ from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 
-from biobb_haddock.haddock.common import cfg_preset, create_cfg
+from biobb_haddock.haddock.common import create_cfg
 
 
 class Haddock3Run(BiobbObject):
@@ -32,6 +32,7 @@ class Haddock3Run(BiobbObject):
         output_haddock_wf_data_zip (str) (Optional): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip>`_. Accepted formats: zip (edam:format_3987).
         haddock_config_path (str) (Optional): Haddock configuration CFG file path. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg>`_. Accepted formats: cfg (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
+            * **cfg** (*dict*) - ({}) Haddock configuration options specification.
             * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -130,7 +131,7 @@ class Haddock3Run(BiobbObject):
             input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
             cfg_properties_dict=self.cfg,
         )
-
+        return
         if self.container_path:
             fu.log("Container execution enabled", self.out_log)
 
