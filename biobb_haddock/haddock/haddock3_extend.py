@@ -7,7 +7,7 @@ import zipfile
 import shutil
 from pathlib import Path
 from typing import Optional
-
+import os
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
@@ -97,9 +97,12 @@ class Haddock3Extend(BiobbObject):
         self.stage_files()
 
         # Decompress input zip
-        run_dir = fu.create_unique_dir()
+        run_dir = os.path.join(self.stage_io_dict["unique_dir"], fu.create_unique_dir())
         with zipfile.ZipFile(self.stage_io_dict["in"]["input_haddock_wf_data_zip"], 'r') as zip_ref:
             zip_ref.extractall(run_dir)
+        cwd = os.getcwd()
+        # Move the unzip folder
+        os.chdir(run_dir)
 
         # if self.container_path:
         #     fu.log("Container execution enabled", self.out_log)
@@ -116,13 +119,12 @@ class Haddock3Extend(BiobbObject):
 
         # Run Biobb block
         self.run_biobb()
-        
+        # Move back to the stage directory
+        os.chdir(cwd)
         # Create zip output
         fu.log(
             f"Zipping {run_dir} to {str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix(''))} ",
-            self.out_log,
-            self.global_log,
-        )
+            self.out_log, self.global_log)
         shutil.make_archive(
             str(Path(self.io_dict["out"]["output_haddock_wf_data_zip"]).with_suffix("")),
             "zip",
