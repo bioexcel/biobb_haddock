@@ -12,7 +12,7 @@ from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 
-from biobb_haddock.haddock.common import cfg_preset, create_cfg, unzip_workflow_data
+from biobb_haddock.haddock.common import create_cfg, unzip_workflow_data
 
 
 class EMRef(BiobbObject):
@@ -24,7 +24,9 @@ class EMRef(BiobbObject):
     Args:
         input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: input. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip>`_. Accepted formats: zip (edam:format_3987).
         refinement_output_zip_path (str): Path to the output PDB file collection in zip format. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_rigidbody.zip>`_. Accepted formats: zip (edam:format_3987).
-        restraints_table_path (str) (Optional): Path to the input TBL file containing a list of restraints for docking. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl>`_. Accepted formats: tbl (edam:format_2330).
+        ambig_restraints_table_path (str) (Optional): Path to the input TBL file containing a list of ambiguous restraints for docking. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl>`_. Accepted formats: tbl (edam:format_2330).
+        unambig_restraints_table_path (str) (Optional): Path to the input TBL file containing a list of unambiguous restraints for docking. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl>`_. Accepted formats: tbl (edam:format_2330).
+        hb_restraints_table_path (str) (Optional): Path to the input TBL file containing a list of hydrogen bond restraints for docking. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl>`_. Accepted formats: tbl (edam:format_2330).
         output_haddock_wf_data_zip (str) (Optional): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip>`_. Accepted formats: zip (edam:format_3987).
         haddock_config_path (str) (Optional): Haddock configuration CFG file path. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg>`_. Accepted formats: cfg (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
@@ -64,7 +66,9 @@ class EMRef(BiobbObject):
         self,
         input_haddock_wf_data_zip: str,
         refinement_output_zip_path: str,
-        restraints_table_path: Optional[str] = None,
+        ambig_restraints_table_path: Optional[str] = None,
+        unambig_restraints_table_path: Optional[str] = None,
+        hb_restraints_table_path: Optional[str] = None,
         output_haddock_wf_data_zip: Optional[str] = None,
         haddock_config_path: Optional[str] = None,
         properties: Optional[dict] = None,
@@ -78,7 +82,9 @@ class EMRef(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {
-                "restraints_table_path": restraints_table_path,
+                "ambig_restraints_table_path": ambig_restraints_table_path,
+                "unambig_restraints_table_path": unambig_restraints_table_path,
+                "hb_restraints_table_path": hb_restraints_table_path,
                 "haddock_config_path": haddock_config_path,
             },
             "out": {
@@ -92,7 +98,7 @@ class EMRef(BiobbObject):
         # Properties specific for BB
         self.haddock_step_name = "emref"
         self.output_cfg_path = properties.get("output_cfg_path", "haddock.cfg")
-        self.cfg = {k: str(v) for k, v in properties.get("cfg", dict()).items()}
+        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
 
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3")
@@ -117,8 +123,14 @@ class EMRef(BiobbObject):
 
         workflow_dict = {"haddock_step_name": self.haddock_step_name}
 
-        if restraints_table_path := self.stage_io_dict["in"].get("restraints_table_path"):
-            self.cfg["ambig_fname"] = restraints_table_path
+        if ambig_path := self.stage_io_dict["in"].get("ambig_restraints_table_path"):
+            self.cfg["ambig_fname"] = ambig_path
+
+        if unambig_fname := self.stage_io_dict["in"].get("unambig_restraints_table_path"):
+            self.cfg["unambig_fname"] = unambig_fname
+
+        if hbond_fname := self.stage_io_dict["in"].get("hb_restraints_table_path"):
+            self.cfg["hbond_fname"] = hbond_fname
 
         # Create data dir
         cfg_dir = fu.create_unique_dir()
@@ -127,6 +139,8 @@ class EMRef(BiobbObject):
             workflow_dict=workflow_dict,
             input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
             cfg_properties_dict=self.cfg,
+            local_log=self.out_log,
+            global_log=self.global_log,
         )
 
         if self.container_path:
@@ -210,7 +224,9 @@ class EMRef(BiobbObject):
 def em_ref(
     input_haddock_wf_data_zip: str,
     refinement_output_zip_path: str,
-    restraints_table_path: Optional[str] = None,
+    ambig_restraints_table_path: Optional[str] = None,
+    unambig_restraints_table_path: Optional[str] = None,
+    hb_restraints_table_path: Optional[str] = None,
     output_haddock_wf_data_zip: Optional[str] = None,
     haddock_config_path: Optional[str] = None,
     properties: Optional[dict] = None,
@@ -222,7 +238,9 @@ def em_ref(
     return EMRef(
         input_haddock_wf_data_zip=input_haddock_wf_data_zip,
         refinement_output_zip_path=refinement_output_zip_path,
-        restraints_table_path=restraints_table_path,
+        ambig_restraints_table_path=ambig_restraints_table_path,
+        unambig_restraints_table_path=unambig_restraints_table_path,
+        hb_restraints_table_path=hb_restraints_table_path,
         output_haddock_wf_data_zip=output_haddock_wf_data_zip,
         haddock_config_path=haddock_config_path,
         properties=properties,
@@ -246,7 +264,9 @@ def main():
     required_args = parser.add_argument_group("required arguments")
     required_args.add_argument("--input_haddock_wf_data_zip", required=True)
     required_args.add_argument("--refinement_output_zip_path", required=True)
-    parser.add_argument("--restraints_table_path", required=False)
+    parser.add_argument("--ambig_restraints_table_path", required=False)
+    parser.add_argument("--unambig_restraints_table_path", required=False)
+    parser.add_argument("--hb_restraints_table_path", required=False)
     parser.add_argument("--output_haddock_wf_data_zip", required=False)
     parser.add_argument("--haddock_config_path", required=False)
 
@@ -258,7 +278,9 @@ def main():
     em_ref(
         input_haddock_wf_data_zip=args.input_haddock_wf_data_zip,
         refinement_output_zip_path=args.refinement_output_zip_path,
-        restraints_table_path=args.restraints_table_path,
+        ambig_restraints_table_path=args.ambig_restraints_table_path,
+        unambig_restraints_table_path=args.unambig_restraints_table_path,
+        hb_restraints_table_path=args.hb_restraints_table_path,
         output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
         haddock_config_path=args.haddock_config_path,
         properties=properties,
