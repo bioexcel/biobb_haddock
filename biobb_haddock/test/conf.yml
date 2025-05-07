@@ -115,9 +115,24 @@ haddock3_actpass_to_ambig:
   paths:
     input_actpass1_path: file:test_data_dir/haddock_restraints/haddock_actpass1.pass
     input_actpass2_path: file:test_data_dir/haddock_restraints/haddock_actpass2.pass
-
     output_tbl_path: haddock_actpass.tbl
+    ref_output_tbl_path: file:test_reference_dir/haddock_restraints/haddock_actpass.tbl
+  properties:
+    remove_tmp: False
 
-    ref_output_tbl_path: file:test_reference_dir/haddock_restraints/haddock_air.tbl
+haddock3_passive_from_active:
+  paths:
+    input_pdb_path: file:test_data_dir/haddock_restraints/1A2P_ch.pdb
+    output_actpass_path: actpass.txt
+    ref_output_actpass_path: file:test_reference_dir/haddock_restraints/1A2P_manual_actpass.txt
+  properties:
+    remove_tmp: False
+    active_list: '27,73,83,87'
+
+haddock3_restrain_bodies:
+  paths:
+    input_structure_path: file:test_data_dir/haddock_restraints/4G6K_clean.pdb
+    output_tbl_path: haddock_actpass.tbl
+    ref_output_tbl_path: file:test_reference_dir/haddock_restraints/antibody-unambig.tbl
   properties:
     remove_tmp: False

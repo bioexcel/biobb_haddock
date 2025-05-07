@@ -1,7 +1,6 @@
-[2025-01-16 17:30:06,669 cli_restraints INFO] [DEPRECATION NOTICE] This command will soon be replaced with `haddock-restraints`
-16/01/2025 17:30:06 L116 INFO - Calculate accessibility...
-16/01/2025 17:30:06 L227 INFO - Chain: A - 150 residues
-16/01/2025 17:30:06 L236 INFO - Applying cutoff to side_chain_rel - 0.4
-16/01/2025 17:30:06 L248 INFO - Chain A - 19,21,29,32,34,35,37,39,40,43,45,53,55,56,57,64,68,69,72,78,80,82,83,84,86,94,96,97,99,101,104,106,108,109,110,111,112,114,117,121,123,125,128,129,130,132,144,145,147,148,150,152,153,154,155,157,160,161,167,168
-16/01/2025 17:30:06 L261 INFO - Writing exposed residues as passive in: e2aP_1F3G_noH_passive_A.actpass
-16/01/2025 17:30:06 L263 ERROR - File e2aP_1F3G_noH_passive_A.actpass already exists, nothing performed!
+[2025-05-07 18:05:53,915 cli_restraints INFO] [DEPRECATION NOTICE] This command will soon be replaced with `haddock-restraints`
+07/05/2025 18:05:53 L116 INFO - Calculate accessibility...
+07/05/2025 18:05:53 L227 INFO - Chain: A - 150 residues
+07/05/2025 18:05:53 L236 INFO - Applying cutoff to side_chain_rel - 0.4
+07/05/2025 18:05:53 L248 INFO - Chain A - 19,21,29,32,34,35,37,39,40,43,45,53,55,56,57,64,68,69,72,78,80,82,83,84,86,94,96,97,99,101,104,106,108,109,110,111,112,114,117,121,123,125,128,129,130,132,144,145,147,148,150,152,153,154,155,157,160,161,167,168
+07/05/2025 18:05:53 L261 INFO - Writing exposed residues as passive in: e2aP_1F3G_noH_passive_A.actpass
