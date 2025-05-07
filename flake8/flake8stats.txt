@@ -1,2 +1,7 @@
 1     E231 missing whitespace after ','
+1     E265 block comment should start with '# '
+2     E266 too many leading '#' for block comment
+1     E302 expected 2 blank lines, found 1
 1     F401 'biobb_haddock.haddock.common.cfg_preset' imported but unused
+2     W291 trailing whitespace
+12    W293 blank line contains whitespace

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>biobb_haddock/haddock/common.py - flake8 annotated source</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <h1>
+            <a href="biobb_haddock.haddock.common.report.html">
+               <img src="back.svg" alt="&#x2B05;">
+               biobb_haddock/haddock/common.py source
+            </a>
+         </h1>
+
+         <div id="doc">
+            <div id="l1"
+               class="code sev- "><tt><i>1</i> <span class="sd">&quot;&quot;&quot;Common functions for package biobb_haddock.haddock&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l2"
+               class="code sev- "><tt><i>2</i> &nbsp;</tt>
+            </div>
+            <div id="l3"
+               class="code sev- "><tt><i>3</i> <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span></tt>
+            </div>
+            <div id="l4"
+               class="code sev- "><tt><i>4</i> <span class="kn">import</span><span class="w"> </span><span class="nn">re</span></tt>
+            </div>
+            <div id="l5"
+               class="code sev- "><tt><i>5</i> <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span></tt>
+            </div>
+            <div id="l6"
+               class="code sev- "><tt><i>6</i> &nbsp;</tt>
+            </div>
+            <div id="l7"
+               class="code sev- "><tt><i>7</i> <span class="kn">import</span><span class="w"> </span><span class="nn">biobb_common.tools.file_utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fu</span></tt>
+            </div>
+            <div id="l8"
+               class="code sev- "><tt><i>8</i> &nbsp;</tt>
+            </div>
+            <div id="l9"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>9</i> <span class="k">def</span><span class="w"> </span><span class="nf">create_cfg</span><span class="p">(</span></tt>
+            </div>
+            <div id="l10"
+               class="code sev- "><tt><i>10</i>     <span class="n">output_cfg_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+            </div>
+            <div id="l11"
+               class="code sev- "><tt><i>11</i>     <span class="n">workflow_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span></tt>
+            </div>
+            <div id="l12"
+               class="code sev- "><tt><i>12</i>     <span class="n">input_cfg_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+            </div>
+            <div id="l13"
+               class="code sev- "><tt><i>13</i>     <span class="n">preset_dict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+            </div>
+            <div id="l14"
+               class="code sev- "><tt><i>14</i>     <span class="n">cfg_properties_dict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+            </div>
+            <div id="l15"
+               class="code sev- "><tt><i>15</i> <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span></tt>
+            </div>
+            <div id="l16"
+               class="code sev- "><tt><i>16</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an CFG file using the following hierarchy  cfg_properties_dict &gt; input_cfg_path &gt; preset_dict&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l17"
+               class="code sev- "><tt><i>17</i>     <span class="n">cfg_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span></tt>
+            </div>
+            <div id="l18"
+               class="code sev- "><tt><i>18</i> &nbsp;</tt>
+            </div>
+            <div id="l19"
+               class="code sev- "><tt><i>19</i>     <span class="k">if</span> <span class="n">haddock_step_name</span> <span class="o">:=</span> <span class="n">workflow_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;haddock_step_name&quot;</span><span class="p">):</span></tt>
+            </div>
+            <div id="l20"
+               class="code sev- "><tt><i>20</i>         <span class="n">preset_dict</span> <span class="o">=</span> <span class="n">cfg_preset</span><span class="p">(</span><span class="n">haddock_step_name</span><span class="p">)</span></tt>
+            </div>
+            <div id="l21"
+               class="code sev- "><tt><i>21</i>         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">preset_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span></tt>
+            </div>
+            <div id="l22"
+               class="code sev- "><tt><i>22</i>             <span class="n">cfg_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span></tt>
+            </div>
+            <div id="l23"
+               class="code sev- "><tt><i>23</i>     <span class="k">if</span> <span class="n">input_cfg_path</span><span class="p">:</span></tt>
+            </div>
+            <div id="l24"
+               class="code sev- "><tt><i>24</i>         <span class="n">input_cfg_dict</span> <span class="o">=</span> <span class="n">read_cfg</span><span class="p">(</span><span class="n">input_cfg_path</span><span class="p">)</span></tt>
+            </div>
+            <div id="l25"
+               class="code sev- "><tt><i>25</i>         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">input_cfg_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span></tt>
+            </div>
+            <div id="l26"
+               class="code sev- "><tt><i>26</i>             <span class="n">cfg_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span></tt>
+            </div>
+            <div id="l27"
+               class="code sev- "><tt><i>27</i>     <span class="k">if</span> <span class="n">cfg_properties_dict</span><span class="p">:</span></tt>
+            </div>
+            <div id="l28"
+               class="code sev- "><tt><i>28</i>         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cfg_properties_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span></tt>
+            </div>
+            <div id="l29"
+               class="code sev- "><tt><i>29</i>             <span class="n">cfg_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span></tt>
+            </div>
+            <div id="l30"
+               class="code sev- "><tt><i>30</i> &nbsp;</tt>
+            </div>
+            <div id="l31"
+               class="code sev- "><tt><i>31</i>     <span class="k">return</span> <span class="n">write_cfg</span><span class="p">(</span><span class="n">output_cfg_path</span><span class="p">,</span> <span class="n">workflow_dict</span><span class="p">,</span> <span class="n">cfg_dict</span><span class="p">)</span></tt>
+            </div>
+            <div id="l32"
+               class="code sev- "><tt><i>32</i> &nbsp;</tt>
+            </div>
+            <div id="l33"
+               class="code sev- "><tt><i>33</i> &nbsp;</tt>
+            </div>
+            <div id="l34"
+               class="code sev- "><tt><i>34</i> <span class="k">def</span><span class="w"> </span><span class="nf">write_cfg</span><span class="p">(</span></tt>
+            </div>
+            <div id="l35"
+               class="code sev- "><tt><i>35</i>     <span class="n">output_cfg_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">workflow_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">cfg_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span></tt>
+            </div>
+            <div id="l36"
+               class="code sev- "><tt><i>36</i> <span class="p">):</span></tt>
+            </div>
+            <div id="l37"
+               class="code sev- "><tt><i>37</i>     <span class="n">cfg_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></tt>
+            </div>
+            <div id="l38"
+               class="code sev- "><tt><i>38</i>     <span class="k">if</span> <span class="n">workflow_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;run_dir&quot;</span><span class="p">):</span></tt>
+            </div>
+            <div id="l39"
+               class="code sev- "><tt><i>39</i>         <span class="n">cfg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;run_dir = &#39;</span><span class="si">{</span><span class="n">workflow_dict</span><span class="p">[</span><span class="s1">&#39;run_dir&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l40"
+               class="code sev- "><tt><i>40</i>     <span class="k">if</span> <span class="n">workflow_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;molecules&quot;</span><span class="p">):</span></tt>
+            </div>
+            <div id="l41"
+               class="code sev- "><tt><i>41</i>         <span class="n">cfg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;molecules = </span><span class="si">{</span><span class="n">workflow_dict</span><span class="p">[</span><span class="s1">&#39;molecules&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l42"
+               class="code sev- "><tt><i>42</i>     <span class="n">cfg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[</span><span class="si">{</span><span class="n">workflow_dict</span><span class="p">[</span><span class="s1">&#39;haddock_step_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l43"
+               class="code sev- "><tt><i>43</i> &nbsp;</tt>
+            </div>
+            <div id="l44"
+               class="code sev- "><tt><i>44</i>     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cfg_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span></tt>
+            </div>
+            <div id="l45"
+               class="code sev- "><tt><i>45</i>         <span class="c1"># cfg_list.append(k + &#39; = &#39; + str(v))</span></tt>
+            </div>
+            <div id="l46"
+               class="code sev- "><tt><i>46</i>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span></tt>
+            </div>
+            <div id="l47"
+               class="code sev- "><tt><i>47</i>             <span class="n">cfg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="s2">&quot; = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span></tt>
+            </div>
+            <div id="l48"
+               class="code sev- "><tt><i>48</i>         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span></tt>
+            </div>
+            <div id="l49"
+               class="code sev- "><tt><i>49</i>             <span class="n">cfg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="s2">&quot; = &quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l50"
+               class="code sev- "><tt><i>50</i>         <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l51"
+               class="code sev- "><tt><i>51</i>             <span class="n">cfg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="s2">&quot; = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span></tt>
+            </div>
+            <div id="l52"
+               class="code sev- "><tt><i>52</i> &nbsp;</tt>
+            </div>
+            <div id="l53"
+               class="code sev- "><tt><i>53</i>     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_cfg_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">cfg_file</span><span class="p">:</span></tt>
+            </div>
+            <div id="l54"
+               class="code sev- "><tt><i>54</i>         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">cfg_list</span><span class="p">:</span></tt>
+            </div>
+            <div id="l55"
+               class="code sev- "><tt><i>55</i>             <span class="n">cfg_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l56"
+               class="code sev- "><tt><i>56</i> &nbsp;</tt>
+            </div>
+            <div id="l57"
+               class="code sev- "><tt><i>57</i>     <span class="k">return</span> <span class="n">output_cfg_path</span></tt>
+            </div>
+            <div id="l58"
+               class="code sev- "><tt><i>58</i> &nbsp;</tt>
+            </div>
+            <div id="l59"
+               class="code sev- "><tt><i>59</i> &nbsp;</tt>
+            </div>
+            <div id="l60"
+               class="code sev- "><tt><i>60</i> <span class="k">def</span><span class="w"> </span><span class="nf">read_cfg</span><span class="p">(</span><span class="n">input_mdp_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span></tt>
+            </div>
+            <div id="l61"
+               class="code sev- "><tt><i>61</i>     <span class="c1"># https://github.com/Becksteinlab/GromacsWrapper/blob/master/gromacs/fileformats/mdp.py</span></tt>
+            </div>
+            <div id="l62"
+               class="code sev- "><tt><i>62</i>     <span class="n">parameter_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span></tt>
+            </div>
+            <div id="l63"
+               class="code sev- "><tt><i>63</i>         <span class="sa">r</span><span class="s2">&quot;\s*(?P&lt;parameter&gt;[^=]+?)\s*=\s*(?P&lt;value&gt;[^;]*)(?P&lt;comment&gt;\s*#.*)?&quot;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l64"
+               class="code sev- "><tt><i>64</i>         <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span></tt>
+            </div>
+            <div id="l65"
+               class="code sev- "><tt><i>65</i>     <span class="p">)</span></tt>
+            </div>
+            <div id="l66"
+               class="code sev- "><tt><i>66</i> &nbsp;</tt>
+            </div>
+            <div id="l67"
+               class="code sev- "><tt><i>67</i>     <span class="n">cfg_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span></tt>
+            </div>
+            <div id="l68"
+               class="code sev- "><tt><i>68</i>     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_mdp_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">mdp_file</span><span class="p">:</span></tt>
+            </div>
+            <div id="l69"
+               class="code sev- "><tt><i>69</i>         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">mdp_file</span><span class="p">:</span></tt>
+            </div>
+            <div id="l70"
+               class="code sev- "><tt><i>70</i>             <span class="n">re_match</span> <span class="o">=</span> <span class="n">parameter_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span></tt>
+            </div>
+            <div id="l71"
+               class="code sev- "><tt><i>71</i>             <span class="k">if</span> <span class="n">re_match</span><span class="p">:</span></tt>
+            </div>
+            <div id="l72"
+               class="code sev- "><tt><i>72</i>                 <span class="n">parameter</span> <span class="o">=</span> <span class="n">re_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;parameter&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l73"
+               class="code sev- "><tt><i>73</i>                 <span class="n">value</span> <span class="o">=</span> <span class="n">re_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l74"
+               class="code sev- "><tt><i>74</i>                 <span class="n">cfg_dict</span><span class="p">[</span><span class="n">parameter</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></tt>
+            </div>
+            <div id="l75"
+               class="code sev- "><tt><i>75</i> &nbsp;</tt>
+            </div>
+            <div id="l76"
+               class="code sev- "><tt><i>76</i>     <span class="k">return</span> <span class="n">cfg_dict</span></tt>
+            </div>
+            <div id="l77"
+               class="code sev- "><tt><i>77</i> &nbsp;</tt>
+            </div>
+            <div id="l78"
+               class="code sev- "><tt><i>78</i> &nbsp;</tt>
+            </div>
+            <div id="l79"
+               class="code sev- "><tt><i>79</i> <span class="k">def</span><span class="w"> </span><span class="nf">cfg_preset</span><span class="p">(</span><span class="n">haddock_step_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span></tt>
+            </div>
+            <div id="l80"
+               class="code sev- "><tt><i>80</i>     <span class="n">cfg_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span></tt>
+            </div>
+            <div id="l81"
+               class="code sev- "><tt><i>81</i>     <span class="k">if</span> <span class="ow">not</span> <span class="n">haddock_step_name</span><span class="p">:</span></tt>
+            </div>
+            <div id="l82"
+               class="code sev- "><tt><i>82</i>         <span class="k">return</span> <span class="n">cfg_dict</span></tt>
+            </div>
+            <div id="l83"
+               class="code sev- "><tt><i>83</i>     <span class="c1"># cfg_dict[&quot;debug&quot;] = True</span></tt>
+            </div>
+            <div id="l84"
+               class="code sev- "><tt><i>84</i> &nbsp;</tt>
+            </div>
+            <div id="l85"
+               class="code sev- "><tt><i>85</i>     <span class="k">if</span> <span class="n">haddock_step_name</span> <span class="o">==</span> <span class="s2">&quot;topoaa&quot;</span><span class="p">:</span></tt>
+            </div>
+            <div id="l86"
+               class="code sev- "><tt><i>86</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;autohis&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span></tt>
+            </div>
+            <div id="l87"
+               class="code sev- "><tt><i>87</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;delenph&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span></tt>
+            </div>
+            <div id="l88"
+               class="code sev- "><tt><i>88</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;log_level&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;quiet&quot;</span></tt>
+            </div>
+            <div id="l89"
+               class="code sev- "><tt><i>89</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;iniseed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">917</span></tt>
+            </div>
+            <div id="l90"
+               class="code sev- "><tt><i>90</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;ligand_param_fname&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></tt>
+            </div>
+            <div id="l91"
+               class="code sev- "><tt><i>91</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;ligand_top_fname&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></tt>
+            </div>
+            <div id="l92"
+               class="code sev- "><tt><i>92</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;limit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span></tt>
+            </div>
+            <div id="l93"
+               class="code sev- "><tt><i>93</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;tolerance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l94"
+               class="code sev- "><tt><i>94</i> &nbsp;</tt>
+            </div>
+            <div id="l95"
+               class="code sev- "><tt><i>95</i>     <span class="k">elif</span> <span class="n">haddock_step_name</span> <span class="o">==</span> <span class="s2">&quot;rigidbody&quot;</span><span class="p">:</span></tt>
+            </div>
+            <div id="l96"
+               class="code sev- "><tt><i>96</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;sampling&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span></tt>
+            </div>
+            <div id="l97"
+               class="code sev- "><tt><i>97</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;tolerance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span></tt>
+            </div>
+            <div id="l98"
+               class="code sev- "><tt><i>98</i> &nbsp;</tt>
+            </div>
+            <div id="l99"
+               class="code sev- "><tt><i>99</i>     <span class="k">elif</span> <span class="n">haddock_step_name</span> <span class="o">==</span> <span class="s2">&quot;seletop&quot;</span><span class="p">:</span></tt>
+            </div>
+            <div id="l100"
+               class="code sev- "><tt><i>100</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;select&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span></tt>
+            </div>
+            <div id="l101"
+               class="code sev- "><tt><i>101</i> &nbsp;</tt>
+            </div>
+            <div id="l102"
+               class="code sev- "><tt><i>102</i>     <span class="k">elif</span> <span class="n">haddock_step_name</span> <span class="o">==</span> <span class="s2">&quot;flexref&quot;</span><span class="p">:</span></tt>
+            </div>
+            <div id="l103"
+               class="code sev- "><tt><i>103</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;tolerance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span></tt>
+            </div>
+            <div id="l104"
+               class="code sev- "><tt><i>104</i> &nbsp;</tt>
+            </div>
+            <div id="l105"
+               class="code sev- "><tt><i>105</i>     <span class="k">elif</span> <span class="n">haddock_step_name</span> <span class="o">==</span> <span class="s2">&quot;emref&quot;</span><span class="p">:</span></tt>
+            </div>
+            <div id="l106"
+               class="code sev- "><tt><i>106</i>         <span class="n">cfg_dict</span><span class="p">[</span><span class="s2">&quot;tolerance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span></tt>
+            </div>
+            <div id="l107"
+               class="code sev- "><tt><i>107</i> &nbsp;</tt>
+            </div>
+            <div id="l108"
+               class="code sev- "><tt><i>108</i>     <span class="c1">#    elif haddock_step_name == &#39;seletopclusts&#39;:</span></tt>
+            </div>
+            <div id="l109"
+               class="code sev- "><tt><i>109</i>     <span class="c1">#        cfg_dict[&#39;select&#39;] = 5</span></tt>
+            </div>
+            <div id="l110"
+               class="code sev- "><tt><i>110</i> &nbsp;</tt>
+            </div>
+            <div id="l111"
+               class="code sev- "><tt><i>111</i>     <span class="k">return</span> <span class="n">cfg_dict</span></tt>
+            </div>
+            <div id="l112"
+               class="code sev- "><tt><i>112</i> &nbsp;</tt>
+            </div>
+            <div id="l113"
+               class="code sev- "><tt><i>113</i> &nbsp;</tt>
+            </div>
+            <div id="l114"
+               class="code sev- "><tt><i>114</i> <span class="k">def</span><span class="w"> </span><span class="nf">unzip_workflow_data</span><span class="p">(</span><span class="n">zip_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">out_log</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">logging</span><span class="o">.</span><span class="n">Logger</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span></tt>
+            </div>
+            <div id="l115"
+               class="code sev- "><tt><i>115</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract all files in the zip_file and return the directory.</span></tt>
+            </div>
+            <div id="l116"
+               class="code sev- "><tt><i>116</i> &nbsp;</tt>
+            </div>
+            <div id="l117"
+               class="code sev- "><tt><i>117</i> <span class="sd">    Args:</span></tt>
+            </div>
+            <div id="l118"
+               class="code sev- "><tt><i>118</i> <span class="sd">        zip_file (str): Input topology zipball file path.</span></tt>
+            </div>
+            <div id="l119"
+               class="code sev- "><tt><i>119</i> <span class="sd">        out_log (:obj:`logging.Logger`): Input log object.</span></tt>
+            </div>
+            <div id="l120"
+               class="code sev- "><tt><i>120</i> &nbsp;</tt>
+            </div>
+            <div id="l121"
+               class="code sev- "><tt><i>121</i> <span class="sd">    Returns:</span></tt>
+            </div>
+            <div id="l122"
+               class="code sev- "><tt><i>122</i> <span class="sd">        str: Path to the extracted directory.</span></tt>
+            </div>
+            <div id="l123"
+               class="code sev- "><tt><i>123</i> &nbsp;</tt>
+            </div>
+            <div id="l124"
+               class="code sev- "><tt><i>124</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l125"
+               class="code sev- "><tt><i>125</i>     <span class="n">extract_dir</span> <span class="o">=</span> <span class="n">fu</span><span class="o">.</span><span class="n">create_unique_dir</span><span class="p">()</span></tt>
+            </div>
+            <div id="l126"
+               class="code sev- "><tt><i>126</i>     <span class="n">zip_list</span> <span class="o">=</span> <span class="n">fu</span><span class="o">.</span><span class="n">unzip_list</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="n">extract_dir</span><span class="p">,</span> <span class="n">out_log</span><span class="p">)</span></tt>
+            </div>
+            <div id="l127"
+               class="code sev- "><tt><i>127</i>     <span class="k">if</span> <span class="n">out_log</span><span class="p">:</span></tt>
+            </div>
+            <div id="l128"
+               class="code sev- "><tt><i>128</i>         <span class="n">out_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Unzipping: &quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l129"
+               class="code sev- "><tt><i>129</i>         <span class="n">out_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span></tt>
+            </div>
+            <div id="l130"
+               class="code sev- "><tt><i>130</i>         <span class="n">out_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;To: &quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l131"
+               class="code sev- "><tt><i>131</i>         <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">zip_list</span><span class="p">:</span></tt>
+            </div>
+            <div id="l132"
+               class="code sev- "><tt><i>132</i>             <span class="n">out_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span></tt>
+            </div>
+            <div id="l133"
+               class="code sev- "><tt><i>133</i>     <span class="k">return</span> <span class="n">extract_dir</span></tt>
+            </div>
+            
+         </div>
+      </div>
+   </body>
+</html>
