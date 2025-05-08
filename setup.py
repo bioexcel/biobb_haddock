@@ -30,6 +30,7 @@ setuptools.setup(
             "em_ref = biobb_haddock.haddock.em_ref:main",
             "flex_ref = biobb_haddock.haddock.flex_ref:main",
             "haddock3_extend = biobb_haddock.haddock.haddock3_extend:main",
+            "haddock3_run = biobb_haddock.haddock.haddock3_run:main",
             "rigid_body = biobb_haddock.haddock.rigid_body:main",
             "sele_top_clusts = biobb_haddock.haddock.sele_top_clusts:main",
             "sele_top = biobb_haddock.haddock.sele_top:main",

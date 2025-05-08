@@ -3,7 +3,7 @@
     "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/rigid_body",
     "name": "biobb_haddock RigidBody",
     "title": "Wrapper class for the Haddock RigidBody module.",
-    "description": "The RigidBody module. Haddock RigidBody  module compute rigid body docking between two molecules.",
+    "description": "The RigidBody module. Haddock RigidBody module compute rigid body docking between two molecules.",
     "type": "object",
     "info": {
         "wrapped_software": {

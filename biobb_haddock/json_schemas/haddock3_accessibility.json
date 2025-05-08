@@ -1,13 +1,13 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/topology",
-    "name": "biobb_haddock Topology",
-    "title": "Wrapper class for the Haddock Topology module.",
-    "description": "The Topology module. Haddock Topology module creates a topology from a system to be used for docking.",
+    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/haddock3_accessibility",
+    "name": "biobb_haddock Haddock3Accessibility",
+    "title": "Wrapper class for the Haddock-Restraints Accessibility module.",
+    "description": "Haddock-Restraints Accessibility computes residues accessibility using freesasa included in the Haddock3 package.",
     "type": "object",
     "info": {
         "wrapped_software": {
-            "name": "Haddock",
+            "name": "Haddock3-restraints",
             "version": "3.0.0",
             "license": "Apache-2.0"
         },
@@ -17,11 +17,11 @@
         }
     },
     "required": [
-        "mol1_input_pdb_path",
-        "mol1_output_top_zip_path"
+        "input_pdb_path",
+        "output_accessibility_path"
     ],
     "properties": {
-        "mol1_input_pdb_path": {
+        "input_pdb_path": {
             "type": "string",
             "description": "Path to the input PDB file",
             "filetype": "input",
@@ -37,94 +37,88 @@
                 }
             ]
         },
-        "mol1_output_top_zip_path": {
+        "output_accessibility_path": {
             "type": "string",
-            "description": "Path to the output PDB file collection in zip format",
+            "description": "Path to the output file with accessibility information",
             "filetype": "output",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol1_top.zip",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/mol1_sasa.txt",
             "enum": [
-                ".*\\.zip$"
+                ".*\\.txt$",
+                ".*\\.dat$",
+                ".*\\.out$"
             ],
             "file_formats": [
                 {
-                    "extension": ".*\\.zip$",
-                    "description": "Path to the output PDB file collection in zip format",
-                    "edam": "format_3987"
-                }
-            ]
-        },
-        "mol2_input_pdb_path": {
-            "type": "string",
-            "description": "Path to the input PDB file",
-            "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/hpr_ensemble.pdb",
-            "enum": [
-                ".*\\.pdb$"
-            ],
-            "file_formats": [
+                    "extension": ".*\\.txt$",
+                    "description": "Path to the output file with accessibility information",
+                    "edam": "format_2330"
+                },
                 {
-                    "extension": ".*\\.pdb$",
-                    "description": "Path to the input PDB file",
-                    "edam": "format_1476"
+                    "extension": ".*\\.dat$",
+                    "description": "Path to the output file with accessibility information",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.out$",
+                    "description": "Path to the output file with accessibility information",
+                    "edam": "format_2330"
                 }
             ]
         },
-        "mol2_output_top_zip_path": {
+        "output_actpass_path": {
             "type": "string",
-            "description": "Path to the output PDB file collection in zip format",
+            "description": "Path to the output file with active/passive residues to be used as haddock3 restraint information",
             "filetype": "output",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol2_top.zip",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/mol1_haddock_actpass.txt",
             "enum": [
-                ".*\\.zip$"
+                ".*\\.txt$",
+                ".*\\.dat$",
+                ".*\\.out$"
             ],
             "file_formats": [
                 {
-                    "extension": ".*\\.zip$",
-                    "description": "Path to the output PDB file collection in zip format",
-                    "edam": "format_3987"
-                }
-            ]
-        },
-        "output_haddock_wf_data_zip": {
-            "type": "string",
-            "description": "Path to the output zipball containing all the current Haddock workflow data",
-            "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip",
-            "enum": [
-                ".*\\.zip$"
-            ],
-            "file_formats": [
+                    "extension": ".*\\.txt$",
+                    "description": "Path to the output file with active/passive residues to be used as haddock3 restraint information",
+                    "edam": "format_2330"
+                },
                 {
-                    "extension": ".*\\.zip$",
-                    "description": "Path to the output zipball containing all the current Haddock workflow data",
-                    "edam": "format_3987"
-                }
-            ]
-        },
-        "haddock_config_path": {
-            "type": "string",
-            "description": "Haddock configuration CFG file path",
-            "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg",
-            "enum": [
-                ".*\\.cfg$"
-            ],
-            "file_formats": [
+                    "extension": ".*\\.dat$",
+                    "description": "Path to the output file with active/passive residues to be used as haddock3 restraint information",
+                    "edam": "format_2330"
+                },
                 {
-                    "extension": ".*\\.cfg$",
-                    "description": "Haddock configuration CFG file path",
-                    "edam": "format_1476"
+                    "extension": ".*\\.out$",
+                    "description": "Path to the output file with active/passive residues to be used as haddock3 restraint information",
+                    "edam": "format_2330"
                 }
             ]
         },
         "properties": {
             "type": "object",
             "properties": {
-                "cfg": {
-                    "type": "object",
-                    "default": {},
+                "chain": {
+                    "type": "string",
+                    "default": "A",
                     "wf_prop": false,
-                    "description": "Haddock configuration options specification."
+                    "description": "Chain to be used from the input PDB file."
+                },
+                "cutoff": {
+                    "type": "number",
+                    "default": 0.4,
+                    "wf_prop": false,
+                    "description": "Relative cutoff for sidechain accessibility."
+                },
+                "probe_radius": {
+                    "type": "number",
+                    "default": 1.4,
+                    "wf_prop": false,
+                    "description": "Probe radius for the accessibility calculation."
+                },
+                "pass_to_act": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": false,
+                    "description": "If True, the passive residues become active in the actpass file and vice versa."
                 },
                 "binary_path": {
                     "type": "string",

@@ -21,3 +21,19 @@ haddock_restrains.haddock3_actpass_to_ambig module
     :members:
     :undoc-members:
     :show-inheritance:
+
+haddock_restrains.haddock3_passive_from_active module
+---------------------------------------------------
+
+.. automodule:: haddock_restrains.haddock3_passive_from_active
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+haddock_restrains.haddock3_actpass_to_ambig haddock3_restrain_bodies
+---------------------------------------------------
+
+.. automodule:: haddock_restrains.haddock3_restrain_bodies
+    :members:
+    :undoc-members:
+    :show-inheritance:

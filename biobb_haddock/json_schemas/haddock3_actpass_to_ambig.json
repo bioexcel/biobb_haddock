@@ -1,0 +1,206 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/haddock3_actpass_to_ambig",
+    "name": "biobb_haddock Haddock3ActpassToAmbig",
+    "title": "Wrapper class for the Haddock-Restraints active_passive_to_ambig module.",
+    "description": "Haddock-Restraints active_passive_to_ambig generates a corresponding ambig.tbl file to be used by HADDOCK from two given files containing active (in the first line) and passive (second line) residues.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "Haddock3-restraints",
+            "version": "3.0.0",
+            "license": "Apache-2.0"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "input_actpass1_path",
+        "input_actpass2_path",
+        "output_tbl_path"
+    ],
+    "properties": {
+        "input_actpass1_path": {
+            "type": "string",
+            "description": "Path to the first input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
+            "filetype": "input",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass.txt",
+            "enum": [
+                ".*\\.txt$",
+                ".*\\.dat$",
+                ".*\\.in$",
+                ".*\\.pass$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.txt$",
+                    "description": "Path to the first input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.dat$",
+                    "description": "Path to the first input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.in$",
+                    "description": "Path to the first input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.pass$",
+                    "description": "Path to the first input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
+                    "edam": "format_2330"
+                }
+            ]
+        },
+        "input_actpass2_path": {
+            "type": "string",
+            "description": "Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
+            "filetype": "input",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass.txt",
+            "enum": [
+                ".*\\.txt$",
+                ".*\\.dat$",
+                ".*\\.in$",
+                ".*\\.pass$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.txt$",
+                    "description": "Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.dat$",
+                    "description": "Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.in$",
+                    "description": "Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.pass$",
+                    "description": "Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
+                    "edam": "format_2330"
+                }
+            ]
+        },
+        "output_tbl_path": {
+            "type": "string",
+            "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
+            "filetype": "output",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/haddock_air.tbl",
+            "enum": [
+                ".*\\.tbl$",
+                ".*\\.txt$",
+                ".*\\.out$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.tbl$",
+                    "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.txt$",
+                    "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.out$",
+                    "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
+                    "edam": "format_2330"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "pass_to_act": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": false,
+                    "description": "Path to the haddock haddock executable binary."
+                },
+                "segid_one": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Segid of the first model."
+                },
+                "segid_two": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Segid of the second model."
+                },
+                "binary_path": {
+                    "type": "string",
+                    "default": "haddock",
+                    "wf_prop": false,
+                    "description": "Path to the haddock haddock executable binary."
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                },
+                "sandbox_path": {
+                    "type": "string",
+                    "default": "./",
+                    "wf_prop": true,
+                    "description": "Parent path to the sandbox directory."
+                },
+                "container_path": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Path to the binary executable of your container."
+                },
+                "container_image": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Container Image identifier."
+                },
+                "container_volume_path": {
+                    "type": "string",
+                    "default": "/data",
+                    "wf_prop": false,
+                    "description": "Path to an internal directory in the container."
+                },
+                "container_working_dir": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Path to the internal CWD in the container."
+                },
+                "container_user_id": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "User number id to be mapped inside the container."
+                },
+                "container_shell_path": {
+                    "type": "string",
+                    "default": "/bin/bash",
+                    "wf_prop": false,
+                    "description": "Path to the binary executable of the container shell."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

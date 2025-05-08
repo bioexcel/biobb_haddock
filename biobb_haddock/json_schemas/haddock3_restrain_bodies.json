@@ -1,13 +1,13 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/sele_top_clusts",
-    "name": "biobb_haddock SeleTopClusts",
-    "title": "Wrapper class for the Haddock SeleTopClusts module.",
-    "description": "The SeleTopClusts module. Haddock SeleTopClusts module selects the top clusters of a docking.",
+    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/haddock3_restrain_bodies",
+    "name": "biobb_haddock Haddock3RestrainBodies",
+    "title": "Wrapper class for the Haddock-Restraints restrain_bodies module.",
+    "description": "Haddock-Restraints restrain_bodies creates distance restraints to lock several chains together. Useful to avoid unnatural flexibility or movement due to sequence/numbering gaps.",
     "type": "object",
     "info": {
         "wrapped_software": {
-            "name": "Haddock",
+            "name": "Haddock3-restraints",
             "version": "3.0.0",
             "license": "Apache-2.0"
         },
@@ -17,88 +17,74 @@
         }
     },
     "required": [
-        "input_haddock_wf_data_zip",
-        "output_selection_zip_path"
+        "input_structure_path",
+        "output_tbl_path"
     ],
     "properties": {
-        "input_haddock_wf_data_zip": {
+        "input_structure_path": {
             "type": "string",
-            "description": "Path to the input zipball containing all the current Haddock workflow data",
+            "description": "Path to the input PDB structure to be restrained",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/structure.pdb",
             "enum": [
-                ".*\\.zip$"
+                ".*\\.pdb$"
             ],
             "file_formats": [
                 {
-                    "extension": ".*\\.zip$",
-                    "description": "Path to the input zipball containing all the current Haddock workflow data",
-                    "edam": "format_3987"
-                }
-            ]
-        },
-        "output_selection_zip_path": {
-            "type": "string",
-            "description": "Path to the output PDB file collection in zip format",
-            "filetype": "output",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_seletop.zip",
-            "enum": [
-                ".*\\.zip$"
-            ],
-            "file_formats": [
-                {
-                    "extension": ".*\\.zip$",
-                    "description": "Path to the output PDB file collection in zip format",
-                    "edam": "format_3987"
-                }
-            ]
-        },
-        "output_haddock_wf_data_zip": {
-            "type": "string",
-            "description": "Path to the output zipball containing all the current Haddock workflow data",
-            "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip",
-            "enum": [
-                ".*\\.zip$"
-            ],
-            "file_formats": [
-                {
-                    "extension": ".*\\.zip$",
-                    "description": "Path to the output zipball containing all the current Haddock workflow data",
-                    "edam": "format_3987"
-                }
-            ]
-        },
-        "haddock_config_path": {
-            "type": "string",
-            "description": "Haddock configuration CFG file path",
-            "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg",
-            "enum": [
-                ".*\\.cfg$"
-            ],
-            "file_formats": [
-                {
-                    "extension": ".*\\.cfg$",
-                    "description": "Haddock configuration CFG file path",
+                    "extension": ".*\\.pdb$",
+                    "description": "Path to the input PDB structure to be restrained",
                     "edam": "format_1476"
+                }
+            ]
+        },
+        "output_tbl_path": {
+            "type": "string",
+            "description": "Path to the output HADDOCK tbl file with restraints to lock chains together",
+            "filetype": "output",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/body_restraints.tbl",
+            "enum": [
+                ".*\\.tbl$",
+                ".*\\.txt$",
+                ".*\\.out$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.tbl$",
+                    "description": "Path to the output HADDOCK tbl file with restraints to lock chains together",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.txt$",
+                    "description": "Path to the output HADDOCK tbl file with restraints to lock chains together",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.out$",
+                    "description": "Path to the output HADDOCK tbl file with restraints to lock chains together",
+                    "edam": "format_2330"
                 }
             ]
         },
         "properties": {
             "type": "object",
             "properties": {
-                "cfg": {
-                    "type": "object",
-                    "default": {},
+                "exclude": {
+                    "type": "string",
+                    "default": null,
                     "wf_prop": false,
-                    "description": "Haddock configuration options specification."
+                    "description": "Chains to exclude from the calculation."
+                },
+                "verbose": {
+                    "type": "integer",
+                    "default": 0,
+                    "wf_prop": false,
+                    "description": "Tune verbosity of the output."
                 },
                 "binary_path": {
                     "type": "string",
-                    "default": "haddock",
+                    "default": "haddock3-restraints",
                     "wf_prop": false,
-                    "description": "Path to the haddock haddock executable binary."
+                    "description": "Path to the HADDOCK3 restraints executable binary."
                 },
                 "remove_tmp": {
                     "type": "boolean",

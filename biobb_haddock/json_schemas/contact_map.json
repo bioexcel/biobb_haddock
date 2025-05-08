@@ -1,9 +1,9 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/capri_eval",
-    "name": "biobb_haddock CapriEval",
-    "title": "Wrapper class for the Haddock CapriEval module.",
-    "description": "The CapriEval module. Haddock CapriEval module computes Capri evaluation for a docking.",
+    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/contact_map",
+    "name": "biobb_haddock ContactMap",
+    "title": "Wrapper class for the Haddock ContactMap module.",
+    "description": "The ContactMap module. Haddock ContactMap module computes contacts between chains in complexes and generates heatmaps and chordcharts.",
     "type": "object",
     "info": {
         "wrapped_software": {
@@ -18,7 +18,7 @@
     },
     "required": [
         "input_haddock_wf_data_zip",
-        "output_evaluation_zip_path"
+        "output_contactmap_zip_path"
     ],
     "properties": {
         "input_haddock_wf_data_zip": {
@@ -37,35 +37,19 @@
                 }
             ]
         },
-        "output_evaluation_zip_path": {
+        "output_contactmap_zip_path": {
             "type": "string",
-            "description": "Path to the output PDB file collection in zip format",
+            "description": "Path to the output contact map files in zip format",
             "filetype": "output",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_caprieval.zip",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_contactmap.zip",
             "enum": [
                 ".*\\.zip$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.zip$",
-                    "description": "Path to the output PDB file collection in zip format",
+                    "description": "Path to the output contact map files in zip format",
                     "edam": "format_3987"
-                }
-            ]
-        },
-        "reference_pdb_path": {
-            "type": "string",
-            "description": "Path to the input PDB file containing an structure for reference",
-            "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_1GGR.pdb",
-            "enum": [
-                ".*\\.pdb$"
-            ],
-            "file_formats": [
-                {
-                    "extension": ".*\\.pdb$",
-                    "description": "Path to the input PDB file containing an structure for reference",
-                    "edam": "format_1476"
                 }
             ]
         },

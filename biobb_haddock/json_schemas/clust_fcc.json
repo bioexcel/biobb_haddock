@@ -3,7 +3,7 @@
     "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/clust_fcc",
     "name": "biobb_haddock ClustFCC",
     "title": "Wrapper class for the Haddock ClustFCC module.",
-    "description": "The ClustFCC module. Haddock ClustFCC  module computes clusters of structures using FCC.",
+    "description": "The ClustFCC module. Haddock ClustFCC module computes clusters of structures using FCC.",
     "type": "object",
     "info": {
         "wrapped_software": {
