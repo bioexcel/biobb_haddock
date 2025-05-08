@@ -2,6 +2,19 @@ global_properties:
   can_write_console_log: True
   working_dir_path: /tmp/biobb/unitests
 
+common:
+  paths:
+    input_cfg_step: file:test_data_dir/haddock/common_step.cfg
+    input_cfg_run: file:test_data_dir/haddock/common_run.cfg
+    output_cfg: output.cfg
+    ref_output_cfg: file:test_reference_dir/haddock/ref_output.cfg
+  properties:
+    cfg_step:
+      tolerance: 5
+    cfg_run:
+      topoaa.1:
+        tolerance: 5
+
 capri_eval:
   paths:
     input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_rigid.zip

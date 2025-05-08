@@ -11,34 +11,67 @@ def create_cfg(
     output_cfg_path: str,
     workflow_dict: dict[str, Any],
     input_cfg_path: Optional[str] = None,
-    preset_dict: Optional[dict[str, str]] = None,
     cfg_properties_dict: Optional[dict[str, str]] = None,
     local_log: Optional[logging.Logger] = None,
     global_log: Optional[logging.Logger] = None,
 ) -> str:
     """Creates an CFG file using the following hierarchy  cfg_properties_dict > input_cfg_path > preset_dict"""
-    cfg_dict: dict[str, str] = {}
+    cfg_dict: dict[str, Any] = {}
 
-    if haddock_step_name := workflow_dict.get("haddock_step_name"):
-        preset_dict = cfg_preset(haddock_step_name)
-        for k, v in preset_dict.items():
-            cfg_dict[k] = v
+    # Handle input configuration if it exists
     if input_cfg_path:
-        input_cfg_dict = load(input_cfg_path)['final_cfg']
-        for k, v in input_cfg_dict.items():
-            cfg_dict[k] = v
-    if cfg_properties_dict:
-        for k, v in cfg_properties_dict.items():
-            fu.log("CFG: " + str(k), local_log, global_log)
-            fu.log("CFG: " + str(v), local_log, global_log)
-            cfg_dict[k] = v
-            
-    if haddock_step_name:
-        cfg_dict = {haddock_step_name: cfg_dict}
+        input_cfg = load(input_cfg_path)['final_cfg']
+        print(f"Input CFG: {input_cfg}")
+        cfg_dict = input_cfg.copy()  # Start with entire loaded config as base
+    
+    # Apply single step configuration if specified
+    if haddock_step_name := workflow_dict.get("haddock_step_name"):
+        # Get preset properties for this step if any
+        step_preset = cfg_preset(haddock_step_name)
+        
+        # Create or update the step configuration
+        if not cfg_dict:
+            # No input config, create new structure with single step
+            target_key = haddock_step_name
+            cfg_dict = {target_key: step_preset or {}}
+        else:
+            # Update the specific step in the existing config
+            target_key = f"{haddock_step_name}.1"
+            if target_key not in cfg_dict:
+                cfg_dict[target_key] = {}
+            # Merge preset values while preserving existing values
+            if step_preset:
+                for k, v in step_preset.items():
+                    if k not in cfg_dict[target_key]:  # Only add if not already defined
+                        cfg_dict[target_key][k] = v
+        
+        # Apply custom properties to the step
+        if cfg_properties_dict:
+            for k, v in cfg_properties_dict.items():
+                fu.log(f"CFG: {k} = {v}", local_log, global_log)
+                cfg_dict[target_key][k] = v
+    else:
+        # Multiple steps: haddock3_run and haddock3_extend
+        if cfg_properties_dict:
+            for key, value in cfg_properties_dict.items():
+                if isinstance(value, dict):
+                    # If the value is a dictionary, update the corresponding section in cfg_dict
+                    if key not in cfg_dict:
+                        cfg_dict[key] = {}
+                    for sub_key, sub_value in value.items():
+                        fu.log(f"CFG: {key}.{sub_key} = {sub_value}", local_log, global_log)
+                        cfg_dict[key][sub_key] = sub_value
+            else:
+                # If the value is not a dictionary, treat it as a top-level property
+                fu.log(f"CFG: {key} = {value}", local_log, global_log)
+                cfg_dict[key] = value
+    
+    # Add molecules and run_dir if provided
     if workflow_dict.get("molecules"):
         cfg_dict["molecules"] = workflow_dict["molecules"]
     if workflow_dict.get("run_dir"):
         cfg_dict["run_dir"] = workflow_dict["run_dir"]
+    
     # Use haddock save
     save(cfg_dict, output_cfg_path)
     
@@ -71,9 +104,6 @@ def cfg_preset(haddock_step_name: str) -> dict[str, Any]:
 
     elif haddock_step_name == "emref":
         cfg_dict["tolerance"] = 20
-
-    #    elif haddock_step_name == 'seletopclusts':
-    #        cfg_dict['select'] = 5
 
     return cfg_dict
 
