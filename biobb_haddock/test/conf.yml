@@ -75,9 +75,19 @@ flex_ref:
 haddock3_extend:
   paths:
     input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_caprieval.zip
-    haddock_config_path: file:test_data_dir/haddock/docking.cfg
+    haddock_config_path: file:test_data_dir/haddock/extend.cfg
     output_haddock_wf_data_zip: haddock_wf_data.zip
     ref_output_haddock_wf_data_zip: file:test_reference_dir/haddock/ref_haddock3_extend.zip
+  properties:
+    remove_tmp: False
+
+haddock3_run:
+  paths:
+    mol1_input_pdb_path: file:test_data_dir/haddock/e2aP_1F3G.pdb
+    mol2_input_pdb_path: file:test_data_dir/haddock/hpr_ensemble.pdb
+    haddock_config_path: file:test_data_dir/haddock/run.cfg
+    output_haddock_wf_data_zip: haddock_wf_data.zip
+    ref_output_haddock_wf_data_zip: file:test_reference_dir/haddock/ref_haddock3_run.zip
   properties:
     remove_tmp: False
 

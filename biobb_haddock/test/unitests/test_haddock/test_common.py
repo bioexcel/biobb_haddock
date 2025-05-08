@@ -44,4 +44,5 @@ class TestCreateCfg():
         assert cfg['run_dir'] == 'test_dir'             # From workflow_dict
         assert cfg['topoaa.1']['iniseed'] == 1          # From input_cfg
         assert cfg['topoaa.1']['tolerance'] == 5        # From cfg_properties_dict
+        assert cfg['rigidbody.1']['ambig_fname'] == 'test_tbl'
 

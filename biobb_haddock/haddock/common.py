@@ -7,6 +7,12 @@ from typing import Any, Optional
 import biobb_common.tools.file_utils as fu
 from haddock.gear.config import load, save
 
+haddock_2_wf = {
+    'ambig_fname': 'ambig_restraints_table_path',
+    'unambig_fname': 'unambig_restraints_table_path',
+    'hbond_fname': 'hb_restraints_table_path',
+}
+
 def create_cfg(
     output_cfg_path: str,
     workflow_dict: dict[str, Any],
@@ -61,10 +67,18 @@ def create_cfg(
                     for sub_key, sub_value in value.items():
                         fu.log(f"CFG: {key}.{sub_key} = {sub_value}", local_log, global_log)
                         cfg_dict[key][sub_key] = sub_value
-            else:
-                # If the value is not a dictionary, treat it as a top-level property
-                fu.log(f"CFG: {key} = {value}", local_log, global_log)
-                cfg_dict[key] = value
+                else:
+                    # If the value is not a dictionary, treat it as a top-level property
+                    fu.log(f"CFG: {key} = {value}", local_log, global_log)
+                    cfg_dict[key] = value
+        # Add workflow_dict properties to cfg_dict    
+        for key, value in cfg_dict.items():
+            if isinstance(value, dict):
+                for sub_key, sub_value in value.items():
+                    mapped_key = haddock_2_wf.get(sub_key)
+                    if mapped_key and mapped_key in workflow_dict:
+                        sub_value = workflow_dict[mapped_key]
+                        cfg_dict[key][sub_key] = sub_value
     
     # Add molecules and run_dir if provided
     if workflow_dict.get("molecules"):
