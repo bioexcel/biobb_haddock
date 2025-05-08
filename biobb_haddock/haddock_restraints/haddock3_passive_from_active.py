@@ -8,6 +8,7 @@ from typing import Optional
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
+from biobb_common.tools import file_utils as fu
 
 
 class Haddock3PassiveFromActive(BiobbObject):
@@ -144,6 +145,7 @@ class Haddock3PassiveFromActive(BiobbObject):
         # Remove deprecation warning if present
         with open(self.stage_io_dict['out']['output_actpass_path'], 'r') as file:
             lines = file.readlines()
+        fu.log('Result: '+lines, self.out_log, self.global_log)
         with open(self.stage_io_dict['out']['output_actpass_path'], 'w') as file:
             file.write(self.active_list.replace(",", " ")+"\n")
             if lines and "DEPRECATION NOTICE" in lines[0]:
