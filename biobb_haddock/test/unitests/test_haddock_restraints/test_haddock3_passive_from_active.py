@@ -14,4 +14,8 @@ class TestHaddockPassiveFromActive():
     def test_haddock3_passive_from_active(self):
         haddock3_passive_from_active(properties=self.properties, **self.paths)
         assert fx.not_empty(self.paths['output_actpass_path'])
-        assert fx.equal(self.paths['output_actpass_path'], self.paths['ref_output_actpass_path'])
+        if not fx.equal(self.paths['output_actpass_path'], self.paths['ref_output_actpass_path']):
+            with open(self.paths['ref_output_actpass_path'], 'r') as ref_file:
+                print("Reference file content:")
+                print(ref_file.read())
+            assert False, "The files are not equal."
