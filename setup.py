@@ -26,9 +26,12 @@ setuptools.setup(
         "console_scripts": [
             "capri_eval = biobb_haddock.haddock.capri_eval:main",
             "clust_fcc = biobb_haddock.haddock.clust_fcc:main",
+            "contact_map = biobb_haddock.haddock.contact_map:main",
             "em_ref = biobb_haddock.haddock.em_ref:main",
             "flex_ref = biobb_haddock.haddock.flex_ref:main",
+            "haddock3_extend = biobb_haddock.haddock.haddock3_extend:main",
             "rigid_body = biobb_haddock.haddock.rigid_body:main",
+            "sele_top_clusts = biobb_haddock.haddock.sele_top_clusts:main",
             "sele_top = biobb_haddock.haddock.sele_top:main",
             "topology = biobb_haddock.haddock.topology:main",
         ]

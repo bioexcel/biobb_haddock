@@ -2,20 +2,71 @@ global_properties:
   can_write_console_log: True
   working_dir_path: /tmp/biobb/unitests
 
-topology:
+capri_eval:
   paths:
-    mol1_input_pdb_path: file:test_data_dir/haddock/e2aP_1F3G.pdb
-    mol2_input_pdb_path: file:test_data_dir/haddock/hpr_ensemble.pdb
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_rigid.zip
+    reference_pdb_path: file:test_data_dir/haddock/e2a-hpr_1GGR.pdb
 
-    output_haddock_wf_data_zip: haddock_wf_data.zip
-    mol1_output_top_zip_path: mol1_top.zip
-    mol2_output_top_zip_path: mol2_top.zip
+    output_evaluation_zip_path: caprieval_output.zip
+    output_haddock_wf_data_zip: haddock_wf_data_caprieval.zip
 
-    ref_mol1_output_top_zip_path: file:test_reference_dir/haddock/ref_mol1_top.zip
-    ref_mol2_output_top_zip_path: file:test_reference_dir/haddock/ref_mol2_top.zip
+    ref_output_evaluation_zip_path: file:test_reference_dir/haddock/ref_caprieval.zip
   properties:
     remove_tmp: False
 
+clust_fcc:
+  paths:
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_caprieval.zip
+    restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
+
+    output_cluster_zip_path: cluster_output.zip
+    output_haddock_wf_data_zip: haddock_wf_data.zip
+
+    ref_output_cluster_zip_path: file:test_reference_dir/haddock/ref_clustfcc.zip
+  properties:
+    remove_tmp: False
+
+contact_map:
+  paths:
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_clustfcc.zip
+    output_contactmap_zip_path: contact_map.zip
+    output_haddock_wf_data_zip: haddock_wf_data.zip
+    ref_output_contactmap_zip_path: file:test_reference_dir/haddock/ref_contact_map.zip
+  properties:
+    remove_tmp: False
+
+em_ref:
+  paths:
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_emref.zip
+    restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
+
+    refinement_output_zip_path: refinement_output.zip
+    output_haddock_wf_data_zip: haddock_wf_data.zip
+
+    ref_refinement_output_zip_path: file:test_reference_dir/haddock/ref_emref.zip
+  properties:
+    remove_tmp: False
+
+flex_ref:
+  paths:
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_seletop.zip
+    restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
+
+    refinement_output_zip_path: refinement_output.zip
+    output_haddock_wf_data_zip: haddock_wf_data.zip
+
+    ref_refinement_output_zip_path: file:test_reference_dir/haddock/ref_flexref.zip
+  properties:
+    remove_tmp: False
+
+haddock3_extend:
+  paths:
+    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_caprieval.zip
+    haddock_config_path: file:test_data_dir/haddock/docking.cfg
+    output_haddock_wf_data_zip: haddock_wf_data.zip
+    ref_output_haddock_wf_data_zip: file:test_reference_dir/haddock/ref_haddock3_extend.zip
+  properties:
+    remove_tmp: False
 
 rigid_body:
   paths:
@@ -26,18 +77,6 @@ rigid_body:
     output_haddock_wf_data_zip: haddock_wf_data_rigid.zip
 
     ref_docking_output_zip_path: file:test_reference_dir/haddock/ref_rigidbody.zip
-  properties:
-    remove_tmp: False
-
-capri_eval:
-  paths:
-    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_rigid.zip
-    reference_pdb_path: file:test_data_dir/haddock/e2a-hpr_1GGR.pdb
-
-    output_evaluation_zip_path: caprieval_output.zip
-    output_haddock_wf_data_zip: haddock_wf_data_caprieval.zip
-
-    ref_output_evaluation_zip_path: file:test_reference_dir/haddock/ref_caprieval.zip
   properties:
     remove_tmp: False
 
@@ -63,41 +102,20 @@ sele_top_clusts:
   properties:
     remove_tmp: False
 
-flex_ref:
+topology:
   paths:
-    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_seletop.zip
-    restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
+    mol1_input_pdb_path: file:test_data_dir/haddock/e2aP_1F3G.pdb
+    mol2_input_pdb_path: file:test_data_dir/haddock/hpr_ensemble.pdb
 
-    refinement_output_zip_path: refinement_output.zip
     output_haddock_wf_data_zip: haddock_wf_data.zip
+    mol1_output_top_zip_path: mol1_top.zip
+    mol2_output_top_zip_path: mol2_top.zip
 
-    ref_refinement_output_zip_path: file:test_reference_dir/haddock/ref_flexref.zip
+    ref_mol1_output_top_zip_path: file:test_reference_dir/haddock/ref_mol1_top.zip
+    ref_mol2_output_top_zip_path: file:test_reference_dir/haddock/ref_mol2_top.zip
   properties:
     remove_tmp: False
 
-em_ref:
-  paths:
-    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_emref.zip
-    restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
-
-    refinement_output_zip_path: refinement_output.zip
-    output_haddock_wf_data_zip: haddock_wf_data.zip
-
-    ref_refinement_output_zip_path: file:test_reference_dir/haddock/ref_emref.zip
-  properties:
-    remove_tmp: False
-
-clust_fcc:
-  paths:
-    input_haddock_wf_data_zip: file:test_data_dir/haddock/haddock_wf_data_caprieval.zip
-    restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
-
-    output_cluster_zip_path: cluster_output.zip
-    output_haddock_wf_data_zip: haddock_wf_data.zip
-
-    ref_output_cluster_zip_path: file:test_reference_dir/haddock/ref_clustfcc.zip
-  properties:
-    remove_tmp: False
 
 haddock3_accessibility:
   paths:

@@ -104,15 +104,15 @@ class Haddock3Extend(BiobbObject):
         # Move the unzip folder
         os.chdir(run_dir)
 
-        # if self.container_path:
-        #     fu.log("Container execution enabled", self.out_log)
+        if self.container_path:
+            fu.log("Container execution enabled", self.out_log)
 
-        #     shutil.copy2(self.output_cfg_path, self.stage_io_dict.get("unique_dir", ""))
-        #     self.output_cfg_path = str(
-        #         Path(self.container_volume_path).joinpath(
-        #             Path(self.output_cfg_path).name
-        #         )
-        #     )
+            shutil.copy2(self.output_cfg_path, self.stage_io_dict.get("unique_dir", ""))
+            self.output_cfg_path = str(
+                Path(self.container_volume_path).joinpath(
+                    Path(self.output_cfg_path).name
+                )
+            )
 
         self.cmd = [self.binary_path, self.stage_io_dict["in"]["haddock_config_path"]]
         self.cmd.extend(["--extend-run", run_dir])
