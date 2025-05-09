@@ -7,7 +7,7 @@
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/04/Bioexcell_logo_1080px_transp.png
 
 biobb_haddock
-------------
+--------------
 
 Contents
 ========

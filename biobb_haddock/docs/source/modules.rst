@@ -1,8 +1,8 @@
 biobb_haddock
-===========
+==============
 
 .. toctree::
    :maxdepth: 4
 
    haddock
-   haddock_restrains
+   haddock_restraints
