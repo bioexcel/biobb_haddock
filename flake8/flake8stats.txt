@@ -1,2 +1,0 @@
-1     E266 too many leading '#' for block comment
-2     W293 blank line contains whitespace
