@@ -100,17 +100,18 @@ class Haddock3ActpassToAmbig(BiobbObject):
 
         if self.pass_to_act:
             with open(self.stage_io_dict['in']['input_actpass1_path'], 'r') as file1, \
-                 open(self.stage_io_dict['in']['input_actpass2_path'], 'r') as file2:
+                    open(self.stage_io_dict['in']['input_actpass2_path'], 'r') as file2:
                 actpass1_lines = file1.readlines()
                 actpass2_lines = file2.readlines()
 
             with open(self.stage_io_dict['in']['input_actpass1_path'], 'w') as file1, \
-                 open(self.stage_io_dict['in']['input_actpass2_path'], 'w') as file2:
+                    open(self.stage_io_dict['in']['input_actpass2_path'], 'w') as file2:
                 file1.writelines([actpass1_lines[1], actpass1_lines[0], '\n'])
                 file2.writelines([actpass2_lines[1], actpass2_lines[0], '\n'])
-                
+
         # haddock3-restraints active_passive_to_ambig haddock_actpass.txt
-        self.cmd = [self.binary_path, "active_passive_to_ambig", self.stage_io_dict['in']['input_actpass1_path'], self.stage_io_dict['in']['input_actpass2_path']]
+        self.cmd = [self.binary_path, "active_passive_to_ambig", self.stage_io_dict['in']
+                    ['input_actpass1_path'], self.stage_io_dict['in']['input_actpass2_path']]
 
         if self.segid_one is not None:
             self.cmd.extend(["--segid-one", self.segid_one])
@@ -123,13 +124,13 @@ class Haddock3ActpassToAmbig(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        ## Remove deprecation warning if present
+        # Remove deprecation warning if present
         with open(self.stage_io_dict['out']['output_tbl_path'], 'r') as file:
             lines = file.readlines()
         if lines and "DEPRECATION NOTICE" in lines[0]:
             with open(self.stage_io_dict['out']['output_tbl_path'], 'w') as file:
                 file.writelines(lines[1:])
-    
+
         # Copy files to host
         self.copy_to_host()
 
@@ -165,7 +166,8 @@ haddock3_actpass_to_ambig.__doc__ = Haddock3ActpassToAmbig.__doc__
 def main():
     parser = argparse.ArgumentParser(
         description="Wrapper of the haddock-restraints active_passive_to_ambig module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(
+            prog, width=99999),
     )
     parser.add_argument(
         "-c",
