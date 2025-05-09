@@ -1,17 +1,17 @@
 """Common functions for package biobb_haddock.haddock"""
 
 import logging
-import re
 from typing import Any, Optional
 
 import biobb_common.tools.file_utils as fu
-from haddock.gear.config import load, save
+from haddock3_config import loads, save
 
 haddock_2_wf = {
     'ambig_fname': 'ambig_restraints_table_path',
     'unambig_fname': 'unambig_restraints_table_path',
     'hbond_fname': 'hb_restraints_table_path',
 }
+
 
 def create_cfg(
     output_cfg_path: str,
@@ -26,15 +26,15 @@ def create_cfg(
 
     # Handle input configuration if it exists
     if input_cfg_path:
-        input_cfg = load(input_cfg_path)['final_cfg']
+        input_cfg = loads(input_cfg_path)['final_cfg']
         print(f"Input CFG: {input_cfg}")
         cfg_dict = input_cfg.copy()  # Start with entire loaded config as base
-    
+
     # Apply single step configuration if specified
     if haddock_step_name := workflow_dict.get("haddock_step_name"):
         # Get preset properties for this step if any
         step_preset = cfg_preset(haddock_step_name)
-        
+
         # Create or update the step configuration
         if not cfg_dict:
             # No input config, create new structure with single step
@@ -50,7 +50,7 @@ def create_cfg(
                 for k, v in step_preset.items():
                     if k not in cfg_dict[target_key]:  # Only add if not already defined
                         cfg_dict[target_key][k] = v
-        
+
         # Apply custom properties to the step
         if cfg_properties_dict:
             for k, v in cfg_properties_dict.items():
@@ -79,16 +79,16 @@ def create_cfg(
                     if mapped_key and mapped_key in workflow_dict:
                         sub_value = workflow_dict[mapped_key]
                         cfg_dict[key][sub_key] = sub_value
-    
+
     # Add molecules and run_dir if provided
     if workflow_dict.get("molecules"):
         cfg_dict["molecules"] = workflow_dict["molecules"]
     if workflow_dict.get("run_dir"):
         cfg_dict["run_dir"] = workflow_dict["run_dir"]
-    
+
     # Use haddock save
     save(cfg_dict, output_cfg_path)
-    
+
     return output_cfg_path
 
 
