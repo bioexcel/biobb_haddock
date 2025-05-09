@@ -1,6 +1,7 @@
 # type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_haddock.haddock.capri_eval import capri_eval
+import warnings
 
 
 class TestCapriEval():
@@ -16,3 +17,6 @@ class TestCapriEval():
         assert fx.not_empty(self.paths['output_evaluation_zip_path'])
         assert fx.not_empty(self.paths['output_haddock_wf_data_zip'])
         # assert fx.equal(self.paths['output_evaluation_zip_path'], self.paths['ref_output_evaluation_zip_path'])
+        warnings.warn(
+            "The content of the output_haddock_wf_data_zip is not being checked.\n"
+            f"Do it manually at {self.testfile_dir}")

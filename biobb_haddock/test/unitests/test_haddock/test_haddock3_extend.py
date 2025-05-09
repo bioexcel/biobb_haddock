@@ -1,6 +1,7 @@
 # type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_haddock.haddock.haddock3_extend import haddock3_extend
+import warnings
 
 
 class TestHaddock3Extend():
@@ -15,3 +16,6 @@ class TestHaddock3Extend():
         haddock3_extend(properties=self.properties, **self.paths)
         assert fx.not_empty(self.paths['output_haddock_wf_data_zip'])
         # assert fx.equal(self.paths['output_evaluation_zip_path'], self.paths['ref_output_evaluation_zip_path'])
+        warnings.warn(
+            "The content of the output_haddock_wf_data_zip is not being checked.\n"
+            f"Do it manually at {self.testfile_dir}")
