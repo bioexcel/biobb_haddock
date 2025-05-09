@@ -93,11 +93,12 @@ class Haddock3RestrainBodies(BiobbObject):
         self.stage_files()
 
         # haddock3-restraints restrain_bodies <structure> [--exclude] [--verbose]
-        self.cmd = [self.binary_path, "restrain_bodies", self.stage_io_dict['in']['input_structure_path']]
+        self.cmd = [self.binary_path, "restrain_bodies",
+                    self.stage_io_dict['in']['input_structure_path']]
 
         if self.exclude is not None:
             self.cmd.extend(["--exclude", self.exclude])
-        
+
         if self.verbose > 0:
             self.cmd.extend(["--verbose", str(self.verbose)])
 
@@ -107,13 +108,13 @@ class Haddock3RestrainBodies(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        ## Remove deprecation warning if present
+        # Remove deprecation warning if present
         with open(self.stage_io_dict['out']['output_tbl_path'], 'r') as file:
             lines = file.readlines()
         if lines and "DEPRECATION NOTICE" in lines[0]:
             with open(self.stage_io_dict['out']['output_tbl_path'], 'w') as file:
                 file.writelines(lines[1:])
-    
+
         # Copy files to host
         self.copy_to_host()
 
@@ -147,7 +148,8 @@ haddock3_restrain_bodies.__doc__ = Haddock3RestrainBodies.__doc__
 def main():
     parser = argparse.ArgumentParser(
         description="Wrapper of the haddock-restraints restrain_bodies module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(
+            prog, width=99999),
     )
     parser.add_argument(
         "-c",

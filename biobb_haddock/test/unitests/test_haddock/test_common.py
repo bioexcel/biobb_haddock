@@ -1,7 +1,8 @@
 # type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_haddock.haddock.common import create_cfg
-import toml,os
+import toml
+
 
 class TestCreateCfg():
     def setup_class(self):
@@ -13,10 +14,11 @@ class TestCreateCfg():
 
     def test_create_cfg_step(self):
         create_cfg(
-            output_cfg_path     = str(self.paths['output_cfg']),
-            workflow_dict       = {'haddock_step_name': 'topoaa',  'run_dir': 'test_dir'},
-            input_cfg_path      = self.paths['input_cfg_step'],
-            cfg_properties_dict = self.properties['cfg_step'],
+            output_cfg_path=str(self.paths['output_cfg']),
+            workflow_dict={'haddock_step_name': 'topoaa',
+                           'run_dir': 'test_dir'},
+            input_cfg_path=self.paths['input_cfg_step'],
+            cfg_properties_dict=self.properties['cfg_step'],
         )
 
         assert fx.not_empty(self.paths['output_cfg'])
@@ -30,19 +32,18 @@ class TestCreateCfg():
 
     def test_create_cfg_run(self):
         create_cfg(
-            output_cfg_path     = str(self.paths['output_cfg']),
-            workflow_dict       = {'run_dir': 'test_dir', 
-                                   'ambig_restraints_table_path': 'test_tbl'},
-            input_cfg_path      = self.paths['input_cfg_run'],
-            cfg_properties_dict = self.properties['cfg_run'],
+            output_cfg_path=str(self.paths['output_cfg']),
+            workflow_dict={'run_dir': 'test_dir',
+                           'ambig_restraints_table_path': 'test_tbl'},
+            input_cfg_path=self.paths['input_cfg_run'],
+            cfg_properties_dict=self.properties['cfg_run'],
         )
 
         assert fx.not_empty(self.paths['output_cfg'])
         with open(self.paths['output_cfg'], 'r') as f:
             cfg = toml.loads(f.read())
-        
+
         assert cfg['run_dir'] == 'test_dir'             # From workflow_dict
         assert cfg['topoaa.1']['iniseed'] == 1          # From input_cfg
         assert cfg['topoaa.1']['tolerance'] == 5        # From cfg_properties_dict
         assert cfg['rigidbody.1']['ambig_fname'] == 'test_tbl'
-

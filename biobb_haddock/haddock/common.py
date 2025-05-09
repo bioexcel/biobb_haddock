@@ -4,7 +4,7 @@ import logging
 from typing import Any, Optional
 
 import biobb_common.tools.file_utils as fu
-from haddock3_config import loads, save
+from .haddock3_config import loads, save
 
 haddock_2_wf = {
     'ambig_fname': 'ambig_restraints_table_path',
@@ -71,7 +71,7 @@ def create_cfg(
                     # If the value is not a dictionary, treat it as a top-level property
                     fu.log(f"CFG: {key} = {value}", local_log, global_log)
                     cfg_dict[key] = value
-        # Add workflow_dict properties to cfg_dict    
+        # Add workflow_dict properties to cfg_dict
         for key, value in cfg_dict.items():
             if isinstance(value, dict):
                 for sub_key, sub_value in value.items():

@@ -100,7 +100,8 @@ class Haddock3Run(BiobbObject):
 
         # Properties specific for BB
         self.output_cfg_path = properties.get("output_cfg_path", "haddock.cfg")
-        self.cfg = {k: str(v) for k, v in properties.get("cfg", dict()).items()}
+        self.cfg = {k: str(v)
+                    for k, v in properties.get("cfg", dict()).items()}
 
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3")
@@ -120,7 +121,7 @@ class Haddock3Run(BiobbObject):
 
         workflow_dict = {
             "run_dir": fu.create_unique_dir(),
-            "molecules": [self.stage_io_dict["in"]["mol1_input_pdb_path"],self.stage_io_dict["in"]["mol2_input_pdb_path"]],
+            "molecules": [self.stage_io_dict["in"]["mol1_input_pdb_path"], self.stage_io_dict["in"]["mol2_input_pdb_path"]],
         }
 
         if ambig_restraints_table_path := self.stage_io_dict["in"].get("ambig_restraints_table_path"):
@@ -129,7 +130,7 @@ class Haddock3Run(BiobbObject):
             workflow_dict["unambig_restraints_table_path"] = unambig_restraints_table_path
         if hb_restraints_table_path := self.stage_io_dict["in"].get("hb_restraints_table_path"):
             workflow_dict["hb_restraints_table_path"] = hb_restraints_table_path
-            
+
         # Create data dir
         cfg_dir = fu.create_unique_dir()
         self.output_cfg_path = create_cfg(
@@ -142,7 +143,8 @@ class Haddock3Run(BiobbObject):
         if self.container_path:
             fu.log("Container execution enabled", self.out_log)
 
-            shutil.copy2(self.output_cfg_path, self.stage_io_dict.get("unique_dir", ""))
+            shutil.copy2(self.output_cfg_path,
+                         self.stage_io_dict.get("unique_dir", ""))
             self.output_cfg_path = str(
                 Path(self.container_volume_path).joinpath(
                     Path(self.output_cfg_path).name
@@ -214,7 +216,8 @@ haddock3_run.__doc__ = Haddock3Run.__doc__
 def main():
     parser = argparse.ArgumentParser(
         description="Wrapper of the haddock3 HADDOCK3 module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(
+            prog, width=99999),
     )
     parser.add_argument(
         "-c",

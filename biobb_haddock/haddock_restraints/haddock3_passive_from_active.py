@@ -83,7 +83,7 @@ class Haddock3PassiveFromActive(BiobbObject):
                 "output_actpass_path": output_actpass_path
             },
         }
-        
+
         # Add input_active_list_path to io_dict if provided
         if input_active_list_path:
             self.io_dict["in"]["input_active_list_path"] = input_active_list_path
@@ -94,14 +94,15 @@ class Haddock3PassiveFromActive(BiobbObject):
         self.surface_list_path = properties.get("surface_list_path", "")
         self.radius = properties.get("radius", 6.5)
         self.binary_path = properties.get("binary_path", "haddock3-restraints")
-        
+
         # Check that either input_active_list_path or active_list is provided
         if not input_active_list_path and not self.active_list:
-            raise ValueError("Either input_active_list_path or active_list property must be provided")
-        
+            raise ValueError(
+                "Either input_active_list_path or active_list property must be provided")
+
         # Check the properties
         self.check_properties(properties)
-        
+
         # If surface_list_path is provided overwrite the active_list
         if self.surface_list_path:
             with open(self.surface_list_path, "r") as surface_file:
@@ -119,8 +120,8 @@ class Haddock3PassiveFromActive(BiobbObject):
         # Build command line
         # haddock3-restraints passive_from_active <pdb_file> <active_list> [-c <chain_id>] [-s <surface_list>] [-r <radius>]
         self.cmd = [
-            self.binary_path, 
-            "passive_from_active", 
+            self.binary_path,
+            "passive_from_active",
             self.stage_io_dict['in']['input_pdb_path'],
             self.active_list
         ]
@@ -128,12 +129,13 @@ class Haddock3PassiveFromActive(BiobbObject):
         # Add optional parameters
         if self.chain_id:
             self.cmd.extend(["-c", self.chain_id])
-        
+
         if self.surface_list_path:
-            self.cmd.extend(["-s", self.stage_io_dict['in']['surface_list_path']])
-        
+            self.cmd.extend(
+                ["-s", self.stage_io_dict['in']['surface_list_path']])
+
         # Radius not in this version
-        #self.cmd.extend(["-r", str(self.radius)])
+        # self.cmd.extend(["-r", str(self.radius)])
 
         # Redirect output to the output file
         self.cmd.append("&>")
@@ -145,14 +147,14 @@ class Haddock3PassiveFromActive(BiobbObject):
         # Remove deprecation warning if present
         with open(self.stage_io_dict['out']['output_actpass_path'], 'r') as file:
             lines = file.readlines()
-        fu.log('Result: '+ '\n'.join(lines), self.out_log, self.global_log)
+        fu.log('Result: ' + '\n'.join(lines), self.out_log, self.global_log)
         with open(self.stage_io_dict['out']['output_actpass_path'], 'w') as file:
             file.write(self.active_list.replace(",", " ")+"\n")
             if lines and "DEPRECATION NOTICE" in lines[0]:
                 file.writelines(lines[1:])
             else:
                 file.writelines(lines)
-    
+
         # Copy files to host
         self.copy_to_host()
 
@@ -188,7 +190,8 @@ haddock3_passive_from_active.__doc__ = Haddock3PassiveFromActive.__doc__
 def main():
     parser = argparse.ArgumentParser(
         description="Wrapper of the haddock3-restraints passive_from_active module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(
+            prog, width=99999),
     )
     parser.add_argument(
         "-c",
@@ -201,7 +204,7 @@ def main():
     required_args = parser.add_argument_group("required arguments")
     required_args.add_argument("--input_pdb_path", required=True)
     required_args.add_argument("--output_actpass_path", required=True)
-    
+
     # Optional arguments
     parser.add_argument("--input_active_list_path", required=False)
 
