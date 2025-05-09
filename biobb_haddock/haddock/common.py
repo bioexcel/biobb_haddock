@@ -4,7 +4,7 @@ import logging
 from typing import Any, Optional
 
 import biobb_common.tools.file_utils as fu
-from .haddock3_config import loads, save
+from .haddock3_config import load, save
 
 haddock_2_wf = {
     'ambig_fname': 'ambig_restraints_table_path',
@@ -26,7 +26,7 @@ def create_cfg(
 
     # Handle input configuration if it exists
     if input_cfg_path:
-        input_cfg = loads(input_cfg_path)['final_cfg']
+        input_cfg = load(input_cfg_path)
         print(f"Input CFG: {input_cfg}")
         cfg_dict = input_cfg.copy()  # Start with entire loaded config as base
 

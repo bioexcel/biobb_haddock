@@ -6,6 +6,7 @@ https://github.com/haddocking/haddock3/blob/main/src/haddock/gear/config.py
 import toml
 import os
 import re
+from pathlib import Path
 
 # the re.ASCII parameter makes sure non-ascii chars are rejected in the \w key
 
@@ -30,6 +31,35 @@ _sub_quoted_header_re = re.compile(
 
 # Captures parameter uppercase boolean
 _uppercase_bool_re = re.compile(r"(_?\w+((_?\w+?)+)?\s*=\s*)(True|False)", re.ASCII)
+
+
+def load(fpath: str) -> dict[str, dict[str, dict[str, str]]]:
+    """
+    Load an HADDOCK3 configuration file to a dictionary.
+
+    Accepts HADDOCK3 ``cfg`` files or pure ``toml`` files.
+
+    Parameters
+    ----------
+    fpath : str or :external:py:class:`pathlib.Path`
+        Path to user configuration file.
+
+    Returns
+    -------
+    dictionary
+        Representing the user configuration file where first level of
+        keys are the module names. Step keys will have a numeric
+        suffix, for example: ``module.1``.
+
+    .. see-also::
+        * :py:func:`loads`
+    """
+    try:
+        return loads(Path(fpath).read_text())
+    except Exception as err:
+        raise Exception(
+            "Something is wrong with the config file."
+        ) from err  # noqa: E501
 
 
 def loads(cfg_str: str) -> dict[str, dict[str, dict[str, str]]]:
@@ -109,7 +139,10 @@ def loads(cfg_str: str) -> dict[str, dict[str, dict[str, str]]]:
     try:
         cfg_dict = toml.loads(cfg)  # Try to load it with the toml library
     except Exception as err:
-        raise err
+        print(cfg)
+        raise Exception(
+            "Some thing is wrong with the config file: " f"{str(err)}"
+        ) from err
 
     return cfg_dict
 
