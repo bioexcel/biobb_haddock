@@ -20,7 +20,7 @@ class Haddock3Accessibility(BiobbObject):
     | `Haddock-Restraints Accessibility <https://www.bonvinlab.org/haddock3/clients/haddock.clis.restraints.calc_accessibility.html>`_ computes residues accessibility using freesasa included in the Haddock3 package.
 
     Args:
-        input_pdb_path (str): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        input_pdb_path (str): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G_noH.pdb>`_. Accepted formats: pdb (edam:format_1476).
         output_accessibility_path (str): Path to the output file with accessibility information. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/mol1_sasa.txt>`_. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), out (edam:format_2330).
         output_actpass_path (str) (Optional): Path to the output file with active/passive residues to be used as haddock3 restraint information. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/mol1_haddock_actpass.txt>`_. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), out (edam:format_2330).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):

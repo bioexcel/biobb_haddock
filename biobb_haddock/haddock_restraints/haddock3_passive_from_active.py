@@ -18,8 +18,8 @@ class Haddock3PassiveFromActive(BiobbObject):
     | `Haddock3-Restraints passive_from_active <https://www.bonvinlab.org/haddock3/clients/haddock.clis.restraints.passive_from_active.html>`_ given a list of active_residues and a PDB structure, it will return a list of surface exposed passive residues within a radius (6.5Å by default) from the active residues.
 
     Args:
-        input_pdb_path (str): Path to the input PDB structure file. File type: input. Accepted formats: pdb (edam:format_1476).
-        output_actpass_path (str): Path to the output file with list of passive residues. File type: output. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), list (edam:format_2330), out (edam:format_2330).
+        input_pdb_path (str): Path to the input PDB structure file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/1A2P_ch.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_actpass_path (str): Path to the output file with list of passive residues. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/1A2P_manual_actpass.txt>`_. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), list (edam:format_2330), out (edam:format_2330).
         input_active_list_path (str) (Optional): Path to the input file with list of active residues. File type: input. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), list (edam:format_2330). If not provided, active_list property must be set.
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **active_list** (*str*) - ('') List of active residues as a comma-separated string. Required if input_active_list_path is not provided.

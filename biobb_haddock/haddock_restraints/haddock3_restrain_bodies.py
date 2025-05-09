@@ -17,8 +17,8 @@ class Haddock3RestrainBodies(BiobbObject):
     | `Haddock-Restraints restrain_bodies <https://www.bonvinlab.org/haddock3/clients/haddock.clis.restraints.restrain_bodies.html>`_ creates distance restraints to lock several chains together. Useful to avoid unnatural flexibility or movement due to sequence/numbering gaps.
 
     Args:
-        input_structure_path (str): Path to the input PDB structure to be restrained. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        output_tbl_path (str): Path to the output HADDOCK tbl file with restraints to lock chains together. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/body_restraints.tbl>`_. Accepted formats: tbl (edam:format_2330), txt (edam:format_2330), out (edam:format_2330).
+        input_structure_path (str): Path to the input PDB structure to be restrained. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/4G6K_clean.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_tbl_path (str): Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/antibody-unambig.tbl>`_. Accepted formats: tbl (edam:format_2330), txt (edam:format_2330), out (edam:format_2330).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **exclude** (*str*) - (None) Chains to exclude from the calculation.
             * **verbose** (*int*) - (0) Tune verbosity of the output.
