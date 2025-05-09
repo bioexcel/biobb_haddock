@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_haddock",
-    version="5.0.0",
+    version="5.0.1",
     author="Biobb developers",
     author_email="pau.andrio@bsc.es",
     description="biobb_haddock is the Biobb module collection to compute information-driven flexible protein-protein docking.",

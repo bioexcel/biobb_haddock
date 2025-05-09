@@ -1,5 +1,16 @@
 # Biobb haddock changelog
 
+## What's new in version [5.0.1](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.0.1)?
+
+### New features
+
+* New blocks for contact_map, haddock3_extend and haddock3_run.
+* New restrain blocks: haddock3_accessibility, haddock3_actpass_to_ambig, haddock3_passive_from_active, haddock3_restrain_bodies.
+
+### Changes
+
+* Remove CNS installation need.
+
 ## What's new in version [5.0.0](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.0.0)?
 
 ### Changes
