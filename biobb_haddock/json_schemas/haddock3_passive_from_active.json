@@ -25,7 +25,7 @@
             "type": "string",
             "description": "Path to the input PDB structure file",
             "filetype": "input",
-            "sample": null,
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/1A2P_ch.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],
@@ -41,7 +41,7 @@
             "type": "string",
             "description": "Path to the output file with list of passive residues",
             "filetype": "output",
-            "sample": null,
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/1A2P_manual_actpass.txt",
             "enum": [
                 ".*\\.txt$",
                 ".*\\.dat$",

@@ -25,7 +25,7 @@
             "type": "string",
             "description": "Path to the input PDB file",
             "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G_noH.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],

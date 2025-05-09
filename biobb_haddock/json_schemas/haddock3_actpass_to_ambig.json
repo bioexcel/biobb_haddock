@@ -26,7 +26,7 @@
             "type": "string",
             "description": "Path to the first input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
             "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass.txt",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass1.txt",
             "enum": [
                 ".*\\.txt$",
                 ".*\\.dat$",
@@ -60,7 +60,7 @@
             "type": "string",
             "description": "Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
             "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass.txt",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass2.txt",
             "enum": [
                 ".*\\.txt$",
                 ".*\\.dat$",
@@ -94,7 +94,7 @@
             "type": "string",
             "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
             "filetype": "output",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/haddock_air.tbl",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/haddock_actpass.tbl",
             "enum": [
                 ".*\\.tbl$",
                 ".*\\.txt$",

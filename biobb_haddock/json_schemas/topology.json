@@ -89,7 +89,7 @@
             "type": "string",
             "description": "Path to the output zipball containing all the current Haddock workflow data",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip",
+            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip",
             "enum": [
                 ".*\\.zip$"
             ],
@@ -105,7 +105,7 @@
             "type": "string",
             "description": "Haddock configuration CFG file path",
             "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg",
             "enum": [
                 ".*\\.cfg$"
             ],

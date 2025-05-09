@@ -25,7 +25,7 @@
             "type": "string",
             "description": "Path to the input PDB structure to be restrained",
             "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/structure.pdb",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/4G6K_clean.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],
@@ -39,9 +39,9 @@
         },
         "output_tbl_path": {
             "type": "string",
-            "description": "Path to the output HADDOCK tbl file with restraints to lock chains together",
+            "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
             "filetype": "output",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/body_restraints.tbl",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/antibody-unambig.tbl",
             "enum": [
                 ".*\\.tbl$",
                 ".*\\.txt$",
@@ -50,17 +50,17 @@
             "file_formats": [
                 {
                     "extension": ".*\\.tbl$",
-                    "description": "Path to the output HADDOCK tbl file with restraints to lock chains together",
+                    "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
                     "edam": "format_2330"
                 },
                 {
                     "extension": ".*\\.txt$",
-                    "description": "Path to the output HADDOCK tbl file with restraints to lock chains together",
+                    "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
                     "edam": "format_2330"
                 },
                 {
                     "extension": ".*\\.out$",
-                    "description": "Path to the output HADDOCK tbl file with restraints to lock chains together",
+                    "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
                     "edam": "format_2330"
                 }
             ]

@@ -35,8 +35,8 @@ Config input / output arguments for this building block:
 * **input_haddock_wf_data_zip** (*string*): Path to the input zipball containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: ZIP
 * **output_evaluation_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_caprieval.zip). Accepted formats: ZIP
 * **reference_pdb_path** (*string*): Path to the input PDB file containing an structure for reference. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_1GGR.pdb). Accepted formats: PDB
-* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip). Accepted formats: ZIP
-* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg). Accepted formats: CFG
+* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_caprieval.zip). Accepted formats: ZIP
+* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -61,7 +61,7 @@ properties:
 ```
 #### Command line
 ```python
-capri_eval --config config_capri_eval.yml --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_evaluation_zip_path ref_caprieval.zip --reference_pdb_path e2a-hpr_1GGR.pdb --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+capri_eval --config config_capri_eval.yml --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_evaluation_zip_path ref_caprieval.zip --reference_pdb_path e2a-hpr_1GGR.pdb --output_haddock_wf_data_zip haddock_wf_data_caprieval.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_capri_eval.json)
@@ -74,7 +74,7 @@ capri_eval --config config_capri_eval.yml --input_haddock_wf_data_zip haddock_wf
 ```
 #### Command line
 ```python
-capri_eval --config config_capri_eval.json --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_evaluation_zip_path ref_caprieval.zip --reference_pdb_path e2a-hpr_1GGR.pdb --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+capri_eval --config config_capri_eval.json --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_evaluation_zip_path ref_caprieval.zip --reference_pdb_path e2a-hpr_1GGR.pdb --output_haddock_wf_data_zip haddock_wf_data_caprieval.zip --haddock_config_path run.cfg
 ```
 
 ## Flex_ref
@@ -110,8 +110,8 @@ Config input / output arguments for this building block:
 * **ambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of ambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
 * **unambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of unambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
 * **hb_restraints_table_path** (*string*): Path to the input TBL file containing a list of hydrogen bond restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
-* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip). Accepted formats: ZIP
-* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg). Accepted formats: CFG
+* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip). Accepted formats: ZIP
+* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -136,7 +136,7 @@ properties:
 ```
 #### Command line
 ```python
-flex_ref --config config_flex_ref.yml --input_haddock_wf_data_zip haddock_wf_data_topology.zip --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+flex_ref --config config_flex_ref.yml --input_haddock_wf_data_zip haddock_wf_data_topology.zip --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_flex_ref.json)
@@ -149,7 +149,7 @@ flex_ref --config config_flex_ref.yml --input_haddock_wf_data_zip haddock_wf_dat
 ```
 #### Command line
 ```python
-flex_ref --config config_flex_ref.json --input_haddock_wf_data_zip haddock_wf_data_topology.zip --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+flex_ref --config config_flex_ref.json --input_haddock_wf_data_zip haddock_wf_data_topology.zip --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 
 ## Rigid_body
@@ -185,8 +185,8 @@ Config input / output arguments for this building block:
 * **ambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of ambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
 * **unambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of unambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
 * **hb_restraints_table_path** (*string*): Path to the input TBL file containing a list of hydrogen bond restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
-* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip). Accepted formats: ZIP
-* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg). Accepted formats: CFG
+* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip). Accepted formats: ZIP
+* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -211,7 +211,7 @@ properties:
 ```
 #### Command line
 ```python
-rigid_body --config config_rigid_body.yml --input_haddock_wf_data_zip haddock_wf_data_topology.zip --docking_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+rigid_body --config config_rigid_body.yml --input_haddock_wf_data_zip haddock_wf_data_topology.zip --docking_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_rigid_body.json)
@@ -224,7 +224,7 @@ rigid_body --config config_rigid_body.yml --input_haddock_wf_data_zip haddock_wf
 ```
 #### Command line
 ```python
-rigid_body --config config_rigid_body.json --input_haddock_wf_data_zip haddock_wf_data_topology.zip --docking_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+rigid_body --config config_rigid_body.json --input_haddock_wf_data_zip haddock_wf_data_topology.zip --docking_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 
 ## Haddock3_passive_from_active
@@ -251,8 +251,8 @@ haddock3_passive_from_active -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_pdb_path** (*string*): Path to the input PDB structure file. File type: input. [Sample file](None). Accepted formats: PDB
-* **output_actpass_path** (*string*): Path to the output file with list of passive residues. File type: output. [Sample file](None). Accepted formats: TXT, DAT, LIST, OUT
+* **input_pdb_path** (*string*): Path to the input PDB structure file. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/1A2P_ch.pdb). Accepted formats: PDB
+* **output_actpass_path** (*string*): Path to the output file with list of passive residues. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/1A2P_manual_actpass.txt). Accepted formats: TXT, DAT, LIST, OUT
 * **input_active_list_path** (*string*): Path to the input file with list of active residues. File type: input. [Sample file](None). Accepted formats: TXT, DAT, LIST, ACTIVE_LIST
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
@@ -282,7 +282,7 @@ properties:
 ```
 #### Command line
 ```python
-haddock3_passive_from_active --config config_haddock3_passive_from_active.yml --input_pdb_path input.pdb --output_actpass_path output.txt --input_active_list_path input.txt
+haddock3_passive_from_active --config config_haddock3_passive_from_active.yml --input_pdb_path 1A2P_ch.pdb --output_actpass_path 1A2P_manual_actpass.txt --input_active_list_path input.txt
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_passive_from_active.json)
@@ -296,7 +296,7 @@ haddock3_passive_from_active --config config_haddock3_passive_from_active.yml --
 ```
 #### Command line
 ```python
-haddock3_passive_from_active --config config_haddock3_passive_from_active.json --input_pdb_path input.pdb --output_actpass_path output.txt --input_active_list_path input.txt
+haddock3_passive_from_active --config config_haddock3_passive_from_active.json --input_pdb_path 1A2P_ch.pdb --output_actpass_path 1A2P_manual_actpass.txt --input_active_list_path input.txt
 ```
 
 ## Sele_top_clusts
@@ -326,8 +326,8 @@ Syntax: input_argument (datatype) : Definition
 Config input / output arguments for this building block:
 * **input_haddock_wf_data_zip** (*string*): Path to the input zipball containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: ZIP
 * **output_selection_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_seletop.zip). Accepted formats: ZIP
-* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip). Accepted formats: ZIP
-* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg). Accepted formats: CFG
+* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip). Accepted formats: ZIP
+* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -352,7 +352,7 @@ properties:
 ```
 #### Command line
 ```python
-sele_top_clusts --config config_sele_top_clusts.yml --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_selection_zip_path ref_seletop.zip --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+sele_top_clusts --config config_sele_top_clusts.yml --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_selection_zip_path ref_seletop.zip --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_sele_top_clusts.json)
@@ -365,7 +365,7 @@ sele_top_clusts --config config_sele_top_clusts.yml --input_haddock_wf_data_zip 
 ```
 #### Command line
 ```python
-sele_top_clusts --config config_sele_top_clusts.json --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_selection_zip_path ref_seletop.zip --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+sele_top_clusts --config config_sele_top_clusts.json --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_selection_zip_path ref_seletop.zip --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 
 ## Haddock3_run
@@ -401,8 +401,8 @@ Config input / output arguments for this building block:
 * **ambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of ambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
 * **unambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of unambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
 * **hb_restraints_table_path** (*string*): Path to the input TBL file containing a list of hydrogen bond restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
-* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip). Accepted formats: ZIP
-* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg). Accepted formats: CFG
+* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip). Accepted formats: ZIP
+* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -427,7 +427,7 @@ properties:
 ```
 #### Command line
 ```python
-haddock3_run --config config_haddock3_run.yml --mol1_input_pdb_path e2aP_1F3G.pdb --mol2_input_pdb_path hpr_ensemble.pdb --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+haddock3_run --config config_haddock3_run.yml --mol1_input_pdb_path e2aP_1F3G.pdb --mol2_input_pdb_path hpr_ensemble.pdb --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_run.json)
@@ -440,7 +440,7 @@ haddock3_run --config config_haddock3_run.yml --mol1_input_pdb_path e2aP_1F3G.pd
 ```
 #### Command line
 ```python
-haddock3_run --config config_haddock3_run.json --mol1_input_pdb_path e2aP_1F3G.pdb --mol2_input_pdb_path hpr_ensemble.pdb --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+haddock3_run --config config_haddock3_run.json --mol1_input_pdb_path e2aP_1F3G.pdb --mol2_input_pdb_path hpr_ensemble.pdb --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 
 ## Clust_fcc
@@ -470,8 +470,8 @@ Syntax: input_argument (datatype) : Definition
 Config input / output arguments for this building block:
 * **input_haddock_wf_data_zip** (*string*): Path to the input zipball containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: ZIP
 * **output_cluster_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_clustfcc.zip). Accepted formats: ZIP
-* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip). Accepted formats: ZIP
-* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg). Accepted formats: CFG
+* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_clustfcc.zip). Accepted formats: ZIP
+* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -496,7 +496,7 @@ properties:
 ```
 #### Command line
 ```python
-clust_fcc --config config_clust_fcc.yml --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_cluster_zip_path ref_clustfcc.zip --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+clust_fcc --config config_clust_fcc.yml --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_cluster_zip_path ref_clustfcc.zip --output_haddock_wf_data_zip haddock_wf_data_clustfcc.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_clust_fcc.json)
@@ -509,7 +509,7 @@ clust_fcc --config config_clust_fcc.yml --input_haddock_wf_data_zip haddock_wf_d
 ```
 #### Command line
 ```python
-clust_fcc --config config_clust_fcc.json --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_cluster_zip_path ref_clustfcc.zip --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+clust_fcc --config config_clust_fcc.json --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_cluster_zip_path ref_clustfcc.zip --output_haddock_wf_data_zip haddock_wf_data_clustfcc.zip --haddock_config_path run.cfg
 ```
 
 ## Haddock3_accessibility
@@ -536,7 +536,7 @@ haddock3_accessibility -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_pdb_path** (*string*): Path to the input PDB file. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb). Accepted formats: PDB
+* **input_pdb_path** (*string*): Path to the input PDB file. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G_noH.pdb). Accepted formats: PDB
 * **output_accessibility_path** (*string*): Path to the output file with accessibility information. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/mol1_sasa.txt). Accepted formats: TXT, DAT, OUT
 * **output_actpass_path** (*string*): Path to the output file with active/passive residues to be used as haddock3 restraint information. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/mol1_haddock_actpass.txt). Accepted formats: TXT, DAT, OUT
 ### Config
@@ -566,7 +566,7 @@ properties:
 ```
 #### Command line
 ```python
-haddock3_accessibility --config config_haddock3_accessibility.yml --input_pdb_path e2aP_1F3G.pdb --output_accessibility_path mol1_sasa.txt --output_actpass_path mol1_haddock_actpass.txt
+haddock3_accessibility --config config_haddock3_accessibility.yml --input_pdb_path e2aP_1F3G_noH.pdb --output_accessibility_path mol1_sasa.txt --output_actpass_path mol1_haddock_actpass.txt
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_accessibility.json)
@@ -579,7 +579,7 @@ haddock3_accessibility --config config_haddock3_accessibility.yml --input_pdb_pa
 ```
 #### Command line
 ```python
-haddock3_accessibility --config config_haddock3_accessibility.json --input_pdb_path e2aP_1F3G.pdb --output_accessibility_path mol1_sasa.txt --output_actpass_path mol1_haddock_actpass.txt
+haddock3_accessibility --config config_haddock3_accessibility.json --input_pdb_path e2aP_1F3G_noH.pdb --output_accessibility_path mol1_sasa.txt --output_actpass_path mol1_haddock_actpass.txt
 ```
 
 ## Sele_top
@@ -609,8 +609,8 @@ Syntax: input_argument (datatype) : Definition
 Config input / output arguments for this building block:
 * **input_haddock_wf_data_zip** (*string*): Path to the input zipball containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: ZIP
 * **output_selection_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_seletop.zip). Accepted formats: ZIP
-* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip). Accepted formats: ZIP
-* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg). Accepted formats: CFG
+* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip). Accepted formats: ZIP
+* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -635,7 +635,7 @@ properties:
 ```
 #### Command line
 ```python
-sele_top --config config_sele_top.yml --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_selection_zip_path ref_seletop.zip --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+sele_top --config config_sele_top.yml --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_selection_zip_path ref_seletop.zip --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_sele_top.json)
@@ -648,7 +648,7 @@ sele_top --config config_sele_top.yml --input_haddock_wf_data_zip haddock_wf_dat
 ```
 #### Command line
 ```python
-sele_top --config config_sele_top.json --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_selection_zip_path ref_seletop.zip --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+sele_top --config config_sele_top.json --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_selection_zip_path ref_seletop.zip --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 
 ## Em_ref
@@ -684,8 +684,8 @@ Config input / output arguments for this building block:
 * **ambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of ambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
 * **unambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of unambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
 * **hb_restraints_table_path** (*string*): Path to the input TBL file containing a list of hydrogen bond restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
-* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip). Accepted formats: ZIP
-* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg). Accepted formats: CFG
+* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip). Accepted formats: ZIP
+* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -710,7 +710,7 @@ properties:
 ```
 #### Command line
 ```python
-em_ref --config config_em_ref.yml --input_haddock_wf_data_zip haddock_wf_data_topology.zip --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+em_ref --config config_em_ref.yml --input_haddock_wf_data_zip haddock_wf_data_topology.zip --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_em_ref.json)
@@ -723,7 +723,7 @@ em_ref --config config_em_ref.yml --input_haddock_wf_data_zip haddock_wf_data_to
 ```
 #### Command line
 ```python
-em_ref --config config_em_ref.json --input_haddock_wf_data_zip haddock_wf_data_topology.zip --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+em_ref --config config_em_ref.json --input_haddock_wf_data_zip haddock_wf_data_topology.zip --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 
 ## Haddock3_extend
@@ -751,7 +751,7 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 * **input_haddock_wf_data_zip** (*string*): Path to the input zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip). Accepted formats: ZIP
-* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg). Accepted formats: CFG
+* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 * **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip). Accepted formats: ZIP
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
@@ -776,7 +776,7 @@ properties:
 ```
 #### Command line
 ```python
-haddock3_extend --config config_haddock3_extend.yml --input_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg --output_haddock_wf_data_zip ref_topology.zip
+haddock3_extend --config config_haddock3_extend.yml --input_haddock_wf_data_zip ref_topology.zip --haddock_config_path run.cfg --output_haddock_wf_data_zip ref_topology.zip
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_extend.json)
@@ -789,7 +789,7 @@ haddock3_extend --config config_haddock3_extend.yml --input_haddock_wf_data_zip 
 ```
 #### Command line
 ```python
-haddock3_extend --config config_haddock3_extend.json --input_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg --output_haddock_wf_data_zip ref_topology.zip
+haddock3_extend --config config_haddock3_extend.json --input_haddock_wf_data_zip ref_topology.zip --haddock_config_path run.cfg --output_haddock_wf_data_zip ref_topology.zip
 ```
 
 ## Haddock3_actpass_to_ambig
@@ -816,9 +816,9 @@ haddock3_actpass_to_ambig -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_actpass1_path** (*string*): Path to the first input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass.txt). Accepted formats: TXT, DAT, IN, PASS
-* **input_actpass2_path** (*string*): Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass.txt). Accepted formats: TXT, DAT, IN, PASS
-* **output_tbl_path** (*string*): Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/haddock_air.tbl). Accepted formats: TBL, TXT, OUT
+* **input_actpass1_path** (*string*): Path to the first input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass1.txt). Accepted formats: TXT, DAT, IN, PASS
+* **input_actpass2_path** (*string*): Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass2.txt). Accepted formats: TXT, DAT, IN, PASS
+* **output_tbl_path** (*string*): Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/haddock_actpass.tbl). Accepted formats: TBL, TXT, OUT
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -845,7 +845,7 @@ properties:
 ```
 #### Command line
 ```python
-haddock3_actpass_to_ambig --config config_haddock3_actpass_to_ambig.yml --input_actpass1_path haddock_actpass.txt --input_actpass2_path haddock_actpass.txt --output_tbl_path haddock_air.tbl
+haddock3_actpass_to_ambig --config config_haddock3_actpass_to_ambig.yml --input_actpass1_path haddock_actpass1.txt --input_actpass2_path haddock_actpass2.txt --output_tbl_path haddock_actpass.tbl
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_actpass_to_ambig.json)
@@ -858,7 +858,7 @@ haddock3_actpass_to_ambig --config config_haddock3_actpass_to_ambig.yml --input_
 ```
 #### Command line
 ```python
-haddock3_actpass_to_ambig --config config_haddock3_actpass_to_ambig.json --input_actpass1_path haddock_actpass.txt --input_actpass2_path haddock_actpass.txt --output_tbl_path haddock_air.tbl
+haddock3_actpass_to_ambig --config config_haddock3_actpass_to_ambig.json --input_actpass1_path haddock_actpass1.txt --input_actpass2_path haddock_actpass2.txt --output_tbl_path haddock_actpass.tbl
 ```
 
 ## Topology
@@ -892,8 +892,8 @@ Config input / output arguments for this building block:
 * **mol1_output_top_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol1_top.zip). Accepted formats: ZIP
 * **mol2_input_pdb_path** (*string*): Path to the input PDB file. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/hpr_ensemble.pdb). Accepted formats: PDB
 * **mol2_output_top_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol2_top.zip). Accepted formats: ZIP
-* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip). Accepted formats: ZIP
-* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg). Accepted formats: CFG
+* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip). Accepted formats: ZIP
+* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -918,7 +918,7 @@ properties:
 ```
 #### Command line
 ```python
-topology --config config_topology.yml --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+topology --config config_topology.yml --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_topology.json)
@@ -931,7 +931,7 @@ topology --config config_topology.yml --mol1_input_pdb_path e2aP_1F3G.pdb --mol1
 ```
 #### Command line
 ```python
-topology --config config_topology.json --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+topology --config config_topology.json --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 
 ## Contact_map
@@ -961,8 +961,8 @@ Syntax: input_argument (datatype) : Definition
 Config input / output arguments for this building block:
 * **input_haddock_wf_data_zip** (*string*): Path to the input zipball containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: ZIP
 * **output_contactmap_zip_path** (*string*): Path to the output contact map files in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_contactmap.zip). Accepted formats: ZIP
-* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip). Accepted formats: ZIP
-* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg). Accepted formats: CFG
+* **output_haddock_wf_data_zip** (*string*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip). Accepted formats: ZIP
+* **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -987,7 +987,7 @@ properties:
 ```
 #### Command line
 ```python
-contact_map --config config_contact_map.yml --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_contactmap_zip_path ref_contactmap.zip --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+contact_map --config config_contact_map.yml --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_contactmap_zip_path ref_contactmap.zip --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_contact_map.json)
@@ -1000,7 +1000,7 @@ contact_map --config config_contact_map.yml --input_haddock_wf_data_zip haddock_
 ```
 #### Command line
 ```python
-contact_map --config config_contact_map.json --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_contactmap_zip_path ref_contactmap.zip --output_haddock_wf_data_zip ref_topology.zip --haddock_config_path configuration.cfg
+contact_map --config config_contact_map.json --input_haddock_wf_data_zip haddock_wf_data_rigid.zip --output_contactmap_zip_path ref_contactmap.zip --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 
 ## Haddock3_restrain_bodies
@@ -1026,8 +1026,8 @@ haddock3_restrain_bodies -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_structure_path** (*string*): Path to the input PDB structure to be restrained. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/structure.pdb). Accepted formats: PDB
-* **output_tbl_path** (*string*): Path to the output HADDOCK tbl file with restraints to lock chains together. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/body_restraints.tbl). Accepted formats: TBL, TXT, OUT
+* **input_structure_path** (*string*): Path to the input PDB structure to be restrained. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/4G6K_clean.pdb). Accepted formats: PDB
+* **output_tbl_path** (*string*): Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/antibody-unambig.tbl). Accepted formats: TBL, TXT, OUT
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -1053,7 +1053,7 @@ properties:
 ```
 #### Command line
 ```python
-haddock3_restrain_bodies --config config_haddock3_restrain_bodies.yml --input_structure_path structure.pdb --output_tbl_path body_restraints.tbl
+haddock3_restrain_bodies --config config_haddock3_restrain_bodies.yml --input_structure_path 4G6K_clean.pdb --output_tbl_path antibody-unambig.tbl
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_restrain_bodies.json)
@@ -1066,5 +1066,5 @@ haddock3_restrain_bodies --config config_haddock3_restrain_bodies.yml --input_st
 ```
 #### Command line
 ```python
-haddock3_restrain_bodies --config config_haddock3_restrain_bodies.json --input_structure_path structure.pdb --output_tbl_path body_restraints.tbl
+haddock3_restrain_bodies --config config_haddock3_restrain_bodies.json --input_structure_path 4G6K_clean.pdb --output_tbl_path antibody-unambig.tbl
 ```

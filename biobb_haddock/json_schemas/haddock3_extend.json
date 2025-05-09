@@ -42,7 +42,7 @@
             "type": "string",
             "description": "Haddock configuration CFG file path",
             "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg",
             "enum": [
                 ".*\\.cfg$"
             ],
