@@ -120,7 +120,7 @@ class Haddock3Run(BiobbObject):
         self.stage_files()
 
         workflow_dict = {
-            "run_dir": fu.create_unique_dir(),
+            "run_dir": fu.create_unique_dir(self.stage_io_dict["unique_dir"]),
             "molecules": [self.stage_io_dict["in"]["mol1_input_pdb_path"], self.stage_io_dict["in"]["mol2_input_pdb_path"]],
         }
 
@@ -132,7 +132,7 @@ class Haddock3Run(BiobbObject):
             workflow_dict["hb_restraints_table_path"] = hb_restraints_table_path
 
         # Create data dir
-        cfg_dir = fu.create_unique_dir()
+        cfg_dir = fu.create_unique_dir(self.stage_io_dict["unique_dir"])
         self.output_cfg_path = create_cfg(
             output_cfg_path=str(Path(cfg_dir).joinpath(self.output_cfg_path)),
             workflow_dict=workflow_dict,
@@ -177,7 +177,7 @@ class Haddock3Run(BiobbObject):
             )
 
         # Remove temporal files
-        self.tmp_files.extend([self.output_cfg_path])
+        self.tmp_files.extend([cfg_dir, self.stage_io_dict.get("unique_dir")])
         self.remove_tmp_files()
 
         return self.return_code

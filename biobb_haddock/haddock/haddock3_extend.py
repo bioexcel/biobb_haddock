@@ -97,7 +97,7 @@ class Haddock3Extend(BiobbObject):
         self.stage_files()
 
         # Decompress input zip
-        run_dir = os.path.join(self.stage_io_dict["unique_dir"], fu.create_unique_dir())
+        run_dir = fu.create_unique_dir(self.stage_io_dict["unique_dir"])
         with zipfile.ZipFile(self.stage_io_dict["in"]["input_haddock_wf_data_zip"], 'r') as zip_ref:
             zip_ref.extractall(run_dir)
         cwd = os.getcwd()
