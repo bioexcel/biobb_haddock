@@ -111,8 +111,9 @@ class Haddock3Accessibility(BiobbObject):
             self.cmd.append("--export_to_actpass")
 
         self.cmd.append(f"-c {self.cutoff}")
-        self.cmd.append("&>")
+        self.cmd.append(">")
         self.cmd.append(self.stage_io_dict['out']['output_accessibility_path'])
+        self.cmd.append("2>&1")
 
         # Run Biobb block
         self.run_biobb()
