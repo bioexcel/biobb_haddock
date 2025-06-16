@@ -41,16 +41,15 @@ class Haddock3Extend(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_haddock.haddock.haddock3_extend import haddock3_extend
-            haddock3_extend(mol1_input_pdb_path='/path/to/myStructure1.pdb',
-                         mol2_input_pdb_path='/path/to/myStructure2.pdb,
-                         haddock_config_path='/path/to/myHaddockConfig.cfg',
-                         output_haddock_wf_data_zip='/path/to/haddock_output.zip',
-                         properties=prop)
+            haddock3_extend(input_haddock_wf_data_zip='/path/to/myworkflowdata.zip',
+                            haddock_config_path='/path/to/myHaddockConfig.cfg',
+                            output_haddock_wf_data_zip='/path/to/haddock_output.zip',
+                            properties=prop)
 
     Info:
         * wrapped_software:
             * name: Haddock
-            * version: 3.0.0
+            * version: 3.0.6
             * license: Apache-2.0
         * ontology:
             * name: EDAM

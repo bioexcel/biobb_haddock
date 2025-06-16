@@ -56,7 +56,7 @@ class Topology(BiobbObject):
     Info:
         * wrapped_software:
             * name: Haddock
-            * version: 3.0.0
+            * version: 3.0.6
             * license: Apache-2.0
         * ontology:
             * name: EDAM
