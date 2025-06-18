@@ -20,7 +20,7 @@ class Haddock3PassiveFromActive(BiobbObject):
     Args:
         input_pdb_path (str): Path to the input PDB structure file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/1A2P_ch.pdb>`_. Accepted formats: pdb (edam:format_1476).
         output_actpass_path (str): Path to the output file with list of passive residues. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/1A2P_manual_actpass.txt>`_. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), list (edam:format_2330), out (edam:format_2330).
-        input_active_list_path (str) (Optional): Path to the input file with list of active residues. File type: input. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), list (edam:format_2330). If not provided, active_list property must be set.
+        input_active_list_path (str) (Optional): Path to the input file with list of active residues. File type: input. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), list (edam:format_2330).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **active_list** (*str*) - ('') List of active residues as a comma-separated string. Required if input_active_list_path is not provided.
             * **chain_id** (*str*) - (None) Chain ID to consider when calculating passive residues.

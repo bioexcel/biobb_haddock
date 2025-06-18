@@ -1,6 +1,6 @@
 {
     "_id": "biobb_haddock",
-    "desc": "biobb_haddock is the Biobb module collection to compute classical molecular interaction potentials.",
+    "desc": "biobb_haddock is the Biobb module collection to compute information-driven flexible protein-protein docking",
     "github": "https://github.com/bioexcel/biobb_haddock",
     "readthedocs": "https://biobb-haddock.readthedocs.io/en/latest/",
     "conda": "https://anaconda.org/bioconda/biobb_haddock",
@@ -23,6 +23,13 @@
             "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.clust_fcc"
         },
         {
+            "block": "ContactMap",
+            "tool": "Haddock ContactMap",
+            "desc": "The ContactMap module. Haddock ContactMap module generates contact maps for protein complexes.",
+            "exec": "contact_map",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.contact_map"
+        },
+        {
             "block": "EMRef",
             "tool": "Haddock EMRef",
             "desc": "The EMRef module. Haddock EMRef module computes an energy minimization refinement over selected structures.",
@@ -35,6 +42,20 @@
             "desc": "The FlexRef module. Haddock FlexRef module computes a flexible refinement over selected structures.",
             "exec": "flex_ref",
             "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.flex_ref"
+        },
+        {
+            "block": "Haddock3Extend",
+            "tool": "Haddock3 Extend",
+            "desc": "The Haddock3Extend module. Extends a previously run Haddock3 workflow with additional steps.",
+            "exec": "haddock3_extend",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.haddock3_extend"
+        },
+        {
+            "block": "Haddock3Run",
+            "tool": "Haddock3 Run",
+            "desc": "The Haddock3Run module. Runs a complete Haddock3 workflow for protein-protein docking.",
+            "exec": "haddock3_run",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.haddock3_run"
         },
         {
             "block": "RigidBody",
@@ -63,6 +84,34 @@
             "desc": "The Topology module. The Haddock Topology module creates a topology from a system to be used for docking.",
             "exec": "topology",
             "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.topology"
+        },
+        {
+            "block": "Accessibility",
+            "tool": "Haddock3 Accessibility",
+            "desc": "The Accessibility module. Calculates solvent accessibility for defining passive residues in Haddock3.",
+            "exec": "haddock3_accessibility",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_accessibility"
+        },
+        {
+            "block": "ActpassToAmbig",
+            "tool": "Haddock3 ActpassToAmbig",
+            "desc": "The ActpassToAmbig module. Converts active and passive residue lists to ambiguous restraints for Haddock3.",
+            "exec": "haddock3_actpass_to_ambig",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_actpass_to_ambig"
+        },
+        {
+            "block": "PassiveFromActive",
+            "tool": "Haddock3 PassiveFromActive",
+            "desc": "The PassiveFromActive module. Generates passive residues from active residues for Haddock3.",
+            "exec": "haddock3_passive_from_active",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_passive_from_active"
+        },
+        {
+            "block": "RestrainBodies",
+            "tool": "Haddock3 RestrainBodies",
+            "desc": "The RestrainBodies module. Creates restraints to maintain the relative orientation of multi-body complexes in Haddock3.",
+            "exec": "haddock3_restrain_bodies",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_restrain_bodies"
         }
     ],
     "dep_pypi": [

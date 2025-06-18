@@ -7,7 +7,7 @@ setuptools.setup(
     name="biobb_haddock",
     version="5.0.1",
     author="Biobb developers",
-    author_email="pau.andrio@bsc.es",
+    author_email="ruben.chaves@irbbarcelona.org",
     description="biobb_haddock is the Biobb module collection to compute information-driven flexible protein-protein docking.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -35,6 +35,10 @@ setuptools.setup(
             "sele_top_clusts = biobb_haddock.haddock.sele_top_clusts:main",
             "sele_top = biobb_haddock.haddock.sele_top:main",
             "topology = biobb_haddock.haddock.topology:main",
+            "haddock3_accessibility = biobb_haddock.haddock_restraints.haddock3_accessibility:main",
+            "haddock3_actpass_to_ambig = biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig:main",
+            "haddock3_passive_from_active = biobb_haddock.haddock_restraints.haddock3_passive_from_active:main",
+            "haddock3_restrain_bodies = biobb_haddock.haddock_restraints.haddock3_restrain_bodies:main",
         ]
     },
     classifiers=[

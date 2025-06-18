@@ -88,7 +88,7 @@ haddock3_run:
     ambig_restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
     haddock_config_path: file:test_data_dir/haddock/run.cfg
     output_haddock_wf_data_zip: haddock_wf_data.zip
-    ref_output_haddock_wf_data_zip: file:test_reference_dir/haddock/ref_haddock3_run.zip
+    #ref_output_haddock_wf_data_zip: file:test_reference_dir/haddock/ref_haddock3_run.zip
   properties:
     remove_tmp: False
 

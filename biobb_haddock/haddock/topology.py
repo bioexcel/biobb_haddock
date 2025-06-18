@@ -100,7 +100,6 @@ class Topology(BiobbObject):
 
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3")
-        self.autohis = properties.get("autohis", True)
 
         # Check the properties
         self.check_properties(properties)

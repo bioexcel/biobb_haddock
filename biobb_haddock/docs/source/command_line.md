@@ -253,7 +253,7 @@ Syntax: input_argument (datatype) : Definition
 Config input / output arguments for this building block:
 * **input_pdb_path** (*string*): Path to the input PDB structure file. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/1A2P_ch.pdb). Accepted formats: PDB
 * **output_actpass_path** (*string*): Path to the output file with list of passive residues. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/1A2P_manual_actpass.txt). Accepted formats: TXT, DAT, LIST, OUT
-* **input_active_list_path** (*string*): Path to the input file with list of active residues. File type: input. [Sample file](None). Accepted formats: TXT, DAT, LIST, ACTIVE_LIST
+* **input_active_list_path** (*string*): Path to the input file with list of active residues. File type: input. [Sample file](None). Accepted formats: TXT, DAT, LIST
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 

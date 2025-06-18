@@ -21,7 +21,7 @@ class RigidBody(BiobbObject):
     """
     | biobb_haddock RigidBody
     | Wrapper class for the Haddock RigidBody module.
-    | The RigidBody module. `Haddock RigidBody module <https://www.bonvinlab.org/haddock3/modules/analysis/haddock.modules.sampling.rigidbody.html>`_ compute rigid body docking between two molecules.
+    | The RigidBody module. `Haddock RigidBody module <https://www.bonvinlab.org/haddock3/modules/sampling/haddock.modules.sampling.rigidbody.html>`_ compute rigid body docking between two molecules.
 
     Args:
         input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: input. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip>`_. Accepted formats: zip (edam:format_3987).
