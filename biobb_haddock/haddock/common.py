@@ -81,10 +81,10 @@ def create_cfg(
                         cfg_dict[key][sub_key] = sub_value
 
     # Add molecules and run_dir if provided
-    if workflow_dict.get("molecules"):
-        cfg_dict["molecules"] = workflow_dict["molecules"]
-    if workflow_dict.get("run_dir"):
-        cfg_dict["run_dir"] = workflow_dict["run_dir"]
+    for key, value in workflow_dict.items():
+        if key == 'haddock_step_name':
+            continue
+        cfg_dict[key] = value
 
     # Use haddock save
     save(cfg_dict, output_cfg_path)

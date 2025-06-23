@@ -28,6 +28,7 @@ class ClustFCC(BiobbObject):
         haddock_config_path (str) (Optional): Haddock configuration CFG file path. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg>`_. Accepted formats: cfg (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cfg** (*dict*) - ({}) Haddock configuration options specification.
+            * **global_cfg** (*dict*) - ({'postprocess': False}) `Global configuration options <https://www.bonvinlab.org/haddock3-user-manual/global_parameters.html#optional-global-parameters>`_ specification.
             * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -88,6 +89,7 @@ class ClustFCC(BiobbObject):
         self.haddock_step_name = "clustfcc"
         self.output_cfg_path = properties.get("output_cfg_path", "haddock.cfg")
         self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
+        self.global_cfg = properties.get("global_cfg", dict(postprocess=False))
 
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3")
@@ -111,6 +113,7 @@ class ClustFCC(BiobbObject):
         )
 
         workflow_dict = {"haddock_step_name": self.haddock_step_name}
+        workflow_dict.update(self.global_cfg)
 
         # Create data dir
         cfg_dir = fu.create_unique_dir()
