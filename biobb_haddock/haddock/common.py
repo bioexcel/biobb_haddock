@@ -82,7 +82,7 @@ def create_cfg(
 
     # Add molecules and run_dir if provided
     for key, value in workflow_dict.items():
-        if key == 'haddock_step_name':
+        if key == 'haddock_step_name' or key in haddock_2_wf.values():
             continue
         cfg_dict[key] = value
 
