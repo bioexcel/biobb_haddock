@@ -4,9 +4,9 @@
     "github": "https://github.com/bioexcel/biobb_haddock",
     "readthedocs": "https://biobb-haddock.readthedocs.io/en/latest/",
     "conda": "https://anaconda.org/bioconda/biobb_haddock",
-    "docker": "https://quay.io/biocontainers/biobb_haddock:5.0.1--pyhdfd78af_0",
-    "singularity": "https://depot.galaxyproject.org/singularity/biobb_haddock:5.0.1--pyhdfd78af_0",
-    "version": "5.0.1",
+    "docker": "https://quay.io/biocontainers/biobb_haddock:5.1.0--pyhdfd78af_0",
+    "singularity": "https://depot.galaxyproject.org/singularity/biobb_haddock:5.1.0--pyhdfd78af_0",
+    "version": "5.1.0",
     "tools": [
         {
             "block": "CapriEval",

@@ -3,7 +3,7 @@
 [![](https://img.shields.io/conda/vn/bioconda/biobb_haddock?label=Conda)](https://anaconda.org/bioconda/biobb_haddock)
 [![](https://img.shields.io/conda/dn/bioconda/biobb_haddock?label=Conda%20Downloads)](https://anaconda.org/bioconda/biobb_haddock)
 [![](https://img.shields.io/badge/Docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_haddock?tab=tags)
-[![](https://img.shields.io/badge/Singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_haddock:5.0.1--pyhdfd78af_0)
+[![](https://img.shields.io/badge/Singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_haddock:5.1.0--pyhdfd78af_0)
 
 [![](https://img.shields.io/badge/OS-Unix%20%7C%20MacOS-blue)](https://github.com/bioexcel/biobb_haddock)
 [![](https://img.shields.io/pypi/pyversions/biobb-haddock.svg?label=Python%20Versions)](https://pypi.org/project/biobb-haddock/)
@@ -40,7 +40,7 @@ The latest documentation of this package can be found in our readthedocs site:
 [latest API documentation](http://biobb-haddock.readthedocs.io/en/latest/).
 
 ## Version
-v5.0.1 2024.2
+v5.1.0 2024.2
 
 ## Install CNS
 
@@ -147,7 +147,7 @@ Using PIP:
 * Installation:
 
 
-        pip install "biobb_haddock>=5.0.1"
+        pip install "biobb_haddock>=5.1.0"
 
 
 * Usage: [Python API documentation](https://biobb-haddock.readthedocs.io/en/latest/modules.html)
@@ -157,7 +157,7 @@ Using ANACONDA:
 * Installation:
 
 
-        conda install -c bioconda "biobb_haddock>=5.0.1"
+        conda install -c bioconda "biobb_haddock>=5.1.0"
 
 
 * Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb-haddock.readthedocs.io/en/latest/modules.html) and the [Command Line documentation](https://biobb-haddock.readthedocs.io/en/latest/command_line.html)
@@ -167,13 +167,13 @@ Using DOCKER:
 * Installation:
 
 
-        docker pull quay.io/biocontainers/biobb_haddock:5.0.1--pyhdfd78af_0
+        docker pull quay.io/biocontainers/biobb_haddock:5.1.0--pyhdfd78af_0
 
 
 * Usage:
 
 
-        docker run quay.io/biocontainers/biobb_haddock:5.0.1--pyhdfd78af_0 <command>
+        docker run quay.io/biocontainers/biobb_haddock:5.1.0--pyhdfd78af_0 <command>
 
 
 Using SINGULARITY:
@@ -183,7 +183,7 @@ Using SINGULARITY:
 * Installation:
 
 
-        singularity pull --name biobb_haddock.sif https://depot.galaxyproject.org/singularity/biobb_haddock:5.0.1--pyhdfd78af_0
+        singularity pull --name biobb_haddock.sif https://depot.galaxyproject.org/singularity/biobb_haddock:5.1.0--pyhdfd78af_0
 
 
 * Usage:
