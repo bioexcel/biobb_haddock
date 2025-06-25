@@ -57,8 +57,8 @@ class Haddock3Run(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Haddock
-            * version: 3.0.6
+            * name: Haddock3
+            * version: 2025.5
             * license: Apache-2.0
         * ontology:
             * name: EDAM

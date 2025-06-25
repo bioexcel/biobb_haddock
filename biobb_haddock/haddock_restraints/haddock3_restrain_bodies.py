@@ -45,8 +45,8 @@ class Haddock3RestrainBodies(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Haddock3-restraints
-            * version: 3.0.6
+            * name: Haddock33-restraints
+            * version: 2025.5
             * license: Apache-2.0
         * ontology:
             * name: EDAM

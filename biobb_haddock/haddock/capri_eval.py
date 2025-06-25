@@ -29,7 +29,7 @@ class CapriEval(BiobbObject):
         haddock_config_path (str) (Optional): Haddock configuration CFG file path. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg>`_. Accepted formats: cfg (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cfg** (*dict*) - ({}) Haddock configuration options specification.
-            * **global_cfg** (*dict*) - ({"postprocess": True}) `Global configuration options <https://www.bonvinlab.org/haddock3-user-manual/global_parameters.html#optional-global-parameters>`_ specification.
+            * **global_cfg** (*dict*) - ({"postprocess": True}) `Global configuration options <https://www.bonvinlab.org/haddock3-user-manual/global_parameters.html>`_ specification.
             * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -53,8 +53,8 @@ class CapriEval(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Haddock
-            * version: 3.0.6
+            * name: Haddock3
+            * version: 2025.5
             * license: Apache-2.0
         * ontology:
             * name: EDAM
