@@ -110,6 +110,14 @@
                     "wf_prop": false,
                     "description": "Haddock configuration options specification."
                 },
+                "global_cfg": {
+                    "type": "object",
+                    "default": {
+                        "postprocess": true
+                    },
+                    "wf_prop": false,
+                    "description": "Global configuration options specification."
+                },
                 "binary_path": {
                     "type": "string",
                     "default": "haddock",

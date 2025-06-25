@@ -42,6 +42,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **cfg** (*object*): ({}) Haddock configuration options specification..
+* **global_cfg** (*object*): ({'postprocess': True}) Global configuration options specification..
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
@@ -117,6 +118,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **cfg** (*object*): ({}) Haddock configuration options specification..
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
@@ -192,6 +194,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **cfg** (*object*): ({}) Haddock configuration options specification..
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
@@ -333,6 +336,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **cfg** (*object*): ({}) Haddock configuration options specification..
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
@@ -477,6 +481,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **cfg** (*object*): ({}) Haddock configuration options specification..
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
@@ -616,6 +621,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **cfg** (*object*): ({}) Haddock configuration options specification..
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
@@ -691,6 +697,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **cfg** (*object*): ({}) Haddock configuration options specification..
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
@@ -899,6 +906,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **cfg** (*object*): ({}) Haddock configuration options specification..
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
@@ -968,6 +976,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **cfg** (*object*): ({}) Haddock configuration options specification..
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
