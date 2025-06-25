@@ -1,5 +1,13 @@
 # Biobb haddock changelog
 
+## What's new in version [5.1.0](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.1.0)?
+
+### New features
+
+* [UPDATE]: Use haddock3 2025.5
+* [FEAT]: Add global_cfg to properties.
+* [FIX](https://github.com/bioexcel/biobb_haddock/issues/4): Extend pipe terminal compatibility.
+
 ## What's new in version [5.0.1](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.0.1)?
 
 ### New features
