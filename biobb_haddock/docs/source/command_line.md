@@ -942,6 +942,37 @@ topology --config config_topology.yml --mol1_input_pdb_path e2aP_1F3G.pdb --mol1
 topology --config config_topology.json --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data_zip haddock_wf_data_emref.zip --haddock_config_path run.cfg
 ```
 
+## Folder_test
+Wrapper class for the FolderTest module.
+### Get help
+Command:
+```python
+folder_test -h
+```
+    usage: folder_test [-h] [-c CONFIG] --output_folder OUTPUT_FOLDER
+    
+    Wrapper of the haddock FolderTest module.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      --output_folder OUTPUT_FOLDER
+### I / O Arguments
+Syntax: input_argument (datatype) : Definition
+
+Config input / output arguments for this building block:
+* **output_folder** (*dir*): Path of the output folder. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_caprieval.zip). Accepted formats: FORMAT
+### Config
+Syntax: input_parameter (datatype) - (default_value) Definition
+
+Config parameters for this building block:
+* **n** (*integer*): (4) Number of files create..
+### YAML
+### JSON
+
 ## Contact_map
 Wrapper class for the Haddock ContactMap module.
 ### Get help

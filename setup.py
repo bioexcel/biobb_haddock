@@ -24,6 +24,7 @@ setuptools.setup(
     python_requires=">=3.9",
     entry_points={
         "console_scripts": [
+            "folder_test = biobb_haddock.haddock.folder_test:main",
             "capri_eval = biobb_haddock.haddock.capri_eval:main",
             "clust_fcc = biobb_haddock.haddock.clust_fcc:main",
             "contact_map = biobb_haddock.haddock.contact_map:main",

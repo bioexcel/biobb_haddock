@@ -11,4 +11,5 @@ __all__ = [
     "sele_top_clusts",
     "sele_top",
     "topology",
+    "folder_test",
 ]

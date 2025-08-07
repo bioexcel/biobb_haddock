@@ -9,6 +9,13 @@
     "version": "5.1.0",
     "tools": [
         {
+            "block": "FolderTest",
+            "tool": "Haddock FolderTest",
+            "desc": "The FolderTest module. Haddock FolderTest module tests the folder structure of a Haddock workflow.",
+            "exec": "folder_test",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.folder_test"
+        },
+        {
             "block": "CapriEval",
             "tool": "Haddock CapriEval",
             "desc": "The CapriEval module. Haddock CapriEval module computes Capri evaluation for a docking.",
