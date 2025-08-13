@@ -2,9 +2,9 @@
 
 import shutil
 import logging
+import jsonpickle
 from pathlib import Path
 from typing import Any, Optional
-
 import biobb_common.tools.file_utils as fu
 from .haddock3_config import load, save
 
@@ -168,6 +168,43 @@ def move_to_container_path(obj, run_dir=None):
                 Path(run_dir).name
             )
         )
+
+
+def copy_step_output(obj,
+                     run_dir,
+                     filter_funct: callable,
+                     output_zip_path: str,
+                     sele_top: bool = False
+                     ) -> None:
+    """Copy the output files from the run directory to the output zip path.
+
+    Args:
+        obj: The object containing the output paths.
+        run_dir (str): The directory where the output files are located.
+        filter_funct (callable): A function that accepts a Path and returns True for the files to be copied.
+        output_zip_path (str): The path where the output zip file will be created."""
+    # Find the directories with the haddock step name
+    haddock_output_list = [
+        str(path)
+        for path in Path(run_dir).iterdir()
+        if path.is_dir() and str(path).endswith(obj.haddock_step_name)
+    ]
+    # Make the one with the highest step number the first one
+    haddock_output_list.sort(reverse=True)
+    # Select files with filter_funct
+    output_file_list = [
+        str(path)
+        for path in Path(haddock_output_list[0]).iterdir()
+        if path.is_file() and filter_funct(path)
+    ]
+    if sele_top:
+        with open(haddock_output_list[0]+'/io.json') as json_file:
+            content = jsonpickle.decode(json_file.read())
+            output = content["output"]
+        for file in output:
+            rel_path = str(file.rel_path).split('/')
+            output_file_list.extend(list(Path(run_dir+'/'+rel_path[-2]).glob(rel_path[-1]+'*')))
+    fu.zip_list(output_zip_path, output_file_list, obj.out_log)
 
 
 def zip_wf_output(obj, run_dir: str):

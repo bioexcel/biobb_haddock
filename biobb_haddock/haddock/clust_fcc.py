@@ -8,8 +8,7 @@ from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_haddock.haddock.common import (create_cfg, unzip_workflow_data,
-                                          move_to_container_path, zip_wf_output)
+import biobb_haddock.haddock.common as common
 
 
 class ClustFCC(BiobbObject):
@@ -105,7 +104,7 @@ class ClustFCC(BiobbObject):
         self.stage_files()
 
         # Unzip workflow data to workflow_data_out
-        run_dir = unzip_workflow_data(
+        run_dir = common.unzip_workflow_data(
             zip_file=self.input_haddock_wf_data_zip, out_log=self.out_log
         )
 
@@ -114,7 +113,7 @@ class ClustFCC(BiobbObject):
 
         # Create data dir
         cfg_dir = fu.create_unique_dir()
-        self.output_cfg_path = create_cfg(
+        self.output_cfg_path = common.create_cfg(
             output_cfg_path=str(Path(cfg_dir).joinpath(self.output_cfg_path)),
             workflow_dict=workflow_dict,
             input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
@@ -123,7 +122,7 @@ class ClustFCC(BiobbObject):
 
         if self.container_path:
             fu.log("Container execution enabled", self.out_log)
-            move_to_container_path(self, run_dir)
+            common.move_to_container_path(self, run_dir)
 
         self.cmd = [self.binary_path, self.output_cfg_path, "--extend-run", run_dir]
 
@@ -131,29 +130,15 @@ class ClustFCC(BiobbObject):
         self.run_biobb()
 
         # Copy files to host
-        # self.copy_to_host()
-
-        # Copy output
-        haddock_output_list = [
-            str(path)
-            for path in Path(run_dir).iterdir()
-            if path.is_dir() and str(path).endswith(workflow_dict["haddock_step_name"])
-        ]
-        haddock_output_list.sort(reverse=True)
-        output_file_list = [
-            str(path)
-            for path in Path(haddock_output_list[0]).iterdir()
-            if path.is_file() and str(path.name) not in ["io.json", "params.cfg"]
-        ]
-        fu.zip_list(
-            self.io_dict["out"]["output_cluster_zip_path"],
-            output_file_list,
-            self.out_log,
+        common.copy_step_output(
+            self, run_dir,
+            lambda path: str(path.name) not in ["io.json", "params.cfg"],
+            self.io_dict["out"]["output_cluster_zip_path"]
         )
 
         # Create zip output
         if self.io_dict["out"].get("output_haddock_wf_data_zip"):
-            zip_wf_output(self, run_dir)
+            common.zip_wf_output(self, run_dir)
 
         # Remove temporal files
         self.tmp_files.extend([run_dir, cfg_dir])

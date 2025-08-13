@@ -7,9 +7,9 @@ from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger, move_to_container_path, zip_wf_output
+from biobb_common.tools.file_utils import launchlogger
 
-from biobb_haddock.haddock.common import create_cfg
+from biobb_haddock.haddock.common import create_cfg, move_to_container_path, zip_wf_output
 
 
 class Haddock3Run(BiobbObject):
