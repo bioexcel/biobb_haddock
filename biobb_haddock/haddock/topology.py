@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 
-"""Module containing the haddock Topology class and the command line interface."""
+"""Module containing the HADDOCK3 Topology class and the command line interface."""
 
-import shutil
 from pathlib import Path
 from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_haddock.haddock.common import create_cfg
+from biobb_haddock.haddock.common import create_cfg, move_to_container_path, zip_wf_output
 
 
 class Topology(BiobbObject):
@@ -132,13 +131,7 @@ class Topology(BiobbObject):
 
         if self.container_path:
             fu.log("Container execution enabled", self.out_log)
-
-            shutil.copy2(self.output_cfg_path, self.stage_io_dict.get("unique_dir", ""))
-            self.output_cfg_path = str(
-                Path(self.container_volume_path).joinpath(
-                    Path(self.output_cfg_path).name
-                )
-            )
+            move_to_container_path(self)
 
         self.cmd = [self.binary_path, self.output_cfg_path]
 
@@ -175,20 +168,7 @@ class Topology(BiobbObject):
 
         # Create zip output
         if self.io_dict["out"].get("output_haddock_wf_data_zip"):
-            fu.log(
-                f"Zipping {workflow_dict['run_dir']} to {str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix(''))} ",
-                self.out_log,
-                self.global_log,
-            )
-            shutil.make_archive(
-                str(
-                    Path(self.io_dict["out"]["output_haddock_wf_data_zip"]).with_suffix(
-                        ""
-                    )
-                ),
-                "zip",
-                str(workflow_dict["run_dir"]),
-            )
+            zip_wf_output(self, str(workflow_dict["run_dir"]))
 
         # Remove temporary files
         self.tmp_files.extend([workflow_dict['run_dir'], cfg_dir])

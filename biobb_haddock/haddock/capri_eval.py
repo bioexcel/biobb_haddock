@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
-"""Module containing the haddock  class and the command line interface."""
+"""Module containing the HADDOCK3 CapriEval class and the command line interface."""
 
-import shutil
 from pathlib import Path
 from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_haddock.haddock.common import create_cfg, unzip_workflow_data
+from biobb_haddock.haddock.common import (create_cfg, unzip_workflow_data,
+                                          move_to_container_path, zip_wf_output)
 
 
 class CapriEval(BiobbObject):
@@ -131,27 +131,7 @@ class CapriEval(BiobbObject):
 
         if self.container_path:
             fu.log("Container execution enabled", self.out_log)
-
-            shutil.copy2(self.output_cfg_path, self.stage_io_dict.get("unique_dir", ""))
-            self.output_cfg_path = str(
-                Path(self.container_volume_path).joinpath(
-                    Path(self.output_cfg_path).name
-                )
-            )
-
-            shutil.copytree(
-                run_dir,
-                str(
-                    Path(self.stage_io_dict.get("unique_dir", "")).joinpath(
-                        Path(run_dir).name
-                    )
-                ),
-            )
-            run_dir = str(
-                Path(self.stage_io_dict.get("unique_dir", "")).joinpath(
-                    Path(run_dir).name
-                )
-            )
+            move_to_container_path(self, run_dir)
 
         self.cmd = [self.binary_path, self.output_cfg_path, "--extend-run", run_dir]
 
@@ -168,6 +148,7 @@ class CapriEval(BiobbObject):
             if path.is_dir() and str(path).endswith(workflow_dict["haddock_step_name"])
         ]
         haddock_output_list.sort(reverse=True)
+        # Select files that end with 'izone', 'aln' or 'tsv'
         output_file_list = [
             str(path)
             for path in Path(haddock_output_list[0]).iterdir()
@@ -179,22 +160,9 @@ class CapriEval(BiobbObject):
             self.out_log,
         )
 
-        # Create zip output
+        # Create zip with all the output if specified
         if self.io_dict["out"].get("output_haddock_wf_data_zip"):
-            fu.log(
-                f"Zipping {run_dir} to {str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix(''))} ",
-                self.out_log,
-                self.global_log,
-            )
-            shutil.make_archive(
-                str(
-                    Path(self.io_dict["out"]["output_haddock_wf_data_zip"]).with_suffix(
-                        ""
-                    )
-                ),
-                "zip",
-                run_dir,
-            )
+            zip_wf_output(self, run_dir)
 
         # Remove temporal files
         self.tmp_files.extend([run_dir, cfg_dir])

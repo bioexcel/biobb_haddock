@@ -1,6 +1,8 @@
 """Common functions for package biobb_haddock.haddock"""
 
+import shutil
 import logging
+from pathlib import Path
 from typing import Any, Optional
 
 import biobb_common.tools.file_utils as fu
@@ -142,3 +144,45 @@ def unzip_workflow_data(zip_file: str, out_log: Optional[logging.Logger] = None)
         for file_name in zip_list:
             out_log.info(file_name)
     return extract_dir
+
+
+def move_to_container_path(obj, run_dir=None):
+    """Move configuration and run directory to container path."""
+    shutil.copy2(obj.output_cfg_path, obj.stage_io_dict.get("unique_dir", ""))
+    obj.output_cfg_path = str(
+        Path(obj.container_volume_path).joinpath(
+            Path(obj.output_cfg_path).name
+        )
+    )
+    if run_dir:
+        shutil.copytree(
+            run_dir,
+            str(
+                Path(obj.stage_io_dict.get("unique_dir", "")).joinpath(
+                    Path(run_dir).name
+                )
+            ),
+        )
+        run_dir = str(
+            Path(obj.stage_io_dict.get("unique_dir", "")).joinpath(
+                Path(run_dir).name
+            )
+        )
+
+
+def zip_wf_output(obj, run_dir: str):
+    """Zip all the files in the run directory and save it to the output path."""
+    fu.log(
+        f"Zipping {run_dir} to {str(Path(obj.io_dict['out']['output_haddock_wf_data_zip']).with_suffix(''))} ",
+        obj.out_log,
+        obj.global_log,
+    )
+    shutil.make_archive(
+        str(
+            Path(obj.io_dict["out"]["output_haddock_wf_data_zip"]).with_suffix(
+                ""
+            )
+        ),
+        "zip",
+        run_dir,
+    )

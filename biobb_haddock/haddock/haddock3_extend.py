@@ -4,13 +4,12 @@
 
 import os
 import zipfile
-import shutil
-from pathlib import Path
 from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
+from biobb_haddock.haddock.common import move_to_container_path, zip_wf_output
 
 
 class Haddock3Extend(BiobbObject):
@@ -104,13 +103,7 @@ class Haddock3Extend(BiobbObject):
 
         if self.container_path:
             fu.log("Container execution enabled", self.out_log)
-
-            shutil.copy2(self.output_cfg_path, self.stage_io_dict.get("unique_dir", ""))
-            self.output_cfg_path = str(
-                Path(self.container_volume_path).joinpath(
-                    Path(self.output_cfg_path).name
-                )
-            )
+            move_to_container_path(self)
 
         self.cmd = [self.binary_path, self.stage_io_dict["in"]["haddock_config_path"]]
         self.cmd.extend(["--extend-run", run_dir])
@@ -120,14 +113,7 @@ class Haddock3Extend(BiobbObject):
         # Move back to the stage directory
         os.chdir(cwd)
         # Create zip output
-        fu.log(
-            f"Zipping {run_dir} to {str(Path(self.io_dict['out']['output_haddock_wf_data_zip']).with_suffix(''))} ",
-            self.out_log, self.global_log)
-        shutil.make_archive(
-            str(Path(self.io_dict["out"]["output_haddock_wf_data_zip"]).with_suffix("")),
-            "zip",
-            str(run_dir),
-        )
+        zip_wf_output(self, run_dir)
 
         # Remove temporal files
         self.tmp_files.extend([run_dir])
