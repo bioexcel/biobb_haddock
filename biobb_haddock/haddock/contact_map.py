@@ -191,10 +191,7 @@ class ContactMap(BiobbObject):
             )
 
         # Remove temporal files
-        self.tmp_files.extend([run_dir,
-                               cfg_dir,
-                               self.stage_io_dict.get("unique_dir")
-                               ])
+        self.tmp_files.extend([run_dir, cfg_dir,])
         self.remove_tmp_files()
 
         return self.return_code
@@ -219,6 +216,9 @@ def contact_map(
         properties=properties,
         **kwargs,
     ).launch()
+
+
+contact_map.__doc__ = ContactMap.__doc__
 
 
 def main():

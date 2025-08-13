@@ -48,7 +48,7 @@ class CapriEval(BiobbObject):
             from biobb_haddock.haddock.capri_eval import capri_eval
             prop = { 'binary_path': 'haddock' }
             capri_eval(input_haddock_wf_data_zip='/path/to/myworkflowdata.zip',
-                       output_evaluation_zip='/path/to/myevalfiles.zip',
+                       output_haddock_wf_data_zip='/path/to/myevalfiles.zip',
                        properties=prop)
 
     Info:
@@ -200,10 +200,7 @@ class CapriEval(BiobbObject):
             )
 
         # Remove temporal files
-        self.tmp_files.extend([run_dir,
-                               cfg_dir,
-                               self.stage_io_dict.get("unique_dir")
-                               ])
+        self.tmp_files.extend([run_dir, cfg_dir])
         self.remove_tmp_files()
 
         return self.return_code
@@ -230,6 +227,9 @@ def capri_eval(
         properties=properties,
         **kwargs,
     ).launch()
+
+
+capri_eval.__doc__ = CapriEval.__doc__
 
 
 def main():

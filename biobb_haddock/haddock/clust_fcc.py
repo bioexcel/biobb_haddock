@@ -194,10 +194,7 @@ class ClustFCC(BiobbObject):
             )
 
         # Remove temporal files
-        self.tmp_files.extend([run_dir,
-                               cfg_dir,
-                               self.stage_io_dict.get("unique_dir")
-                               ])
+        self.tmp_files.extend([run_dir, cfg_dir])
         self.remove_tmp_files()
 
         return self.return_code
@@ -222,6 +219,9 @@ def clust_fcc(
         properties=properties,
         **kwargs,
     ).launch()
+
+
+clust_fcc.__doc__ = ClustFCC.__doc__
 
 
 def main():
@@ -251,7 +251,6 @@ def main():
     clust_fcc(
         input_haddock_wf_data_zip=args.input_haddock_wf_data_zip,
         output_cluster_zip_path=args.output_cluster_zip_path,
-        reference_pdb_path=args.reference_pdb_path,
         output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
         haddock_config_path=args.haddock_config_path,
         properties=properties,

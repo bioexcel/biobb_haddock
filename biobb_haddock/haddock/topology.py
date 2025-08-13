@@ -196,10 +196,7 @@ class Topology(BiobbObject):
             )
 
         # Remove temporary files
-        self.tmp_files.extend([workflow_dict['run_dir'],
-                               cfg_dir,
-                               self.stage_io_dict.get("unique_dir")
-                               ])
+        self.tmp_files.extend([workflow_dict['run_dir'], cfg_dir])
         self.remove_tmp_files()
 
         return self.return_code
@@ -228,6 +225,9 @@ def topology(
         properties=properties,
         **kwargs,
     ).launch()
+
+
+topology.__doc__ = Topology.__doc__
 
 
 def main():

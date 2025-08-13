@@ -177,7 +177,7 @@ class Haddock3Run(BiobbObject):
             )
 
         # Remove temporal files
-        self.tmp_files.extend([cfg_dir, self.stage_io_dict.get("unique_dir")])
+        self.tmp_files.extend([cfg_dir])
         self.remove_tmp_files()
 
         return self.return_code

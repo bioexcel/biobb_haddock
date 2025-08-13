@@ -143,9 +143,7 @@ class Haddock3Accessibility(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.extend([self.stage_io_dict["unique_dir"]])
-        actpass_files = glob.glob('*.actpass')
-        self.tmp_files.extend(actpass_files)
+        self.tmp_files.extend(glob.glob('*.actpass'))
         self.remove_tmp_files()
 
         return self.return_code

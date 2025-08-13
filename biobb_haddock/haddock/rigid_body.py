@@ -218,10 +218,7 @@ class RigidBody(BiobbObject):
             )
 
         # Remove temporal files
-        self.tmp_files.extend([
-            run_dir,
-            cfg_dir,
-            self.stage_io_dict.get("unique_dir")])
+        self.tmp_files.extend([run_dir, cfg_dir])
         self.remove_tmp_files()
 
         return self.return_code

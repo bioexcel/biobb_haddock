@@ -215,10 +215,7 @@ class FlexRef(BiobbObject):
             )
 
         # Remove temporal files
-        self.tmp_files.extend([run_dir,
-                               cfg_dir,
-                               self.stage_io_dict.get("unique_dir")
-                               ])
+        self.tmp_files.extend([run_dir, cfg_dir])
         self.remove_tmp_files()
 
         return self.return_code
@@ -249,6 +246,9 @@ def flex_ref(
         properties=properties,
         **kwargs,
     ).launch()
+
+
+flex_ref.__doc__ = FlexRef.__doc__
 
 
 def main():

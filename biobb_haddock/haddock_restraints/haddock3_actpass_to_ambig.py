@@ -136,7 +136,6 @@ class Haddock3ActpassToAmbig(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.extend([self.stage_io_dict["unique_dir"]])
         self.remove_tmp_files()
 
         return self.return_code

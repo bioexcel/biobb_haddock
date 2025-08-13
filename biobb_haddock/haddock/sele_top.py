@@ -65,7 +65,6 @@ class SeleTop(BiobbObject):
         self,
         input_haddock_wf_data_zip: str,
         output_selection_zip_path: str,
-        reference_pdb_path: Optional[str] = None,
         output_haddock_wf_data_zip: Optional[str] = None,
         haddock_config_path: Optional[str] = None,
         properties: Optional[dict] = None,
@@ -200,10 +199,7 @@ class SeleTop(BiobbObject):
             )
 
         # Remove temporal files
-        self.tmp_files.extend([run_dir,
-                               cfg_dir,
-                               self.stage_io_dict.get("unique_dir")
-                               ])
+        self.tmp_files.extend([run_dir, cfg_dir])
         self.remove_tmp_files()
 
         return self.return_code
@@ -228,6 +224,9 @@ def sele_top(
         properties=properties,
         **kwargs,
     ).launch()
+
+
+sele_top.__doc__ = SeleTop.__doc__
 
 
 def main():
@@ -257,7 +256,6 @@ def main():
     sele_top(
         input_haddock_wf_data_zip=args.input_haddock_wf_data_zip,
         output_selection_zip_path=args.output_selection_zip_path,
-        reference_pdb_path=args.reference_pdb_path,
         output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
         haddock_config_path=args.haddock_config_path,
         properties=properties,
