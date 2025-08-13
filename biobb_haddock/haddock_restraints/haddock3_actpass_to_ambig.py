@@ -2,10 +2,7 @@
 
 """Module containing the haddock  class and the command line interface."""
 
-import argparse
 from typing import Optional
-
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
 
@@ -141,58 +138,10 @@ class Haddock3ActpassToAmbig(BiobbObject):
         return self.return_code
 
 
-def haddock3_actpass_to_ambig(
-    input_actpass1_path: str,
-    input_actpass2_path: str,
-    output_tbl_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3ActpassToAmbig <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig.launch>` method."""
-
-    return Haddock3ActpassToAmbig(
-        input_actpass1_path=input_actpass1_path,
-        input_actpass2_path=input_actpass2_path,
-        output_tbl_path=output_tbl_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-
-haddock3_actpass_to_ambig.__doc__ = Haddock3ActpassToAmbig.__doc__
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Wrapper of the haddock-restraints active_passive_to_ambig module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(
-            prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument("--input_actpass1_path", required=True)
-    required_args.add_argument("--input_actpass2_path", required=True)
-    required_args.add_argument("--output_tbl_path", required=True)
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    haddock3_actpass_to_ambig(
-        input_actpass1_path=args.input_actpass1_path,
-        input_actpass2_path=args.input_actpass2_path,
-        output_tbl_path=args.output_tbl_path,
-        properties=properties,
-    )
+haddock3_actpass_to_ambig = Haddock3ActpassToAmbig.get_launcher()
+main = Haddock3ActpassToAmbig.get_main(
+    "Wrapper of the Haddock-Restraints active_passive_to_ambig module."
+)
 
 
 if __name__ == "__main__":

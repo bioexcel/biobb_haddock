@@ -2,13 +2,11 @@
 
 """Module containing the haddock  class and the command line interface."""
 
-import argparse
 import glob
 import os
 import shutil
 from typing import Optional
 
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
 
@@ -149,57 +147,8 @@ class Haddock3Accessibility(BiobbObject):
         return self.return_code
 
 
-def haddock3_accessibility(
-    input_pdb_path: str,
-    output_accessibility_path: str,
-    output_actpass_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3Accessibility <biobb_haddock.haddock_restraints.haddock3_accessibility>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_accessibility.launch>` method."""
-
-    return Haddock3Accessibility(
-        input_pdb_path=input_pdb_path,
-        output_accessibility_path=output_accessibility_path,
-        output_actpass_path=output_actpass_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-
-haddock3_accessibility.__doc__ = Haddock3Accessibility.__doc__
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Wrapper of the haddock-restraints Accessibility module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument("--input_pdb_path", required=True)
-    required_args.add_argument("--output_accessibility_path", required=True)
-    parser.add_argument("--output_actpass_path", required=False)
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    haddock3_accessibility(
-        input_pdb_path=args.input_pdb_path,
-        output_accessibility_path=args.output_accessibility_path,
-        output_actpass_path=args.output_actpass_path,
-        properties=properties,
-    )
+haddock3_accessibility = Haddock3Accessibility.get_launcher()
+main = Haddock3Accessibility.get_main("Wrapper of the Haddock-Restraints Accessibility module.")
 
 
 if __name__ == "__main__":

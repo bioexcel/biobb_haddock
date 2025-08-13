@@ -2,26 +2,21 @@
 
 """Module containing the haddock Topology class and the command line interface."""
 
-# import os
-# import json
-import argparse
 import shutil
 from pathlib import Path
 from typing import Optional
 
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-
 from biobb_haddock.haddock.common import create_cfg
 
 
 class Topology(BiobbObject):
     """
     | biobb_haddock Topology
-    | Wrapper class for the Haddock Topology module.
-    | The Topology module. `Haddock Topology module <https://www.bonvinlab.org/haddock3/modules/topology/haddock.modules.topology.topoaa.html#haddock.modules.topology.topoaa.HaddockModule>`_ creates a topology from a system to be used for docking.
+    | Wrapper class for the HADDOCK3 Topology module.
+    | The Topology module. `HADDOCK3 Topology module <https://www.bonvinlab.org/haddock3/modules/topology/haddock.modules.topology.topoaa.html#haddock.modules.topology.topoaa.HaddockModule>`_ creates a topology from a system to be used for docking.
 
     Args:
         mol1_input_pdb_path (str): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb>`_. Accepted formats: pdb (edam:format_1476).
@@ -56,7 +51,7 @@ class Topology(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Haddock3
+            * name: HADDOCK3
             * version: 2025.5
             * license: Apache-2.0
         * ontology:
@@ -202,69 +197,8 @@ class Topology(BiobbObject):
         return self.return_code
 
 
-def topology(
-    mol1_input_pdb_path: str,
-    mol1_output_top_zip_path: str,
-    mol2_input_pdb_path: Optional[str] = None,
-    mol2_output_top_zip_path: Optional[str] = None,
-    output_haddock_wf_data_zip: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Topology <biobb_haddock.haddock.topology>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.topology.launch>` method."""
-
-    return Topology(
-        mol1_input_pdb_path=mol1_input_pdb_path,
-        mol1_output_top_zip_path=mol1_output_top_zip_path,
-        mol2_output_top_zip_path=mol2_output_top_zip_path,
-        mol2_input_pdb_path=mol2_input_pdb_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        haddock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-
-topology.__doc__ = Topology.__doc__
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Wrapper of the haddock haddock module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument("--mol1_input_pdb_path", required=True)
-    required_args.add_argument("--mol1_output_top_zip_path", required=True)
-    parser.add_argument("--mol2_input_pdb_path", required=False)
-    parser.add_argument("--output_haddock_wf_data_zip", required=False)
-    parser.add_argument("--mol2_output_top_zip_path", required=False)
-    parser.add_argument("--haddock_config_path", required=False)
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    topology(
-        mol1_input_pdb_path=args.mol1_input_pdb_path,
-        mol1_output_top_zip_path=args.mol1_output_top_zip_path,
-        mol2_output_top_zip_path=args.mol2_output_top_zip_path,
-        mol2_input_pdb_path=args.mol2_input_pdb_path,
-        output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
-        haddock_config_path=args.haddock_config_path,
-        properties=properties,
-    )
+topology = Topology.get_launcher()
+main = Topology.get_main("Wrapper of the HADDOCK3 Topology module.")
 
 
 if __name__ == "__main__":

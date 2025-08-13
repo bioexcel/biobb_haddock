@@ -2,14 +2,10 @@
 
 """Module containing the haddock3 run class and the command line interface."""
 
-# import os
-# import json
-import argparse
 import shutil
 from pathlib import Path
 from typing import Optional
 
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
@@ -20,8 +16,8 @@ from biobb_haddock.haddock.common import create_cfg
 class Haddock3Run(BiobbObject):
     """
     | biobb_haddock Haddock3Run
-    | Wrapper class for the Haddock3 run module.
-    | The Haddock3 run module launches the HADDOCK3 execution for docking.
+    | Wrapper class for the HADDOCK3 run module.
+    | The HADDOCK3 run module launches the HADDOCK3 execution for docking.
 
     Args:
         mol1_input_pdb_path (str): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb>`_. Accepted formats: pdb (edam:format_1476).
@@ -57,7 +53,7 @@ class Haddock3Run(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Haddock3
+            * name: HADDOCK3
             * version: 2025.5
             * license: Apache-2.0
         * ontology:
@@ -183,74 +179,8 @@ class Haddock3Run(BiobbObject):
         return self.return_code
 
 
-def haddock3_run(
-    mol1_input_pdb_path: str,
-    mol2_input_pdb_path: str,
-    output_haddock_wf_data_zip: str,
-    ambig_restraints_table_path: Optional[str] = None,
-    unambig_restraints_table_path: Optional[str] = None,
-    hb_restraints_table_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3Run <biobb_haddock.haddock.haddock3_run>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.haddock3_run.launch>` method."""
-
-    return Haddock3Run(
-        mol1_input_pdb_path=mol1_input_pdb_path,
-        mol2_input_pdb_path=mol2_input_pdb_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        ambig_restraints_table_path=ambig_restraints_table_path,
-        unambig_restraints_table_path=unambig_restraints_table_path,
-        hb_restraints_table_path=hb_restraints_table_path,
-        haddock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-
-haddock3_run.__doc__ = Haddock3Run.__doc__
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Wrapper of the haddock3 HADDOCK3 module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(
-            prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument("--mol1_input_pdb_path", required=True)
-    required_args.add_argument("--mol2_input_pdb_path", required=True)
-    required_args.add_argument("--output_haddock_wf_data_zip", required=True)
-    parser.add_argument("--ambig_restraints_table_path", required=False)
-    parser.add_argument("--unambig_restraints_table_path", required=False)
-    parser.add_argument("--hb_restraints_table_path", required=False)
-    parser.add_argument("--haddock_config_path", required=False)
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    haddock3_run(
-        mol1_input_pdb_path=args.mol1_input_pdb_path,
-        mol2_input_pdb_path=args.mol2_input_pdb_path,
-        output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
-        ambig_restraints_table_path=args.ambig_restraints_table_path,
-        unambig_restraints_table_path=args.unambig_restraints_table_path,
-        hb_restraints_table_path=args.hb_restraints_table_path,
-        haddock_config_path=args.haddock_config_path,
-        properties=properties,
-    )
+haddock3_run = Haddock3Run.get_launcher()
+main = Haddock3Run.get_main("Wrapper of the HADDOCK3 Haddock3Run module.")
 
 
 if __name__ == "__main__":

@@ -2,24 +2,21 @@
 
 """Module containing the haddock EMRef class and the command line interface."""
 
-import argparse
 import shutil
 from pathlib import Path
 from typing import Optional
 
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-
 from biobb_haddock.haddock.common import create_cfg, unzip_workflow_data
 
 
 class EMRef(BiobbObject):
     """
     | biobb_haddock EMRef
-    | Wrapper class for the Haddock EMRef module.
-    | The EMRef module. `Haddock CapriEval module <https://www.bonvinlab.org/haddock3/modules/refinement/haddock.modules.refinement.emref.html>`_ computes an energy minimization refinement over selected structures.
+    | Wrapper class for the HADDOCK3 EMRef module.
+    | The EMRef module. `HADDOCK3 EMRef module <https://www.bonvinlab.org/haddock3/modules/refinement/haddock.modules.refinement.emref.html>`_ computes an energy minimization refinement over selected structures.
 
     Args:
         input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: input. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip>`_. Accepted formats: zip (edam:format_3987).
@@ -55,7 +52,7 @@ class EMRef(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Haddock3
+            * name: HADDOCK3
             * version: 2025.5
             * license: Apache-2.0
         * ontology:
@@ -221,73 +218,8 @@ class EMRef(BiobbObject):
         return self.return_code
 
 
-def em_ref(
-    input_haddock_wf_data_zip: str,
-    refinement_output_zip_path: str,
-    ambig_restraints_table_path: Optional[str] = None,
-    unambig_restraints_table_path: Optional[str] = None,
-    hb_restraints_table_path: Optional[str] = None,
-    output_haddock_wf_data_zip: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`EMRef <biobb_haddock.haddock.em_ref>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.em_ref.launch>` method."""
-
-    return EMRef(
-        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-        refinement_output_zip_path=refinement_output_zip_path,
-        ambig_restraints_table_path=ambig_restraints_table_path,
-        unambig_restraints_table_path=unambig_restraints_table_path,
-        hb_restraints_table_path=hb_restraints_table_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        haddock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-
-em_ref.__doc__ = EMRef.__doc__
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Wrapper of the haddock EMRef module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument("--input_haddock_wf_data_zip", required=True)
-    required_args.add_argument("--refinement_output_zip_path", required=True)
-    parser.add_argument("--ambig_restraints_table_path", required=False)
-    parser.add_argument("--unambig_restraints_table_path", required=False)
-    parser.add_argument("--hb_restraints_table_path", required=False)
-    parser.add_argument("--output_haddock_wf_data_zip", required=False)
-    parser.add_argument("--haddock_config_path", required=False)
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    em_ref(
-        input_haddock_wf_data_zip=args.input_haddock_wf_data_zip,
-        refinement_output_zip_path=args.refinement_output_zip_path,
-        ambig_restraints_table_path=args.ambig_restraints_table_path,
-        unambig_restraints_table_path=args.unambig_restraints_table_path,
-        hb_restraints_table_path=args.hb_restraints_table_path,
-        output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
-        haddock_config_path=args.haddock_config_path,
-        properties=properties,
-    )
+em_ref = EMRef.get_launcher()
+main = EMRef.get_main("Wrapper of the HADDOCK3 EMRef module.")
 
 
 if __name__ == "__main__":

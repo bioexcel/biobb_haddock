@@ -3,10 +3,8 @@
 """Module containing the haddock  class and the command line interface."""
 
 import os
-import argparse
 from typing import Optional
 
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 # from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
@@ -87,49 +85,8 @@ class FolderTest(BiobbObject):
         return self.return_code
 
 
-def folder_test(
-    output_folder: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`FolderTest <biobb_haddock.haddock.folder_test>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.folder_test.launch>` method."""
-
-    return FolderTest(
-        output_folder=output_folder,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-
-folder_test.__doc__ = FolderTest.__doc__
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Wrapper of the haddock FolderTest module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument("--output_folder", required=True)
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    folder_test(
-        output_folder=args.output_folder,
-        properties=properties,
-    )
+folder_test = FolderTest.get_launcher()
+main = FolderTest.get_main("Wrapper of the HADDOCK3 FolderTest module.")
 
 
 if __name__ == "__main__":

@@ -2,10 +2,7 @@
 
 """Module containing the Haddock3PassiveFromActive class and the command line interface."""
 
-import argparse
 from typing import Optional
-
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
 from biobb_common.tools import file_utils as fu
@@ -165,60 +162,10 @@ class Haddock3PassiveFromActive(BiobbObject):
         return self.return_code
 
 
-def haddock3_passive_from_active(
-    input_pdb_path: str,
-    output_actpass_path: str,
-    input_active_list_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3PassiveFromActive <biobb_haddock.haddock_restraints.haddock3_passive_from_active>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_passive_from_active.launch>` method."""
-
-    return Haddock3PassiveFromActive(
-        input_pdb_path=input_pdb_path,
-        output_actpass_path=output_actpass_path,
-        input_active_list_path=input_active_list_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-
-haddock3_passive_from_active.__doc__ = Haddock3PassiveFromActive.__doc__
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Wrapper of the haddock3-restraints passive_from_active module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(
-            prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument("--input_pdb_path", required=True)
-    required_args.add_argument("--output_actpass_path", required=True)
-
-    # Optional arguments
-    parser.add_argument("--input_active_list_path", required=False)
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    haddock3_passive_from_active(
-        input_pdb_path=args.input_pdb_path,
-        output_actpass_path=args.output_actpass_path,
-        input_active_list_path=args.input_active_list_path,
-        properties=properties,
-    )
+haddock3_passive_from_active = Haddock3PassiveFromActive.get_launcher()
+main = Haddock3PassiveFromActive.get_main(
+    "Wrapper of the Haddock3-Restraints passive_from_active module."
+)
 
 
 if __name__ == "__main__":

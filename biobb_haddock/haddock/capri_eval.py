@@ -2,24 +2,21 @@
 
 """Module containing the haddock  class and the command line interface."""
 
-import argparse
 import shutil
 from pathlib import Path
 from typing import Optional
 
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-
 from biobb_haddock.haddock.common import create_cfg, unzip_workflow_data
 
 
 class CapriEval(BiobbObject):
     """
     | biobb_haddock CapriEval
-    | Wrapper class for the Haddock CapriEval module.
-    | The CapriEval module. `Haddock CapriEval module <https://www.bonvinlab.org/haddock3/modules/analysis/haddock.modules.analysis.caprieval.html>`_ computes Capri evaluation for a docking.
+    | Wrapper class for the HADDOCK3 CapriEval module.
+    | The CapriEval module. `HADDOCK3 CapriEval module <https://www.bonvinlab.org/haddock3/modules/analysis/haddock.modules.analysis.caprieval.html>`_ computes Capri evaluation for a docking.
 
     Args:
         input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: input. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip>`_. Accepted formats: zip (edam:format_3987).
@@ -53,7 +50,7 @@ class CapriEval(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Haddock3
+            * name: HADDOCK3
             * version: 2025.5
             * license: Apache-2.0
         * ontology:
@@ -206,65 +203,8 @@ class CapriEval(BiobbObject):
         return self.return_code
 
 
-def capri_eval(
-    input_haddock_wf_data_zip: str,
-    output_evaluation_zip_path: str,
-    reference_pdb_path: Optional[str] = None,
-    output_haddock_wf_data_zip: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`CapriEval <biobb_haddock.haddock.capri_eval>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.capri_eval.launch>` method."""
-
-    return CapriEval(
-        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-        output_evaluation_zip_path=output_evaluation_zip_path,
-        reference_pdb_path=reference_pdb_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        haddock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-
-capri_eval.__doc__ = CapriEval.__doc__
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Wrapper of the haddock CapriEval module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument("--input_haddock_wf_data_zip", required=True)
-    required_args.add_argument("--output_evaluation_zip_path", required=True)
-    parser.add_argument("--reference_pdb_path", required=False)
-    parser.add_argument("--output_haddock_wf_data_zip", required=False)
-    parser.add_argument("--haddock_config_path", required=False)
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    capri_eval(
-        input_haddock_wf_data_zip=args.input_haddock_wf_data_zip,
-        output_evaluation_zip_path=args.output_evaluation_zip_path,
-        reference_pdb_path=args.reference_pdb_path,
-        output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
-        haddock_config_path=args.haddock_config_path,
-        properties=properties,
-    )
+capri_eval = CapriEval.get_launcher()
+main = CapriEval.get_main('Wrapper of the HADDOCK3 CapriEval module.')
 
 
 if __name__ == "__main__":

@@ -2,10 +2,7 @@
 
 """Module containing the haddock class and the command line interface."""
 
-import argparse
 from typing import Optional
-
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
 
@@ -125,54 +122,8 @@ class Haddock3RestrainBodies(BiobbObject):
         return self.return_code
 
 
-def haddock3_restrain_bodies(
-    input_structure_path: str,
-    output_tbl_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3RestrainBodies <biobb_haddock.haddock_restraints.haddock3_restrain_bodies>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_restrain_bodies.launch>` method."""
-
-    return Haddock3RestrainBodies(
-        input_structure_path=input_structure_path,
-        output_tbl_path=output_tbl_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-
-haddock3_restrain_bodies.__doc__ = Haddock3RestrainBodies.__doc__
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Wrapper of the haddock-restraints restrain_bodies module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(
-            prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument("--input_structure_path", required=True)
-    required_args.add_argument("--output_tbl_path", required=True)
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    haddock3_restrain_bodies(
-        input_structure_path=args.input_structure_path,
-        output_tbl_path=args.output_tbl_path,
-        properties=properties,
-    )
+haddock3_restrain_bodies = Haddock3RestrainBodies.get_launcher()
+main = Haddock3RestrainBodies.get_main("Wrapper of the HADDOCK3 restrain_bodies module.")
 
 
 if __name__ == "__main__":

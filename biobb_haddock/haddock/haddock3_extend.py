@@ -2,13 +2,12 @@
 
 """Module containing the haddock3 run class and the command line interface."""
 
-import argparse
+import os
 import zipfile
 import shutil
 from pathlib import Path
 from typing import Optional
-import os
-from biobb_common.configuration import settings
+
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
@@ -17,8 +16,8 @@ from biobb_common.tools.file_utils import launchlogger
 class Haddock3Extend(BiobbObject):
     """
     | biobb_haddock Haddock3Extend
-    | Wrapper class for the Haddock3 extend module.
-    | The `Haddock3 extend <https://www.bonvinlab.org/haddock3/tutorials/continuing_runs.html>`_. module continues the HADDOCK3 execution for docking of an already started run.
+    | Wrapper class for the HADDOCK3 extend module.
+    | The `HADDOCK3 extend <https://www.bonvinlab.org/haddock3/tutorials/continuing_runs.html>`_. module continues the HADDOCK3 execution for docking of an already started run.
 
     Args:
         input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip>`_. Accepted formats: zip (edam:format_3987).
@@ -48,7 +47,7 @@ class Haddock3Extend(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Haddock3
+            * name: HADDOCK3
             * version: 2025.5
             * license: Apache-2.0
         * ontology:
@@ -137,57 +136,8 @@ class Haddock3Extend(BiobbObject):
         return self.return_code
 
 
-def haddock3_extend(
-    input_haddock_wf_data_zip: str,
-    haddock_config_path: str,
-    output_haddock_wf_data_zip: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3Extend <biobb_haddock.haddock.haddock3_extend>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.haddock3_extend.launch>` method."""
-
-    return Haddock3Extend(
-        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-        haddock_config_path=haddock_config_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-
-haddock3_extend.__doc__ = Haddock3Extend.__doc__
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Wrapper of the haddock3 HADDOCK3 module.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument("--input_haddock_wf_data_zip", required=True)
-    required_args.add_argument("--haddock_config_path", required=True)
-    required_args.add_argument("--output_haddock_wf_data_zip", required=True)
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    haddock3_extend(
-        input_haddock_wf_data_zip=args.input_haddock_wf_data_zip,
-        haddock_config_path=args.haddock_config_path,
-        output_haddock_wf_data_zip=args.output_haddock_wf_data_zip,
-        properties=properties,
-    )
+haddock3_extend = Haddock3Extend.get_launcher()
+main = Haddock3Extend.get_main("Wrapper of the HADDOCK3 Haddock3Extend module.")
 
 
 if __name__ == "__main__":
