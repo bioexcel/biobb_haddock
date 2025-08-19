@@ -2,12 +2,12 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/em_ref",
     "name": "biobb_haddock EMRef",
-    "title": "Wrapper class for the Haddock EMRef module.",
-    "description": "The EMRef module. Haddock CapriEval module computes an energy minimization refinement over selected structures.",
+    "title": "Wrapper class for the HADDOCK3 EMRef module.",
+    "description": "The EMRef module. HADDOCK3 EMRef module computes an energy minimization refinement over selected structures.",
     "type": "object",
     "info": {
         "wrapped_software": {
-            "name": "Haddock3",
+            "name": "HADDOCK3",
             "version": "2025.5",
             "license": "Apache-2.0"
         },

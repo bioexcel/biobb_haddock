@@ -2,12 +2,12 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/contact_map",
     "name": "biobb_haddock ContactMap",
-    "title": "Wrapper class for the Haddock ContactMap module.",
-    "description": "The ContactMap module. Haddock ContactMap module computes contacts between chains in complexes and generates heatmaps and chordcharts.",
+    "title": "Wrapper class for the HADDOCK3 ContactMap module.",
+    "description": "The ContactMap module. HADDOCK3 ContactMap module computes contacts between chains in complexes and generates heatmaps and chordcharts.",
     "type": "object",
     "info": {
         "wrapped_software": {
-            "name": "Haddock3",
+            "name": "HADDOCK3",
             "version": "2025.5",
             "license": "Apache-2.0"
         },

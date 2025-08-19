@@ -2,12 +2,12 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/haddock3_extend",
     "name": "biobb_haddock Haddock3Extend",
-    "title": "Wrapper class for the Haddock3 extend module.",
-    "description": "The Haddock3 extend. module continues the HADDOCK3 execution for docking of an already started run.",
+    "title": "Wrapper class for the HADDOCK3 extend module.",
+    "description": "The HADDOCK3 extend. module continues the HADDOCK3 execution for docking of an already started run.",
     "type": "object",
     "info": {
         "wrapped_software": {
-            "name": "Haddock3",
+            "name": "HADDOCK3",
             "version": "2025.5",
             "license": "Apache-2.0"
         },
