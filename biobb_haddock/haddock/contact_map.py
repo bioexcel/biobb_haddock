@@ -149,8 +149,29 @@ class ContactMap(BiobbObject):
         return self.return_code
 
 
-contact_map = ContactMap.get_launcher()
-main = ContactMap.get_main("Wrapper of the HADDOCK3 ContactMap module.")
+def contact_map(
+    input_haddock_wf_data_zip: str,
+    output_contactmap_zip_path: str,
+    output_haddock_wf_data_zip: Optional[str] = None,
+    haddock_config_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`ContactMap <biobb_haddock.haddock.contact_map>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.contact_map.launch>` method."""
+
+    return ContactMap(
+        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
+        output_contactmap_zip_path=output_contactmap_zip_path,
+        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+        haddock_config_path=haddock_config_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+contact_map.__doc__ = ContactMap.__doc__
+main = ContactMap.get_main(contact_map, "Wrapper of the HADDOCK3 ContactMap module.")
 
 
 if __name__ == "__main__":

@@ -147,8 +147,27 @@ class Haddock3Accessibility(BiobbObject):
         return self.return_code
 
 
-haddock3_accessibility = Haddock3Accessibility.get_launcher()
-main = Haddock3Accessibility.get_main("Wrapper of the Haddock-Restraints Accessibility module.")
+def haddock3_accessibility(
+    input_pdb_path: str,
+    output_accessibility_path: str,
+    output_actpass_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`Haddock3Accessibility <biobb_haddock.haddock_restraints.haddock3_accessibility>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_accessibility.launch>` method."""
+
+    return Haddock3Accessibility(
+        input_pdb_path=input_pdb_path,
+        output_accessibility_path=output_accessibility_path,
+        output_actpass_path=output_actpass_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+haddock3_accessibility.__doc__ = Haddock3Accessibility.__doc__
+main = Haddock3Accessibility.get_main(haddock3_accessibility, "Wrapper of the Haddock-Restraints Accessibility module.")
 
 
 if __name__ == "__main__":

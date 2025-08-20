@@ -170,8 +170,35 @@ class RigidBody(BiobbObject):
         return self.return_code
 
 
-rigid_body = RigidBody.get_launcher()
-main = RigidBody.get_main("Wrapper of the HADDOCK3 RigidBody module.")
+def rigid_body(
+    input_haddock_wf_data_zip: str,
+    docking_output_zip_path: str,
+    ambig_restraints_table_path: Optional[str] = None,
+    unambig_restraints_table_path: Optional[str] = None,
+    hb_restraints_table_path: Optional[str] = None,
+    output_haddock_wf_data_zip: Optional[str] = None,
+    haddock_config_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`RigidBody <biobb_haddock.haddock.rigid_body>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.rigid_body.launch>` method."""
+
+    return RigidBody(
+        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
+        docking_output_zip_path=docking_output_zip_path,
+        ambig_restraints_table_path=ambig_restraints_table_path,
+        unambig_restraints_table_path=unambig_restraints_table_path,
+        hb_restraints_table_path=hb_restraints_table_path,
+        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+        haddock_config_path=haddock_config_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+rigid_body.__doc__ = RigidBody.__doc__
+main = RigidBody.get_main(rigid_body, "Wrapper of the HADDOCK3 RigidBody module.")
 
 
 if __name__ == "__main__":

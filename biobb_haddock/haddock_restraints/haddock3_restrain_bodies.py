@@ -122,8 +122,25 @@ class Haddock3RestrainBodies(BiobbObject):
         return self.return_code
 
 
-haddock3_restrain_bodies = Haddock3RestrainBodies.get_launcher()
-main = Haddock3RestrainBodies.get_main("Wrapper of the HADDOCK3 restrain_bodies module.")
+def haddock3_restrain_bodies(
+    input_structure_path: str,
+    output_tbl_path: str,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`Haddock3RestrainBodies <biobb_haddock.haddock_restraints.haddock3_restrain_bodies>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_restrain_bodies.launch>` method."""
+
+    return Haddock3RestrainBodies(
+        input_structure_path=input_structure_path,
+        output_tbl_path=output_tbl_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+haddock3_restrain_bodies.__doc__ = Haddock3RestrainBodies.__doc__
+main = Haddock3RestrainBodies.get_main(haddock3_restrain_bodies, "Wrapper of the HADDOCK3 restrain_bodies module.")
 
 
 if __name__ == "__main__":

@@ -169,8 +169,35 @@ class EMRef(BiobbObject):
         return self.return_code
 
 
-em_ref = EMRef.get_launcher()
-main = EMRef.get_main("Wrapper of the HADDOCK3 EMRef module.")
+def em_ref(
+    input_haddock_wf_data_zip: str,
+    refinement_output_zip_path: str,
+    ambig_restraints_table_path: Optional[str] = None,
+    unambig_restraints_table_path: Optional[str] = None,
+    hb_restraints_table_path: Optional[str] = None,
+    output_haddock_wf_data_zip: Optional[str] = None,
+    haddock_config_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`EMRef <biobb_haddock.haddock.em_ref>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.em_ref.launch>` method."""
+
+    return EMRef(
+        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
+        refinement_output_zip_path=refinement_output_zip_path,
+        ambig_restraints_table_path=ambig_restraints_table_path,
+        unambig_restraints_table_path=unambig_restraints_table_path,
+        hb_restraints_table_path=hb_restraints_table_path,
+        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+        haddock_config_path=haddock_config_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+em_ref.__doc__ = EMRef.__doc__
+main = EMRef.get_main(em_ref, "Wrapper of the HADDOCK3 EMRef module.")
 
 
 if __name__ == "__main__":

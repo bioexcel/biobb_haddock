@@ -6,7 +6,7 @@ import os
 from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
-# from biobb_common.tools import file_utils as fu
+from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 
 
@@ -70,8 +70,10 @@ class FolderTest(BiobbObject):
         self.stage_files()
 
         # Create n files in the output folder
-        sandbox_output_folder = f'{self.stage_io_dict["unique_dir"]}/{self.io_dict["out"]["output_folder"]}'
+        sandbox_output_folder = self.stage_io_dict["out"]["output_folder"]
         os.makedirs(sandbox_output_folder, exist_ok=True)
+        fu.log(f"Creating {self.n} files in the output folder: {sandbox_output_folder}",
+               self.out_log, self.global_log)
         for i in range(1, self.n + 1):
             with open(f'{sandbox_output_folder}/file_{i}.txt', 'w') as f:
                 f.write(f"This is file number {i}")
@@ -85,9 +87,14 @@ class FolderTest(BiobbObject):
         return self.return_code
 
 
-folder_test = FolderTest.get_launcher()
-main = FolderTest.get_main("Wrapper of the HADDOCK3 FolderTest module.")
+def folder_test(output_folder: str, properties: Optional[dict] = None, **kwargs) -> int:
+    """Create :class:`FolderTest <biobb_haddock.haddock.folder_test>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.folder_test.launch>` method."""
+    return FolderTest(output_folder=output_folder, properties=properties, **kwargs).launch()
 
+
+folder_test.__doc__ = FolderTest.__doc__
+main = FolderTest.get_main(folder_test, "Wrapper of the HADDOCK3 FolderTest module.")
 
 if __name__ == "__main__":
     main()

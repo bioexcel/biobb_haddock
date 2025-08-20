@@ -158,8 +158,35 @@ class Haddock3Run(BiobbObject):
         return self.return_code
 
 
-haddock3_run = Haddock3Run.get_launcher()
-main = Haddock3Run.get_main("Wrapper of the HADDOCK3 Haddock3Run module.")
+def haddock3_run(
+    mol1_input_pdb_path: str,
+    mol2_input_pdb_path: str,
+    output_haddock_wf_data_zip: str,
+    ambig_restraints_table_path: Optional[str] = None,
+    unambig_restraints_table_path: Optional[str] = None,
+    hb_restraints_table_path: Optional[str] = None,
+    haddock_config_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`Haddock3Run <biobb_haddock.haddock.haddock3_run>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.haddock3_run.launch>` method."""
+
+    return Haddock3Run(
+        mol1_input_pdb_path=mol1_input_pdb_path,
+        mol2_input_pdb_path=mol2_input_pdb_path,
+        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+        ambig_restraints_table_path=ambig_restraints_table_path,
+        unambig_restraints_table_path=unambig_restraints_table_path,
+        hb_restraints_table_path=hb_restraints_table_path,
+        haddock_config_path=haddock_config_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+haddock3_run.__doc__ = Haddock3Run.__doc__
+main = Haddock3Run.get_main(haddock3_run, "Wrapper of the HADDOCK3 Haddock3Run module.")
 
 
 if __name__ == "__main__":

@@ -147,8 +147,29 @@ class SeleTopClusts(BiobbObject):
         return self.return_code
 
 
-sele_top_clusts = SeleTopClusts.get_launcher()
-main = SeleTopClusts.get_main("Wrapper of the HADDOCK3 SeleTopClusts module.")
+def sele_top_clusts(
+    input_haddock_wf_data_zip: str,
+    output_selection_zip_path: str,
+    output_haddock_wf_data_zip: Optional[str] = None,
+    haddock_config_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`SeleTopClusts <biobb_haddock.haddock.sele_top_clusts>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.sele_top_clusts.launch>` method."""
+
+    return SeleTopClusts(
+        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
+        output_selection_zip_path=output_selection_zip_path,
+        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+        haddock_config_path=haddock_config_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+sele_top_clusts.__doc__ = SeleTopClusts.__doc__
+main = SeleTopClusts.get_main(sele_top_clusts, "Wrapper of the HADDOCK3 SeleTopClusts module.")
 
 
 if __name__ == "__main__":

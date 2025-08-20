@@ -169,8 +169,35 @@ class FlexRef(BiobbObject):
         return self.return_code
 
 
-flex_ref = FlexRef.get_launcher()
-main = FlexRef.get_main("Wrapper of the HADDOCK3 FlexRef module.")
+def flex_ref(
+    input_haddock_wf_data_zip: str,
+    refinement_output_zip_path: str,
+    ambig_restraints_table_path: Optional[str] = None,
+    unambig_restraints_table_path: Optional[str] = None,
+    hb_restraints_table_path: Optional[str] = None,
+    output_haddock_wf_data_zip: Optional[str] = None,
+    haddock_config_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`FlexRef <biobb_haddock.haddock.flex_ref>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.flex_ref.launch>` method."""
+
+    return FlexRef(
+        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
+        refinement_output_zip_path=refinement_output_zip_path,
+        ambig_restraints_table_path=ambig_restraints_table_path,
+        unambig_restraints_table_path=unambig_restraints_table_path,
+        hb_restraints_table_path=hb_restraints_table_path,
+        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+        haddock_config_path=haddock_config_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+flex_ref.__doc__ = FlexRef.__doc__
+main = FlexRef.get_main(flex_ref, "Wrapper of the HADDOCK3 FlexRef module.")
 
 
 if __name__ == "__main__":

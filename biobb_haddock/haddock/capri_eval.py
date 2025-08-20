@@ -155,8 +155,31 @@ class CapriEval(BiobbObject):
         return self.return_code
 
 
-capri_eval = CapriEval.get_launcher()
-main = CapriEval.get_main('Wrapper of the HADDOCK3 CapriEval module.')
+def capri_eval(
+    input_haddock_wf_data_zip: str,
+    output_evaluation_zip_path: str,
+    reference_pdb_path: Optional[str] = None,
+    output_haddock_wf_data_zip: Optional[str] = None,
+    haddock_config_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`CapriEval <biobb_haddock.haddock.capri_eval>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.capri_eval.launch>` method."""
+
+    return CapriEval(
+        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
+        output_evaluation_zip_path=output_evaluation_zip_path,
+        reference_pdb_path=reference_pdb_path,
+        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+        haddock_config_path=haddock_config_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+capri_eval.__doc__ = CapriEval.__doc__
+main = CapriEval.get_main(capri_eval, 'Wrapper of the HADDOCK3 CapriEval module.')
 
 
 if __name__ == "__main__":

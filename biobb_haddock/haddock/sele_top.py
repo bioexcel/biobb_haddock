@@ -149,8 +149,29 @@ class SeleTop(BiobbObject):
         return self.return_code
 
 
-sele_top = SeleTop.get_launcher()
-main = SeleTop.get_main("Wrapper of the HADDOCK3 SeleTop module.")
+def sele_top(
+    input_haddock_wf_data_zip: str,
+    output_selection_zip_path: str,
+    output_haddock_wf_data_zip: Optional[str] = None,
+    haddock_config_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`SeleTop <biobb_haddock.haddock.sele_top>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.sele_top.launch>` method."""
+
+    return SeleTop(
+        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
+        output_selection_zip_path=output_selection_zip_path,
+        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+        addock_config_path=haddock_config_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+sele_top.__doc__ = SeleTop.__doc__
+main = SeleTop.get_main(sele_top, "Wrapper of the HADDOCK3 SeleTop module.")
 
 
 if __name__ == "__main__":

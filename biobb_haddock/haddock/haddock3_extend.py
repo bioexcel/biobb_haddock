@@ -122,8 +122,27 @@ class Haddock3Extend(BiobbObject):
         return self.return_code
 
 
-haddock3_extend = Haddock3Extend.get_launcher()
-main = Haddock3Extend.get_main("Wrapper of the HADDOCK3 Haddock3Extend module.")
+def haddock3_extend(
+    input_haddock_wf_data_zip: str,
+    haddock_config_path: str,
+    output_haddock_wf_data_zip: str,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`Haddock3Extend <biobb_haddock.haddock.haddock3_extend>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.haddock3_extend.launch>` method."""
+
+    return Haddock3Extend(
+        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
+        haddock_config_path=haddock_config_path,
+        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+haddock3_extend.__doc__ = Haddock3Extend.__doc__
+main = Haddock3Extend.get_main(haddock3_extend, "Wrapper of the HADDOCK3 Haddock3Extend module.")
 
 
 if __name__ == "__main__":

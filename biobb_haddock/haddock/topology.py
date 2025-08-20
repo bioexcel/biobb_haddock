@@ -177,8 +177,33 @@ class Topology(BiobbObject):
         return self.return_code
 
 
-topology = Topology.get_launcher()
-main = Topology.get_main("Wrapper of the HADDOCK3 Topology module.")
+def topology(
+    mol1_input_pdb_path: str,
+    mol1_output_top_zip_path: str,
+    mol2_input_pdb_path: Optional[str] = None,
+    mol2_output_top_zip_path: Optional[str] = None,
+    output_haddock_wf_data_zip: Optional[str] = None,
+    haddock_config_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`Topology <biobb_haddock.haddock.topology>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.topology.launch>` method."""
+
+    return Topology(
+        mol1_input_pdb_path=mol1_input_pdb_path,
+        mol1_output_top_zip_path=mol1_output_top_zip_path,
+        mol2_output_top_zip_path=mol2_output_top_zip_path,
+        mol2_input_pdb_path=mol2_input_pdb_path,
+        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+        haddock_config_path=haddock_config_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+topology.__doc__ = Topology.__doc__
+main = Topology.get_main(topology, "Wrapper of the HADDOCK3 Topology module.")
 
 
 if __name__ == "__main__":

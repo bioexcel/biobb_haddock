@@ -162,8 +162,28 @@ class Haddock3PassiveFromActive(BiobbObject):
         return self.return_code
 
 
-haddock3_passive_from_active = Haddock3PassiveFromActive.get_launcher()
+def haddock3_passive_from_active(
+    input_pdb_path: str,
+    output_actpass_path: str,
+    input_active_list_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`Haddock3PassiveFromActive <biobb_haddock.haddock_restraints.haddock3_passive_from_active>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_passive_from_active.launch>` method."""
+
+    return Haddock3PassiveFromActive(
+        input_pdb_path=input_pdb_path,
+        output_actpass_path=output_actpass_path,
+        input_active_list_path=input_active_list_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+haddock3_passive_from_active.__doc__ = Haddock3PassiveFromActive.__doc__
 main = Haddock3PassiveFromActive.get_main(
+    haddock3_passive_from_active,
     "Wrapper of the Haddock3-Restraints passive_from_active module."
 )
 

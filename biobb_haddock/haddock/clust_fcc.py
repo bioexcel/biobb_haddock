@@ -147,8 +147,29 @@ class ClustFCC(BiobbObject):
         return self.return_code
 
 
-clust_fcc = ClustFCC.get_launcher()
-main = ClustFCC.get_main("Wrapper of the HADDOCK3 ClustFCC module.")
+def clust_fcc(
+    input_haddock_wf_data_zip: str,
+    output_cluster_zip_path: str,
+    output_haddock_wf_data_zip: Optional[str] = None,
+    haddock_config_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
+    """Create :class:`ClustFCC <biobb_haddock.haddock.clust_fcc>` class and
+    execute the :meth:`launch() <biobb_haddock.haddock.clust_fcc.launch>` method."""
+
+    return ClustFCC(
+        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
+        output_cluster_zip_path=output_cluster_zip_path,
+        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
+        addock_config_path=haddock_config_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
+
+
+clust_fcc.__doc__ = ClustFCC.__doc__
+main = ClustFCC.get_main(clust_fcc, "Wrapper of the HADDOCK3 ClustFCC module.")
 
 
 if __name__ == "__main__":
