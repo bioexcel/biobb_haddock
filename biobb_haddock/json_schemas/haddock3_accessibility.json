@@ -7,7 +7,7 @@
     "type": "object",
     "info": {
         "wrapped_software": {
-            "name": "Haddock33-restraints",
+            "name": "Haddock3-restraints",
             "version": "2025.5",
             "license": "Apache-2.0"
         },

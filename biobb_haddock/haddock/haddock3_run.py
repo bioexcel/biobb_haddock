@@ -76,6 +76,7 @@ class Haddock3Run(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -102,7 +103,7 @@ class Haddock3Run(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock3")
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -171,18 +172,7 @@ def haddock3_run(
 ) -> int:
     """Create :class:`Haddock3Run <biobb_haddock.haddock.haddock3_run>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.haddock3_run.launch>` method."""
-
-    return Haddock3Run(
-        mol1_input_pdb_path=mol1_input_pdb_path,
-        mol2_input_pdb_path=mol2_input_pdb_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        ambig_restraints_table_path=ambig_restraints_table_path,
-        unambig_restraints_table_path=unambig_restraints_table_path,
-        hb_restraints_table_path=hb_restraints_table_path,
-        haddock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return Haddock3Run(**dict(locals())).launch()
 
 
 haddock3_run.__doc__ = Haddock3Run.__doc__

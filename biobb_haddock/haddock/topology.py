@@ -98,7 +98,7 @@ class Topology(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock3")
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -109,6 +109,7 @@ class Topology(BiobbObject):
         if self.check_restart():
             return 0
         self.stage_files()
+        self.locals_var_dict = locals().copy()
 
         workflow_dict = {
             "run_dir": fu.create_unique_dir(),
@@ -189,17 +190,7 @@ def topology(
 ) -> int:
     """Create :class:`Topology <biobb_haddock.haddock.topology>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.topology.launch>` method."""
-
-    return Topology(
-        mol1_input_pdb_path=mol1_input_pdb_path,
-        mol1_output_top_zip_path=mol1_output_top_zip_path,
-        mol2_output_top_zip_path=mol2_output_top_zip_path,
-        mol2_input_pdb_path=mol2_input_pdb_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        haddock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return Topology(**dict(locals())).launch()
 
 
 topology.__doc__ = Topology.__doc__

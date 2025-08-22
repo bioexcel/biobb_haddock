@@ -69,6 +69,7 @@ class ClustFCC(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -91,7 +92,7 @@ class ClustFCC(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock3")
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -157,15 +158,7 @@ def clust_fcc(
 ) -> int:
     """Create :class:`ClustFCC <biobb_haddock.haddock.clust_fcc>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.clust_fcc.launch>` method."""
-
-    return ClustFCC(
-        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-        output_cluster_zip_path=output_cluster_zip_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        addock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return ClustFCC(**dict(locals())).launch()
 
 
 clust_fcc.__doc__ = ClustFCC.__doc__

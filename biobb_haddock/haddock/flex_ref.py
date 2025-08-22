@@ -75,6 +75,7 @@ class FlexRef(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -102,7 +103,7 @@ class FlexRef(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock3")
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -182,18 +183,7 @@ def flex_ref(
 ) -> int:
     """Create :class:`FlexRef <biobb_haddock.haddock.flex_ref>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.flex_ref.launch>` method."""
-
-    return FlexRef(
-        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-        refinement_output_zip_path=refinement_output_zip_path,
-        ambig_restraints_table_path=ambig_restraints_table_path,
-        unambig_restraints_table_path=unambig_restraints_table_path,
-        hb_restraints_table_path=hb_restraints_table_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        haddock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return FlexRef(**dict(locals())).launch()
 
 
 flex_ref.__doc__ = FlexRef.__doc__

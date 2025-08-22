@@ -66,6 +66,7 @@ class Haddock3Extend(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -82,7 +83,7 @@ class Haddock3Extend(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock3")
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -131,14 +132,7 @@ def haddock3_extend(
 ) -> int:
     """Create :class:`Haddock3Extend <biobb_haddock.haddock.haddock3_extend>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.haddock3_extend.launch>` method."""
-
-    return Haddock3Extend(
-        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-        haddock_config_path=haddock_config_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return Haddock3Extend(**dict(locals())).launch()
 
 
 haddock3_extend.__doc__ = Haddock3Extend.__doc__

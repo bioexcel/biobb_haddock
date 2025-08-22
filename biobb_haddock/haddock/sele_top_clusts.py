@@ -69,6 +69,7 @@ class SeleTopClusts(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -91,7 +92,7 @@ class SeleTopClusts(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock3")
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -157,15 +158,7 @@ def sele_top_clusts(
 ) -> int:
     """Create :class:`SeleTopClusts <biobb_haddock.haddock.sele_top_clusts>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.sele_top_clusts.launch>` method."""
-
-    return SeleTopClusts(
-        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-        output_selection_zip_path=output_selection_zip_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        haddock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return SeleTopClusts(**dict(locals())).launch()
 
 
 sele_top_clusts.__doc__ = SeleTopClusts.__doc__

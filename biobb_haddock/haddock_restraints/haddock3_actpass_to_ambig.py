@@ -45,7 +45,7 @@ class Haddock3ActpassToAmbig(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Haddock33-restraints
+            * name: Haddock3-restraints
             * version: 2025.5
             * license: Apache-2.0
         * ontology:
@@ -65,6 +65,7 @@ class Haddock3ActpassToAmbig(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -84,7 +85,7 @@ class Haddock3ActpassToAmbig(BiobbObject):
         self.segid_two = properties.get("segid_two", None)
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -147,14 +148,7 @@ def haddock3_actpass_to_ambig(
 ) -> int:
     """Create :class:`Haddock3ActpassToAmbig <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig>` class and
     execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig.launch>` method."""
-
-    return Haddock3ActpassToAmbig(
-        input_actpass1_path=input_actpass1_path,
-        input_actpass2_path=input_actpass2_path,
-        output_tbl_path=output_tbl_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return Haddock3ActpassToAmbig(**dict(locals())).launch()
 
 
 haddock3_actpass_to_ambig.__doc__ = Haddock3ActpassToAmbig.__doc__

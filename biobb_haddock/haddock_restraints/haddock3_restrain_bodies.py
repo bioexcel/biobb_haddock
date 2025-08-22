@@ -42,7 +42,7 @@ class Haddock3RestrainBodies(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Haddock33-restraints
+            * name: Haddock3-restraints
             * version: 2025.5
             * license: Apache-2.0
         * ontology:
@@ -61,6 +61,7 @@ class Haddock3RestrainBodies(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -78,7 +79,7 @@ class Haddock3RestrainBodies(BiobbObject):
         self.verbose = properties.get("verbose", 0)
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -130,13 +131,7 @@ def haddock3_restrain_bodies(
 ) -> int:
     """Create :class:`Haddock3RestrainBodies <biobb_haddock.haddock_restraints.haddock3_restrain_bodies>` class and
     execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_restrain_bodies.launch>` method."""
-
-    return Haddock3RestrainBodies(
-        input_structure_path=input_structure_path,
-        output_tbl_path=output_tbl_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return Haddock3RestrainBodies(**dict(locals())).launch()
 
 
 haddock3_restrain_bodies.__doc__ = Haddock3RestrainBodies.__doc__

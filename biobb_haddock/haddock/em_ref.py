@@ -75,6 +75,7 @@ class EMRef(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -102,7 +103,7 @@ class EMRef(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock3")
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -182,18 +183,7 @@ def em_ref(
 ) -> int:
     """Create :class:`EMRef <biobb_haddock.haddock.em_ref>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.em_ref.launch>` method."""
-
-    return EMRef(
-        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-        refinement_output_zip_path=refinement_output_zip_path,
-        ambig_restraints_table_path=ambig_restraints_table_path,
-        unambig_restraints_table_path=unambig_restraints_table_path,
-        hb_restraints_table_path=hb_restraints_table_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        haddock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return EMRef(**dict(locals())).launch()
 
 
 em_ref.__doc__ = EMRef.__doc__

@@ -49,7 +49,7 @@ class Haddock3Accessibility(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Haddock33-restraints
+            * name: Haddock3-restraints
             * version: 2025.5
             * license: Apache-2.0
         * ontology:
@@ -69,6 +69,7 @@ class Haddock3Accessibility(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -91,7 +92,7 @@ class Haddock3Accessibility(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock3-restraints")
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -156,14 +157,7 @@ def haddock3_accessibility(
 ) -> int:
     """Create :class:`Haddock3Accessibility <biobb_haddock.haddock_restraints.haddock3_accessibility>` class and
     execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_accessibility.launch>` method."""
-
-    return Haddock3Accessibility(
-        input_pdb_path=input_pdb_path,
-        output_accessibility_path=output_accessibility_path,
-        output_actpass_path=output_actpass_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return Haddock3Accessibility(**dict(locals())).launch()
 
 
 haddock3_accessibility.__doc__ = Haddock3Accessibility.__doc__

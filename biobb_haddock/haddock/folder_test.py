@@ -48,6 +48,7 @@ class FolderTest(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -83,14 +84,14 @@ class FolderTest(BiobbObject):
 
         # Remove temporal files
         self.remove_tmp_files()
-
+        # self.check_arguments(output_files_created=True, raise_exception=False)
         return self.return_code
 
 
-def folder_test(output_folder: str, properties: Optional[dict] = None, **kwargs) -> int:
+def folder_test(input_folder: str, output_folder: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`FolderTest <biobb_haddock.haddock.folder_test>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.folder_test.launch>` method."""
-    return FolderTest(output_folder=output_folder, properties=properties, **kwargs).launch()
+    return FolderTest(**dict(locals())).launch()
 
 
 folder_test.__doc__ = FolderTest.__doc__

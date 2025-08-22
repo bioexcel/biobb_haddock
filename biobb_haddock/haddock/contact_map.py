@@ -69,6 +69,7 @@ class ContactMap(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -94,7 +95,7 @@ class ContactMap(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock3")
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -159,15 +160,7 @@ def contact_map(
 ) -> int:
     """Create :class:`ContactMap <biobb_haddock.haddock.contact_map>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.contact_map.launch>` method."""
-
-    return ContactMap(
-        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-        output_contactmap_zip_path=output_contactmap_zip_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        haddock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return ContactMap(**dict(locals())).launch()
 
 
 contact_map.__doc__ = ContactMap.__doc__

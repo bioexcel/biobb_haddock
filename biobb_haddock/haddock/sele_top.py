@@ -70,6 +70,7 @@ class SeleTop(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -92,7 +93,7 @@ class SeleTop(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock3")
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -159,15 +160,7 @@ def sele_top(
 ) -> int:
     """Create :class:`SeleTop <biobb_haddock.haddock.sele_top>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.sele_top.launch>` method."""
-
-    return SeleTop(
-        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-        output_selection_zip_path=output_selection_zip_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        addock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return SeleTop(**dict(locals())).launch()
 
 
 sele_top.__doc__ = SeleTop.__doc__

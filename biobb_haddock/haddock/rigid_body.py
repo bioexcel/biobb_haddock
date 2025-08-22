@@ -75,6 +75,7 @@ class RigidBody(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -103,7 +104,7 @@ class RigidBody(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock3")
 
         # Check the properties
-        self.check_properties(properties)
+        self.check_init(properties)
 
     @launchlogger
     def launch(self) -> int:
@@ -183,18 +184,7 @@ def rigid_body(
 ) -> int:
     """Create :class:`RigidBody <biobb_haddock.haddock.rigid_body>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.rigid_body.launch>` method."""
-
-    return RigidBody(
-        input_haddock_wf_data_zip=input_haddock_wf_data_zip,
-        docking_output_zip_path=docking_output_zip_path,
-        ambig_restraints_table_path=ambig_restraints_table_path,
-        unambig_restraints_table_path=unambig_restraints_table_path,
-        hb_restraints_table_path=hb_restraints_table_path,
-        output_haddock_wf_data_zip=output_haddock_wf_data_zip,
-        haddock_config_path=haddock_config_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
+    return RigidBody(**dict(locals())).launch()
 
 
 rigid_body.__doc__ = RigidBody.__doc__
