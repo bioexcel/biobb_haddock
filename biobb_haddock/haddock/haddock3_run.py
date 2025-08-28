@@ -2,13 +2,10 @@
 
 """Module containing the HADDOCK3 Run class and the command line interface."""
 
-from pathlib import Path
 from typing import Optional
-
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-
 from biobb_haddock.haddock.common import create_cfg, move_to_container_path, zip_wf_output
 
 
@@ -19,12 +16,8 @@ class Haddock3Run(BiobbObject):
     | The HADDOCK3 run module launches the HADDOCK3 execution for docking.
 
     Args:
-        mol1_input_pdb_path (str): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        mol2_input_pdb_path (str): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/hpr_ensemble.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        ambig_restraints_table_path (str) (Optional): Path to the input TBL file containing a list of ambiguous restraints for docking. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl>`_. Accepted formats: tbl (edam:format_2330).
-        unambig_restraints_table_path (str) (Optional): Path to the input TBL file containing a list of unambiguous restraints for docking. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl>`_. Accepted formats: tbl (edam:format_2330).
-        hb_restraints_table_path (str) (Optional): Path to the input TBL file containing a list of hydrogen bond restraints for docking. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl>`_. Accepted formats: tbl (edam:format_2330).
-        output_haddock_wf_data_zip (str) (Optional): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip>`_. Accepted formats: zip (edam:format_3987).
+        input_folder (dir): Input folder containing all the files defined in the config. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb>`_. Accepted formats: directory (edam:format_1915), zip (edam:format_3987).
+        output_haddock_wf_data (dir): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip>`_. Accepted formats: (edam:format_1915), zip (edam:format_3987).
         haddock_config_path (str) (Optional): Haddock configuration CFG file path. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg>`_. Accepted formats: cfg (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cfg** (*dict*) - ({}) Haddock configuration options specification.
@@ -44,10 +37,9 @@ class Haddock3Run(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_haddock.haddock.haddock3_run import haddock3_run
-            haddock3_run(mol1_input_pdb_path='/path/to/myStructure1.pdb',
-                         mol2_input_pdb_path='/path/to/myStructure2.pdb,
+            haddock3_run(input_folder='/path/to/input_folder.pdb',
+                         output_haddock_wf_data='/path/to/haddock_output.zip',
                          haddock_config_path='/path/to/myHaddockConfig.cfg',
-                         output_haddock_wf_data_zip='/path/to/haddock_output.zip',
                          properties=prop)
 
     Info:
@@ -62,12 +54,8 @@ class Haddock3Run(BiobbObject):
 
     def __init__(
         self,
-        mol1_input_pdb_path: str,
-        mol2_input_pdb_path: str,
-        output_haddock_wf_data_zip: str,
-        ambig_restraints_table_path: Optional[str] = None,
-        unambig_restraints_table_path: Optional[str] = None,
-        hb_restraints_table_path: Optional[str] = None,
+        input_folder: str,
+        output_haddock_wf_data: str,
         haddock_config_path: Optional[str] = None,
         properties: Optional[dict] = None,
         **kwargs,
@@ -81,16 +69,11 @@ class Haddock3Run(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {
-                "mol1_input_pdb_path": mol1_input_pdb_path,
-                "mol2_input_pdb_path": mol2_input_pdb_path,
-                "ambig_restraints_table_path": ambig_restraints_table_path,
-                "unambig_restraints_table_path": unambig_restraints_table_path,
-                "hb_restraints_table_path": hb_restraints_table_path,
+                "input_folder": input_folder,
                 "haddock_config_path": haddock_config_path,
-
             },
             "out": {
-                "output_haddock_wf_data_zip": output_haddock_wf_data_zip,
+                "output_haddock_wf_data": output_haddock_wf_data,
             },
         }
 
@@ -108,67 +91,51 @@ class Haddock3Run(BiobbObject):
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`Haddock3Run <biobb_haddock.haddock.haddock3_run>` object."""
-        # tmp_files = []
 
         # Setup Biobb
         if self.check_restart():
             return 0
         self.stage_files()
 
-        workflow_dict = {
-            "run_dir": fu.create_unique_dir(self.stage_io_dict["unique_dir"]),
-            "molecules": [self.stage_io_dict["in"]["mol1_input_pdb_path"], self.stage_io_dict["in"]["mol2_input_pdb_path"]],
-        }
-
-        if ambig_restraints_table_path := self.stage_io_dict["in"].get("ambig_restraints_table_path"):
-            workflow_dict["ambig_restraints_table_path"] = ambig_restraints_table_path
-        if unambig_restraints_table_path := self.stage_io_dict["in"].get("unambig_restraints_table_path"):
-            workflow_dict["unambig_restraints_table_path"] = unambig_restraints_table_path
-        if hb_restraints_table_path := self.stage_io_dict["in"].get("hb_restraints_table_path"):
-            workflow_dict["hb_restraints_table_path"] = hb_restraints_table_path
+        workflow_dict = {"run_dir": self.stage_io_dict["out"]["output_haddock_wf_data"]}
 
         # Create data dir
-        cfg_dir = fu.create_unique_dir(self.stage_io_dict["unique_dir"])
-        self.output_cfg_path = create_cfg(
-            output_cfg_path=str(Path(cfg_dir).joinpath(self.output_cfg_path)),
+        output_cfg_path = create_cfg(
+            output_cfg_path=self.create_tmp_file('_haddock.cfg'),
             workflow_dict=workflow_dict,
             input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
             cfg_properties_dict=self.cfg,
+            out_log=self.out_log,
+            global_log=self.global_log
         )
 
         if self.container_path:
             fu.log("Container execution enabled", self.out_log)
             move_to_container_path(self)
 
-        self.cmd = [self.binary_path, self.output_cfg_path]
-
-        # Run Biobb block
-        self.run_biobb()
+        with fu.change_dir(self.stage_io_dict["unique_dir"]):
+            self.cmd = [self.binary_path, output_cfg_path]
+            # Run Biobb block
+            self.run_biobb()
 
         # Copy files to host
-        # self.copy_to_host()
-
-        # Create zip output
-        if self.io_dict["out"].get("output_haddock_wf_data_zip"):
+        if self.io_dict["out"]["output_haddock_wf_data"][-4:] == ".zip":
             zip_wf_output(self, str(workflow_dict["run_dir"]))
+        else:
+            self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.extend([cfg_dir])
         self.remove_tmp_files()
 
         return self.return_code
 
 
 def haddock3_run(
-    mol1_input_pdb_path: str,
-    mol2_input_pdb_path: str,
-    output_haddock_wf_data_zip: str,
-    ambig_restraints_table_path: Optional[str] = None,
-    unambig_restraints_table_path: Optional[str] = None,
-    hb_restraints_table_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
+        input_folder: str,
+        output_haddock_wf_data: str,
+        haddock_config_path: Optional[str] = None,
+        properties: Optional[dict] = None,
+        **kwargs,
 ) -> int:
     """Create :class:`Haddock3Run <biobb_haddock.haddock.haddock3_run>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.haddock3_run.launch>` method."""
