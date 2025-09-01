@@ -17,23 +17,39 @@
         }
     },
     "required": [
-        "input_haddock_wf_data_zip",
-        "refinement_output_zip_path"
+        "input_haddock_wf_data",
+        "output_haddock_wf_data"
     ],
     "properties": {
-        "input_haddock_wf_data_zip": {
-            "type": "string",
-            "description": "Path to the input zipball containing all the current Haddock workflow data",
+        "input_haddock_wf_data": {
+            "type": "dir",
+            "description": "Path to the input directory containing all the current Haddock workflow data",
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip",
             "enum": [
-                ".*\\.zip$"
+                ".*\\.directory$"
             ],
             "file_formats": [
                 {
-                    "extension": ".*\\.zip$",
-                    "description": "Path to the input zipball containing all the current Haddock workflow data",
-                    "edam": "format_3987"
+                    "extension": ".*\\.directory$",
+                    "description": "Path to the input directory containing all the current Haddock workflow data",
+                    "edam": "format_1915"
+                }
+            ]
+        },
+        "output_haddock_wf_data": {
+            "type": "dir",
+            "description": "Path to the output directory containing all the current Haddock workflow data",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip",
+            "enum": [
+                ".*\\.directory$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.directory$",
+                    "description": "Path to the output directory containing all the current Haddock workflow data",
+                    "edam": "format_1915"
                 }
             ]
         },
@@ -98,22 +114,6 @@
                     "extension": ".*\\.tbl$",
                     "description": "Path to the input TBL file containing a list of hydrogen bond restraints for docking",
                     "edam": "format_2330"
-                }
-            ]
-        },
-        "output_haddock_wf_data_zip": {
-            "type": "string",
-            "description": "Path to the output zipball containing all the current Haddock workflow data",
-            "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip",
-            "enum": [
-                ".*\\.zip$"
-            ],
-            "file_formats": [
-                {
-                    "extension": ".*\\.zip$",
-                    "description": "Path to the output zipball containing all the current Haddock workflow data",
-                    "edam": "format_3987"
                 }
             ]
         },

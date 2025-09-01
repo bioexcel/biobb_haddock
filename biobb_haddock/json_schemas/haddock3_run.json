@@ -17,103 +17,39 @@
         }
     },
     "required": [
-        "mol1_input_pdb_path",
-        "mol2_input_pdb_path"
+        "input_haddock_wf_data",
+        "output_haddock_wf_data"
     ],
     "properties": {
-        "mol1_input_pdb_path": {
-            "type": "string",
-            "description": "Path to the input PDB file",
+        "input_haddock_wf_data": {
+            "type": "dir",
+            "description": "Input folder containing all the files defined in the config",
             "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb",
+            "sample": "https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/input_haddock_wf_data",
             "enum": [
-                ".*\\.pdb$"
+                ".*\\.directory$"
             ],
             "file_formats": [
                 {
-                    "extension": ".*\\.pdb$",
-                    "description": "Path to the input PDB file",
-                    "edam": "format_1476"
+                    "extension": ".*\\.directory$",
+                    "description": "Input folder containing all the files defined in the config",
+                    "edam": "format_1915"
                 }
             ]
         },
-        "mol2_input_pdb_path": {
-            "type": "string",
-            "description": "Path to the input PDB file",
-            "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/hpr_ensemble.pdb",
-            "enum": [
-                ".*\\.pdb$"
-            ],
-            "file_formats": [
-                {
-                    "extension": ".*\\.pdb$",
-                    "description": "Path to the input PDB file",
-                    "edam": "format_1476"
-                }
-            ]
-        },
-        "ambig_restraints_table_path": {
-            "type": "string",
-            "description": "Path to the input TBL file containing a list of ambiguous restraints for docking",
-            "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl",
-            "enum": [
-                ".*\\.tbl$"
-            ],
-            "file_formats": [
-                {
-                    "extension": ".*\\.tbl$",
-                    "description": "Path to the input TBL file containing a list of ambiguous restraints for docking",
-                    "edam": "format_2330"
-                }
-            ]
-        },
-        "unambig_restraints_table_path": {
-            "type": "string",
-            "description": "Path to the input TBL file containing a list of unambiguous restraints for docking",
-            "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl",
-            "enum": [
-                ".*\\.tbl$"
-            ],
-            "file_formats": [
-                {
-                    "extension": ".*\\.tbl$",
-                    "description": "Path to the input TBL file containing a list of unambiguous restraints for docking",
-                    "edam": "format_2330"
-                }
-            ]
-        },
-        "hb_restraints_table_path": {
-            "type": "string",
-            "description": "Path to the input TBL file containing a list of hydrogen bond restraints for docking",
-            "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl",
-            "enum": [
-                ".*\\.tbl$"
-            ],
-            "file_formats": [
-                {
-                    "extension": ".*\\.tbl$",
-                    "description": "Path to the input TBL file containing a list of hydrogen bond restraints for docking",
-                    "edam": "format_2330"
-                }
-            ]
-        },
-        "output_haddock_wf_data_zip": {
-            "type": "string",
+        "output_haddock_wf_data": {
+            "type": "dir",
             "description": "Path to the output zipball containing all the current Haddock workflow data",
             "filetype": "output",
             "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip",
             "enum": [
-                ".*\\.zip$"
+                ".*\\.directory$"
             ],
             "file_formats": [
                 {
-                    "extension": ".*\\.zip$",
+                    "extension": ".*\\.directory$",
                     "description": "Path to the output zipball containing all the current Haddock workflow data",
-                    "edam": "format_3987"
+                    "edam": "format_1915"
                 }
             ]
         },
