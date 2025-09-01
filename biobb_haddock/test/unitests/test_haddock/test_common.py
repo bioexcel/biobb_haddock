@@ -33,7 +33,7 @@ class TestCreateCfg():
     def test_create_cfg_run(self):
         create_cfg(
             output_cfg_path=str(self.paths['output_cfg']),
-            workflow_dict={'run_dir': 'test_dir',
+            workflow_dict={'haddock_step_name': 'haddock3_run', 'run_dir': 'test_dir',
                            'ambig_restraints_table_path': 'test_tbl'},
             input_cfg_path=self.paths['input_cfg_run'],
             cfg_properties_dict=self.properties['cfg_run'],

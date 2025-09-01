@@ -3,21 +3,18 @@
 """Module containing the HADDOCK3 Run class and the command line interface."""
 
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
-from biobb_haddock.haddock.common import create_cfg, move_to_container_path, zip_wf_output
+import biobb_haddock.haddock.common as common
 
 
-class Haddock3Run(BiobbObject):
+class Haddock3Run(common.HaddockStepBase):
     """
     | biobb_haddock Haddock3Run
     | Wrapper class for the HADDOCK3 Run module.
     | The HADDOCK3 run module launches the HADDOCK3 execution for docking.
 
     Args:
-        input_folder (dir): Input folder containing all the files defined in the config. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb>`_. Accepted formats: directory (edam:format_1915), zip (edam:format_3987).
-        output_haddock_wf_data (dir): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip>`_. Accepted formats: (edam:format_1915), zip (edam:format_3987).
+        input_haddock_wf_data (dir): Input folder containing all the files defined in the config. File type: input. `Sample folder <https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/input_haddock_wf_data>`_. Accepted formats: directory (edam:format_1915).
+        output_haddock_wf_data (dir): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip>`_. Accepted formats: directory (edam:format_1915).
         haddock_config_path (str) (Optional): Haddock configuration CFG file path. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg>`_. Accepted formats: cfg (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cfg** (*dict*) - ({}) Haddock configuration options specification.
@@ -37,8 +34,8 @@ class Haddock3Run(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_haddock.haddock.haddock3_run import haddock3_run
-            haddock3_run(input_folder='/path/to/input_folder.pdb',
-                         output_haddock_wf_data='/path/to/haddock_output.zip',
+            haddock3_run(input_haddock_wf_data='/path/to/myInputData',
+                         output_haddock_wf_data='/path/to/myOutputData',
                          haddock_config_path='/path/to/myHaddockConfig.cfg',
                          properties=prop)
 
@@ -54,7 +51,7 @@ class Haddock3Run(BiobbObject):
 
     def __init__(
         self,
-        input_folder: str,
+        input_haddock_wf_data: str,
         output_haddock_wf_data: str,
         haddock_config_path: Optional[str] = None,
         properties: Optional[dict] = None,
@@ -69,7 +66,7 @@ class Haddock3Run(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {
-                "input_folder": input_folder,
+                "input_haddock_wf_data": input_haddock_wf_data,
                 "haddock_config_path": haddock_config_path,
             },
             "out": {
@@ -77,61 +74,21 @@ class Haddock3Run(BiobbObject):
             },
         }
 
-        # Properties specific for BB
-        self.output_cfg_path = properties.get("output_cfg_path", "haddock.cfg")
+        # Properties specific for HADDOCK Step
+        self.haddock_step_name = "haddock3_run"
+        # Handle configuration options from properties
         self.cfg = {k: str(v)
                     for k, v in properties.get("cfg", dict()).items()}
-
+        # Global HADDOCK configuration options
+        self.global_cfg = properties.get("global_cfg", dict(postprocess=True))
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3")
-
         # Check the properties
         self.check_init(properties)
 
-    @launchlogger
-    def launch(self) -> int:
-        """Execute the :class:`Haddock3Run <biobb_haddock.haddock.haddock3_run>` object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
-
-        workflow_dict = {"run_dir": self.stage_io_dict["out"]["output_haddock_wf_data"]}
-
-        # Create data dir
-        output_cfg_path = create_cfg(
-            output_cfg_path=self.create_tmp_file('_haddock.cfg'),
-            workflow_dict=workflow_dict,
-            input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
-            cfg_properties_dict=self.cfg,
-            out_log=self.out_log,
-            global_log=self.global_log
-        )
-
-        if self.container_path:
-            fu.log("Container execution enabled", self.out_log)
-            move_to_container_path(self)
-
-        with fu.change_dir(self.stage_io_dict["unique_dir"]):
-            self.cmd = [self.binary_path, output_cfg_path]
-            # Run Biobb block
-            self.run_biobb()
-
-        # Copy files to host
-        if self.io_dict["out"]["output_haddock_wf_data"][-4:] == ".zip":
-            zip_wf_output(self, str(workflow_dict["run_dir"]))
-        else:
-            self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        return self.return_code
-
 
 def haddock3_run(
-        input_folder: str,
+        input_haddock_wf_data: str,
         output_haddock_wf_data: str,
         haddock_config_path: Optional[str] = None,
         properties: Optional[dict] = None,

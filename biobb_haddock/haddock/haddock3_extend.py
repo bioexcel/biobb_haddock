@@ -2,27 +2,23 @@
 
 """Module containing the haddock3 run class and the command line interface."""
 
-import os
-import zipfile
 from typing import Optional
-
-from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
-from biobb_haddock.haddock.common import move_to_container_path, zip_wf_output
+import biobb_haddock.haddock.common as common
 
 
-class Haddock3Extend(BiobbObject):
+class Haddock3Extend(common.HaddockStepBase):
     """
     | biobb_haddock Haddock3Extend
     | Wrapper class for the HADDOCK3 extend module.
     | The `HADDOCK3 extend <https://www.bonvinlab.org/haddock3/tutorials/continuing_runs.html>`_. module continues the HADDOCK3 execution for docking of an already started run.
 
     Args:
-        input_haddock_wf_data_zip (str): Path to the input zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip>`_. Accepted formats: zip (edam:format_3987).
+        input_haddock_wf_data (dir): Path to the input zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip>`_. Accepted formats: zip (edam:format_3987).
         haddock_config_path (str): Haddock configuration CFG file path. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg>`_. Accepted formats: cfg (edam:format_1476).
-        output_haddock_wf_data_zip (str): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip>`_. Accepted formats: zip (edam:format_3987).
+        output_haddock_wf_data (dir): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip>`_. Accepted formats: zip (edam:format_3987).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
+            * **cfg** (*dict*) - ({}) Haddock configuration options specification.
+            * **global_cfg** (*dict*) - ({"postprocess": True}) `Global configuration options <https://www.bonvinlab.org/haddock3-user-manual/global_parameters.html>`_ specification.
             * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -39,9 +35,9 @@ class Haddock3Extend(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_haddock.haddock.haddock3_extend import haddock3_extend
-            haddock3_extend(input_haddock_wf_data_zip='/path/to/myworkflowdata.zip',
+            haddock3_extend(input_haddock_wf_data='/path/to/myworkflowdata.zip',
                             haddock_config_path='/path/to/myHaddockConfig.cfg',
-                            output_haddock_wf_data_zip='/path/to/haddock_output.zip',
+                            output_haddock_wf_data='/path/to/haddock_output.zip',
                             properties=prop)
 
     Info:
@@ -56,9 +52,9 @@ class Haddock3Extend(BiobbObject):
 
     def __init__(
         self,
-        input_haddock_wf_data_zip: str,
+        input_haddock_wf_data: str,
         haddock_config_path: str,
-        output_haddock_wf_data_zip: str,
+        output_haddock_wf_data: str,
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
@@ -71,62 +67,30 @@ class Haddock3Extend(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {
-                "input_haddock_wf_data_zip": input_haddock_wf_data_zip,
+                "input_haddock_wf_data": input_haddock_wf_data,
                 "haddock_config_path": haddock_config_path,
             },
             "out": {
-                "output_haddock_wf_data_zip": output_haddock_wf_data_zip,
+                "output_haddock_wf_data": output_haddock_wf_data,
             },
         }
 
         # Properties specific for BB
+        self.haddock_step_name = "haddock3_extend"
+        # Handle configuration options from properties
+        self.cfg = {k: str(v) for k, v in properties.get("cfg", dict()).items()}
+        # Global HADDOCK configuration options
+        self.global_cfg = properties.get("global_cfg", dict(postprocess=True))
+        # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3")
-
         # Check the properties
         self.check_init(properties)
 
-    @launchlogger
-    def launch(self) -> int:
-        """Execute the :class:`Haddock3Extend <biobb_haddock.haddock.haddock3_extend>` object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
-
-        # Decompress input zip
-        run_dir = fu.create_unique_dir(self.stage_io_dict["unique_dir"])
-        with zipfile.ZipFile(self.stage_io_dict["in"]["input_haddock_wf_data_zip"], 'r') as zip_ref:
-            zip_ref.extractall(run_dir)
-        cwd = os.getcwd()
-        # Move the unzip folder
-        os.chdir(run_dir)
-
-        if self.container_path:
-            fu.log("Container execution enabled", self.out_log)
-            move_to_container_path(self)
-
-        self.cmd = [self.binary_path, self.stage_io_dict["in"]["haddock_config_path"]]
-        self.cmd.extend(["--extend-run", run_dir])
-
-        # Run Biobb block
-        self.run_biobb()
-        # Move back to the stage directory
-        os.chdir(cwd)
-        # Create zip output
-        zip_wf_output(self, run_dir)
-
-        # Remove temporal files
-        self.tmp_files.extend([run_dir])
-        self.remove_tmp_files()
-
-        return self.return_code
-
 
 def haddock3_extend(
-    input_haddock_wf_data_zip: str,
+    input_haddock_wf_data: str,
     haddock_config_path: str,
-    output_haddock_wf_data_zip: str,
+    output_haddock_wf_data: str,
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
