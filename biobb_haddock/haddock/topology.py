@@ -2,11 +2,12 @@
 
 """Module containing the HADDOCK3 Topology class and the command line interface."""
 
+from pathlib import Path
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_haddock.haddock.common import create_cfg, move_to_container_path
+from biobb_haddock.haddock.common import create_cfg, move_to_container_path, zip_wf_output
 
 
 class Topology(BiobbObject):
@@ -17,10 +18,10 @@ class Topology(BiobbObject):
 
     Args:
         mol1_input_pdb_path (str): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2aP_1F3G.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        mol1_output_top_zip_path (str): Path to the output PDB file collection in zip format. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol1_top.zip>`_. Accepted formats: zip (edam:format_3987).
+        mol1_output_top_zip_path (str) (Optional): Path to the output PDB file collection in zip format. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol1_top.zip>`_. Accepted formats: zip (edam:format_3987).
         mol2_input_pdb_path (str) (Optional): Path to the input PDB file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/hpr_ensemble.pdb>`_. Accepted formats: pdb (edam:format_1476).
         mol2_output_top_zip_path (str) (Optional): Path to the output PDB file collection in zip format. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol2_top.zip>`_. Accepted formats: zip (edam:format_3987).
-        output_haddock_wf_data (dir) (Optional): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip>`_. Accepted formats: zip (edam:format_3987).
+        output_haddock_wf_data (dir): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip>`_. Accepted formats: zip (edam:format_3987).
         haddock_config_path (str) (Optional): Haddock configuration CFG file path. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg>`_. Accepted formats: cfg (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cfg** (*dict*) - ({}) Haddock configuration options specification.
@@ -90,7 +91,7 @@ class Topology(BiobbObject):
         # Properties specific for BB
         self.haddock_step_name = "topoaa"
         # Handle configuration options from propierties
-        self.cfg = {k: str(v) for k, v in properties.get("cfg", dict()).items()}
+        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
         # Global HADDOCK configuration options
         self.global_cfg = properties.get("global_cfg", dict(postprocess=False))
         # Properties specific for BB
@@ -107,8 +108,10 @@ class Topology(BiobbObject):
             return 0
         self.stage_files()
 
+        self.run_dir = self.stage_io_dict["out"]["output_haddock_wf_data"]
+        self.run_dir = self.run_dir[:-4] if self.run_dir[-4:] == ".zip" else self.run_dir
         workflow_dict = {
-            "run_dir": self.stage_io_dict["out"]["output_haddock_wf_data"],
+            "run_dir": self.run_dir,
             "molecules": [self.stage_io_dict["in"]["mol1_input_pdb_path"]],
             "haddock_step_name": self.haddock_step_name,
         }
@@ -134,37 +137,34 @@ class Topology(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
+        # Copy output
+        haddock_output_path = Path(f'{workflow_dict["run_dir"]}/0_{self.haddock_step_name}')
+        mol1_name = str(Path(self.io_dict["in"]["mol1_input_pdb_path"]).stem)
+        mol1_output_file_list = list(
+            haddock_output_path.glob(mol1_name + r"*_haddock.pdb*")
+        )
+        fu.zip_list(
+            self.io_dict["out"]["mol1_output_top_zip_path"],
+            mol1_output_file_list,
+        )
+
+        if self.io_dict["out"].get("mol1_output_top_zip_path"):
+            mol2_name = str(Path(self.io_dict["in"]["mol2_input_pdb_path"]).stem)
+            mol2_output_file_list = list(
+                haddock_output_path.glob(mol2_name + r"*_haddock.pdb*")
+            )
+            fu.zip_list(
+                self.io_dict["out"]["mol2_output_top_zip_path"],
+                mol2_output_file_list,
+                self.out_log,
+            )
+
+        # Create zip output
+        if self.stage_io_dict["out"]["output_haddock_wf_data"][-4:] == ".zip":
+            zip_wf_output(self)
+
         # Copy files to host
         self.copy_to_host()
-
-        # Copy output
-        # haddock_output_path = Path(
-        #     str(workflow_dict["run_dir"]), "0_" + self.haddock_step_name
-        # )
-        # mol1_name = str(Path(self.io_dict["in"]["mol1_input_pdb_path"]).stem)
-        # mol1_output_file_list = list(
-        #     haddock_output_path.glob(mol1_name + r"*_haddock.pdb*")
-        # )
-        # fu.zip_list(
-        #     self.io_dict["out"]["mol1_output_top_zip_path"],
-        #     mol1_output_file_list,
-        #     self.out_log,
-        # )
-
-        # if self.io_dict["out"].get("mol1_output_top_zip_path"):
-        #     mol2_name = str(Path(self.io_dict["in"]["mol2_input_pdb_path"]).stem)
-        #     mol2_output_file_list = list(
-        #         haddock_output_path.glob(mol2_name + r"*_haddock.pdb*")
-        #     )
-        #     fu.zip_list(
-        #         self.io_dict["out"]["mol2_output_top_zip_path"],
-        #         mol2_output_file_list,
-        #         self.out_log,
-        #     )
-
-        # # Create zip output
-        # if self.io_dict["out"].get("output_haddock_wf_data_zip"):
-        #     zip_wf_output(self, str(workflow_dict["run_dir"]))
 
         # Remove temporary files
         self.remove_tmp_files()
@@ -178,7 +178,6 @@ def topology(
     mol1_output_top_zip_path: Optional[str] = None,
     mol2_input_pdb_path: Optional[str] = None,
     mol2_output_top_zip_path: Optional[str] = None,
-    output_haddock_wf_data_zip: Optional[str] = None,
     haddock_config_path: Optional[str] = None,
     properties: Optional[dict] = None,
     **kwargs,

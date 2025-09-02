@@ -79,9 +79,8 @@ class ClustFCC(common.HaddockStepBase):
         }
         # Properties specific for BB
         self.haddock_step_name = "clustfcc"
-        # Handle configuration options from propierties
-        self.cfg = {k: str(v) for k, v in properties.get("cfg", dict()).items()}
-        # Handle configuration options from arguments
+        # Handle configuration options from properties
+        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
         # Global HADDOCK configuration options
         self.global_cfg = properties.get("global_cfg", dict(postprocess=False))
         # Properties specific for BB
@@ -90,6 +89,7 @@ class ClustFCC(common.HaddockStepBase):
         self.check_init(properties)
 
     def _handle_step_output(self):
+        """Handle how the output files from the step are copied to host."""
         if output_cluster_zip_path := self.io_dict["out"].get("output_cluster_zip_path"):
             self.copy_step_output(
                 lambda path: str(path.name) not in ["io.json", "params.cfg"],

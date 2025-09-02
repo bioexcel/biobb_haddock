@@ -84,10 +84,7 @@ class CapriEval(common.HaddockStepBase):
         # Properties specific for HADDOCK Step
         self.haddock_step_name = "caprieval"
         # Handle configuration options from properties
-        self.cfg = {k: str(v) for k, v in properties.get("cfg", dict()).items()}
-        # Handle configuration options from arguments
-        if reference_pdb_path:
-            self.cfg["reference_fname"] = reference_pdb_path
+        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
         # Global HADDOCK configuration options
         self.global_cfg = properties.get("global_cfg", dict(postprocess=True))
         # Properties specific for BB
@@ -95,7 +92,13 @@ class CapriEval(common.HaddockStepBase):
         # Check the properties
         self.check_init(properties)
 
+    def _handle_config_arguments(self):
+        """Handle configuration options from arguments."""
+        if self.io_dict["in"].get("reference_fname"):
+            self.cfg["reference_fname"] = self.stage_io_dict["in"].get("reference_fname")
+
     def _handle_step_output(self):
+        """Handle how the output files from the step are copied to host."""
         if output_evaluation_zip_path := self.io_dict["out"].get("output_evaluation_zip_path"):
             self.copy_step_output(
                 lambda path: str(path).endswith(("izone", "aln", "tsv")),

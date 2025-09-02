@@ -90,7 +90,7 @@ class FlexRef(common.HaddockStepBase):
         # Properties specific for BB
         self.haddock_step_name = "flexref"
         # Handle configuration options from propierties
-        self.cfg = {k: str(v) for k, v in properties.get("cfg", dict()).items()}
+        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
         # Handle configuration options from arguments
         if ambig_restraints_table_path:
             self.cfg["ambig_fname"] = ambig_restraints_table_path
@@ -105,7 +105,17 @@ class FlexRef(common.HaddockStepBase):
         # Check the properties
         self.check_init(properties)
 
+    def _handle_config_arguments(self):
+        """Handle configuration options from arguments."""
+        if self.io_dict["in"].get("ambig_restraints_table_path"):
+            self.cfg["ambig_fname"] = self.stage_io_dict["in"].get("ambig_restraints_table_path")
+        if self.io_dict["in"].get("unambig_restraints_table_path"):
+            self.cfg["unambig_fname"] = self.stage_io_dict["in"].get("unambig_restraints_table_path")
+        if self.io_dict["in"].get("hb_restraints_table_path"):
+            self.cfg["hbond_fname"] = self.stage_io_dict["in"].get("hb_restraints_table_path")
+
     def _handle_step_output(self):
+        """Handle how the output files from the step are copied to host."""
         if refinement_output_zip_path := self.io_dict["out"].get("refinement_output_zip_path"):
             self.copy_step_output(
                 lambda path: path.match(self.haddock_step_name + r"*.pdb*"),

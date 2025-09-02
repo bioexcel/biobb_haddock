@@ -78,7 +78,7 @@ class Haddock3Extend(common.HaddockStepBase):
         # Properties specific for BB
         self.haddock_step_name = "haddock3_extend"
         # Handle configuration options from properties
-        self.cfg = {k: str(v) for k, v in properties.get("cfg", dict()).items()}
+        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
         # Global HADDOCK configuration options
         self.global_cfg = properties.get("global_cfg", dict(postprocess=True))
         # Properties specific for BB
@@ -96,6 +96,7 @@ def haddock3_extend(
 ) -> int:
     """Create :class:`Haddock3Extend <biobb_haddock.haddock.haddock3_extend>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.haddock3_extend.launch>` method."""
+    # Launch method inherited from HaddockStepBase
     return Haddock3Extend(**dict(locals())).launch()
 
 

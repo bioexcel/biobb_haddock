@@ -52,7 +52,7 @@ class HaddockStepBase(BiobbObject):
             for file in output:
                 rel_path = str(file.rel_path).split('/')
                 output_file_list.extend(list(Path(self.run_dir+'/'+rel_path[-2]).glob(rel_path[-1]+'*')))
-        if len(output_file_list) > 0:
+        if len(output_file_list) == 0:
             fu.log("No output files found matching the criteria.", self.out_log, self.global_log)
         fu.zip_list(output_zip_path, output_file_list, self.out_log)
 
@@ -72,13 +72,18 @@ class HaddockStepBase(BiobbObject):
 
         self.run_dir = self.stage_io_dict["out"]["output_haddock_wf_data"]
         if self.stage_io_dict["in"]["input_haddock_wf_data"] == self.run_dir:
+            # Different I/O folder
             shutil.copytree(self.stage_io_dict["in"]["input_haddock_wf_data"],
                             self.run_dir, dirs_exist_ok=True)
         else:
+            # Same I/O folder
             os.rename(self.stage_io_dict["in"]["input_haddock_wf_data"], self.run_dir)
 
         workflow_dict = {"haddock_step_name": self.haddock_step_name}
         workflow_dict.update(self.global_cfg)
+
+        if hasattr(self, '_handle_config_arguments'):
+            self._handle_config_arguments()
 
         # Create workflow configuration
         self.output_cfg_path = create_cfg(
@@ -86,6 +91,8 @@ class HaddockStepBase(BiobbObject):
             workflow_dict=workflow_dict,
             input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
             cfg_properties_dict=self.cfg,
+            out_log=self.out_log,
+            global_log=self.global_log,
         )
 
         if self.container_path:
@@ -102,7 +109,7 @@ class HaddockStepBase(BiobbObject):
         if hasattr(self, '_handle_step_output'):
             self._handle_step_output()
         if self.io_dict["out"]["output_haddock_wf_data"][-4:] == ".zip":
-            zip_wf_output(self, str(workflow_dict["run_dir"]))
+            zip_wf_output(self)
         else:
             self.copy_to_host()
 
@@ -154,7 +161,7 @@ def create_cfg(
         # Apply custom properties to the step
         if cfg_properties_dict:
             for k, v in cfg_properties_dict.items():
-                fu.log(f"CFG: {k} = {v}", out_log, global_log)
+                fu.log(f"CFG from properties: {k} = {v}", out_log, global_log)
                 cfg_dict[target_key][k] = v
     # Multiple steps: haddock3_run and haddock3_extend
     else:
@@ -182,9 +189,9 @@ def create_cfg(
 
     # Add molecules and run_dir if provided
     for key, value in workflow_dict.items():
-        fu.log(f"CFG: {key} = {value}", out_log, global_log)
         if key == 'haddock_step_name' or key in haddock_2_wf.values():
             continue
+        fu.log(f"CFG: {key} = {value}", out_log, global_log)
         cfg_dict[key] = value
 
     # Use haddock save
@@ -245,10 +252,6 @@ def move_to_container_path(obj, run_dir=None):
 
 def zip_wf_output(obj):
     """Zip all the files in the run directory and save it to the output path."""
-    fu.log(
-        f"Zipping {obj.run_dir} to {str(Path(obj.io_dict['out']['output_haddock_wf_data']).with_suffix(''))} ",
-        obj.out_log, obj.global_log)
-
-    shutil.make_archive(
-        str(Path(obj.io_dict["out"]["output_haddock_wf_data"]).with_suffix("")),
-        "zip", obj.run_dir)
+    dest_path = str(Path(obj.io_dict["out"]["output_haddock_wf_data"]).with_suffix(''))
+    fu.log(f"Zipping {obj.run_dir} to {dest_path} ", obj.out_log, obj.global_log)
+    shutil.make_archive(dest_path, "zip", obj.run_dir)

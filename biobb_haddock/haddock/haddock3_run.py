@@ -77,8 +77,7 @@ class Haddock3Run(common.HaddockStepBase):
         # Properties specific for HADDOCK Step
         self.haddock_step_name = "haddock3_run"
         # Handle configuration options from properties
-        self.cfg = {k: str(v)
-                    for k, v in properties.get("cfg", dict()).items()}
+        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
         # Global HADDOCK configuration options
         self.global_cfg = properties.get("global_cfg", dict(postprocess=True))
         # Properties specific for BB
@@ -96,6 +95,7 @@ def haddock3_run(
 ) -> int:
     """Create :class:`Haddock3Run <biobb_haddock.haddock.haddock3_run>` class and
     execute the :meth:`launch() <biobb_haddock.haddock.haddock3_run.launch>` method."""
+    # Launch method inherited from HaddockStepBase
     return Haddock3Run(**dict(locals())).launch()
 
 

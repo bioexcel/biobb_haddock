@@ -13,8 +13,8 @@ class TestTopology():
 
     def test_topology(self):
         topology(properties=self.properties, **self.paths)
-        # assert fx.not_empty(self.paths['mol1_output_top_zip_path'])
-        # assert fx.not_empty(self.paths['mol2_output_top_zip_path'])
+        assert fx.not_empty(self.paths['mol1_output_top_zip_path'])
+        assert fx.not_empty(self.paths['mol2_output_top_zip_path'])
         assert fx.not_empty(self.paths['output_haddock_wf_data'])
         # assert fx.equal(self.paths['mol1_output_top_zip_path'], self.paths['ref_mol1_output_top_zip_path'])
         # assert fx.equal(self.paths['mol2_output_top_zip_path'], self.paths['ref_mol2_output_top_zip_path'])
