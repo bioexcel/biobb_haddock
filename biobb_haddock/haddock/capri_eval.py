@@ -2,6 +2,7 @@
 
 """Module containing the HADDOCK3 CapriEval class and the command line interface."""
 
+from os.path import abspath
 from typing import Optional
 import biobb_haddock.haddock.common as common
 
@@ -95,7 +96,7 @@ class CapriEval(common.HaddockStepBase):
     def _handle_config_arguments(self):
         """Handle configuration options from arguments."""
         if self.io_dict["in"].get("reference_fname"):
-            self.cfg["reference_fname"] = self.stage_io_dict["in"].get("reference_fname")
+            self.cfg["reference_fname"] = abspath(self.stage_io_dict["in"].get("reference_fname"))
 
     def _handle_step_output(self):
         """Handle how the output files from the step are copied to host."""

@@ -2,6 +2,7 @@
 
 """Module containing the HADDOCK3 FlexRef class and the command line interface."""
 
+from os.path import abspath
 from typing import Optional
 import biobb_haddock.haddock.common as common
 
@@ -108,11 +109,11 @@ class FlexRef(common.HaddockStepBase):
     def _handle_config_arguments(self):
         """Handle configuration options from arguments."""
         if self.io_dict["in"].get("ambig_restraints_table_path"):
-            self.cfg["ambig_fname"] = self.stage_io_dict["in"].get("ambig_restraints_table_path")
+            self.cfg["ambig_fname"] = abspath(self.stage_io_dict["in"].get("ambig_restraints_table_path"))
         if self.io_dict["in"].get("unambig_restraints_table_path"):
-            self.cfg["unambig_fname"] = self.stage_io_dict["in"].get("unambig_restraints_table_path")
+            self.cfg["unambig_fname"] = abspath(self.stage_io_dict["in"].get("unambig_restraints_table_path"))
         if self.io_dict["in"].get("hb_restraints_table_path"):
-            self.cfg["hbond_fname"] = self.stage_io_dict["in"].get("hb_restraints_table_path")
+            self.cfg["hbond_fname"] = abspath(self.stage_io_dict["in"].get("hb_restraints_table_path"))
 
     def _handle_step_output(self):
         """Handle how the output files from the step are copied to host."""

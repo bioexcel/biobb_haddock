@@ -54,7 +54,8 @@ class HaddockStepBase(BiobbObject):
                 output_file_list.extend(list(Path(self.run_dir+'/'+rel_path[-2]).glob(rel_path[-1]+'*')))
         if len(output_file_list) == 0:
             fu.log("No output files found matching the criteria.", self.out_log, self.global_log)
-        fu.zip_list(output_zip_path, output_file_list, self.out_log)
+        else:
+            fu.zip_list(output_zip_path, output_file_list, self.out_log)
 
     @launchlogger
     def launch(self) -> int:
@@ -71,13 +72,25 @@ class HaddockStepBase(BiobbObject):
             self.stage_io_dict["in"]["input_haddock_wf_data"] = new_input
 
         self.run_dir = self.stage_io_dict["out"]["output_haddock_wf_data"]
-        if self.stage_io_dict["in"]["input_haddock_wf_data"] == self.run_dir:
+        if self.stage_io_dict["in"]["input_haddock_wf_data"] != self.run_dir:
             # Different I/O folder
             shutil.copytree(self.stage_io_dict["in"]["input_haddock_wf_data"],
                             self.run_dir, dirs_exist_ok=True)
         else:
             # Same I/O folder
             os.rename(self.stage_io_dict["in"]["input_haddock_wf_data"], self.run_dir)
+            # Check if there are more than 9 numbered folders and rename them to add leading zeros
+            input_wf = self.io_dict["in"]["input_haddock_wf_data"]
+            numbered_dirs = []
+            for item in os.listdir(input_wf):
+                item_path = os.path.join(input_wf, item)
+                if os.path.isdir(item_path) and item[0].isdigit():
+                    numbered_dirs.append(item)
+
+            if len(numbered_dirs) in [10, 100, 1000]:
+                for dirname in numbered_dirs:
+                    os.rename(os.path.join(input_wf, dirname),
+                              os.path.join(input_wf, f"0{dirname}"))
 
         workflow_dict = {"haddock_step_name": self.haddock_step_name}
         workflow_dict.update(self.global_cfg)
@@ -99,7 +112,7 @@ class HaddockStepBase(BiobbObject):
             fu.log("Container execution enabled", self.out_log)
             move_to_container_path(self, self.run_dir)
 
-        self.cmd = [self.binary_path, self.output_cfg_path, "--extend-run", self.run_dir]
+        self.cmd = [self.binary_path, self.output_cfg_path, "--extend-run", os.path.abspath(self.run_dir)]
 
         # Run Biobb block
         with fu.change_dir(self.run_dir):

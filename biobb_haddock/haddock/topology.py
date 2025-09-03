@@ -165,7 +165,6 @@ class Topology(BiobbObject):
 
         # Copy files to host
         self.copy_to_host()
-
         # Remove temporary files
         self.remove_tmp_files()
 
