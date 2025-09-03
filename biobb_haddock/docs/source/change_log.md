@@ -4,6 +4,13 @@
 
 ### New features
 
+* [UPDATE]: Use biobb_common 5.1.1
+* [FEATURE]: Use input/output folders as arguments instead of zip folders.
+
+## What's new in version [5.1.0](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.1.0)?
+
+### New features
+
 * [UPDATE]: Use haddock3 2025.5
 * [FEAT]: Add global_cfg to properties.
 * [FIX](https://github.com/bioexcel/biobb_haddock/issues/4): Extend pipe terminal compatibility.

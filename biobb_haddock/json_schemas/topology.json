@@ -18,7 +18,7 @@
     },
     "required": [
         "mol1_input_pdb_path",
-        "mol1_output_top_zip_path"
+        "output_haddock_wf_data"
     ],
     "properties": {
         "mol1_input_pdb_path": {

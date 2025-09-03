@@ -87,7 +87,7 @@ class HaddockStepBase(BiobbObject):
                 if os.path.isdir(item_path) and item[0].isdigit():
                     numbered_dirs.append(item)
 
-            if len(numbered_dirs) in [10, 100, 1000]:
+            if len(numbered_dirs) in [10, 100, 1000] and not self.disable_sandbox:
                 for dirname in numbered_dirs:
                     os.rename(os.path.join(input_wf, dirname),
                               os.path.join(input_wf, f"0{dirname}"))
