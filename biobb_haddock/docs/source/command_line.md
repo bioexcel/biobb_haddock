@@ -21,16 +21,18 @@ capri_eval -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data
       --output_evaluation_zip_path OUTPUT_EVALUATION_ZIP_PATH
-                            Path to the output PDB file collection in zip format
+                            Path to the output PDB file collection in zip format. Accepted formats: zip.
       --reference_pdb_path REFERENCE_PDB_PATH
-                            Path to the input PDB file containing an structure for reference
+                            Path to the input PDB file containing an structure for reference. Accepted formats: pdb.
       --haddock_config_path HADDOCK_CONFIG_PATH
-                            Haddock configuration CFG file path
+                            Haddock configuration CFG file path. Accepted formats: cfg.
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -96,14 +98,16 @@ clust_fcc -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data
       --output_cluster_zip_path OUTPUT_CLUSTER_ZIP_PATH
-                            Path to the output PDB file collection in zip format
+                            Path to the output PDB file collection in zip format. Accepted formats: zip.
       --haddock_config_path HADDOCK_CONFIG_PATH
-                            Haddock configuration CFG file path
+                            Haddock configuration CFG file path. Accepted formats: cfg.
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -168,14 +172,16 @@ contact_map -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data
       --output_contactmap_zip_path OUTPUT_CONTACTMAP_ZIP_PATH
-                            Path to the output contact map files in zip format
+                            Path to the output contact map files in zip format. Accepted formats: zip.
       --haddock_config_path HADDOCK_CONFIG_PATH
-                            Haddock configuration CFG file path
+                            Haddock configuration CFG file path. Accepted formats: cfg.
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -240,20 +246,22 @@ em_ref -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data
       --refinement_output_zip_path REFINEMENT_OUTPUT_ZIP_PATH
-                            Path to the output PDB file collection in zip format
+                            Path to the output PDB file collection in zip format. Accepted formats: zip.
       --ambig_restraints_table_path AMBIG_RESTRAINTS_TABLE_PATH
-                            Path to the input TBL file containing a list of ambiguous restraints for docking
+                            Path to the input TBL file containing a list of ambiguous restraints for docking. Accepted formats: tbl.
       --unambig_restraints_table_path UNAMBIG_RESTRAINTS_TABLE_PATH
-                            Path to the input TBL file containing a list of unambiguous restraints for docking
+                            Path to the input TBL file containing a list of unambiguous restraints for docking. Accepted formats: tbl.
       --hb_restraints_table_path HB_RESTRAINTS_TABLE_PATH
-                            Path to the input TBL file containing a list of hydrogen bond restraints for docking
+                            Path to the input TBL file containing a list of hydrogen bond restraints for docking. Accepted formats: tbl.
       --haddock_config_path HADDOCK_CONFIG_PATH
-                            Haddock configuration CFG file path
+                            Haddock configuration CFG file path. Accepted formats: cfg.
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -321,20 +329,22 @@ flex_ref -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data
       --refinement_output_zip_path REFINEMENT_OUTPUT_ZIP_PATH
-                            Path to the output PDB file collection in zip format
+                            Path to the output PDB file collection in zip format. Accepted formats: zip.
       --ambig_restraints_table_path AMBIG_RESTRAINTS_TABLE_PATH
-                            Path to the input TBL file containing a list of ambiguous restraints for docking
+                            Path to the input TBL file containing a list of ambiguous restraints for docking. Accepted formats: tbl.
       --unambig_restraints_table_path UNAMBIG_RESTRAINTS_TABLE_PATH
-                            Path to the input TBL file containing a list of unambiguous restraints for docking
+                            Path to the input TBL file containing a list of unambiguous restraints for docking. Accepted formats: tbl.
       --hb_restraints_table_path HB_RESTRAINTS_TABLE_PATH
-                            Path to the input TBL file containing a list of hydrogen bond restraints for docking
+                            Path to the input TBL file containing a list of hydrogen bond restraints for docking. Accepted formats: tbl.
       --haddock_config_path HADDOCK_CONFIG_PATH
-                            Haddock configuration CFG file path
+                            Haddock configuration CFG file path. Accepted formats: cfg.
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -402,12 +412,14 @@ haddock3_accessibility -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      -i INPUT_PDB_PATH, --input_pdb_path INPUT_PDB_PATH
-                            Path to the input PDB file
-      --output_accessibility_path OUTPUT_ACCESSIBILITY_PATH
-                            Path to the output file with accessibility information
       --output_actpass_path OUTPUT_ACTPASS_PATH
-                            Path to the output file with active/passive residues to be used as haddock3 restraint information
+                            Path to the output file with active/passive residues to be used as haddock3 restraint information. Accepted formats: txt, dat, out.
+    
+    required arguments:
+      -i INPUT_PDB_PATH, --input_pdb_path INPUT_PDB_PATH
+                            Path to the input PDB file. Accepted formats: pdb.
+      --output_accessibility_path OUTPUT_ACCESSIBILITY_PATH
+                            Path to the output file with accessibility information. Accepted formats: txt, dat, out.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -473,12 +485,14 @@ haddock3_actpass_to_ambig -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
       --input_actpass1_path INPUT_ACTPASS1_PATH
-                            Path to the first input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues
+                            Path to the first input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues. Accepted formats: txt, dat, in, pass.
       --input_actpass2_path INPUT_ACTPASS2_PATH
-                            Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues
+                            Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues. Accepted formats: txt, dat, in, pass.
       -o OUTPUT_TBL_PATH, --output_tbl_path OUTPUT_TBL_PATH
-                            Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information
+                            Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information. Accepted formats: tbl, txt, out.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -543,12 +557,14 @@ haddock3_extend -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
       --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input zipball containing all the current Haddock workflow data
+                            Path to the input zipball containing all the current Haddock workflow data. Accepted formats: zip.
       -i HADDOCK_CONFIG_PATH, --haddock_config_path HADDOCK_CONFIG_PATH
-                            Haddock configuration CFG file path
+                            Haddock configuration CFG file path. Accepted formats: cfg.
       --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output zipball containing all the current Haddock workflow data
+                            Path to the output zipball containing all the current Haddock workflow data. Accepted formats: zip.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -612,12 +628,14 @@ haddock3_passive_from_active -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --input_pdb_path INPUT_PDB_PATH
-                            Path to the input PDB structure file
-      -o OUTPUT_ACTPASS_PATH, --output_actpass_path OUTPUT_ACTPASS_PATH
-                            Path to the output file with list of passive residues
       --input_active_list_path INPUT_ACTIVE_LIST_PATH
-                            Path to the input file with list of active residues
+                            Path to the input file with list of active residues. Accepted formats: txt, dat, list.
+    
+    required arguments:
+      --input_pdb_path INPUT_PDB_PATH
+                            Path to the input PDB structure file. Accepted formats: pdb.
+      -o OUTPUT_ACTPASS_PATH, --output_actpass_path OUTPUT_ACTPASS_PATH
+                            Path to the output file with list of passive residues. Accepted formats: txt, dat, list, out.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -685,10 +703,12 @@ haddock3_restrain_bodies -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
-                            Path to the input PDB structure to be restrained
+                            Path to the input PDB structure to be restrained. Accepted formats: pdb.
       -o OUTPUT_TBL_PATH, --output_tbl_path OUTPUT_TBL_PATH
-                            Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information
+                            Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information. Accepted formats: tbl, txt, out.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -751,12 +771,14 @@ haddock3_run -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Input folder containing all the files defined in the config
-      -o OUTPUT_HADDOCK_WF_DATA, --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output zipball containing all the current Haddock workflow data
       --haddock_config_path HADDOCK_CONFIG_PATH
-                            Haddock configuration CFG file path
+                            Haddock configuration CFG file path. Accepted formats: cfg.
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Input folder containing all the files defined in the config. Accepted formats: directory.
+      -o OUTPUT_HADDOCK_WF_DATA, --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output zipball containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -819,20 +841,22 @@ rigid_body -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data
-      --docking_output_zip_path DOCKING_OUTPUT_ZIP_PATH
-                            Path to the output PDB file collection in zip format
       --ambig_restraints_table_path AMBIG_RESTRAINTS_TABLE_PATH
-                            Path to the input TBL file containing a list of ambiguous restraints for docking
+                            Path to the input TBL file containing a list of ambiguous restraints for docking. Accepted formats: tbl.
       --unambig_restraints_table_path UNAMBIG_RESTRAINTS_TABLE_PATH
-                            Path to the input TBL file containing a list of unambiguous restraints for docking
+                            Path to the input TBL file containing a list of unambiguous restraints for docking. Accepted formats: tbl.
       --hb_restraints_table_path HB_RESTRAINTS_TABLE_PATH
-                            Path to the input TBL file containing a list of hydrogen bond restraints for docking
+                            Path to the input TBL file containing a list of hydrogen bond restraints for docking. Accepted formats: tbl.
       --haddock_config_path HADDOCK_CONFIG_PATH
-                            Haddock configuration CFG file path
+                            Haddock configuration CFG file path. Accepted formats: cfg.
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
+      --docking_output_zip_path DOCKING_OUTPUT_ZIP_PATH
+                            Path to the output PDB file collection in zip format. Accepted formats: zip.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -900,14 +924,16 @@ sele_top -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data
       --output_selection_zip_path OUTPUT_SELECTION_ZIP_PATH
-                            Path to the output PDB file collection in zip format
+                            Path to the output PDB file collection in zip format. Accepted formats: zip.
       --haddock_config_path HADDOCK_CONFIG_PATH
-                            Haddock configuration CFG file path
+                            Haddock configuration CFG file path. Accepted formats: cfg.
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -972,14 +998,16 @@ sele_top_clusts -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data
       --output_selection_zip_path OUTPUT_SELECTION_ZIP_PATH
-                            Path to the output PDB file collection in zip format
+                            Path to the output PDB file collection in zip format. Accepted formats: zip.
       --haddock_config_path HADDOCK_CONFIG_PATH
-                            Haddock configuration CFG file path
+                            Haddock configuration CFG file path. Accepted formats: cfg.
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -1044,18 +1072,20 @@ topology -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --mol1_input_pdb_path MOL1_INPUT_PDB_PATH
-                            Path to the input PDB file
       --mol1_output_top_zip_path MOL1_OUTPUT_TOP_ZIP_PATH
-                            Path to the output PDB file collection in zip format
+                            Path to the output PDB file collection in zip format. Accepted formats: zip.
       --mol2_input_pdb_path MOL2_INPUT_PDB_PATH
-                            Path to the input PDB file
+                            Path to the input PDB file. Accepted formats: pdb.
       --mol2_output_top_zip_path MOL2_OUTPUT_TOP_ZIP_PATH
-                            Path to the output PDB file collection in zip format
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output zipball containing all the current Haddock workflow data
+                            Path to the output PDB file collection in zip format. Accepted formats: zip.
       --haddock_config_path HADDOCK_CONFIG_PATH
-                            Haddock configuration CFG file path
+                            Haddock configuration CFG file path. Accepted formats: cfg.
+    
+    required arguments:
+      --mol1_input_pdb_path MOL1_INPUT_PDB_PATH
+                            Path to the input PDB file. Accepted formats: pdb.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output zipball containing all the current Haddock workflow data. Accepted formats: zip.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
