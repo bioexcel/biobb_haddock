@@ -116,13 +116,13 @@
         }
     ],
     "dep_pypi": [
-        "install_requires=['biobb_common==5.0.0']",
+        "install_requires=['biobb_common==5.1.1']",
         "python_requires='>=3.9'"
     ],
     "dep_conda": [
         "python >=3.9",
-        "biobb_common ==5.0.0",
-        "haddock_biobb ==3.0.7"
+        "biobb_common ==5.1.1",
+        "haddock_biobb ==2025.5.0"
     ],
     "keywords": [
         "haddock",
