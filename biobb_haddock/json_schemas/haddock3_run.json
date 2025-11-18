@@ -25,7 +25,7 @@
             "type": "dir",
             "description": "Input folder containing all the files defined in the config",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/input_haddock_wf_data",
+            "sample": "https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/input_folder",
             "enum": [
                 ".*\\.directory$"
             ],
@@ -41,7 +41,7 @@
             "type": "dir",
             "description": "Path to the output zipball containing all the current Haddock workflow data",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip",
+            "sample": null,
             "enum": [
                 ".*\\.directory$"
             ],

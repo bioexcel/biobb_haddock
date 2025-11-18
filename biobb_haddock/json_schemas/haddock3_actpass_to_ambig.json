@@ -26,7 +26,7 @@
             "type": "string",
             "description": "Path to the first input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
             "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass1.txt",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/haddock_actpass1.pass",
             "enum": [
                 ".*\\.txt$",
                 ".*\\.dat$",
@@ -60,7 +60,7 @@
             "type": "string",
             "description": "Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues",
             "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/haddock_actpass2.txt",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/haddock_actpass2.pass",
             "enum": [
                 ".*\\.txt$",
                 ".*\\.dat$",

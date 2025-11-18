@@ -41,7 +41,7 @@
             "type": "dir",
             "description": "Path to the output directory containing all the current Haddock workflow data",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip",
+            "sample": null,
             "enum": [
                 ".*\\.directory$"
             ],

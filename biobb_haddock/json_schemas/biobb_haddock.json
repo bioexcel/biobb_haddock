@@ -9,7 +9,6 @@
     "version": "5.1.1",
     "rest": true,
     "tools": [
-
         {
             "block": "CapriEval",
             "tool": "Haddock CapriEval",

@@ -13,8 +13,8 @@ class Haddock3Run(common.HaddockStepBase):
     | The HADDOCK3 run module launches the HADDOCK3 execution for docking.
 
     Args:
-        input_haddock_wf_data (dir): Input folder containing all the files defined in the config. File type: input. `Sample folder <https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/input_haddock_wf_data>`_. Accepted formats: directory (edam:format_1915).
-        output_haddock_wf_data (dir): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip>`_. Accepted formats: directory (edam:format_1915).
+        input_haddock_wf_data (dir): Input folder containing all the files defined in the config. File type: input. `Sample folder <https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/input_folder>`_. Accepted formats: directory (edam:format_1915).
+        output_haddock_wf_data (dir): Path to the output zipball containing all the current Haddock workflow data. File type: output. Accepted formats: directory (edam:format_1915).
         haddock_config_path (str) (Optional): Haddock configuration CFG file path. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg>`_. Accepted formats: cfg (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cfg** (*dict*) - ({}) Haddock configuration options specification.
