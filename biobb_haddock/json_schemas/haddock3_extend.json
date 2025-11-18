@@ -1,0 +1,154 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/haddock3_extend",
+    "name": "biobb_haddock Haddock3Extend",
+    "title": "Wrapper class for the HADDOCK3 extend module.",
+    "description": "The HADDOCK3 extend. module continues the HADDOCK3 execution for docking of an already started run.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "HADDOCK3",
+            "version": "2025.5",
+            "license": "Apache-2.0"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "input_haddock_wf_data",
+        "haddock_config_path",
+        "output_haddock_wf_data"
+    ],
+    "properties": {
+        "input_haddock_wf_data": {
+            "type": "dir",
+            "description": "Path to the input zipball containing all the current Haddock workflow data",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip",
+            "enum": [
+                ".*\\.zip$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Path to the input zipball containing all the current Haddock workflow data",
+                    "edam": "format_3987"
+                }
+            ]
+        },
+        "haddock_config_path": {
+            "type": "string",
+            "description": "Haddock configuration CFG file path",
+            "filetype": "input",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg",
+            "enum": [
+                ".*\\.cfg$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.cfg$",
+                    "description": "Haddock configuration CFG file path",
+                    "edam": "format_1476"
+                }
+            ]
+        },
+        "output_haddock_wf_data": {
+            "type": "dir",
+            "description": "Path to the output zipball containing all the current Haddock workflow data",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip",
+            "enum": [
+                ".*\\.zip$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Path to the output zipball containing all the current Haddock workflow data",
+                    "edam": "format_3987"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "cfg": {
+                    "type": "object",
+                    "default": {},
+                    "wf_prop": false,
+                    "description": "Haddock configuration options specification."
+                },
+                "global_cfg": {
+                    "type": "object",
+                    "default": {
+                        "postprocess": true
+                    },
+                    "wf_prop": false,
+                    "description": "Global configuration options specification."
+                },
+                "binary_path": {
+                    "type": "string",
+                    "default": "haddock",
+                    "wf_prop": false,
+                    "description": "Path to the haddock haddock executable binary."
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                },
+                "sandbox_path": {
+                    "type": "string",
+                    "default": "./",
+                    "wf_prop": true,
+                    "description": "Parent path to the sandbox directory."
+                },
+                "container_path": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Path to the binary executable of your container."
+                },
+                "container_image": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Container Image identifier."
+                },
+                "container_volume_path": {
+                    "type": "string",
+                    "default": "/data",
+                    "wf_prop": false,
+                    "description": "Path to an internal directory in the container."
+                },
+                "container_working_dir": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Path to the internal CWD in the container."
+                },
+                "container_user_id": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "User number id to be mapped inside the container."
+                },
+                "container_shell_path": {
+                    "type": "string",
+                    "default": "/bin/bash",
+                    "wf_prop": false,
+                    "description": "Path to the binary executable of the container shell."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

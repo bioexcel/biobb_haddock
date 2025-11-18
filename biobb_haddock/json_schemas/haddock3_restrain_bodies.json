@@ -1,0 +1,147 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/haddock3_restrain_bodies",
+    "name": "biobb_haddock Haddock3RestrainBodies",
+    "title": "Wrapper class for the Haddock-Restraints restrain_bodies module.",
+    "description": "Haddock-Restraints restrain_bodies creates distance restraints to lock several chains together. Useful to avoid unnatural flexibility or movement due to sequence/numbering gaps.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "Haddock3-restraints",
+            "version": "2025.5",
+            "license": "Apache-2.0"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "input_structure_path",
+        "output_tbl_path"
+    ],
+    "properties": {
+        "input_structure_path": {
+            "type": "string",
+            "description": "Path to the input PDB structure to be restrained",
+            "filetype": "input",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/4G6K_clean.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Path to the input PDB structure to be restrained",
+                    "edam": "format_1476"
+                }
+            ]
+        },
+        "output_tbl_path": {
+            "type": "string",
+            "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
+            "filetype": "output",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/antibody-unambig.tbl",
+            "enum": [
+                ".*\\.tbl$",
+                ".*\\.txt$",
+                ".*\\.out$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.tbl$",
+                    "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.txt$",
+                    "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.out$",
+                    "description": "Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information",
+                    "edam": "format_2330"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "exclude": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Chains to exclude from the calculation."
+                },
+                "verbose": {
+                    "type": "integer",
+                    "default": 0,
+                    "wf_prop": false,
+                    "description": "Tune verbosity of the output."
+                },
+                "binary_path": {
+                    "type": "string",
+                    "default": "haddock3-restraints",
+                    "wf_prop": false,
+                    "description": "Path to the HADDOCK3 restraints executable binary."
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                },
+                "sandbox_path": {
+                    "type": "string",
+                    "default": "./",
+                    "wf_prop": true,
+                    "description": "Parent path to the sandbox directory."
+                },
+                "container_path": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Path to the binary executable of your container."
+                },
+                "container_image": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Container Image identifier."
+                },
+                "container_volume_path": {
+                    "type": "string",
+                    "default": "/data",
+                    "wf_prop": false,
+                    "description": "Path to an internal directory in the container."
+                },
+                "container_working_dir": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Path to the internal CWD in the container."
+                },
+                "container_user_id": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "User number id to be mapped inside the container."
+                },
+                "container_shell_path": {
+                    "type": "string",
+                    "default": "/bin/bash",
+                    "wf_prop": false,
+                    "description": "Path to the binary executable of the container shell."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

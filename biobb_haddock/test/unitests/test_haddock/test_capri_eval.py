@@ -14,5 +14,5 @@ class TestCapriEval():
     def test_capri_eval(self):
         capri_eval(properties=self.properties, **self.paths)
         assert fx.not_empty(self.paths['output_evaluation_zip_path'])
-        assert fx.not_empty(self.paths['output_haddock_wf_data_zip'])
+        assert fx.not_empty(self.paths['output_haddock_wf_data'])
         # assert fx.equal(self.paths['output_evaluation_zip_path'], self.paths['ref_output_evaluation_zip_path'])

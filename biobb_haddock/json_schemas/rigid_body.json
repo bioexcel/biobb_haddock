@@ -2,13 +2,13 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/rigid_body",
     "name": "biobb_haddock RigidBody",
-    "title": "Wrapper class for the Haddock RigidBody module.",
-    "description": "The RigidBody module. Haddock RigidBody  module compute rigid body docking between two molecules.",
+    "title": "Wrapper class for the HADDOCK3 RigidBody module.",
+    "description": "The RigidBody module. HADDOCK3 RigidBody module compute rigid body docking between two molecules.",
     "type": "object",
     "info": {
         "wrapped_software": {
-            "name": "Haddock",
-            "version": "3.0.0",
+            "name": "HADDOCK3",
+            "version": "2025.5",
             "license": "Apache-2.0"
         },
         "ontology": {
@@ -17,23 +17,40 @@
         }
     },
     "required": [
-        "input_haddock_wf_data_zip",
+        "input_haddock_wf_data",
+        "output_haddock_wf_data",
         "docking_output_zip_path"
     ],
     "properties": {
-        "input_haddock_wf_data_zip": {
-            "type": "string",
-            "description": "Path to the input zipball containing all the current Haddock workflow data",
+        "input_haddock_wf_data": {
+            "type": "dir",
+            "description": "Path to the input directory containing all the current Haddock workflow data",
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip",
             "enum": [
-                ".*\\.zip$"
+                ".*\\.directory$"
             ],
             "file_formats": [
                 {
-                    "extension": ".*\\.zip$",
-                    "description": "Path to the input zipball containing all the current Haddock workflow data",
-                    "edam": "format_3987"
+                    "extension": ".*\\.directory$",
+                    "description": "Path to the input directory containing all the current Haddock workflow data",
+                    "edam": "format_1915"
+                }
+            ]
+        },
+        "output_haddock_wf_data": {
+            "type": "dir",
+            "description": "Path to the output directory containing all the current Haddock workflow data",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_emref.zip",
+            "enum": [
+                ".*\\.directory$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.directory$",
+                    "description": "Path to the output directory containing all the current Haddock workflow data",
+                    "edam": "format_1915"
                 }
             ]
         },
@@ -101,27 +118,11 @@
                 }
             ]
         },
-        "output_haddock_wf_data_zip": {
-            "type": "string",
-            "description": "Path to the output zipball containing all the current Haddock workflow data",
-            "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_topology.zip",
-            "enum": [
-                ".*\\.zip$"
-            ],
-            "file_formats": [
-                {
-                    "extension": ".*\\.zip$",
-                    "description": "Path to the output zipball containing all the current Haddock workflow data",
-                    "edam": "format_3987"
-                }
-            ]
-        },
         "haddock_config_path": {
             "type": "string",
             "description": "Haddock configuration CFG file path",
             "filetype": "input",
-            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/configuration.cfg",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg",
             "enum": [
                 ".*\\.cfg$"
             ],
@@ -141,6 +142,14 @@
                     "default": {},
                     "wf_prop": false,
                     "description": "Haddock configuration options specification."
+                },
+                "global_cfg": {
+                    "type": "object",
+                    "default": {
+                        "postprocess": false
+                    },
+                    "wf_prop": false,
+                    "description": "Global configuration options specification."
                 },
                 "binary_path": {
                     "type": "string",

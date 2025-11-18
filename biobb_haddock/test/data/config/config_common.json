@@ -1,0 +1,12 @@
+{
+  "properties": {
+    "cfg_step": {
+      "tolerance": 5
+    },
+    "cfg_run": {
+      "topoaa.1": {
+        "tolerance": 5
+      }
+    }
+  }
+}

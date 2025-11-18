@@ -5,15 +5,6 @@ Submodules
 ----------
 
 
-haddock.topology module
-------------------------------
-
-.. automodule:: haddock.topology
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
 haddock.capri_eval module
 ------------------------------
 
@@ -30,6 +21,14 @@ haddock.clust_fcc module
     :undoc-members:
     :show-inheritance:
 
+haddock.contact_map module
+------------------------------
+
+.. automodule:: haddock.contact_map
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 haddock.em_ref module
 ------------------------------
 
@@ -42,6 +41,22 @@ haddock.flex_ref module
 ------------------------------
 
 .. automodule:: haddock.flex_ref
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+haddock.haddock3_extend module
+------------------------------
+
+.. automodule:: haddock.haddock3_extend
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+haddock.haddock3_run module
+------------------------------
+
+.. automodule:: haddock.haddock3_run
     :members:
     :undoc-members:
     :show-inheritance:
@@ -66,6 +81,14 @@ haddock.sele_top module
 ------------------------------
 
 .. automodule:: haddock.sele_top
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+haddock.topology module
+------------------------------
+
+.. automodule:: haddock.topology
     :members:
     :undoc-members:
     :show-inheritance:

@@ -1,5 +1,31 @@
 # Biobb haddock changelog
 
+## What's new in version [5.1.0](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.1.0)?
+
+### New features
+
+* [UPDATE]: Use biobb_common 5.1.1
+* [FEATURE]: Use input/output folders as arguments instead of zip folders.
+
+## What's new in version [5.1.0](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.1.0)?
+
+### New features
+
+* [UPDATE]: Use haddock3 2025.5
+* [FEAT]: Add global_cfg to properties.
+* [FIX](https://github.com/bioexcel/biobb_haddock/issues/4): Extend pipe terminal compatibility.
+
+## What's new in version [5.0.1](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.0.1)?
+
+### New features
+
+* New blocks for contact_map, haddock3_extend and haddock3_run.
+* New restrain blocks: haddock3_accessibility, haddock3_actpass_to_ambig, haddock3_passive_from_active, haddock3_restrain_bodies.
+
+### Changes
+
+* Remove CNS installation need.
+
 ## What's new in version [5.0.0](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.0.0)?
 
 ### Changes

@@ -11,7 +11,7 @@ class TestHaddockActpassToAmbig():
         pass
         # fx.test_teardown(self)
 
-    def test_capri_eval(self):
+    def test_haddock3_actpass_to_ambig(self):
         haddock3_actpass_to_ambig(properties=self.properties, **self.paths)
         assert fx.not_empty(self.paths['output_tbl_path'])
-        # assert fx.equal(self.paths['output_tbl_path'], self.paths['ref_output_tbl_path'])
+        assert fx.equal(self.paths['output_tbl_path'], self.paths['ref_output_tbl_path'])

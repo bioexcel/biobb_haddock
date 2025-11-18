@@ -3,7 +3,7 @@
 [![](https://img.shields.io/conda/vn/bioconda/biobb_haddock?label=Conda)](https://anaconda.org/bioconda/biobb_haddock)
 [![](https://img.shields.io/conda/dn/bioconda/biobb_haddock?label=Conda%20Downloads)](https://anaconda.org/bioconda/biobb_haddock)
 [![](https://img.shields.io/badge/Docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_haddock?tab=tags)
-[![](https://img.shields.io/badge/Singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_haddock:5.0.0--pyhdfd78af_0)
+[![](https://img.shields.io/badge/Singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_haddock:5.1.1--pyhdfd78af_0)
 
 [![](https://img.shields.io/badge/OS-Unix%20%7C%20MacOS-blue)](https://github.com/bioexcel/biobb_haddock)
 [![](https://img.shields.io/pypi/pyversions/biobb-haddock.svg?label=Python%20Versions)](https://pypi.org/project/biobb-haddock/)
@@ -40,104 +40,7 @@ The latest documentation of this package can be found in our readthedocs site:
 [latest API documentation](http://biobb-haddock.readthedocs.io/en/latest/).
 
 ## Version
-v5.0.0 2024.2
-
-## Install CNS
-
-### 1 Download the source code of CNS
-
-In this case: `cns_solve_1.3_all.tar.gz`
-
-From the [CNS site](http://cns-online.org) create a new folder in the Haddock
-folder and uncompress it.
-
-```bash
-# Replace /__PATH__/__to__/ by your path to the haddock3 directory.
-cd /__PATH__/__to__/haddock3
-mkdir haddock3/CNS
-cp cns_solve_1.3_all.tar.gz haddock3/CNS/
-cd haddock3/CNS/
-tar xvzf cns_solve_1.3_all.tar.gz
-```
-### 2 Download the Intel Fortran and C++ offline compilers
-
-In this case: `m_fortran-compiler-classic_p_2022.0.0.63_offline.dmg` and `m_cpp-compiler-classic_p_2022.0.0.62_offline.dmg`
-
-From the [Intel developers site](https://www.intel.com/content/www/us/en/developer/articles/tool/oneapi-standalone-components.html) and double click to install them.
-
-### 3 Configure the CNS environment
-
-#### 3.1 `cns_solve_env`:
-
-```bash
-# Replace /__PATH__/__to__/ by your path to the haddock3 directory.
-cd /__PATH__/__to__/haddock3/CNS
-vim cns_solve_1.3/cns_solve_env
-```
-Modify the `CNS_SOLVE` env var:
-
-```bash
-# CHANGE THE NEXT LINE TO POINT TO THE LOCATION OF THE CNSsolve DIRECTORY
-
-            setenv CNS_SOLVE '_CNSsolve_location_'
-
-#
-# ==========================================================================
-```
-
-In this case:
-
-```bash
-# Replace /__PATH__/__to__/ by your path to the haddock3 directory.
-
-            setenv CNS_SOLVE '/__PATH__/__to__/haddock3/CNS/cns_solve_1.3/'
-
-```
-
-#### 3.2 `rtf.inc`:
-
-```bash
-# Replace /__PATH__/__to__/ by your path to the haddock3 directory.
-cd /__PATH__/__to__/haddock3/CNS
-vim cns_solve_1.3/source/rtf.inc
-```
-
-Modify all the MX (maximum) variables adding one extra zero to all of them:
-```
-PARAMETER (MXRTRS=200,NICM=50) --> PARAMETER (MXRTRS=2000,NICM=50)
-PARAMETER (MXRTA=2000)         --> PARAMETER (MXRTA=20000)
-PARAMETER (MXRTX=2000)         --> PARAMETER (MXRTX=20000)
-PARAMETER (MXRTB=2000)         --> PARAMETER (MXRTB=20000)
-PARAMETER (MXRTT=3000)         --> PARAMETER (MXRTT=30000)
-PARAMETER (MXRTP=2000)         --> PARAMETER (MXRTP=20000)
-PARAMETER (MXRTI=2000)         --> PARAMETER (MXRTI=20000)
-```
-
-### 4 Compile and link CNS
-
-```bash
-# Replace /__PATH__/__to__/ by your path to the haddock3 directory.
-cd /__PATH__/__to__/haddock3/CNS/cns_solve_1.3
-make install
-```
-
-If everything ended well, one of the last output lines will be:
-
-```
-created executable file cns_solve-xxxxxxxxx.exe
-```
-
-The `xxxxxxxxx` will be a different number on each build.
-
-Finally link the CNS binary:
-
-```bash
-# Replace /__PATH__/__to__/ by your path to the haddock3 directory.
-cd /__PATH__/__to__/haddock3
-mkdir -p bin/
-#Replace the  `xxxxxxxxx` and the __PATH__TO_BIN__ by your binary file
-ln -s CNS/__PATH__TO_BIN__/cns_solve-xxxxxxxxx.exe bin/cns
-```
+v5.1.1 2025.1
 
 ## Installation
 Using PIP:
@@ -147,7 +50,7 @@ Using PIP:
 * Installation:
 
 
-        pip install "biobb_haddock>=5.0.0"
+        pip install "biobb_haddock>=5.1.1"
 
 
 * Usage: [Python API documentation](https://biobb-haddock.readthedocs.io/en/latest/modules.html)
@@ -157,7 +60,7 @@ Using ANACONDA:
 * Installation:
 
 
-        conda install -c bioconda "biobb_haddock>=5.0.0"
+        conda install -c bioconda "biobb_haddock>=5.1.1"
 
 
 * Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb-haddock.readthedocs.io/en/latest/modules.html) and the [Command Line documentation](https://biobb-haddock.readthedocs.io/en/latest/command_line.html)
@@ -167,13 +70,13 @@ Using DOCKER:
 * Installation:
 
 
-        docker pull quay.io/biocontainers/biobb_haddock:5.0.0--pyhdfd78af_0
+        docker pull quay.io/biocontainers/biobb_haddock:5.1.1--pyhdfd78af_0
 
 
 * Usage:
 
 
-        docker run quay.io/biocontainers/biobb_haddock:5.0.0--pyhdfd78af_0 <command>
+        docker run quay.io/biocontainers/biobb_haddock:5.1.1--pyhdfd78af_0 <command>
 
 
 Using SINGULARITY:
@@ -183,7 +86,7 @@ Using SINGULARITY:
 * Installation:
 
 
-        singularity pull --name biobb_haddock.sif https://depot.galaxyproject.org/singularity/biobb_haddock:5.0.0--pyhdfd78af_0
+        singularity pull --name biobb_haddock.sif https://depot.galaxyproject.org/singularity/biobb_haddock:5.1.1--pyhdfd78af_0
 
 
 * Usage:
