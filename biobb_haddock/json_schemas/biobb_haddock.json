@@ -7,6 +7,7 @@
     "docker": "https://quay.io/biocontainers/biobb_haddock:5.1.1--pyhdfd78af_0",
     "singularity": "https://depot.galaxyproject.org/singularity/biobb_haddock:5.1.1--pyhdfd78af_0",
     "version": "5.1.1",
+    "rest": true,
     "tools": [
 
         {
@@ -14,105 +15,120 @@
             "tool": "Haddock CapriEval",
             "desc": "The CapriEval module. Haddock CapriEval module computes Capri evaluation for a docking.",
             "exec": "capri_eval",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.capri_eval"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.capri_eval",
+            "rest": true
         },
         {
             "block": "ClustFCC",
             "tool": "Haddock ClustFCC",
             "desc": "The ClustFCC module. Haddock ClustFCC module computes clusters of structures using FCC.",
             "exec": "clust_fcc",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.clust_fcc"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.clust_fcc",
+            "rest": true
         },
         {
             "block": "ContactMap",
             "tool": "Haddock ContactMap",
             "desc": "The ContactMap module. Haddock ContactMap module generates contact maps for protein complexes.",
             "exec": "contact_map",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.contact_map"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.contact_map",
+            "rest": true
         },
         {
             "block": "EMRef",
             "tool": "Haddock EMRef",
             "desc": "The EMRef module. Haddock EMRef module computes an energy minimization refinement over selected structures.",
             "exec": "em_ref",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.em_ref"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.em_ref",
+            "rest": true
         },
         {
             "block": "FlexRef",
             "tool": "Haddock FlexRef",
             "desc": "The FlexRef module. Haddock FlexRef module computes a flexible refinement over selected structures.",
             "exec": "flex_ref",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.flex_ref"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.flex_ref",
+            "rest": true
         },
         {
             "block": "Haddock3Extend",
             "tool": "Haddock3 Extend",
             "desc": "The Haddock3Extend module. Extends a previously run Haddock3 workflow with additional steps.",
             "exec": "haddock3_extend",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.haddock3_extend"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.haddock3_extend",
+            "rest": true
         },
         {
             "block": "Haddock3Run",
             "tool": "Haddock3 Run",
             "desc": "The Haddock3Run module. Runs a complete Haddock3 workflow for protein-protein docking.",
             "exec": "haddock3_run",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.haddock3_run"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.haddock3_run",
+            "rest": true
         },
         {
             "block": "RigidBody",
             "tool": "Haddock RigidBody",
             "desc": "The RigidBody module. Haddock RigidBody module compute rigid body docking between two molecules.",
             "exec": "rigid_body",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.rigid_body"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.rigid_body",
+            "rest": true
         },
         {
             "block": "SeleTopClusts",
             "tool": "Haddock SeleTopClusts",
             "desc": "The SeleTopClusts module. Haddock SeleTop module selects the top clusters of a docking.",
             "exec": "sele_top_clusts",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.sele_top_clusts"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.sele_top_clusts",
+            "rest": true
         },
         {
             "block": "SeleTop",
             "tool": "Haddock SeleTop",
             "desc": "The SeleTop module. Haddock SeleTop module computes selects the top structures of a docking.",
             "exec": "sele_top",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.sele_top"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.sele_top",
+            "rest": true
         },
         {
             "block": "Topology",
             "tool": "Haddock Topology",
             "desc": "The Topology module. The Haddock Topology module creates a topology from a system to be used for docking.",
             "exec": "topology",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.topology"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.topology",
+            "rest": true
         },
         {
             "block": "Accessibility",
             "tool": "Haddock3 Accessibility",
             "desc": "The Accessibility module. Calculates solvent accessibility for defining passive residues in Haddock3.",
             "exec": "haddock3_accessibility",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_accessibility"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_accessibility",
+            "rest": true
         },
         {
             "block": "ActpassToAmbig",
             "tool": "Haddock3 ActpassToAmbig",
             "desc": "The ActpassToAmbig module. Converts active and passive residue lists to ambiguous restraints for Haddock3.",
             "exec": "haddock3_actpass_to_ambig",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_actpass_to_ambig"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_actpass_to_ambig",
+            "rest": true
         },
         {
             "block": "PassiveFromActive",
             "tool": "Haddock3 PassiveFromActive",
             "desc": "The PassiveFromActive module. Generates passive residues from active residues for Haddock3.",
             "exec": "haddock3_passive_from_active",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_passive_from_active"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_passive_from_active",
+            "rest": true
         },
         {
             "block": "RestrainBodies",
             "tool": "Haddock3 RestrainBodies",
             "desc": "The RestrainBodies module. Creates restraints to maintain the relative orientation of multi-body complexes in Haddock3.",
             "exec": "haddock3_restrain_bodies",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_restrain_bodies"
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_restrain_bodies",
+            "rest": true
         }
     ],
     "dep_pypi": [
