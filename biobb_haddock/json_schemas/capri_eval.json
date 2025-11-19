@@ -27,13 +27,19 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip",
             "enum": [
-                ".*\\.directory$"
+                ".*\\.directory$",
+                ".*\\.zip$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.directory$",
                     "description": "Path to the input directory containing all the current Haddock workflow data",
                     "edam": "format_1915"
+                },
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Path to the input PDB file collection in zip format",
+                    "edam": "format_3987"
                 }
             ]
         },
@@ -43,13 +49,19 @@
             "filetype": "output",
             "sample": "https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_caprieval.zip",
             "enum": [
-                ".*\\.directory$"
+                ".*\\.directory$",
+                ".*\\.zip$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.directory$",
                     "description": "Path to the output directory containing all the current Haddock workflow data",
                     "edam": "format_1915"
+                },
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Path to the output PDB file collection in zip format",
+                    "edam": "format_3987"
                 }
             ]
         },

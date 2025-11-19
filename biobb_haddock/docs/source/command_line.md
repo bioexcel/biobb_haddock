@@ -37,8 +37,8 @@ capri_eval -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: DIRECTORY
-* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_caprieval.zip). Accepted formats: DIRECTORY
+* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: DIRECTORY, ZIP
+* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_caprieval.zip). Accepted formats: DIRECTORY, ZIP
 * **output_evaluation_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_caprieval.zip). Accepted formats: ZIP
 * **reference_pdb_path** (*string*): Path to the input PDB file containing an structure for reference. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_1GGR.pdb). Accepted formats: PDB
 * **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
@@ -112,8 +112,8 @@ clust_fcc -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: DIRECTORY
-* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_clustfcc.zip). Accepted formats: DIRECTORY
+* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: DIRECTORY, ZIP
+* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_clustfcc.zip). Accepted formats: DIRECTORY, ZIP
 * **output_cluster_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_clustfcc.zip). Accepted formats: ZIP
 * **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
@@ -186,8 +186,8 @@ contact_map -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: DIRECTORY
-* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY
+* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: DIRECTORY, ZIP
+* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY, ZIP
 * **output_contactmap_zip_path** (*string*): Path to the output contact map files in zip format. File type: output. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_contact_map.zip). Accepted formats: ZIP
 * **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
@@ -266,8 +266,8 @@ em_ref -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip). Accepted formats: DIRECTORY
-* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY
+* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip). Accepted formats: DIRECTORY, ZIP
+* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY, ZIP
 * **refinement_output_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_rigidbody.zip). Accepted formats: ZIP
 * **ambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of ambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
 * **unambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of unambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
@@ -349,8 +349,8 @@ flex_ref -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip). Accepted formats: DIRECTORY
-* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY
+* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip). Accepted formats: DIRECTORY, ZIP
+* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY, ZIP
 * **refinement_output_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_rigidbody.zip). Accepted formats: ZIP
 * **ambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of ambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
 * **unambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of unambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
@@ -783,8 +783,8 @@ haddock3_run -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_haddock_wf_data** (*dir*): Input folder containing all the files defined in the config. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/input_folder). Accepted formats: DIRECTORY
-* **output_haddock_wf_data** (*dir*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY
+* **input_haddock_wf_data** (*dir*): Input folder containing all the files defined in the config. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/input_folder). Accepted formats: DIRECTORY, ZIP
+* **output_haddock_wf_data** (*dir*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY, ZIP
 * **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
@@ -861,8 +861,8 @@ rigid_body -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip). Accepted formats: DIRECTORY
-* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY
+* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_topology.zip). Accepted formats: DIRECTORY, ZIP
+* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY, ZIP
 * **docking_output_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_rigidbody.zip). Accepted formats: ZIP
 * **ambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of ambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
 * **unambig_restraints_table_path** (*string*): Path to the input TBL file containing a list of unambiguous restraints for docking. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/e2a-hpr_air.tbl). Accepted formats: TBL
@@ -938,8 +938,8 @@ sele_top -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: DIRECTORY
-* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY
+* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: DIRECTORY, ZIP
+* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY, ZIP
 * **output_selection_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_seletop.zip). Accepted formats: ZIP
 * **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
@@ -1012,8 +1012,8 @@ sele_top_clusts -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: DIRECTORY
-* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY
+* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: DIRECTORY, ZIP
+* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY, ZIP
 * **output_selection_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_seletop.zip). Accepted formats: ZIP
 * **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config

@@ -27,13 +27,19 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/input_folder",
             "enum": [
-                ".*\\.directory$"
+                ".*\\.directory$",
+                ".*\\.zip$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.directory$",
                     "description": "Input folder containing all the files defined in the config",
                     "edam": "format_1915"
+                },
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Path to the output contact map files in zip format",
+                    "edam": "format_3987"
                 }
             ]
         },
@@ -43,13 +49,19 @@
             "filetype": "output",
             "sample": null,
             "enum": [
-                ".*\\.directory$"
+                ".*\\.directory$",
+                ".*\\.zip$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.directory$",
                     "description": "Path to the output zipball containing all the current Haddock workflow data",
                     "edam": "format_1915"
+                },
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Path to the output contact map files in zip format",
+                    "edam": "format_3987"
                 }
             ]
         },
