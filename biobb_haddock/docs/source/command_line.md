@@ -783,7 +783,7 @@ haddock3_run -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_haddock_wf_data** (*dir*): Input folder containing all the files defined in the config. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/input_folder). Accepted formats: DIRECTORY, ZIP
+* **input_haddock_wf_data** (*dir*): Input folder containing all the files defined in the config. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/haddock_wf_data_run.zip). Accepted formats: DIRECTORY, ZIP
 * **output_haddock_wf_data** (*dir*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY, ZIP
 * **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config

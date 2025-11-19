@@ -25,7 +25,7 @@
             "type": "dir",
             "description": "Input folder containing all the files defined in the config",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/input_folder",
+            "sample": "https://github.com/bioexcel/biobb_haddock/tree/master/biobb_haddock/test/data/haddock/haddock_wf_data_run.zip",
             "enum": [
                 ".*\\.directory$",
                 ".*\\.zip$"
