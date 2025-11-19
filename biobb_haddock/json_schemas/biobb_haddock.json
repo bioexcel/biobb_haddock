@@ -39,7 +39,7 @@
             "desc": "The EMRef module. Haddock EMRef module computes an energy minimization refinement over selected structures.",
             "exec": "em_ref",
             "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.em_ref",
-            "rest": true
+            "rest": false
         },
         {
             "block": "FlexRef",
@@ -47,7 +47,7 @@
             "desc": "The FlexRef module. Haddock FlexRef module computes a flexible refinement over selected structures.",
             "exec": "flex_ref",
             "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.flex_ref",
-            "rest": true
+            "rest": false
         },
         {
             "block": "Haddock3Extend",

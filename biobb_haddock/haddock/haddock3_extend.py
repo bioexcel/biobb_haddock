@@ -13,7 +13,7 @@ class Haddock3Extend(common.HaddockStepBase):
     | The `HADDOCK3 extend <https://www.bonvinlab.org/haddock3/tutorials/continuing_runs.html>`_. module continues the HADDOCK3 execution for docking of an already started run.
 
     Args:
-        input_haddock_wf_data (dir): Path to the input zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_caprieval.zip>`_. Accepted formats: zip (edam:format_3987).
+        input_haddock_wf_data (dir): Path to the input zipball containing all the current Haddock workflow data. File type: input. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_caprieval.zip>`_. Accepted formats: zip (edam:format_3987).
         haddock_config_path (str): Haddock configuration CFG file path. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg>`_. Accepted formats: cfg (edam:format_1476).
         output_haddock_wf_data (dir): Path to the output zipball containing all the current Haddock workflow data. File type: output. `Sample file <https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/reference/haddock/ref_haddock3_extend.zip>`_. Accepted formats: zip (edam:format_3987).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
