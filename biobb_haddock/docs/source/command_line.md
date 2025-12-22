@@ -21,18 +21,20 @@ capri_eval -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+    
+    optional arguments:
       --output_evaluation_zip_path OUTPUT_EVALUATION_ZIP_PATH
                             Path to the output PDB file collection in zip format. Accepted formats: zip.
       --reference_pdb_path REFERENCE_PDB_PATH
                             Path to the input PDB file containing an structure for reference. Accepted formats: pdb.
       --haddock_config_path HADDOCK_CONFIG_PATH
                             Haddock configuration CFG file path. Accepted formats: cfg.
-    
-    required arguments:
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -98,16 +100,18 @@ clust_fcc -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+    
+    optional arguments:
       --output_cluster_zip_path OUTPUT_CLUSTER_ZIP_PATH
                             Path to the output PDB file collection in zip format. Accepted formats: zip.
       --haddock_config_path HADDOCK_CONFIG_PATH
                             Haddock configuration CFG file path. Accepted formats: cfg.
-    
-    required arguments:
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -172,16 +176,18 @@ contact_map -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+    
+    optional arguments:
       --output_contactmap_zip_path OUTPUT_CONTACTMAP_ZIP_PATH
                             Path to the output contact map files in zip format. Accepted formats: zip.
       --haddock_config_path HADDOCK_CONFIG_PATH
                             Haddock configuration CFG file path. Accepted formats: cfg.
-    
-    required arguments:
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -215,7 +221,7 @@ properties:
 ```
 #### Command line
 ```python
-contact_map --config config_contact_map.yml --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data haddock_wf_data_emref.zip --output_contactmap_zip_path ref_contactmap.zip --haddock_config_path run.cfg
+contact_map --config config_contact_map.yml --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data output.directory --output_contactmap_zip_path ref_contact_map.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_contact_map.json)
@@ -228,7 +234,7 @@ contact_map --config config_contact_map.yml --input_haddock_wf_data haddock_wf_d
 ```
 #### Command line
 ```python
-contact_map --config config_contact_map.json --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data haddock_wf_data_emref.zip --output_contactmap_zip_path ref_contactmap.zip --haddock_config_path run.cfg
+contact_map --config config_contact_map.json --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data output.directory --output_contactmap_zip_path ref_contact_map.zip --haddock_config_path run.cfg
 ```
 
 ## Em_ref
@@ -246,6 +252,14 @@ em_ref -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+    
+    optional arguments:
       --refinement_output_zip_path REFINEMENT_OUTPUT_ZIP_PATH
                             Path to the output PDB file collection in zip format. Accepted formats: zip.
       --ambig_restraints_table_path AMBIG_RESTRAINTS_TABLE_PATH
@@ -256,12 +270,6 @@ em_ref -h
                             Path to the input TBL file containing a list of hydrogen bond restraints for docking. Accepted formats: tbl.
       --haddock_config_path HADDOCK_CONFIG_PATH
                             Haddock configuration CFG file path. Accepted formats: cfg.
-    
-    required arguments:
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -298,7 +306,7 @@ properties:
 ```
 #### Command line
 ```python
-em_ref --config config_em_ref.yml --input_haddock_wf_data haddock_wf_data_topology.zip --output_haddock_wf_data haddock_wf_data_emref.zip --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --haddock_config_path run.cfg
+em_ref --config config_em_ref.yml --input_haddock_wf_data haddock_wf_data_topology.zip --output_haddock_wf_data output.directory --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_em_ref.json)
@@ -311,7 +319,7 @@ em_ref --config config_em_ref.yml --input_haddock_wf_data haddock_wf_data_topolo
 ```
 #### Command line
 ```python
-em_ref --config config_em_ref.json --input_haddock_wf_data haddock_wf_data_topology.zip --output_haddock_wf_data haddock_wf_data_emref.zip --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --haddock_config_path run.cfg
+em_ref --config config_em_ref.json --input_haddock_wf_data haddock_wf_data_topology.zip --output_haddock_wf_data output.directory --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --haddock_config_path run.cfg
 ```
 
 ## Flex_ref
@@ -329,6 +337,14 @@ flex_ref -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+    
+    optional arguments:
       --refinement_output_zip_path REFINEMENT_OUTPUT_ZIP_PATH
                             Path to the output PDB file collection in zip format. Accepted formats: zip.
       --ambig_restraints_table_path AMBIG_RESTRAINTS_TABLE_PATH
@@ -339,12 +355,6 @@ flex_ref -h
                             Path to the input TBL file containing a list of hydrogen bond restraints for docking. Accepted formats: tbl.
       --haddock_config_path HADDOCK_CONFIG_PATH
                             Haddock configuration CFG file path. Accepted formats: cfg.
-    
-    required arguments:
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -381,7 +391,7 @@ properties:
 ```
 #### Command line
 ```python
-flex_ref --config config_flex_ref.yml --input_haddock_wf_data haddock_wf_data_topology.zip --output_haddock_wf_data haddock_wf_data_emref.zip --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --haddock_config_path run.cfg
+flex_ref --config config_flex_ref.yml --input_haddock_wf_data haddock_wf_data_topology.zip --output_haddock_wf_data output.directory --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_flex_ref.json)
@@ -394,7 +404,7 @@ flex_ref --config config_flex_ref.yml --input_haddock_wf_data haddock_wf_data_to
 ```
 #### Command line
 ```python
-flex_ref --config config_flex_ref.json --input_haddock_wf_data haddock_wf_data_topology.zip --output_haddock_wf_data haddock_wf_data_emref.zip --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --haddock_config_path run.cfg
+flex_ref --config config_flex_ref.json --input_haddock_wf_data haddock_wf_data_topology.zip --output_haddock_wf_data output.directory --refinement_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --haddock_config_path run.cfg
 ```
 
 ## Haddock3_accessibility
@@ -412,14 +422,16 @@ haddock3_accessibility -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --output_actpass_path OUTPUT_ACTPASS_PATH
-                            Path to the output file with active/passive residues to be used as haddock3 restraint information. Accepted formats: txt, dat, out.
     
     required arguments:
       -i INPUT_PDB_PATH, --input_pdb_path INPUT_PDB_PATH
                             Path to the input PDB file. Accepted formats: pdb.
       --output_accessibility_path OUTPUT_ACCESSIBILITY_PATH
                             Path to the output file with accessibility information. Accepted formats: txt, dat, out.
+    
+    optional arguments:
+      --output_actpass_path OUTPUT_ACTPASS_PATH
+                            Path to the output file with active/passive residues to be used as haddock3 restraint information. Accepted formats: txt, dat, out.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -526,7 +538,7 @@ properties:
 ```
 #### Command line
 ```python
-haddock3_actpass_to_ambig --config config_haddock3_actpass_to_ambig.yml --input_actpass1_path haddock_actpass1.txt --input_actpass2_path haddock_actpass2.txt --output_tbl_path haddock_actpass.tbl
+haddock3_actpass_to_ambig --config config_haddock3_actpass_to_ambig.yml --input_actpass1_path haddock_actpass1.pass --input_actpass2_path haddock_actpass2.pass --output_tbl_path haddock_actpass.tbl
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_actpass_to_ambig.json)
@@ -539,7 +551,7 @@ haddock3_actpass_to_ambig --config config_haddock3_actpass_to_ambig.yml --input_
 ```
 #### Command line
 ```python
-haddock3_actpass_to_ambig --config config_haddock3_actpass_to_ambig.json --input_actpass1_path haddock_actpass1.txt --input_actpass2_path haddock_actpass2.txt --output_tbl_path haddock_actpass.tbl
+haddock3_actpass_to_ambig --config config_haddock3_actpass_to_ambig.json --input_actpass1_path haddock_actpass1.pass --input_actpass2_path haddock_actpass2.pass --output_tbl_path haddock_actpass.tbl
 ```
 
 ## Haddock3_extend
@@ -549,7 +561,7 @@ Command:
 ```python
 haddock3_extend -h
 ```
-    usage: haddock3_extend [-h] [-c CONFIG] --input_haddock_wf_data INPUT_HADDOCK_WF_DATA -i HADDOCK_CONFIG_PATH --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+    usage: haddock3_extend [-h] [-c CONFIG] --input_haddock_wf_data INPUT_HADDOCK_WF_DATA --haddock_config_path HADDOCK_CONFIG_PATH -o OUTPUT_HADDOCK_WF_DATA
     
     Wrapper of the HADDOCK3 Haddock3Extend module.
     
@@ -561,9 +573,9 @@ haddock3_extend -h
     required arguments:
       --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
                             Path to the input zipball containing all the current Haddock workflow data. Accepted formats: zip.
-      -i HADDOCK_CONFIG_PATH, --haddock_config_path HADDOCK_CONFIG_PATH
+      --haddock_config_path HADDOCK_CONFIG_PATH
                             Haddock configuration CFG file path. Accepted formats: cfg.
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+      -o OUTPUT_HADDOCK_WF_DATA, --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
                             Path to the output zipball containing all the current Haddock workflow data. Accepted formats: zip.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
@@ -628,14 +640,16 @@ haddock3_passive_from_active -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --input_active_list_path INPUT_ACTIVE_LIST_PATH
-                            Path to the input file with list of active residues. Accepted formats: txt, dat, list.
     
     required arguments:
       --input_pdb_path INPUT_PDB_PATH
                             Path to the input PDB structure file. Accepted formats: pdb.
       -o OUTPUT_ACTPASS_PATH, --output_actpass_path OUTPUT_ACTPASS_PATH
                             Path to the output file with list of passive residues. Accepted formats: txt, dat, list, out.
+    
+    optional arguments:
+      --input_active_list_path INPUT_ACTIVE_LIST_PATH
+                            Path to the input file with list of active residues. Accepted formats: txt, dat, list.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -771,14 +785,16 @@ haddock3_run -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
-      --haddock_config_path HADDOCK_CONFIG_PATH
-                            Haddock configuration CFG file path. Accepted formats: cfg.
     
     required arguments:
       --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Input folder containing all the files defined in the config. Accepted formats: directory.
+                            Input folder containing all the files defined in the config. Accepted formats: directory, zip.
       -o OUTPUT_HADDOCK_WF_DATA, --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output zipball containing all the current Haddock workflow data. Accepted formats: directory.
+                            Path to the output zipball containing all the current Haddock workflow data. Accepted formats: directory, zip.
+    
+    optional arguments:
+      --haddock_config_path HADDOCK_CONFIG_PATH
+                            Haddock configuration CFG file path. Accepted formats: cfg.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -810,7 +826,7 @@ properties:
 ```
 #### Command line
 ```python
-haddock3_run --config config_haddock3_run.yml --input_haddock_wf_data input_haddock_wf_data --output_haddock_wf_data haddock_wf_data_emref.zip --haddock_config_path run.cfg
+haddock3_run --config config_haddock3_run.yml --input_haddock_wf_data haddock_wf_data_run.zip --output_haddock_wf_data output.directory --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_run.json)
@@ -823,7 +839,7 @@ haddock3_run --config config_haddock3_run.yml --input_haddock_wf_data input_hadd
 ```
 #### Command line
 ```python
-haddock3_run --config config_haddock3_run.json --input_haddock_wf_data input_haddock_wf_data --output_haddock_wf_data haddock_wf_data_emref.zip --haddock_config_path run.cfg
+haddock3_run --config config_haddock3_run.json --input_haddock_wf_data haddock_wf_data_run.zip --output_haddock_wf_data output.directory --haddock_config_path run.cfg
 ```
 
 ## Rigid_body
@@ -841,6 +857,16 @@ rigid_body -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+      --docking_output_zip_path DOCKING_OUTPUT_ZIP_PATH
+                            Path to the output PDB file collection in zip format. Accepted formats: zip.
+    
+    optional arguments:
       --ambig_restraints_table_path AMBIG_RESTRAINTS_TABLE_PATH
                             Path to the input TBL file containing a list of ambiguous restraints for docking. Accepted formats: tbl.
       --unambig_restraints_table_path UNAMBIG_RESTRAINTS_TABLE_PATH
@@ -849,14 +875,6 @@ rigid_body -h
                             Path to the input TBL file containing a list of hydrogen bond restraints for docking. Accepted formats: tbl.
       --haddock_config_path HADDOCK_CONFIG_PATH
                             Haddock configuration CFG file path. Accepted formats: cfg.
-    
-    required arguments:
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
-      --docking_output_zip_path DOCKING_OUTPUT_ZIP_PATH
-                            Path to the output PDB file collection in zip format. Accepted formats: zip.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -893,7 +911,7 @@ properties:
 ```
 #### Command line
 ```python
-rigid_body --config config_rigid_body.yml --input_haddock_wf_data haddock_wf_data_topology.zip --output_haddock_wf_data haddock_wf_data_emref.zip --docking_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --haddock_config_path run.cfg
+rigid_body --config config_rigid_body.yml --input_haddock_wf_data haddock_wf_data_topology.zip --output_haddock_wf_data output.directory --docking_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_rigid_body.json)
@@ -906,7 +924,7 @@ rigid_body --config config_rigid_body.yml --input_haddock_wf_data haddock_wf_dat
 ```
 #### Command line
 ```python
-rigid_body --config config_rigid_body.json --input_haddock_wf_data haddock_wf_data_topology.zip --output_haddock_wf_data haddock_wf_data_emref.zip --docking_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --haddock_config_path run.cfg
+rigid_body --config config_rigid_body.json --input_haddock_wf_data haddock_wf_data_topology.zip --output_haddock_wf_data output.directory --docking_output_zip_path ref_rigidbody.zip --ambig_restraints_table_path e2a-hpr_air.tbl --unambig_restraints_table_path e2a-hpr_air.tbl --hb_restraints_table_path e2a-hpr_air.tbl --haddock_config_path run.cfg
 ```
 
 ## Sele_top
@@ -924,16 +942,18 @@ sele_top -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+    
+    optional arguments:
       --output_selection_zip_path OUTPUT_SELECTION_ZIP_PATH
                             Path to the output PDB file collection in zip format. Accepted formats: zip.
       --haddock_config_path HADDOCK_CONFIG_PATH
                             Haddock configuration CFG file path. Accepted formats: cfg.
-    
-    required arguments:
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -967,7 +987,7 @@ properties:
 ```
 #### Command line
 ```python
-sele_top --config config_sele_top.yml --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data haddock_wf_data_emref.zip --output_selection_zip_path ref_seletop.zip --haddock_config_path run.cfg
+sele_top --config config_sele_top.yml --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data output.directory --output_selection_zip_path ref_seletop.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_sele_top.json)
@@ -980,7 +1000,7 @@ sele_top --config config_sele_top.yml --input_haddock_wf_data haddock_wf_data_ri
 ```
 #### Command line
 ```python
-sele_top --config config_sele_top.json --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data haddock_wf_data_emref.zip --output_selection_zip_path ref_seletop.zip --haddock_config_path run.cfg
+sele_top --config config_sele_top.json --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data output.directory --output_selection_zip_path ref_seletop.zip --haddock_config_path run.cfg
 ```
 
 ## Sele_top_clusts
@@ -998,16 +1018,18 @@ sele_top_clusts -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
+                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
+    
+    optional arguments:
       --output_selection_zip_path OUTPUT_SELECTION_ZIP_PATH
                             Path to the output PDB file collection in zip format. Accepted formats: zip.
       --haddock_config_path HADDOCK_CONFIG_PATH
                             Haddock configuration CFG file path. Accepted formats: cfg.
-    
-    required arguments:
-      --input_haddock_wf_data INPUT_HADDOCK_WF_DATA
-                            Path to the input directory containing all the current Haddock workflow data. Accepted formats: directory.
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -1041,7 +1063,7 @@ properties:
 ```
 #### Command line
 ```python
-sele_top_clusts --config config_sele_top_clusts.yml --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data haddock_wf_data_emref.zip --output_selection_zip_path ref_seletop.zip --haddock_config_path run.cfg
+sele_top_clusts --config config_sele_top_clusts.yml --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data output.directory --output_selection_zip_path ref_seletop.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_sele_top_clusts.json)
@@ -1054,7 +1076,7 @@ sele_top_clusts --config config_sele_top_clusts.yml --input_haddock_wf_data hadd
 ```
 #### Command line
 ```python
-sele_top_clusts --config config_sele_top_clusts.json --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data haddock_wf_data_emref.zip --output_selection_zip_path ref_seletop.zip --haddock_config_path run.cfg
+sele_top_clusts --config config_sele_top_clusts.json --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data output.directory --output_selection_zip_path ref_seletop.zip --haddock_config_path run.cfg
 ```
 
 ## Topology
@@ -1072,6 +1094,14 @@ topology -h
       -h, --help            show this help message and exit
       -c CONFIG, --config CONFIG
                             This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      --mol1_input_pdb_path MOL1_INPUT_PDB_PATH
+                            Path to the input PDB file. Accepted formats: pdb.
+      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
+                            Path to the output zipball containing all the current Haddock workflow data. Accepted formats: zip.
+    
+    optional arguments:
       --mol1_output_top_zip_path MOL1_OUTPUT_TOP_ZIP_PATH
                             Path to the output PDB file collection in zip format. Accepted formats: zip.
       --mol2_input_pdb_path MOL2_INPUT_PDB_PATH
@@ -1080,12 +1110,6 @@ topology -h
                             Path to the output PDB file collection in zip format. Accepted formats: zip.
       --haddock_config_path HADDOCK_CONFIG_PATH
                             Haddock configuration CFG file path. Accepted formats: cfg.
-    
-    required arguments:
-      --mol1_input_pdb_path MOL1_INPUT_PDB_PATH
-                            Path to the input PDB file. Accepted formats: pdb.
-      --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output zipball containing all the current Haddock workflow data. Accepted formats: zip.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -1121,7 +1145,7 @@ properties:
 ```
 #### Command line
 ```python
-topology --config config_topology.yml --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data haddock_wf_data_emref.zip --haddock_config_path run.cfg
+topology --config config_topology.yml --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data output.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_topology.json)
@@ -1134,5 +1158,5 @@ topology --config config_topology.yml --mol1_input_pdb_path e2aP_1F3G.pdb --mol1
 ```
 #### Command line
 ```python
-topology --config config_topology.json --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data haddock_wf_data_emref.zip --haddock_config_path run.cfg
+topology --config config_topology.json --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data output.zip --haddock_config_path run.cfg
 ```
