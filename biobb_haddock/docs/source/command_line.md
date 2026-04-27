@@ -48,18 +48,18 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **cfg** (*object*): ({}) Haddock configuration options specification..
-* **global_cfg** (*object*): ({'postprocess': True}) Global configuration options specification..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **cfg** (*object*): ({}) Haddock configuration options specification.
+* **global_cfg** (*object*): ({'postprocess': True}) Global configuration options specification.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_capri_eval.yml)
 ```python
@@ -124,18 +124,18 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **cfg** (*object*): ({}) Haddock configuration options specification..
-* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **cfg** (*object*): ({}) Haddock configuration options specification.
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_clust_fcc.yml)
 ```python
@@ -200,18 +200,18 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **cfg** (*object*): ({}) Haddock configuration options specification..
-* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **cfg** (*object*): ({}) Haddock configuration options specification.
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_contact_map.yml)
 ```python
@@ -285,18 +285,18 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **cfg** (*object*): ({}) Haddock configuration options specification..
-* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **cfg** (*object*): ({}) Haddock configuration options specification.
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_em_ref.yml)
 ```python
@@ -370,18 +370,18 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **cfg** (*object*): ({}) Haddock configuration options specification..
-* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **cfg** (*object*): ({}) Haddock configuration options specification.
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_flex_ref.yml)
 ```python
@@ -443,20 +443,20 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **chain** (*string*): (A) Chain to be used from the input PDB file..
-* **cutoff** (*number*): (0.4) Relative cutoff for sidechain accessibility..
-* **probe_radius** (*number*): (1.4) Probe radius for the accessibility calculation..
-* **pass_to_act** (*boolean*): (False) If True, the passive residues become active in the actpass file and vice versa..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **chain** (*string*): (A) Chain to be used from the input PDB file.
+* **cutoff** (*number*): (0.4) Relative cutoff for sidechain accessibility.
+* **probe_radius** (*number*): (1.4) Probe radius for the accessibility calculation.
+* **pass_to_act** (*boolean*): (False) If True, the passive residues become active in the actpass file and vice versa.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_accessibility.yml)
 ```python
@@ -516,19 +516,19 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **pass_to_act** (*boolean*): (False) Path to the haddock haddock executable binary..
-* **segid_one** (*string*): (None) Segid of the first model..
-* **segid_two** (*string*): (None) Segid of the second model..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **pass_to_act** (*boolean*): (False) Path to the haddock haddock executable binary.
+* **segid_one** (*string*): (None) Segid of the first model.
+* **segid_two** (*string*): (None) Segid of the second model.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_actpass_to_ambig.yml)
 ```python
@@ -588,18 +588,18 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **cfg** (*object*): ({}) Haddock configuration options specification..
-* **global_cfg** (*object*): ({'postprocess': True}) Global configuration options specification..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **cfg** (*object*): ({}) Haddock configuration options specification.
+* **global_cfg** (*object*): ({'postprocess': True}) Global configuration options specification.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_extend.yml)
 ```python
@@ -661,20 +661,20 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **active_list** (*string*): () List of active residues as a comma-separated string. Required if input_active_list_path is not provided..
-* **chain_id** (*string*): (None) Chain ID to consider when calculating passive residues..
-* **surface_list_path** (*string*): () Path to file with list of surface residues to filter..
-* **radius** (*number*): (6.5) Radius in Angstroms to look for surface residues around active ones..
-* **binary_path** (*string*): (haddock3-restraints) Path to the haddock3-restraints executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **active_list** (*string*): () List of active residues as a comma-separated string. Required if input_active_list_path is not provided.
+* **chain_id** (*string*): (None) Chain ID to consider when calculating passive residues.
+* **surface_list_path** (*string*): () Path to file with list of surface residues to filter.
+* **radius** (*number*): (6.5) Radius in Angstroms to look for surface residues around active ones.
+* **binary_path** (*string*): (haddock3-restraints) Path to the haddock3-restraints executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_passive_from_active.yml)
 ```python
@@ -733,18 +733,18 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **exclude** (*string*): (None) Chains to exclude from the calculation..
-* **verbose** (*integer*): (0) Tune verbosity of the output..
-* **binary_path** (*string*): (haddock3-restraints) Path to the HADDOCK3 restraints executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **exclude** (*string*): (None) Chains to exclude from the calculation.
+* **verbose** (*integer*): (0) Tune verbosity of the output.
+* **binary_path** (*string*): (haddock3-restraints) Path to the HADDOCK3 restraints executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_restrain_bodies.yml)
 ```python
@@ -806,17 +806,17 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **cfg** (*object*): ({}) Haddock configuration options specification..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **cfg** (*object*): ({}) Haddock configuration options specification.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_haddock3_run.yml)
 ```python
@@ -890,18 +890,18 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **cfg** (*object*): ({}) Haddock configuration options specification..
-* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **cfg** (*object*): ({}) Haddock configuration options specification.
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_rigid_body.yml)
 ```python
@@ -966,18 +966,18 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **cfg** (*object*): ({}) Haddock configuration options specification..
-* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **cfg** (*object*): ({}) Haddock configuration options specification.
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_sele_top.yml)
 ```python
@@ -1042,18 +1042,18 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **cfg** (*object*): ({}) Haddock configuration options specification..
-* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **cfg** (*object*): ({}) Haddock configuration options specification.
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_sele_top_clusts.yml)
 ```python
@@ -1124,18 +1124,18 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **cfg** (*object*): ({}) Haddock configuration options specification..
-* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification..
-* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Path to the binary executable of your container..
-* **container_image** (*string*): (None) Container Image identifier..
-* **container_volume_path** (*string*): (/data) Path to an internal directory in the container..
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container..
-* **container_user_id** (*string*): (None) User number id to be mapped inside the container..
-* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell..
+* **cfg** (*object*): ({}) Haddock configuration options specification.
+* **global_cfg** (*object*): ({'postprocess': False}) Global configuration options specification.
+* **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (None) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_topology.yml)
 ```python
