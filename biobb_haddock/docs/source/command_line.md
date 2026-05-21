@@ -1034,7 +1034,7 @@ sele_top_clusts -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_rigid.zip). Accepted formats: DIRECTORY, ZIP
+* **input_haddock_wf_data** (*dir*): Path to the input directory containing all the current Haddock workflow data. File type: input. [Sample file](https://github.com/bioexcel/biobb_haddock/raw/master/biobb_haddock/test/data/haddock/haddock_wf_data_clustfcc.zip). Accepted formats: DIRECTORY, ZIP
 * **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY, ZIP
 * **output_selection_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_seletop.zip). Accepted formats: ZIP
 * **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
