@@ -113,6 +113,10 @@ jobs:
             flake8
             pip
 
+      - name: Install haddock_biobb from pip
+        shell: bash -l {0}
+        run: pip install haddock_biobb==2025.11
+
       - name: Install genbadge from pip
         shell: bash -l {0}
         run: pip install genbadge[all]
@@ -120,12 +124,6 @@ jobs:
       - name: List installed package versions
         shell: bash -l {0}
         run: micromamba list
-
-      - name: Create soft link from CNS to Haddock
-        shell: bash -l {0}
-        run: |
-          mkdir -p $CONDA_PREFIX/lib/python${{ matrix.python-version }}/bin
-          ln -s /home/user/software/cns_solve_1.3/intel-x86_64bit-linux/source/cns_solve-2405281130.exe $CONDA_PREFIX/lib/python${{ matrix.python-version }}/bin/cns
 
       - name: Lint with flake8
         shell: bash -l {0}
@@ -162,7 +160,7 @@ jobs:
             TEST_PATHS="${{ github.event.repository.name }}/test/unitests/"
           fi
 
-          pytest $TEST_PATHS --cov=${{ github.event.repository.name }}/ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*pmemd* --junit-xml=./reports/junit/junit.xml --html=./reports/junit/report.html
+          pytest $TEST_PATHS --cov=${{ github.event.repository.name }}/ --cov-report=xml --ignore-glob=*container.py --junit-xml=./reports/junit/junit.xml --html=./reports/junit/report.html
 
       - name: Generate Tests badge
         shell: bash -l {0}
@@ -184,3 +182,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: ./reports
+
+
