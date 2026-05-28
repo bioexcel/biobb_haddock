@@ -113,9 +113,9 @@ jobs:
             flake8
             pip
 
-      - name: Install haddock_biobb from pip
+      - name: Install haddock3 from pip
         shell: bash -l {0}
-        run: pip install haddock_biobb==2025.11
+        run: pip install haddock3
 
       - name: Install genbadge from pip
         shell: bash -l {0}
