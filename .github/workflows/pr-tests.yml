@@ -91,6 +91,10 @@ jobs:
             flake8
             pip
 
+      - name: Install haddock3 from pip
+        shell: bash -l {0}
+        run: pip install haddock3==2025.11.0
+
       - name: List installed package versions
         shell: bash -l {0}
         run: micromamba list
