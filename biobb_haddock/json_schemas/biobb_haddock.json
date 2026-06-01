@@ -39,7 +39,7 @@
             "desc": "The EMRef module. Haddock EMRef module computes an energy minimization refinement over selected structures.",
             "exec": "em_ref",
             "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.em_ref",
-            "rest": false
+            "rest": true
         },
         {
             "block": "FlexRef",
@@ -47,7 +47,7 @@
             "desc": "The FlexRef module. Haddock FlexRef module computes a flexible refinement over selected structures.",
             "exec": "flex_ref",
             "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.flex_ref",
-            "rest": false
+            "rest": true
         },
         {
             "block": "Haddock3Extend",
@@ -63,7 +63,7 @@
             "desc": "The Haddock3Run module. Runs a complete Haddock3 workflow for protein-protein docking.",
             "exec": "haddock3_run",
             "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.haddock3_run",
-            "rest": false
+            "rest": true
         },
         {
             "block": "RigidBody",
@@ -79,7 +79,7 @@
             "desc": "The SeleTopClusts module. Haddock SeleTop module selects the top clusters of a docking.",
             "exec": "sele_top_clusts",
             "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.sele_top_clusts",
-            "rest": false
+            "rest": true
         },
         {
             "block": "SeleTop",
@@ -95,7 +95,7 @@
             "desc": "The Topology module. The Haddock Topology module creates a topology from a system to be used for docking.",
             "exec": "topology",
             "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock.html#module-haddock.topology",
-            "rest": false
+            "rest": true
         },
         {
             "block": "Accessibility",
