@@ -112,7 +112,10 @@ class HaddockStepBase(BiobbObject):
             fu.log("Container execution enabled", self.out_log)
             move_to_container_path(self, self.run_dir)
 
-        self.cmd = [self.binary_path, self.output_cfg_path, "--extend-run", os.path.abspath(self.run_dir)]
+        self.cmd = [self.binary_path, self.output_cfg_path]
+
+        if self.haddock_step_name != "haddock3_run":
+            self.cmd.extend(["--extend-run", os.path.abspath(self.run_dir)])
 
         # Run Biobb block
         with fu.change_dir(self.run_dir):
@@ -199,6 +202,8 @@ def create_cfg(
                     if mapped_key and mapped_key in workflow_dict:
                         sub_value = workflow_dict[mapped_key]
                         cfg_dict[key][sub_key] = sub_value
+        if haddock_step_name == "haddock3_run" and "run_dir" not in cfg_dict:
+            cfg_dict["run_dir"] = "run"
 
     # Add molecules and run_dir if provided
     for key, value in workflow_dict.items():
