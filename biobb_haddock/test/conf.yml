@@ -133,6 +133,14 @@ haddock3_run:
   properties:
     remove_tmp: False
 
+haddock_interface:
+  paths:
+    input_pdb_path: file:test_data_dir/haddock/e2a-hpr_1GGR.pdb
+    output_txt_path: haddock_interface.txt
+    ref_output_txt_path: file:test_reference_dir/haddock_restraints/haddock_interface.txt
+  properties:
+    remove_tmp: False
+
 haddock3_accessibility:
   paths:
     input_pdb_path: file:test_data_dir/haddock/e2aP_1F3G_noH.pdb
