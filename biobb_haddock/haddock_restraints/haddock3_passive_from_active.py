@@ -12,7 +12,7 @@ class Haddock3PassiveFromActive(BiobbObject):
     """
     | biobb_haddock Haddock3PassiveFromActive
     | Wrapper class for the Haddock3-Restraints passive_from_active module.
-    | `Haddock3-Restraints passive_from_active <https://www.bonvinlab.org/haddock3/clients/haddock.clis.restraints.passive_from_active.html>`_ given a list of active_residues and a PDB structure, it will return a list of surface exposed passive residues within a radius (6.5Å by default) from the active residues.
+    | `Haddock3-Restraints passive_from_active <https://www.bonvinlab.org/haddock3-user-manual/restraints_cli.html#passive-from-active>`_ given a list of active_residues and a PDB structure, it will return a list of surface exposed passive residues within a radius (6.5Å by default) from the active residues.
 
     Args:
         input_pdb_path (str): Path to the input PDB structure file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/1A2P_ch.pdb>`_. Accepted formats: pdb (edam:format_1476).
@@ -102,7 +102,7 @@ class Haddock3PassiveFromActive(BiobbObject):
         self.check_init(properties)
 
         # If surface_list_path is provided overwrite the active_list
-        if self.surface_list_path:
+        if self.surface_list_path and not self.active_list:
             with open(self.surface_list_path, "r") as surface_file:
                 self.active_list = surface_file.read()
 
@@ -121,7 +121,7 @@ class Haddock3PassiveFromActive(BiobbObject):
             self.binary_path,
             "passive_from_active",
             self.stage_io_dict['in']['input_pdb_path'],
-            self.active_list
+            f"\"{self.active_list}\""
         ]
 
         # Add optional parameters
