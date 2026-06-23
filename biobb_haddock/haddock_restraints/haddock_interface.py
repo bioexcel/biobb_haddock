@@ -101,6 +101,13 @@ class HaddockRestrainInterface(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
+        # Open the file and sort the lines so the output is always the same
+        with open(self.stage_io_dict['out']['output_txt_path'], 'r') as f:
+            lines = f.readlines()
+            lines.sort()
+        with open(self.stage_io_dict['out']['output_txt_path'], 'w') as f:
+            f.writelines(lines)
+
         # Copy files to host
         self.copy_to_host()
 
