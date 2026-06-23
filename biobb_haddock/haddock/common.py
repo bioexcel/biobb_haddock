@@ -103,7 +103,7 @@ class HaddockStepBase(BiobbObject):
             output_cfg_path=self.create_tmp_file('_haddock.cfg'),
             workflow_dict=workflow_dict,
             input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
-            cfg_properties_dict=self.cfg,
+            properties_cfg_dict=self.cfg,
             out_log=self.out_log,
             global_log=self.global_log,
         )
@@ -136,11 +136,11 @@ def create_cfg(
     output_cfg_path: str,
     workflow_dict: dict[str, Any],
     input_cfg_path: Optional[str] = None,
-    cfg_properties_dict: Optional[dict[str, str]] = None,
+    properties_cfg_dict: Optional[dict[str, str]] = None,
     out_log: Optional[logging.Logger] = None,
     global_log: Optional[logging.Logger] = None,
 ) -> str:
-    """Creates an CFG file using the following hierarchy  cfg_properties_dict > input_cfg_path > preset_dict"""
+    """Creates an CFG file using the following hierarchy: properties_cfg_dict > input_cfg_path > preset_dict"""
     cfg_dict: dict[str, Any] = {}
 
     # Handle input configuration if it exists
@@ -172,14 +172,14 @@ def create_cfg(
                         cfg_dict[target_key][k] = v
 
         # Apply custom properties to the step
-        if cfg_properties_dict:
-            for k, v in cfg_properties_dict.items():
+        if properties_cfg_dict:
+            for k, v in properties_cfg_dict.items():
                 fu.log(f"CFG from properties: {k} = {v}", out_log, global_log)
                 cfg_dict[target_key][k] = v
     # Multiple steps: haddock3_run and haddock3_extend
     else:
-        if cfg_properties_dict:
-            for key, value in cfg_properties_dict.items():
+        if properties_cfg_dict:
+            for key, value in properties_cfg_dict.items():
                 if isinstance(value, dict):
                     # If the value is a dictionary, update the corresponding section in cfg_dict
                     if key not in cfg_dict:

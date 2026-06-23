@@ -125,7 +125,7 @@ class Topology(BiobbObject):
             output_cfg_path=self.create_tmp_file('_haddock.cfg'),
             workflow_dict=workflow_dict,
             input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
-            cfg_properties_dict=self.cfg,
+            properties_cfg_dict=self.cfg,
         )
 
         if self.container_path:

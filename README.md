@@ -32,7 +32,7 @@
 # biobb_haddock
 
 ## Introduction
-biobb_haddock is the Biobb module collection to compute information-driven flexible protein-protein docking.
+biobb_haddock is the Biobb module collection to compute information-driven flexible protein-protein docking using [HADDOCK3](https://github.com/haddocking/haddock3).
 Biobb (BioExcel building blocks) packages are Python building blocks that
 create new layer of compatibility and interoperability over popular
 bioinformatics tools.

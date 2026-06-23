@@ -18,7 +18,7 @@ class TestCreateCfg():
             workflow_dict={'haddock_step_name': 'topoaa',
                            'run_dir': 'test_dir'},
             input_cfg_path=self.paths['input_cfg_step'],
-            cfg_properties_dict=self.properties['cfg_step'],
+            properties_cfg_dict=self.properties['cfg_step'],
         )
 
         assert fx.not_empty(self.paths['output_cfg'])
@@ -27,7 +27,7 @@ class TestCreateCfg():
 
         assert cfg['run_dir'] == 'test_dir'             # From workflow_dict
         assert cfg['topoaa.1']['iniseed'] == 1          # From input_cfg
-        assert cfg['topoaa.1']['tolerance'] == 5        # From cfg_properties_dict
+        assert cfg['topoaa.1']['tolerance'] == 5        # From properties_cfg_dict
         assert cfg['topoaa.1']["log_level"] == "quiet"  # From preset
 
     def test_create_cfg_run(self):
@@ -36,7 +36,7 @@ class TestCreateCfg():
             workflow_dict={'haddock_step_name': 'haddock3_run', 'run_dir': 'test_dir',
                            'ambig_restraints_table_path': 'test_tbl'},
             input_cfg_path=self.paths['input_cfg_run'],
-            cfg_properties_dict=self.properties['cfg_run'],
+            properties_cfg_dict=self.properties['cfg_run'],
         )
 
         assert fx.not_empty(self.paths['output_cfg'])
@@ -45,5 +45,5 @@ class TestCreateCfg():
 
         assert cfg['run_dir'] == 'test_dir'             # From workflow_dict
         assert cfg['topoaa.1']['iniseed'] == 1          # From input_cfg
-        assert cfg['topoaa.1']['tolerance'] == 5        # From cfg_properties_dict
+        assert cfg['topoaa.1']['tolerance'] == 5        # From properties_cfg_dict
         assert cfg['rigidbody.1']['ambig_fname'] == 'test_tbl'
