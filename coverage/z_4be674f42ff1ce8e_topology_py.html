@@ -64,8 +64,8 @@
             <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a id="nextFileLink" class="nav" href="z_4afa08dbc058ef02___init___py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.14.1">coverage.py v7.14.1</a>,
-            created at 2026-05-28 14:34 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.14.3">coverage.py v7.14.3</a>,
+            created at 2026-07-01 12:31 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -207,7 +207,7 @@
     <p class="run run2"><span class="n"><a id="t125" href="#t125">125</a></span><span class="t">            <span class="nam">output_cfg_path</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">create_tmp_file</span><span class="op">(</span><span class="str">'_haddock.cfg'</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t126" href="#t126">126</a></span><span class="t">            <span class="nam">workflow_dict</span><span class="op">=</span><span class="nam">workflow_dict</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t127" href="#t127">127</a></span><span class="t">            <span class="nam">input_cfg_path</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">stage_io_dict</span><span class="op">[</span><span class="str">"in"</span><span class="op">]</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">"haddock_config_path"</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t128" href="#t128">128</a></span><span class="t">            <span class="nam">cfg_properties_dict</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">cfg</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t128" href="#t128">128</a></span><span class="t">            <span class="nam">properties_cfg_dict</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">cfg</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t129" href="#t129">129</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t130" href="#t130">130</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t131" href="#t131">131</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">container_path</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -220,7 +220,7 @@
     <p class="run"><span class="n"><a id="t138" href="#t138">138</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">run_biobb</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t139" href="#t139">139</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t140" href="#t140">140</a></span><span class="t">        <span class="com"># Copy output</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t141" href="#t141">141</a></span><span class="t">        <span class="nam">haddock_output_path</span> <span class="op">=</span> <span class="nam">Path</span><span class="op">(</span><span class="fst">f'</span><span class="op">{</span><span class="nam">workflow_dict</span><span class="op">[</span><span class="str">"run_dir"</span><span class="op">]</span><span class="op">}</span><span class="fst">/0_</span><span class="op">{</span><span class="nam">self</span><span class="op">.</span><span class="nam">haddock_step_name</span><span class="op">}</span><span class="fst">'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t141" href="#t141">141</a></span><span class="t">        <span class="nam">haddock_output_path</span> <span class="op">=</span> <span class="nam">Path</span><span class="op">(</span><span class="str">f'{workflow_dict["run_dir"]}/0_{self.haddock_step_name}'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t142" href="#t142">142</a></span><span class="t">        <span class="nam">mol1_name</span> <span class="op">=</span> <span class="nam">str</span><span class="op">(</span><span class="nam">Path</span><span class="op">(</span><span class="nam">self</span><span class="op">.</span><span class="nam">io_dict</span><span class="op">[</span><span class="str">"in"</span><span class="op">]</span><span class="op">[</span><span class="str">"mol1_input_pdb_path"</span><span class="op">]</span><span class="op">)</span><span class="op">.</span><span class="nam">stem</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t143" href="#t143">143</a></span><span class="t">        <span class="nam">mol1_output_file_list</span> <span class="op">=</span> <span class="nam">list</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t144" href="#t144">144</a></span><span class="t">            <span class="nam">haddock_output_path</span><span class="op">.</span><span class="nam">glob</span><span class="op">(</span><span class="nam">mol1_name</span> <span class="op">+</span> <span class="str">r"*_haddock.pdb*"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
@@ -282,8 +282,8 @@
             <a class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a class="nav" href="z_4afa08dbc058ef02___init___py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.14.1">coverage.py v7.14.1</a>,
-            created at 2026-05-28 14:34 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.14.3">coverage.py v7.14.3</a>,
+            created at 2026-07-01 12:31 +0000
         </p>
     </div>
 </footer>
