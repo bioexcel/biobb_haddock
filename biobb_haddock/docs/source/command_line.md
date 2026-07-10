@@ -1063,7 +1063,7 @@ properties:
 ```
 #### Command line
 ```python
-sele_top_clusts --config config_sele_top_clusts.yml --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data output.directory --output_selection_zip_path ref_seletop.zip --haddock_config_path run.cfg
+sele_top_clusts --config config_sele_top_clusts.yml --input_haddock_wf_data haddock_wf_data_clustfcc.zip --output_haddock_wf_data output.directory --output_selection_zip_path ref_seletop.zip --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_sele_top_clusts.json)
@@ -1076,7 +1076,7 @@ sele_top_clusts --config config_sele_top_clusts.yml --input_haddock_wf_data hadd
 ```
 #### Command line
 ```python
-sele_top_clusts --config config_sele_top_clusts.json --input_haddock_wf_data haddock_wf_data_rigid.zip --output_haddock_wf_data output.directory --output_selection_zip_path ref_seletop.zip --haddock_config_path run.cfg
+sele_top_clusts --config config_sele_top_clusts.json --input_haddock_wf_data haddock_wf_data_clustfcc.zip --output_haddock_wf_data output.directory --output_selection_zip_path ref_seletop.zip --haddock_config_path run.cfg
 ```
 
 ## Topology
