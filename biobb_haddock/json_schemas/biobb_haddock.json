@@ -98,6 +98,14 @@
             "rest": true
         },
         {
+            "block": "Interface",
+            "tool": "Haddock Interface",
+            "desc": "The Interface module. Identifies the interface residues between two molecules in Haddock3.",
+            "exec": "haddock_interface",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock_interface",
+            "rest": true
+        },
+        {
             "block": "Accessibility",
             "tool": "Haddock3 Accessibility",
             "desc": "The Accessibility module. Calculates solvent accessibility for defining passive residues in Haddock3.",

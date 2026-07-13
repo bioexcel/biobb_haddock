@@ -35,6 +35,7 @@ setuptools.setup(
             "sele_top_clusts = biobb_haddock.haddock.sele_top_clusts:main",
             "sele_top = biobb_haddock.haddock.sele_top:main",
             "topology = biobb_haddock.haddock.topology:main",
+            "haddock_interface = biobb_haddock.haddock_restraints.haddock_interface:main",
             "haddock3_accessibility = biobb_haddock.haddock_restraints.haddock3_accessibility:main",
             "haddock3_actpass_to_ambig = biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig:main",
             "haddock3_passive_from_active = biobb_haddock.haddock_restraints.haddock3_passive_from_active:main",
