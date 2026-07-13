@@ -6,3 +6,4 @@ biobb_haddock
 
    haddock
    haddock_restraints
+   utils

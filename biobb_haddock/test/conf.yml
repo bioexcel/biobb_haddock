@@ -178,3 +178,11 @@ haddock3_restrain_bodies:
     ref_output_tbl_path: file:test_reference_dir/haddock_restraints/antibody-unambig.tbl
   properties:
     remove_tmp: False
+
+anarcii:
+  paths:
+    input_pdb_path: file:test_data_dir/haddock_restraints/4G6K_clean.pdb
+    output_pdb_path: 4G6K_anarcii_imgt.pdb
+    ref_output_pdb_path: file:test_reference_dir/utils/4G6K_anarcii_imgt.pdb
+  properties:
+    remove_tmp: False

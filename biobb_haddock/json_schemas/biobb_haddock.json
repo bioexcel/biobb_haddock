@@ -128,6 +128,14 @@
             "exec": "haddock3_restrain_bodies",
             "docs": "https://biobb-haddock.readthedocs.io/en/latest/haddock_restraints.html#module-haddock_restraints.haddock3_restrain_bodies",
             "rest": true
+        },
+        {
+            "block": "Anarcii",
+            "tool": "Haddock3 Anarcii",
+            "desc": "The Anarcii module. Renumerates a structure following the IMGT numbering scheme.",
+            "exec": "anarcii",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/utils.html#module-utils.anarcii",
+            "rest": true
         }
     ],
     "dep_pypi": [
@@ -137,7 +145,8 @@
     "dep_conda": [
         "python >=3.10",
         "biobb_common ==5.2.2",
-        "haddock_biobb ==2025.11"
+        "haddock_biobb ==2025.11",
+        "anarcii >=2.0.0"
     ],
     "keywords": [
         "haddock",

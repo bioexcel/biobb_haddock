@@ -20,7 +20,7 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=["docs", "test"]),
     package_data={"biobb_haddock": ["py.typed"]},
     include_package_data=True,
-    install_requires=["biobb_common==5.2.2", "haddock3==2025.11.0"],
+    install_requires=["biobb_common==5.2.2", "haddock3==2025.11.0", "anarcii>=2.0.0"],
     python_requires=">=3.10",
     entry_points={
         "console_scripts": [
@@ -39,6 +39,7 @@ setuptools.setup(
             "haddock3_actpass_to_ambig = biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig:main",
             "haddock3_passive_from_active = biobb_haddock.haddock_restraints.haddock3_passive_from_active:main",
             "haddock3_restrain_bodies = biobb_haddock.haddock_restraints.haddock3_restrain_bodies:main",
+            "anarcii = biobb_haddock.utils.anarcii:main",
         ]
     },
     classifiers=[
