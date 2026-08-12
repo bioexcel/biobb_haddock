@@ -18,7 +18,7 @@ class HaddockRestrainInterface(BiobbObject):
         output_txt_path (str): Path to the output text file with the list of interface residues. File type: output. Accepted formats: txt (edam:format_2330).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cutoff** (*float*) - (4.0) Cutoff distance in Angstroms for interface residues calculation.
-            * **binary_path** (*str*) - ("haddock3-restraints") Path to the HADDOCK3 restraints executable binary.
+            * **binary_path** (*str*) - ("haddock-restraints") Path to the HADDOCK3 restraints executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
@@ -42,7 +42,7 @@ class HaddockRestrainInterface(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Haddock3-restraints
+            * name: Haddock-restraints
             * version: 2025.5
             * license: Apache-2.0
         * ontology:
@@ -89,7 +89,7 @@ class HaddockRestrainInterface(BiobbObject):
             return 0
         self.stage_files()
 
-        # haddock3-restraints interface <structure> <cutoff>
+        # haddock-restraints interface <structure> <cutoff>
         self.cmd = [self.binary_path, "interface",
                     self.stage_io_dict['in']['input_pdb_path'],
                     str(self.cutoff)]
