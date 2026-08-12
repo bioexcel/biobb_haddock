@@ -807,6 +807,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **cfg** (*object*): ({}) Haddock configuration options specification.
+* **restart_from** (*integer*): (None) Restart the run from a given step, this maps to the HADDOCK3 --restart option. Step folders from the selected step onward will be deleted. Use 0 to start the run from scratch, reusing an existing non-empty run_dir.
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
 * **remove_tmp** (*boolean*): (True) Remove temporal files.
 * **restart** (*boolean*): (False) Do not execute if output files exist.

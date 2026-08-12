@@ -116,6 +116,14 @@ class HaddockStepBase(BiobbObject):
 
         if self.haddock_step_name != "haddock3_run":
             self.cmd.extend(["--extend-run", os.path.abspath(self.run_dir)])
+        elif getattr(self, "restart_from", None) is not None:
+            restart_from = int(self.restart_from)
+            if restart_from < 0:
+                fu.log(f"Warning: restart_from must be a non-negative integer, {self.restart_from} given, "
+                       "ignoring it.", self.out_log, self.global_log)
+            else:
+                fu.log(f"Restarting the run from step {restart_from}", self.out_log, self.global_log)
+                self.cmd.extend(["--restart", str(restart_from)])
 
         # Run Biobb block
         with fu.change_dir(self.run_dir):

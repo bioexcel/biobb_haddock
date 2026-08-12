@@ -1,5 +1,11 @@
 # Biobb haddock changelog
 
+## Unreleased
+
+### New features
+
+* [FEATURE] New restart_from property in haddock3_run, maps to the HADDOCK3 --restart option to resume or overwrite an existing run_dir.
+
 ## What's new in version [5.3.0](https://github.com/bioexcel/biobb_amber/releases/tag/v5.3.0)?
 
 ### Changes

@@ -90,6 +90,12 @@
                     "wf_prop": false,
                     "description": "Haddock configuration options specification."
                 },
+                "restart_from": {
+                    "type": "integer",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Restart the run from a given step, this maps to the HADDOCK3 --restart option. Step folders from the selected step onward will be deleted. Use 0 to start the run from scratch, reusing an existing non-empty run_dir."
+                },
                 "binary_path": {
                     "type": "string",
                     "default": "haddock",
