@@ -1,4 +1,4 @@
 name = "utils"
 __all__ = [
-    "anarcii",
+    "biobb_anarcii",
 ]

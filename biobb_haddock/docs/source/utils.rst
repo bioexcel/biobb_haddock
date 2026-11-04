@@ -5,10 +5,10 @@ Submodules
 -----------
 
 
-utils.anarcii module
----------------------
+utils.biobb_anarcii module
+---------------------------
 
-.. automodule:: utils.anarcii
+.. automodule:: utils.biobb_anarcii
     :members:
     :undoc-members:
     :show-inheritance:

@@ -141,8 +141,8 @@
             "block": "Anarcii",
             "tool": "Haddock3 Anarcii",
             "desc": "The Anarcii module. Renumerates a structure following the IMGT numbering scheme.",
-            "exec": "anarcii",
-            "docs": "https://biobb-haddock.readthedocs.io/en/latest/utils.html#module-utils.anarcii",
+            "exec": "biobb_anarcii",
+            "docs": "https://biobb-haddock.readthedocs.io/en/latest/utils.html#module-utils.biobb_anarcii",
             "rest": true
         }
     ],

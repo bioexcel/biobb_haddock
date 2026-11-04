@@ -6,6 +6,10 @@
 
 * [FEATURE] New restart_from property in haddock3_run, maps to the HADDOCK3 --restart option to resume or overwrite an existing run_dir.
 
+### Changes
+
+* [UPDATE] Rename the anarcii block to biobb_anarcii (module `biobb_haddock.utils.biobb_anarcii`, command `biobb_anarcii`): its `anarcii` command clashed with the command of the ANARCII package it wraps, so the biocontainer ran ANARCII's CLI. `biobb_haddock.utils.anarcii` still imports it.
+
 ## What's new in version [5.3.1](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.3.1)?
 
 ### Changes

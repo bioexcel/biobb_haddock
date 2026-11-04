@@ -40,7 +40,7 @@ setuptools.setup(
             "haddock3_actpass_to_ambig = biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig:main",
             "haddock3_passive_from_active = biobb_haddock.haddock_restraints.haddock3_passive_from_active:main",
             "haddock3_restrain_bodies = biobb_haddock.haddock_restraints.haddock3_restrain_bodies:main",
-            "anarcii = biobb_haddock.utils.anarcii:main",
+            "biobb_anarcii = biobb_haddock.utils.biobb_anarcii:main",
         ]
     },
     classifiers=[

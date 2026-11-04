@@ -6,6 +6,68 @@ biobb_command [-h] --config CONFIG --input_file(s) <input_file(s)> --output_file
 -----------------
 
 
+## Biobb_anarcii
+Wrapper class for the ANARCII antibody numbering tool.
+### Get help
+Command:
+```python
+biobb_anarcii -h
+```
+    usage: biobb_anarcii [-h] [-c CONFIG] -i INPUT_PDB_PATH -o OUTPUT_PDB_PATH
+    
+    Wrapper for the ANARCII antibody numbering tool.
+    
+    options:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_PDB_PATH, --input_pdb_path INPUT_PDB_PATH
+                            Path to the input PDB structure file. Accepted formats: pdb.
+      -o OUTPUT_PDB_PATH, --output_pdb_path OUTPUT_PDB_PATH
+                            Path to the output renumbered PDB structure file. Accepted formats: pdb.
+### I / O Arguments
+Syntax: input_argument (datatype) : Definition
+
+Config input / output arguments for this building block:
+* **input_pdb_path** (*string*): Path to the input PDB structure file. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/4G6K_clean.pdb). Accepted formats: PDB
+* **output_pdb_path** (*string*): Path to the output renumbered PDB structure file. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/utils/4G6K_anarcii_imgt.pdb). Accepted formats: PDB
+### Config
+Syntax: input_parameter (datatype) - (default_value) Definition
+
+Config parameters for this building block:
+* **seq_type** (*string*): (antibody) Type of sequence to number. 
+* **mode** (*string*): (accuracy) Numbering mode. 
+* **verbose** (*boolean*): (True) Print verbose output during numbering.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+### YAML
+#### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_biobb_anarcii.yml)
+```python
+properties:
+  remove_tmp: false
+
+```
+#### Command line
+```python
+biobb_anarcii --config config_biobb_anarcii.yml --input_pdb_path 4G6K_clean.pdb --output_pdb_path 4G6K_anarcii_imgt.pdb
+```
+### JSON
+#### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_biobb_anarcii.json)
+```python
+{
+  "properties": {
+    "remove_tmp": false
+  }
+}
+```
+#### Command line
+```python
+biobb_anarcii --config config_biobb_anarcii.json --input_pdb_path 4G6K_clean.pdb --output_pdb_path 4G6K_anarcii_imgt.pdb
+```
+
 ## Capri_eval
 Wrapper class for the HADDOCK3 CapriEval module.
 ### Get help

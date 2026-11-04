@@ -1,0 +1,137 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_haddock/json_schemas/1.0/biobb_anarcii",
+    "name": "biobb_haddock Anarcii",
+    "title": "Wrapper class for the ANARCII antibody numbering tool.",
+    "description": "ANARCII numbers antibody, TCR, and other immune receptor sequences. Given an input PDB structure it renumbers it (IMGT scheme by default) and writes the renumbered PDB structure.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "ANARCII",
+            "version": "2.0.0",
+            "license": "BSD-3-Clause"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "input_pdb_path",
+        "output_pdb_path"
+    ],
+    "properties": {
+        "input_pdb_path": {
+            "type": "string",
+            "description": "Path to the input PDB structure file",
+            "filetype": "input",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/4G6K_clean.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Path to the input PDB structure file",
+                    "edam": "format_1476"
+                }
+            ]
+        },
+        "output_pdb_path": {
+            "type": "string",
+            "description": "Path to the output renumbered PDB structure file",
+            "filetype": "output",
+            "sample": "https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/utils/4G6K_anarcii_imgt.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Path to the output renumbered PDB structure file",
+                    "edam": "format_1476"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "seq_type": {
+                    "type": "string",
+                    "default": "antibody",
+                    "wf_prop": false,
+                    "description": "Type of sequence to number. ",
+                    "enum": [
+                        "antibody",
+                        "tcr",
+                        "vhh",
+                        "sabdab"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "antibody",
+                            "description": null
+                        },
+                        {
+                            "name": "tcr",
+                            "description": null
+                        },
+                        {
+                            "name": "vhh",
+                            "description": null
+                        },
+                        {
+                            "name": "sabdab",
+                            "description": null
+                        }
+                    ]
+                },
+                "mode": {
+                    "type": "string",
+                    "default": "accuracy",
+                    "wf_prop": false,
+                    "description": "Numbering mode. ",
+                    "enum": [
+                        "accuracy",
+                        "speed"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "accuracy",
+                            "description": null
+                        },
+                        {
+                            "name": "speed",
+                            "description": null
+                        }
+                    ]
+                },
+                "verbose": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": false,
+                    "description": "Print verbose output during numbering."
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                },
+                "sandbox_path": {
+                    "type": "string",
+                    "default": "./",
+                    "wf_prop": true,
+                    "description": "Parent path to the sandbox directory."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}
