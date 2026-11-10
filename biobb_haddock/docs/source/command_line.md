@@ -1162,7 +1162,7 @@ topology -h
       --mol1_input_pdb_path MOL1_INPUT_PDB_PATH
                             Path to the input PDB file. Accepted formats: pdb.
       --output_haddock_wf_data OUTPUT_HADDOCK_WF_DATA
-                            Path to the output zipball containing all the current Haddock workflow data. Accepted formats: zip.
+                            Path to the output directory containing all the current Haddock workflow data. Accepted formats: directory, zip.
     
     optional arguments:
       --mol1_output_top_zip_path MOL1_OUTPUT_TOP_ZIP_PATH
@@ -1181,7 +1181,7 @@ Config input / output arguments for this building block:
 * **mol1_output_top_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol1_top.zip). Accepted formats: ZIP
 * **mol2_input_pdb_path** (*string*): Path to the input PDB file. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/hpr_ensemble.pdb). Accepted formats: PDB
 * **mol2_output_top_zip_path** (*string*): Path to the output PDB file collection in zip format. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock/ref_mol2_top.zip). Accepted formats: ZIP
-* **output_haddock_wf_data** (*dir*): Path to the output zipball containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: ZIP
+* **output_haddock_wf_data** (*dir*): Path to the output directory containing all the current Haddock workflow data. File type: output. [Sample file](None). Accepted formats: DIRECTORY, ZIP
 * **haddock_config_path** (*string*): Haddock configuration CFG file path. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg). Accepted formats: CFG
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
@@ -1208,7 +1208,7 @@ properties:
 ```
 #### Command line
 ```python
-topology --config config_topology.yml --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data output.zip --haddock_config_path run.cfg
+topology --config config_topology.yml --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data output.directory --haddock_config_path run.cfg
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_haddock/blob/master/biobb_haddock/test/data/config/config_topology.json)
@@ -1221,5 +1221,5 @@ topology --config config_topology.yml --mol1_input_pdb_path e2aP_1F3G.pdb --mol1
 ```
 #### Command line
 ```python
-topology --config config_topology.json --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data output.zip --haddock_config_path run.cfg
+topology --config config_topology.json --mol1_input_pdb_path e2aP_1F3G.pdb --mol1_output_top_zip_path ref_mol1_top.zip --mol2_input_pdb_path hpr_ensemble.pdb --mol2_output_top_zip_path ref_mol2_top.zip --output_haddock_wf_data output.directory --haddock_config_path run.cfg
 ```

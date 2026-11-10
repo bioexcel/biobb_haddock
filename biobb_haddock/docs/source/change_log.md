@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changes
+
+* [FIX] topology docs and JSON schema: `output_haddock_wf_data` also accepts a directory (format `directory`), as the other HADDOCK3 blocks; the block already wrote the run folder for a path without the `.zip` extension.
+
 ## What's new in version [5.3.2](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.3.2)?
 
 ### Changes
