@@ -2,9 +2,14 @@
 
 ## Unreleased
 
+## What's new in version [5.3.3](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.3.3)?
+
 ### Changes
 
+* [FIX] capri_eval: the `reference_pdb_path` structure now reaches HADDOCK3 as the caprieval reference. It was dropped, so models were scored against the best-scoring model instead of the given reference.
+* [FIX] haddock3_passive_from_active, haddock3_actpass_to_ambig, haddock3_restrain_bodies, haddock3_accessibility and haddock_interface: stderr of the HADDOCK3 tools no longer ends up in the output files (warnings printed by the tools corrupted the restraint and actpass files); it goes to the error log instead.
 * [FIX] topology docs and JSON schema: `output_haddock_wf_data` also accepts a directory (format `directory`), as the other HADDOCK3 blocks; the block already wrote the run folder for a path without the `.zip` extension.
+* [UPDATE] README: readthedocs badge.
 
 ## What's new in version [5.3.2](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.3.2)?
 
