@@ -4,11 +4,17 @@
 
 import glob
 import os
+import re
 import shutil
 from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
+
+# calc_accessibility writes its report as Python log records, e.g.
+# "16/11/2026 12:49:38 L227 INFO - Chain: A - 150 residues"
+REPORT_RECORD = re.compile(r"\d{2}/\d{2}/\d{4} \d{2}:\d{2}:\d{2} L\d+ [A-Z]+ - ")
 
 
 class Haddock3Accessibility(BiobbObject):
@@ -110,12 +116,24 @@ class Haddock3Accessibility(BiobbObject):
             self.cmd.append("--export_to_actpass")
 
         self.cmd.append(f"-c {self.cutoff}")
-        self.cmd.append(">")
+        # calc_accessibility writes its report with Python logging, i.e. to stderr,
+        # so here stderr (not stdout) is redirected to the report file
+        self.cmd.append("2>")
         self.cmd.append(self.stage_io_dict['out']['output_accessibility_path'])
-        self.cmd.append("2>&1")
 
         # Run Biobb block
         self.run_biobb()
+
+        # Keep only the tool's log records in the report: any other stderr
+        # line (e.g. Python warnings, tracebacks) goes to the error log
+        report_path = self.stage_io_dict['out']['output_accessibility_path']
+        with open(report_path, 'r') as file:
+            lines = file.readlines()
+        other_lines = [line for line in lines if not REPORT_RECORD.match(line)]
+        if other_lines:
+            fu.log(''.join(other_lines), self.err_log)
+            with open(report_path, 'w') as file:
+                file.writelines(line for line in lines if REPORT_RECORD.match(line))
 
         # Check chain
         target_string = f"Chain {self.chain}"

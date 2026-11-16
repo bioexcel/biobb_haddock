@@ -94,9 +94,9 @@ class HaddockRestrainInterface(BiobbObject):
                     self.stage_io_dict['in']['input_pdb_path'],
                     str(self.cutoff)]
 
+        # Redirect only stdout (the result): stderr (warnings, errors) goes to the error log
         self.cmd.append(">")
         self.cmd.append(self.stage_io_dict['out']['output_txt_path'])
-        self.cmd.append("2>&1")
 
         # Run Biobb block
         self.run_biobb()

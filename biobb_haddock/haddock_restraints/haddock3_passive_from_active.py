@@ -135,10 +135,9 @@ class Haddock3PassiveFromActive(BiobbObject):
         # Radius not in this version
         # self.cmd.extend(["-r", str(self.radius)])
 
-        # Redirect output to the output file
+        # Redirect only stdout (the result): stderr (warnings, errors) goes to the error log
         self.cmd.append(">")
         self.cmd.append(self.stage_io_dict['out']['output_actpass_path'])
-        self.cmd.append("2>&1")
 
         # Run Biobb block
         self.run_biobb()

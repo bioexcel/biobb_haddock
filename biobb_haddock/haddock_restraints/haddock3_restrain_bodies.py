@@ -100,9 +100,9 @@ class Haddock3RestrainBodies(BiobbObject):
         if self.verbose > 0:
             self.cmd.extend(["--verbose", str(self.verbose)])
 
+        # Redirect only stdout (the result): stderr (warnings, errors) goes to the error log
         self.cmd.append(">")
         self.cmd.append(self.stage_io_dict['out']['output_tbl_path'])
-        self.cmd.append("2>&1")
 
         # Run Biobb block
         self.run_biobb()

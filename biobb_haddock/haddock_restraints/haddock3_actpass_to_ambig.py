@@ -116,9 +116,9 @@ class Haddock3ActpassToAmbig(BiobbObject):
         if self.segid_two is not None:
             self.cmd.extend(["--segid-two", self.segid_two])
 
+        # Redirect only stdout (the result): stderr (warnings, errors) goes to the error log
         self.cmd.append(">")
         self.cmd.append(self.stage_io_dict['out']['output_tbl_path'])
-        self.cmd.append("2>&1")
 
         # Run Biobb block
         self.run_biobb()

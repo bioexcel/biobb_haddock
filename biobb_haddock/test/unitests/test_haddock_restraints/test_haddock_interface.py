@@ -1,4 +1,6 @@
 # type: ignore
+from pathlib import Path
+
 from biobb_common.tools import test_fixtures as fx
 from biobb_haddock.haddock_restraints.haddock_interface import haddock_interface
 
@@ -15,3 +17,10 @@ class TestHaddockInterface():
         haddock_interface(properties=self.properties, **self.paths)
         assert fx.not_empty(self.paths['output_txt_path'])
         assert fx.equal(self.paths['output_txt_path'], self.paths['ref_output_txt_path'])
+
+    def test_haddock_interface_stderr_not_in_output(self, noisy_properties, fake_warning):
+        properties = {**self.properties, **noisy_properties('haddock-restraints')}
+        haddock_interface(properties=properties, **self.paths)
+        assert fake_warning not in Path(self.paths['output_txt_path']).read_text()
+        assert fx.equal(self.paths['output_txt_path'], self.paths['ref_output_txt_path'])
+        assert fake_warning in Path(properties['err_log_path']).read_text()
