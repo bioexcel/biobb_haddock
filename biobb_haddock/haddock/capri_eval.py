@@ -95,8 +95,8 @@ class CapriEval(common.HaddockStepBase):
 
     def _handle_config_arguments(self):
         """Handle configuration options from arguments."""
-        if self.io_dict["in"].get("reference_fname"):
-            self.cfg["reference_fname"] = abspath(self.stage_io_dict["in"].get("reference_fname"))
+        if self.io_dict["in"].get("reference_pdb_path"):
+            self.cfg["reference_fname"] = abspath(self.stage_io_dict["in"].get("reference_pdb_path"))
 
     def _handle_step_output(self):
         """Handle how the output files from the step are copied to host."""
