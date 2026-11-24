@@ -4,7 +4,6 @@
 
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 
 
 class Haddock3RestrainBodies(BiobbObject):
@@ -78,17 +77,8 @@ class Haddock3RestrainBodies(BiobbObject):
         self.exclude = properties.get("exclude", None)
         self.verbose = properties.get("verbose", 0)
 
-        # Check the properties
-        self.check_init(properties)
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`Haddock3RestrainBodies <biobb_haddock.haddock_restraints.haddock3_restrain_bodies>` object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # haddock3-restraints restrain_bodies <structure> [--exclude] [--verbose]
         self.cmd = [self.binary_path, "restrain_bodies",

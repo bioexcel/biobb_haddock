@@ -4,7 +4,6 @@
 
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 
 
 class HaddockRestrainInterface(BiobbObject):
@@ -77,17 +76,8 @@ class HaddockRestrainInterface(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock-restraints")
         self.cutoff = properties.get("cutoff", 4.0)
 
-        # Check the properties
-        self.check_init(properties)
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`Haddock3RestrainInterface <biobb_haddock.haddock_restraints.haddock_interface>` object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # haddock-restraints interface <structure> <cutoff>
         self.cmd = [self.binary_path, "interface",

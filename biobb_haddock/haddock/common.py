@@ -8,7 +8,6 @@ from pathlib import Path
 from typing import Any, Optional
 import biobb_common.tools.file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 from .haddock3_config import load, save
 
 haddock_2_wf = {
@@ -57,14 +56,8 @@ class HaddockStepBase(BiobbObject):
         else:
             fu.zip_list(output_zip_path, output_file_list, self.out_log)
 
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the HADDOCK step with common workflow."""
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
-
         if self.stage_io_dict["in"]["input_haddock_wf_data"][-4:] == ".zip":
             # Unzip workflow data to workflow_data_out
             new_input = fu.create_unique_dir(self.stage_io_dict["unique_dir"], '_input_unzipped')

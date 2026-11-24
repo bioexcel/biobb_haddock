@@ -4,7 +4,6 @@
 
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 from biobb_common.tools import file_utils as fu
 
 
@@ -98,22 +97,13 @@ class Haddock3PassiveFromActive(BiobbObject):
             raise ValueError(
                 "Either input_active_list_path or active_list property must be provided")
 
-        # Check the properties
-        self.check_init(properties)
-
         # If surface_list_path is provided overwrite the active_list
         if self.surface_list_path and not self.active_list:
             with open(self.surface_list_path, "r") as surface_file:
                 self.active_list = surface_file.read()
 
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`Haddock3PassiveFromActive <biobb_haddock.haddock_restraints.haddock3_passive_from_active>` object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Build command line
         # haddock3-restraints passive_from_active <pdb_file> <active_list> [-c <chain_id>] [-s <surface_list>] [-r <radius>]

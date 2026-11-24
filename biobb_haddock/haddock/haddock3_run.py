@@ -85,8 +85,6 @@ class Haddock3Run(common.HaddockStepBase):
         self.restart_from = properties.get("restart_from")
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3")
-        # Check the properties
-        self.check_init(properties)
 
 
 def haddock3_run(

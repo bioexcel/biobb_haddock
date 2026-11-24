@@ -10,7 +10,6 @@ from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
 # calc_accessibility writes its report as Python log records, e.g.
 # "16/11/2026 12:49:38 L227 INFO - Chain: A - 150 residues"
@@ -97,17 +96,8 @@ class Haddock3Accessibility(BiobbObject):
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3-restraints")
 
-        # Check the properties
-        self.check_init(properties)
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`Haddock3Accessibility <biobb_haddock.haddock_restraints.haddock3_accessibility>` object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # haddock3-restraints calc_accessibility 1UBQ.pdb --export_to_actpass
         self.cmd = [self.binary_path, "calc_accessibility", self.stage_io_dict['in']['input_pdb_path']]

@@ -10,7 +10,6 @@ from typing import Optional, Union
 
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 from anarcii import Anarcii as AnarciiModel
 
 
@@ -75,18 +74,8 @@ class Anarcii(BiobbObject):
         self.mode = properties.get("mode", "accuracy")
         self.verbose = properties.get("verbose", True)
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`Anarcii <utils.biobb_anarcii.Anarcii>` object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # ANARCII appends the '.pdb' suffix to the output stem
         output_pdb_path = self.stage_io_dict["out"]["output_pdb_path"]

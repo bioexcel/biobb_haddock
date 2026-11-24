@@ -6,7 +6,6 @@ from pathlib import Path
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 from biobb_haddock.haddock.common import create_cfg, move_to_container_path, zip_wf_output
 
 
@@ -96,17 +95,9 @@ class Topology(BiobbObject):
         self.global_cfg = properties.get("global_cfg", dict(postprocess=False))
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3")
-        # Check the properties
-        self.check_init(properties)
 
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`Topology <biobb_haddock.haddock.topology>` object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         self.run_dir = self.stage_io_dict["out"]["output_haddock_wf_data"]
         self.run_dir = self.run_dir[:-4] if self.run_dir[-4:] == ".zip" else self.run_dir

@@ -83,8 +83,6 @@ class Haddock3Extend(common.HaddockStepBase):
         self.global_cfg = properties.get("global_cfg", dict(postprocess=True))
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3")
-        # Check the properties
-        self.check_init(properties)
 
 
 def haddock3_extend(

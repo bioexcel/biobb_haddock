@@ -4,7 +4,6 @@
 
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 
 
 class Haddock3ActpassToAmbig(BiobbObject):
@@ -84,17 +83,8 @@ class Haddock3ActpassToAmbig(BiobbObject):
         self.segid_one = properties.get("segid_one", None)
         self.segid_two = properties.get("segid_two", None)
 
-        # Check the properties
-        self.check_init(properties)
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`Haddock3ActpassToAmbig <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig>` object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         if self.pass_to_act:
             with open(self.stage_io_dict['in']['input_actpass1_path'], 'r') as file1, \
