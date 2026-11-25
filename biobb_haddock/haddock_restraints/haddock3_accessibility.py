@@ -136,11 +136,11 @@ class Haddock3Accessibility(BiobbObject):
         if found:
             # Rename/Copy output file to the given output file name
             file_name = os.path.basename(self.io_dict['in']['input_pdb_path'])
-            shutil.copyfile(f"{file_name[:-4]}_passive_{self.chain}.actpass", self.io_dict["out"]["output_actpass_path"])
+            shutil.copyfile(f"{file_name[:-4]}_passive_{self.chain}.actpass", self.sandbox_file("output_actpass_path"))
             if self.pass_to_act:
-                with open(self.io_dict["out"]["output_actpass_path"], 'r') as file:
+                with open(self.sandbox_file("output_actpass_path"), 'r') as file:
                     lines = file.readlines()
-                with open(self.io_dict["out"]["output_actpass_path"], 'w') as file:
+                with open(self.sandbox_file("output_actpass_path"), 'w') as file:
                     file.write(lines[1])
                     file.write('\n\n')
         else:

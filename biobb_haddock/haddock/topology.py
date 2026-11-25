@@ -135,7 +135,7 @@ class Topology(BiobbObject):
             haddock_output_path.glob(mol1_name + r"*_haddock.pdb*")
         )
         fu.zip_list(
-            self.io_dict["out"]["mol1_output_top_zip_path"],
+            self.sandbox_file("mol1_output_top_zip_path"),
             mol1_output_file_list,
         )
 
@@ -145,7 +145,7 @@ class Topology(BiobbObject):
                 haddock_output_path.glob(mol2_name + r"*_haddock.pdb*")
             )
             fu.zip_list(
-                self.io_dict["out"]["mol2_output_top_zip_path"],
+                self.sandbox_file("mol2_output_top_zip_path"),
                 mol2_output_file_list,
                 self.out_log,
             )
