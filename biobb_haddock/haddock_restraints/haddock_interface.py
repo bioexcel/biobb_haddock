@@ -76,7 +76,7 @@ class HaddockRestrainInterface(BiobbObject):
         self.binary_path = properties.get("binary_path", "haddock-restraints")
         self.cutoff = properties.get("cutoff", 4.0)
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`Haddock3RestrainInterface <biobb_haddock.haddock_restraints.haddock_interface>` object."""
 
         # haddock-restraints interface <structure> <cutoff>
@@ -97,14 +97,6 @@ class HaddockRestrainInterface(BiobbObject):
             lines.sort()
         with open(self.stage_io_dict['out']['output_txt_path'], 'w') as f:
             f.writelines(lines)
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        return self.return_code
 
 
 def haddock_interface(

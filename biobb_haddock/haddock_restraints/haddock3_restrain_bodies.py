@@ -77,7 +77,7 @@ class Haddock3RestrainBodies(BiobbObject):
         self.exclude = properties.get("exclude", None)
         self.verbose = properties.get("verbose", 0)
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`Haddock3RestrainBodies <biobb_haddock.haddock_restraints.haddock3_restrain_bodies>` object."""
 
         # haddock3-restraints restrain_bodies <structure> [--exclude] [--verbose]
@@ -103,14 +103,6 @@ class Haddock3RestrainBodies(BiobbObject):
         if lines and "DEPRECATION NOTICE" in lines[0]:
             with open(self.stage_io_dict['out']['output_tbl_path'], 'w') as file:
                 file.writelines(lines[1:])
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        return self.return_code
 
 
 def haddock3_restrain_bodies(

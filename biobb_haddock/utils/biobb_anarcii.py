@@ -74,7 +74,7 @@ class Anarcii(BiobbObject):
         self.mode = properties.get("mode", "accuracy")
         self.verbose = properties.get("verbose", True)
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`Anarcii <utils.biobb_anarcii.Anarcii>` object."""
 
         # ANARCII appends the '.pdb' suffix to the output stem
@@ -108,15 +108,6 @@ class Anarcii(BiobbObject):
         captured = log_capture.getvalue().strip()
         if captured:
             fu.log("ANARCII output:\n%s" % captured, self.out_log, self.global_log)
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=True)
-        return self.return_code
 
 
 def biobb_anarcii(

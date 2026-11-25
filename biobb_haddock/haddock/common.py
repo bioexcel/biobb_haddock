@@ -56,7 +56,7 @@ class HaddockStepBase(BiobbObject):
         else:
             fu.zip_list(output_zip_path, output_file_list, self.out_log)
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the HADDOCK step with common workflow."""
         if self.stage_io_dict["in"]["input_haddock_wf_data"][-4:] == ".zip":
             # Unzip workflow data to workflow_data_out
@@ -122,18 +122,14 @@ class HaddockStepBase(BiobbObject):
         with fu.change_dir(self.run_dir):
             self.run_biobb()
 
-        # Copy files to host
+    def copy_to_host(self) -> None:
+        """Copy the output files of the step to the host, zipping the workflow data if its output is a zip file."""
         if hasattr(self, '_handle_step_output'):
             self._handle_step_output()
         if self.io_dict["out"]["output_haddock_wf_data"][-4:] == ".zip":
             zip_wf_output(self)
         else:
-            self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        return self.return_code
+            super().copy_to_host()
 
 
 def create_cfg(

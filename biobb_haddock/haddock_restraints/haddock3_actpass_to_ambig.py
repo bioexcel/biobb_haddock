@@ -83,7 +83,7 @@ class Haddock3ActpassToAmbig(BiobbObject):
         self.segid_one = properties.get("segid_one", None)
         self.segid_two = properties.get("segid_two", None)
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`Haddock3ActpassToAmbig <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig>` object."""
 
         if self.pass_to_act:
@@ -119,14 +119,6 @@ class Haddock3ActpassToAmbig(BiobbObject):
         if lines and "DEPRECATION NOTICE" in lines[0]:
             with open(self.stage_io_dict['out']['output_tbl_path'], 'w') as file:
                 file.writelines(lines[1:])
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        return self.return_code
 
 
 def haddock3_actpass_to_ambig(

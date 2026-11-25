@@ -96,7 +96,7 @@ class Topology(BiobbObject):
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3")
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`Topology <biobb_haddock.haddock.topology>` object."""
 
         self.run_dir = self.stage_io_dict["out"]["output_haddock_wf_data"]
@@ -153,13 +153,6 @@ class Topology(BiobbObject):
         # Create zip output
         if self.stage_io_dict["out"]["output_haddock_wf_data"][-4:] == ".zip":
             zip_wf_output(self)
-
-        # Copy files to host
-        self.copy_to_host()
-        # Remove temporary files
-        self.remove_tmp_files()
-
-        return self.return_code
 
 
 def topology(

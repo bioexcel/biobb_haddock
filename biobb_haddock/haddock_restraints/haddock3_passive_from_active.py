@@ -102,7 +102,7 @@ class Haddock3PassiveFromActive(BiobbObject):
             with open(self.surface_list_path, "r") as surface_file:
                 self.active_list = surface_file.read()
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`Haddock3PassiveFromActive <biobb_haddock.haddock_restraints.haddock3_passive_from_active>` object."""
 
         # Build command line
@@ -142,14 +142,6 @@ class Haddock3PassiveFromActive(BiobbObject):
                 file.writelines(lines[1:])
             else:
                 file.writelines(lines)
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        return self.return_code
 
 
 def haddock3_passive_from_active(

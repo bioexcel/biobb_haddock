@@ -96,7 +96,7 @@ class Haddock3Accessibility(BiobbObject):
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "haddock3-restraints")
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`Haddock3Accessibility <biobb_haddock.haddock_restraints.haddock3_accessibility>` object."""
 
         # haddock3-restraints calc_accessibility 1UBQ.pdb --export_to_actpass
@@ -146,14 +146,8 @@ class Haddock3Accessibility(BiobbObject):
         else:
             print(f"\nWARNING: Chain {self.chain} not found in input PDB file. Please check and modify the chain property accordingly.\n")
 
-        # Copy files to host
-        self.copy_to_host()
-
         # Remove temporal files
         self.tmp_files.extend(glob.glob('*.actpass'))
-        self.remove_tmp_files()
-
-        return self.return_code
 
 
 def haddock3_accessibility(
