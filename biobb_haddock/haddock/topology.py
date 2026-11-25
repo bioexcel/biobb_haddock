@@ -139,7 +139,7 @@ class Topology(BiobbObject):
             mol1_output_file_list,
         )
 
-        if self.io_dict["out"].get("mol1_output_top_zip_path"):
+        if self.io_dict["out"].get("mol2_output_top_zip_path"):
             mol2_name = str(Path(self.io_dict["in"]["mol2_input_pdb_path"]).stem)
             mol2_output_file_list = list(
                 haddock_output_path.glob(mol2_name + r"*_haddock.pdb*")
