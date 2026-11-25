@@ -56,26 +56,7 @@ class Haddock3RestrainBodies(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_structure_path": input_structure_path
-            },
-            "out": {
-                "output_tbl_path": output_tbl_path,
-            },
-        }
-
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "haddock3-restraints")
-        self.exclude = properties.get("exclude", None)
-        self.verbose = properties.get("verbose", 0)
+        super().__init__(**locals())
 
     def run(self) -> None:
         """Execute the :class:`Haddock3RestrainBodies <biobb_haddock.haddock_restraints.haddock3_restrain_bodies>` object."""

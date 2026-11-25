@@ -31,7 +31,7 @@ class Haddock3Accessibility(BiobbObject):
             * **cutoff** (*float*) - (0.4) Relative cutoff for sidechain accessibility.
             * **probe_radius** (*float*) - (1.4) Probe radius for the accessibility calculation.
             * **pass_to_act** (*bool*) - (False) If True, the passive residues become active in the actpass file and vice versa.
-            * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
+            * **binary_path** (*str*) - ("haddock3-restraints") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
@@ -70,31 +70,7 @@ class Haddock3Accessibility(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_pdb_path": input_pdb_path,
-            },
-            "out": {
-                "output_accessibility_path": output_accessibility_path,
-                "output_actpass_path": output_actpass_path,
-            },
-        }
-
-        # Properties specific for BB
-        self.chain = properties.get("chain", "A")
-        self.cutoff = properties.get("cutoff", 0.4)
-        self.probe_radius = properties.get("probe_radius", 1.4)
-        self.pass_to_act = properties.get("pass_to_act", False)
-
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "haddock3-restraints")
+        super().__init__(**locals())
 
     def run(self) -> None:
         """Execute the :class:`Haddock3Accessibility <biobb_haddock.haddock_restraints.haddock3_accessibility>` object."""

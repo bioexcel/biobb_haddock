@@ -25,7 +25,7 @@ class Topology(BiobbObject):
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cfg** (*dict*) - ({}) Haddock configuration options specification.
             * **global_cfg** (*dict*) - ({"postprocess": False}) `Global configuration options <https://www.bonvinlab.org/haddock3-user-manual/global_parameters.html>`_ specification.
-            * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
+            * **binary_path** (*str*) - ("haddock3") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
@@ -67,34 +67,12 @@ class Topology(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "mol1_input_pdb_path": mol1_input_pdb_path,
-                "mol2_input_pdb_path": mol2_input_pdb_path,
-                "haddock_config_path": haddock_config_path,
-            },
-            "out": {
-                "output_haddock_wf_data": output_haddock_wf_data,
-                "mol1_output_top_zip_path": mol1_output_top_zip_path,
-                "mol2_output_top_zip_path": mol2_output_top_zip_path,
-            },
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
         self.haddock_step_name = "topoaa"
         # Handle configuration options from propierties
-        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
-        # Global HADDOCK configuration options
-        self.global_cfg = properties.get("global_cfg", dict(postprocess=False))
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "haddock3")
+        self.cfg = {k: v for k, v in self.cfg.items()}
 
     def run(self) -> None:
         """Execute the :class:`Topology <biobb_haddock.haddock.topology>` object."""

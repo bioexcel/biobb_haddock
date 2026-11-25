@@ -57,22 +57,7 @@ class Anarcii(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_pdb_path": input_pdb_path},
-            "out": {"output_pdb_path": output_pdb_path},
-        }
-
-        # Properties specific for BB
-        self.seq_type = properties.get("seq_type", "antibody")
-        self.mode = properties.get("mode", "accuracy")
-        self.verbose = properties.get("verbose", True)
+        super().__init__(**locals())
 
     def run(self) -> None:
         """Execute the :class:`Anarcii <utils.biobb_anarcii.Anarcii>` object."""

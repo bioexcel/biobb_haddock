@@ -20,7 +20,7 @@ class Haddock3ActpassToAmbig(BiobbObject):
             * **pass_to_act** (*bool*) - (False) Path to the haddock haddock executable binary.
             * **segid_one** (*str*) - (None) Segid of the first model.
             * **segid_two** (*str*) - (None) Segid of the second model.
-            * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
+            * **binary_path** (*str*) - ("haddock3-restraints") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
@@ -60,28 +60,7 @@ class Haddock3ActpassToAmbig(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_actpass1_path": input_actpass1_path,
-                "input_actpass2_path": input_actpass2_path,
-            },
-            "out": {
-                "output_tbl_path": output_tbl_path,
-            },
-        }
-
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "haddock3-restraints")
-        self.pass_to_act = properties.get("pass_to_act", False)
-        self.segid_one = properties.get("segid_one", None)
-        self.segid_two = properties.get("segid_two", None)
+        super().__init__(**locals())
 
     def run(self) -> None:
         """Execute the :class:`Haddock3ActpassToAmbig <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig>` object."""

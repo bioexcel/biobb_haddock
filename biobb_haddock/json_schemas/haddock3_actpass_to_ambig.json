@@ -141,7 +141,7 @@
                 },
                 "binary_path": {
                     "type": "string",
-                    "default": "haddock",
+                    "default": "haddock3-restraints",
                     "wf_prop": false,
                     "description": "Path to the haddock haddock executable binary."
                 },

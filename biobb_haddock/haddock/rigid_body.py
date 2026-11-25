@@ -24,7 +24,7 @@ class RigidBody(common.HaddockStepBase):
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cfg** (*dict*) - ({}) Haddock configuration options specification.
             * **global_cfg** (*dict*) - ({"postprocess": False}) `Global configuration options <https://www.bonvinlab.org/haddock3-user-manual/global_parameters.html>`_ specification.
-            * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
+            * **binary_path** (*str*) - ("haddock3") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
@@ -67,35 +67,12 @@ class RigidBody(common.HaddockStepBase):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_haddock_wf_data": input_haddock_wf_data,
-                "ambig_restraints_table_path": ambig_restraints_table_path,
-                "unambig_restraints_table_path": unambig_restraints_table_path,
-                "hb_restraints_table_path": hb_restraints_table_path,
-                "haddock_config_path": haddock_config_path,
-            },
-            "out": {
-                "output_haddock_wf_data": output_haddock_wf_data,
-                "docking_output_zip_path": docking_output_zip_path,
-            },
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
         self.haddock_step_name = "rigidbody"
         # Handle configuration options from properties
-        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
-        # Global HADDOCK configuration options
-        self.global_cfg = properties.get("global_cfg", dict(postprocess=False))
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "haddock3")
+        self.cfg = {k: v for k, v in self.cfg.items()}
 
     def _handle_config_arguments(self):
         """Handle configuration options from arguments."""

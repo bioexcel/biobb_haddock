@@ -65,32 +65,7 @@ class Haddock3PassiveFromActive(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_pdb_path": input_pdb_path
-            },
-            "out": {
-                "output_actpass_path": output_actpass_path
-            },
-        }
-
-        # Add input_active_list_path to io_dict if provided
-        if input_active_list_path:
-            self.io_dict["in"]["input_active_list_path"] = input_active_list_path
-
-        # Properties specific for BB
-        self.active_list = properties.get("active_list", "")
-        self.chain_id = properties.get("chain_id", None)
-        self.surface_list_path = properties.get("surface_list_path", "")
-        self.radius = properties.get("radius", 6.5)
-        self.binary_path = properties.get("binary_path", "haddock3-restraints")
+        super().__init__(**locals())
 
         # Check that either input_active_list_path or active_list is provided
         if not input_active_list_path and not self.active_list:
