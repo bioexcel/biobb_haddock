@@ -5,6 +5,7 @@
 from os.path import abspath
 from typing import Optional
 import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
 class RigidBody(common.HaddockStepBase):
@@ -92,26 +93,8 @@ class RigidBody(common.HaddockStepBase):
             )
 
 
-def rigid_body(
-    input_haddock_wf_data: str,
-    output_haddock_wf_data: str,
-    docking_output_zip_path: Optional[str] = None,
-    ambig_restraints_table_path: Optional[str] = None,
-    unambig_restraints_table_path: Optional[str] = None,
-    hb_restraints_table_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`RigidBody <biobb_haddock.haddock.rigid_body>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.rigid_body.launch>` method."""
-    # Launch method inherited from HaddockStepBase
-    return RigidBody(**dict(locals())).launch()
-
-
-rigid_body.__doc__ = RigidBody.__doc__
-main = RigidBody.get_main(rigid_body, "Wrapper of the HADDOCK3 RigidBody module.")
+rigid_body = launcher(RigidBody)
 
 
 if __name__ == "__main__":
-    main()
+    RigidBody.main()

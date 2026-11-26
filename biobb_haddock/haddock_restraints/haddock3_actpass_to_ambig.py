@@ -3,7 +3,7 @@
 """Module containing the haddock  class and the command line interface."""
 
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class Haddock3ActpassToAmbig(BiobbObject):
@@ -100,24 +100,8 @@ class Haddock3ActpassToAmbig(BiobbObject):
                 file.writelines(lines[1:])
 
 
-def haddock3_actpass_to_ambig(
-    input_actpass1_path: str,
-    input_actpass2_path: str,
-    output_tbl_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3ActpassToAmbig <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig.launch>` method."""
-    return Haddock3ActpassToAmbig(**dict(locals())).launch()
-
-
-haddock3_actpass_to_ambig.__doc__ = Haddock3ActpassToAmbig.__doc__
-main = Haddock3ActpassToAmbig.get_main(
-    haddock3_actpass_to_ambig,
-    "Wrapper of the Haddock-Restraints active_passive_to_ambig module."
-)
+haddock3_actpass_to_ambig = launcher(Haddock3ActpassToAmbig)
 
 
 if __name__ == "__main__":
-    main()
+    Haddock3ActpassToAmbig.main()

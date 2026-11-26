@@ -8,7 +8,7 @@ import logging
 from pathlib import Path
 from typing import Optional, Union
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 from anarcii import Anarcii as AnarciiModel
 
@@ -95,20 +95,8 @@ class Anarcii(BiobbObject):
             fu.log("ANARCII output:\n%s" % captured, self.out_log, self.global_log)
 
 
-def biobb_anarcii(
-    input_pdb_path: Union[str, Path],
-    output_pdb_path: Union[str, Path],
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Anarcii <utils.biobb_anarcii.Anarcii>` class and
-    execute the :meth:`launch() <utils.biobb_anarcii.Anarcii.launch>` method."""
-    return Anarcii(**dict(locals())).launch()
-
-
-biobb_anarcii.__doc__ = Anarcii.__doc__
-main = Anarcii.get_main(biobb_anarcii, "Wrapper for the ANARCII antibody numbering tool.")
+biobb_anarcii = launcher(Anarcii)
 
 
 if __name__ == "__main__":
-    main()
+    Anarcii.main()

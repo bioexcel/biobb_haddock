@@ -5,6 +5,7 @@
 from os.path import abspath
 from typing import Optional
 import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
 class FlexRef(common.HaddockStepBase):
@@ -99,26 +100,8 @@ class FlexRef(common.HaddockStepBase):
             )
 
 
-def flex_ref(
-    input_haddock_wf_data: str,
-    output_haddock_wf_data: str,
-    refinement_output_zip_path: Optional[str] = None,
-    ambig_restraints_table_path: Optional[str] = None,
-    unambig_restraints_table_path: Optional[str] = None,
-    hb_restraints_table_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`FlexRef <biobb_haddock.haddock.flex_ref>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.flex_ref.launch>` method."""
-    # Launch method inherited from HaddockStepBase
-    return FlexRef(**dict(locals())).launch()
-
-
-flex_ref.__doc__ = FlexRef.__doc__
-main = FlexRef.get_main(flex_ref, "Wrapper of the HADDOCK3 FlexRef module.")
+flex_ref = launcher(FlexRef)
 
 
 if __name__ == "__main__":
-    main()
+    FlexRef.main()

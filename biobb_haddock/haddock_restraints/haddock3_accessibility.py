@@ -8,7 +8,7 @@ import re
 import shutil
 from typing import Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 # calc_accessibility writes its report as Python log records, e.g.
@@ -126,21 +126,8 @@ class Haddock3Accessibility(BiobbObject):
         self.tmp_files.extend(glob.glob('*.actpass'))
 
 
-def haddock3_accessibility(
-    input_pdb_path: str,
-    output_accessibility_path: str,
-    output_actpass_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3Accessibility <biobb_haddock.haddock_restraints.haddock3_accessibility>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_accessibility.launch>` method."""
-    return Haddock3Accessibility(**dict(locals())).launch()
-
-
-haddock3_accessibility.__doc__ = Haddock3Accessibility.__doc__
-main = Haddock3Accessibility.get_main(haddock3_accessibility, "Wrapper of the Haddock-Restraints Accessibility module.")
+haddock3_accessibility = launcher(Haddock3Accessibility)
 
 
 if __name__ == "__main__":
-    main()
+    Haddock3Accessibility.main()

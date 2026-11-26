@@ -4,6 +4,7 @@
 
 from typing import Optional
 import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
 class ClustFCC(common.HaddockStepBase):
@@ -76,23 +77,8 @@ class ClustFCC(common.HaddockStepBase):
             )
 
 
-def clust_fcc(
-    input_haddock_wf_data: str,
-    output_haddock_wf_data: str,
-    output_cluster_zip_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`ClustFCC <biobb_haddock.haddock.clust_fcc>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.clust_fcc.launch>` method."""
-    # Launch method inherited from HaddockStepBase
-    return ClustFCC(**dict(locals())).launch()
-
-
-clust_fcc.__doc__ = ClustFCC.__doc__
-main = ClustFCC.get_main(clust_fcc, "Wrapper of the HADDOCK3 ClustFCC module.")
+clust_fcc = launcher(ClustFCC)
 
 
 if __name__ == "__main__":
-    main()
+    ClustFCC.main()

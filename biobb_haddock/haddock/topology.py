@@ -4,7 +4,7 @@
 
 from pathlib import Path
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 from biobb_haddock.haddock.common import create_cfg, move_to_container_path, zip_wf_output
 
@@ -133,24 +133,8 @@ class Topology(BiobbObject):
             zip_wf_output(self)
 
 
-def topology(
-    mol1_input_pdb_path: str,
-    output_haddock_wf_data: str,
-    mol1_output_top_zip_path: Optional[str] = None,
-    mol2_input_pdb_path: Optional[str] = None,
-    mol2_output_top_zip_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Topology <biobb_haddock.haddock.topology>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.topology.launch>` method."""
-    return Topology(**dict(locals())).launch()
-
-
-topology.__doc__ = Topology.__doc__
-main = Topology.get_main(topology, "Wrapper of the HADDOCK3 Topology module.")
+topology = launcher(Topology)
 
 
 if __name__ == "__main__":
-    main()
+    Topology.main()

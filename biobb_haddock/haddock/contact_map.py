@@ -4,6 +4,7 @@
 
 from typing import Optional
 import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
 class ContactMap(common.HaddockStepBase):
@@ -76,23 +77,8 @@ class ContactMap(common.HaddockStepBase):
             )
 
 
-def contact_map(
-    input_haddock_wf_data: str,
-    output_haddock_wf_data: str,
-    output_contactmap_zip_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`ContactMap <biobb_haddock.haddock.contact_map>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.contact_map.launch>` method."""
-    # Launch method inherited from HaddockStepBase
-    return ContactMap(**dict(locals())).launch()
-
-
-contact_map.__doc__ = ContactMap.__doc__
-main = ContactMap.get_main(contact_map, "Wrapper of the HADDOCK3 ContactMap module.")
+contact_map = launcher(ContactMap)
 
 
 if __name__ == "__main__":
-    main()
+    ContactMap.main()

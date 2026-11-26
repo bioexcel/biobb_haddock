@@ -3,7 +3,7 @@
 """Module containing the Haddock3PassiveFromActive class and the command line interface."""
 
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 
@@ -119,24 +119,8 @@ class Haddock3PassiveFromActive(BiobbObject):
                 file.writelines(lines)
 
 
-def haddock3_passive_from_active(
-    input_pdb_path: str,
-    output_actpass_path: str,
-    input_active_list_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3PassiveFromActive <biobb_haddock.haddock_restraints.haddock3_passive_from_active>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_passive_from_active.launch>` method."""
-    return Haddock3PassiveFromActive(**dict(locals())).launch()
-
-
-haddock3_passive_from_active.__doc__ = Haddock3PassiveFromActive.__doc__
-main = Haddock3PassiveFromActive.get_main(
-    haddock3_passive_from_active,
-    "Wrapper of the Haddock3-Restraints passive_from_active module."
-)
+haddock3_passive_from_active = launcher(Haddock3PassiveFromActive)
 
 
 if __name__ == "__main__":
-    main()
+    Haddock3PassiveFromActive.main()

@@ -4,6 +4,7 @@
 
 from typing import Optional
 import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
 class SeleTop(common.HaddockStepBase):
@@ -77,23 +78,8 @@ class SeleTop(common.HaddockStepBase):
             )
 
 
-def sele_top(
-    input_haddock_wf_data: str,
-    output_haddock_wf_data: str,
-    output_selection_zip_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`SeleTop <biobb_haddock.haddock.sele_top>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.sele_top.launch>` method."""
-    # Launch method inherited from HaddockStepBase
-    return SeleTop(**dict(locals())).launch()
-
-
-sele_top.__doc__ = SeleTop.__doc__
-main = SeleTop.get_main(sele_top, "Wrapper of the HADDOCK3 SeleTop module.")
+sele_top = launcher(SeleTop)
 
 
 if __name__ == "__main__":
-    main()
+    SeleTop.main()

@@ -5,6 +5,7 @@
 from os.path import abspath
 from typing import Optional
 import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
 class CapriEval(common.HaddockStepBase):
@@ -84,24 +85,8 @@ class CapriEval(common.HaddockStepBase):
             )
 
 
-def capri_eval(
-    input_haddock_wf_data: str,
-    output_haddock_wf_data: str,
-    output_evaluation_zip_path: Optional[str] = None,
-    reference_pdb_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`CapriEval <biobb_haddock.haddock.capri_eval>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.capri_eval.launch>` method."""
-    # Launch method inherited from HaddockStepBase
-    return CapriEval(**dict(locals())).launch()
-
-
-capri_eval.__doc__ = CapriEval.__doc__
-main = CapriEval.get_main(capri_eval, 'Wrapper of the HADDOCK3 CapriEval module.')
+capri_eval = launcher(CapriEval)
 
 
 if __name__ == "__main__":
-    main()
+    CapriEval.main()

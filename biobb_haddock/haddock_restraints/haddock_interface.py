@@ -3,7 +3,7 @@
 """Module containing the haddock class and the command line interface."""
 
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class HaddockRestrainInterface(BiobbObject):
@@ -81,20 +81,8 @@ class HaddockRestrainInterface(BiobbObject):
             f.writelines(lines)
 
 
-def haddock_interface(
-    input_pdb_path: str,
-    output_txt_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3RestrainInterface <biobb_haddock.haddock_restraints.haddock_interface>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock_interface.launch>` method."""
-    return HaddockRestrainInterface(**dict(locals())).launch()
-
-
-haddock_interface.__doc__ = HaddockRestrainInterface.__doc__
-main = HaddockRestrainInterface.get_main(haddock_interface, "Wrapper of the HADDOCK3 interface module.")
+haddock_interface = launcher(HaddockRestrainInterface)
 
 
 if __name__ == "__main__":
-    main()
+    HaddockRestrainInterface.main()

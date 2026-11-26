@@ -5,6 +5,7 @@
 from os.path import abspath
 from typing import Optional
 import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
 class EMRef(common.HaddockStepBase):
@@ -92,26 +93,8 @@ class EMRef(common.HaddockStepBase):
             )
 
 
-def em_ref(
-    input_haddock_wf_data: str,
-    output_haddock_wf_data: str,
-    refinement_output_zip_path: Optional[str] = None,
-    ambig_restraints_table_path: Optional[str] = None,
-    unambig_restraints_table_path: Optional[str] = None,
-    hb_restraints_table_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`EMRef <biobb_haddock.haddock.em_ref>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.em_ref.launch>` method."""
-    # Launch method inherited from HaddockStepBase
-    return EMRef(**dict(locals())).launch()
-
-
-em_ref.__doc__ = EMRef.__doc__
-main = EMRef.get_main(em_ref, "Wrapper of the HADDOCK3 EMRef module.")
+em_ref = launcher(EMRef)
 
 
 if __name__ == "__main__":
-    main()
+    EMRef.main()

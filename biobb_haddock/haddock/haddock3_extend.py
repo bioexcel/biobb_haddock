@@ -4,6 +4,7 @@
 
 from typing import Optional
 import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
 class Haddock3Extend(common.HaddockStepBase):
@@ -66,22 +67,8 @@ class Haddock3Extend(common.HaddockStepBase):
         self.cfg = {k: v for k, v in self.cfg.items()}
 
 
-def haddock3_extend(
-    input_haddock_wf_data: str,
-    haddock_config_path: str,
-    output_haddock_wf_data: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3Extend <biobb_haddock.haddock.haddock3_extend>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.haddock3_extend.launch>` method."""
-    # Launch method inherited from HaddockStepBase
-    return Haddock3Extend(**dict(locals())).launch()
-
-
-haddock3_extend.__doc__ = Haddock3Extend.__doc__
-main = Haddock3Extend.get_main(haddock3_extend, "Wrapper of the HADDOCK3 Haddock3Extend module.")
+haddock3_extend = launcher(Haddock3Extend)
 
 
 if __name__ == "__main__":
-    main()
+    Haddock3Extend.main()

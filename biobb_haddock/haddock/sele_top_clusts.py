@@ -4,6 +4,7 @@
 
 from typing import Optional
 import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
 class SeleTopClusts(common.HaddockStepBase):
@@ -76,23 +77,8 @@ class SeleTopClusts(common.HaddockStepBase):
             )
 
 
-def sele_top_clusts(
-    input_haddock_wf_data: str,
-    output_haddock_wf_data: str,
-    output_selection_zip_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`SeleTopClusts <biobb_haddock.haddock.sele_top_clusts>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.sele_top_clusts.launch>` method."""
-    # Launch method inherited from HaddockStepBase
-    return SeleTopClusts(**dict(locals())).launch()
-
-
-sele_top_clusts.__doc__ = SeleTopClusts.__doc__
-main = SeleTopClusts.get_main(sele_top_clusts, "Wrapper of the HADDOCK3 SeleTopClusts module.")
+sele_top_clusts = launcher(SeleTopClusts)
 
 
 if __name__ == "__main__":
-    main()
+    SeleTopClusts.main()
