@@ -83,10 +83,8 @@ class Anarcii(BiobbObject):
                 model = AnarciiModel(
                     seq_type=self.seq_type, mode=self.mode, verbose=self.verbose
                 )
-                # number() renumbers the structure and returns the numbering
-                self.results = model.number(
-                    self.sandbox_file("input_pdb_path"), pdb_out_stem=pdb_out_stem
-                )
+                # number() writes the renumbered structure
+                model.number(self.sandbox_file("input_pdb_path"), pdb_out_stem=pdb_out_stem)
         finally:
             root_logger.removeHandler(log_handler)
 
