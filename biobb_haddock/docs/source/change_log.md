@@ -5,6 +5,7 @@
 ### Changes
 
 * [UPDATE] haddock3_run docs and JSON schema: the `global_cfg` property (HADDOCK3 global parameters, `{"postprocess": True}` by default) is documented; the block already used it.
+* [FIX] topology: `mol1_output_top_zip_path` can be left out, as documented; the block failed without it.
 
 ## What's new in version [5.3.3](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.3.3)?
 

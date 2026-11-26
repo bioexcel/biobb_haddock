@@ -4,12 +4,11 @@
 
 from pathlib import Path
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject, launcher
-from biobb_common.tools import file_utils as fu
-from biobb_haddock.haddock.common import create_cfg, zip_wf_output
+import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
-class Topology(BiobbObject):
+class Topology(common.HaddockStepBase):
     """
     | biobb_haddock Topology
     | Wrapper class for the HADDOCK3 Topology module.
@@ -55,6 +54,8 @@ class Topology(BiobbObject):
             * schema: http://edamontology.org/EDAM.owl
     """
 
+    haddock_step_name = "topoaa"
+
     def __init__(
         self,
         mol1_input_pdb_path: str,
@@ -68,67 +69,25 @@ class Topology(BiobbObject):
     ) -> None:
         super().__init__(**locals())
 
-        # Properties specific for BB
-        self.haddock_step_name = "topoaa"
-        # Handle configuration options from propierties
-        self.cfg = {k: v for k, v in self.cfg.items()}
-
     def run(self) -> None:
-        """Execute the :class:`Topology <biobb_haddock.haddock.topology>` object."""
-
-        # The run directory, named after the output (without .zip): relative to the sandbox, where haddock3 runs
+        """Start a HADDOCK3 run with the topologies of the molecules: haddock3 creates the run folder, named
+        after the output (without .zip), in the sandbox where it runs."""
+        # The run folder relative to the sandbox, and its host path for the Python code
         run_dir = self.stage_io_dict["out"]["output_haddock_wf_data"]
         run_dir = run_dir[:-4] if run_dir[-4:] == ".zip" else run_dir
-        # Its host path, for the Python code
         self.run_dir = str(Path(self.stage_io_dict["unique_dir"], run_dir))
-        workflow_dict = {
-            "run_dir": run_dir,
-            "molecules": [self.stage_io_dict["in"]["mol1_input_pdb_path"]],
-            "haddock_step_name": self.haddock_step_name,
-        }
-        workflow_dict.update(self.global_cfg)
-
-        if mol2_input_pdb_path := self.stage_io_dict["in"].get("mol2_input_pdb_path"):
-            workflow_dict["molecules"].append(mol2_input_pdb_path)
-
-        # Create workflow configuration
-        self.output_cfg_path = create_cfg(
-            output_cfg_path=self.create_tmp_file('_haddock.cfg'),
-            workflow_dict=workflow_dict,
-            input_cfg_path=self.sandbox_file("haddock_config_path"),
-            properties_cfg_dict=self.cfg,
-        )
+        molecules = [self.stage_io_dict["in"][mol] for mol in ("mol1_input_pdb_path", "mol2_input_pdb_path")
+                     if self.io_dict["in"].get(mol)]
+        self.write_cfg(run_dir=run_dir, molecules=molecules)
 
         self.cmd = [self.binary_path, self.staged_path(self.output_cfg_path)]
-
-        # Run Biobb block
         self.run_biobb()
 
-        # Copy output
-        haddock_output_path = Path(f'{self.run_dir}/0_{self.haddock_step_name}')
-        mol1_name = str(Path(self.io_dict["in"]["mol1_input_pdb_path"]).stem)
-        mol1_output_file_list = list(
-            haddock_output_path.glob(mol1_name + r"*_haddock.pdb*")
-        )
-        fu.zip_list(
-            self.sandbox_file("mol1_output_top_zip_path"),
-            mol1_output_file_list,
-        )
-
-        if self.io_dict["out"].get("mol2_output_top_zip_path"):
-            mol2_name = str(Path(self.io_dict["in"]["mol2_input_pdb_path"]).stem)
-            mol2_output_file_list = list(
-                haddock_output_path.glob(mol2_name + r"*_haddock.pdb*")
-            )
-            fu.zip_list(
-                self.sandbox_file("mol2_output_top_zip_path"),
-                mol2_output_file_list,
-                self.out_log,
-            )
-
-        # Create zip output
+        for mol in ("mol1", "mol2"):
+            if input_pdb := self.io_dict["in"].get(f"{mol}_input_pdb_path"):
+                self.zip_step_files(f"{mol}_output_top_zip_path", [f"{Path(input_pdb).stem}*_haddock.pdb*"])
         if self.stage_io_dict["out"]["output_haddock_wf_data"][-4:] == ".zip":
-            zip_wf_output(self)
+            common.zip_wf_output(self)
 
 
 topology = launcher(Topology)
