@@ -110,7 +110,8 @@ class HaddockStepBase(BiobbObject):
         self.cmd = [self.binary_path, self.run_path(self.output_cfg_path)]
 
         if self.haddock_step_name != "haddock3_run":
-            self.cmd.extend(["--extend-run", "."])
+            # By name: haddock3 looks for the run folder name in this path to compress the steps again
+            self.cmd.extend(["--extend-run", f"../{Path(self.run_dir).name}"])
         elif getattr(self, "restart_from", None) is not None:
             restart_from = int(self.restart_from)
             if restart_from < 0:
