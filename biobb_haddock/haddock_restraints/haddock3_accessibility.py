@@ -80,6 +80,7 @@ class Haddock3Accessibility(BiobbObject):
             self.cmd.append("--export_to_actpass")
 
         self.cmd.append(f"-c {self.cutoff}")
+        self.cmd.append(f"--probe_radius {self.probe_radius}")
         # calc_accessibility writes its report with Python logging, i.e. to stderr,
         # so here stderr (not stdout) is redirected to the report file
         self.cmd.append("2>")

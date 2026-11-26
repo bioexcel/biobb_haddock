@@ -6,6 +6,7 @@
 
 * [UPDATE] haddock3_run docs and JSON schema: the `global_cfg` property (HADDOCK3 global parameters, `{"postprocess": True}` by default) is documented; the block already used it.
 * [FIX] topology: `mol1_output_top_zip_path` can be left out, as documented; the block failed without it.
+* [FIX] haddock3_accessibility: the `probe_radius` property now reaches haddock3-restraints. It was ignored, so the accessibility was always computed with a 1.4 Å probe.
 
 ## What's new in version [5.3.3](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.3.3)?
 
