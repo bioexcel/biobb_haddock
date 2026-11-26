@@ -54,6 +54,11 @@ class RigidBody(common.HaddockStepBase):
             * schema: http://edamontology.org/EDAM.owl
     """
 
+    haddock_step_name = "rigidbody"
+    cfg_files = common.RESTRAINT_FILES
+    step_zip = "docking_output_zip_path"
+    step_zip_files = ("rigidbody*.pdb*",)
+
     def __init__(
         self,
         input_haddock_wf_data: str,
@@ -67,28 +72,6 @@ class RigidBody(common.HaddockStepBase):
         **kwargs,
     ) -> None:
         super().__init__(**locals())
-
-        # Properties specific for BB
-        self.haddock_step_name = "rigidbody"
-        # Handle configuration options from properties
-        self.cfg = {k: v for k, v in self.cfg.items()}
-
-    def _handle_config_arguments(self):
-        """Handle configuration options from arguments."""
-        if self.io_dict["in"].get("ambig_restraints_table_path"):
-            self.cfg["ambig_fname"] = self.run_path(self.sandbox_file("ambig_restraints_table_path"))
-        if self.io_dict["in"].get("unambig_restraints_table_path"):
-            self.cfg["unambig_fname"] = self.run_path(self.sandbox_file("unambig_restraints_table_path"))
-        if self.io_dict["in"].get("hb_restraints_table_path"):
-            self.cfg["hbond_fname"] = self.run_path(self.sandbox_file("hb_restraints_table_path"))
-
-    def _handle_step_output(self):
-        """Zip the output files of the step, in the sandbox."""
-        if docking_output_zip_path := self.sandbox_file("docking_output_zip_path"):
-            self.copy_step_output(
-                lambda path: path.match(self.haddock_step_name + r"*.pdb*"),
-                docking_output_zip_path
-            )
 
 
 rigid_body = launcher(RigidBody)

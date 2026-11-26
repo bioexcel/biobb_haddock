@@ -51,6 +51,10 @@ class SeleTop(common.HaddockStepBase):
             * schema: http://edamontology.org/EDAM.owl
     """
 
+    haddock_step_name = "seletop"
+    step_zip = "output_selection_zip_path"
+    zip_selected_models = True
+
     def __init__(
         self,
         input_haddock_wf_data: str,
@@ -61,20 +65,6 @@ class SeleTop(common.HaddockStepBase):
         **kwargs,
     ) -> None:
         super().__init__(**locals())
-
-        # Properties specific for BB
-        self.haddock_step_name = "seletop"
-        # Handle configuration options from propierties
-        self.cfg = {k: v for k, v in self.cfg.items()}
-
-    def _handle_step_output(self):
-        """Zip the output files of the step, in the sandbox."""
-        if output_selection_zip_path := self.sandbox_file("output_selection_zip_path"):
-            self.copy_step_output(
-                lambda path: str(path.name) not in ["io.json", "params.cfg"],
-                output_selection_zip_path,
-                sele_top=True
-            )
 
 
 sele_top = launcher(SeleTop)

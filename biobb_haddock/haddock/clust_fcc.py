@@ -51,6 +51,9 @@ class ClustFCC(common.HaddockStepBase):
             * schema: http://edamontology.org/EDAM.owl
     """
 
+    haddock_step_name = "clustfcc"
+    step_zip = "output_cluster_zip_path"
+
     def __init__(
         self,
         input_haddock_wf_data: str,
@@ -61,19 +64,6 @@ class ClustFCC(common.HaddockStepBase):
         **kwargs,
     ) -> None:
         super().__init__(**locals())
-
-        # Properties specific for BB
-        self.haddock_step_name = "clustfcc"
-        # Handle configuration options from properties
-        self.cfg = {k: v for k, v in self.cfg.items()}
-
-    def _handle_step_output(self):
-        """Zip the output files of the step, in the sandbox."""
-        if output_cluster_zip_path := self.sandbox_file("output_cluster_zip_path"):
-            self.copy_step_output(
-                lambda path: str(path.name) not in ["io.json", "params.cfg"],
-                output_cluster_zip_path
-            )
 
 
 clust_fcc = launcher(ClustFCC)

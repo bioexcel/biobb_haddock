@@ -51,6 +51,10 @@ class ContactMap(common.HaddockStepBase):
             * schema: http://edamontology.org/EDAM.owl
     """
 
+    haddock_step_name = "contactmap"
+    step_zip = "output_contactmap_zip_path"
+    step_zip_files = ("*.html", "*.tsv")
+
     def __init__(
         self,
         input_haddock_wf_data: str,
@@ -61,19 +65,6 @@ class ContactMap(common.HaddockStepBase):
         **kwargs,
     ) -> None:
         super().__init__(**locals())
-
-        # Properties specific for BB
-        self.haddock_step_name = "contactmap"
-        # Handle configuration options from properties
-        self.cfg = {k: v for k, v in self.cfg.items()}
-
-    def _handle_step_output(self):
-        """Zip the output files of the step, in the sandbox."""
-        if output_contactmap_zip_path := self.sandbox_file("output_contactmap_zip_path"):
-            self.copy_step_output(
-                lambda path: str(path).endswith((".html", ".tsv")),
-                output_contactmap_zip_path
-            )
 
 
 contact_map = launcher(ContactMap)

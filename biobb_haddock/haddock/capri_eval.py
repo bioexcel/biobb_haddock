@@ -52,6 +52,11 @@ class CapriEval(common.HaddockStepBase):
             * schema: http://edamontology.org/EDAM.owl
     """
 
+    haddock_step_name = "caprieval"
+    cfg_files = {"reference_pdb_path": "reference_fname"}
+    step_zip = "output_evaluation_zip_path"
+    step_zip_files = ("*izone", "*aln", "*tsv")
+
     def __init__(
         self,
         input_haddock_wf_data: str,
@@ -63,24 +68,6 @@ class CapriEval(common.HaddockStepBase):
         **kwargs,
     ) -> None:
         super().__init__(**locals())
-
-        # Properties specific for HADDOCK Step
-        self.haddock_step_name = "caprieval"
-        # Handle configuration options from properties
-        self.cfg = {k: v for k, v in self.cfg.items()}
-
-    def _handle_config_arguments(self):
-        """Handle configuration options from arguments."""
-        if self.io_dict["in"].get("reference_pdb_path"):
-            self.cfg["reference_fname"] = self.run_path(self.sandbox_file("reference_pdb_path"))
-
-    def _handle_step_output(self):
-        """Zip the output files of the step, in the sandbox."""
-        if output_evaluation_zip_path := self.sandbox_file("output_evaluation_zip_path"):
-            self.copy_step_output(
-                lambda path: str(path).endswith(("izone", "aln", "tsv")),
-                output_evaluation_zip_path
-            )
 
 
 capri_eval = launcher(CapriEval)

@@ -90,6 +90,14 @@
                     "wf_prop": false,
                     "description": "Haddock configuration options specification."
                 },
+                "global_cfg": {
+                    "type": "object",
+                    "default": {
+                        "postprocess": true
+                    },
+                    "wf_prop": false,
+                    "description": "Global configuration options specification."
+                },
                 "restart_from": {
                     "type": "integer",
                     "default": null,

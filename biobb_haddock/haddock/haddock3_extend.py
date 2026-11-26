@@ -50,6 +50,8 @@ class Haddock3Extend(common.HaddockStepBase):
             * schema: http://edamontology.org/EDAM.owl
     """
 
+    haddock_step_name = "haddock3_extend"
+
     def __init__(
         self,
         input_haddock_wf_data: str,
@@ -59,11 +61,6 @@ class Haddock3Extend(common.HaddockStepBase):
         **kwargs,
     ) -> None:
         super().__init__(**locals())
-
-        # Properties specific for BB
-        self.haddock_step_name = "haddock3_extend"
-        # Handle configuration options from properties
-        self.cfg = {k: v for k, v in self.cfg.items()}
 
 
 haddock3_extend = launcher(Haddock3Extend)

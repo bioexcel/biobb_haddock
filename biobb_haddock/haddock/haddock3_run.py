@@ -19,6 +19,7 @@ class Haddock3Run(common.HaddockStepBase):
         haddock_config_path (str) (Optional): Haddock configuration CFG file path. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock/run.cfg>`_. Accepted formats: cfg (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cfg** (*dict*) - ({}) Haddock configuration options specification.
+            * **global_cfg** (*dict*) - ({"postprocess": True}) `Global configuration options <https://www.bonvinlab.org/haddock3-user-manual/global_parameters.html>`_ specification.
             * **restart_from** (*int*) - (None) Restart the run from a given step, this maps to the HADDOCK3 --restart option. Step folders from the selected step onward will be deleted. Use 0 to start the run from scratch, reusing an existing non-empty run_dir.
             * **binary_path** (*str*) - ("haddock3") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
@@ -50,6 +51,8 @@ class Haddock3Run(common.HaddockStepBase):
             * schema: http://edamontology.org/EDAM.owl
     """
 
+    haddock_step_name = "haddock3_run"
+
     def __init__(
         self,
         input_haddock_wf_data: str,
@@ -59,13 +62,6 @@ class Haddock3Run(common.HaddockStepBase):
         **kwargs,
     ) -> None:
         super().__init__(**locals())
-
-        # Properties specific for HADDOCK Step
-        self.haddock_step_name = "haddock3_run"
-        # Handle configuration options from properties
-        self.cfg = {k: v for k, v in self.cfg.items()}
-        # Global HADDOCK configuration options
-        self.global_cfg = self.properties.get("global_cfg", dict(postprocess=True))
 
 
 haddock3_run = launcher(Haddock3Run)
