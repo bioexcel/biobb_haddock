@@ -90,8 +90,8 @@ class FlexRef(common.HaddockStepBase):
             self.cfg["hbond_fname"] = self.run_path(self.sandbox_file("hb_restraints_table_path"))
 
     def _handle_step_output(self):
-        """Handle how the output files from the step are copied to host."""
-        if refinement_output_zip_path := self.io_dict["out"].get("refinement_output_zip_path"):
+        """Zip the output files of the step, in the sandbox."""
+        if refinement_output_zip_path := self.sandbox_file("refinement_output_zip_path"):
             self.copy_step_output(
                 lambda path: path.match(self.haddock_step_name + r"*.pdb*"),
                 refinement_output_zip_path

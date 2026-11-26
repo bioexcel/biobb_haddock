@@ -75,8 +75,8 @@ class CapriEval(common.HaddockStepBase):
             self.cfg["reference_fname"] = self.run_path(self.sandbox_file("reference_pdb_path"))
 
     def _handle_step_output(self):
-        """Handle how the output files from the step are copied to host."""
-        if output_evaluation_zip_path := self.io_dict["out"].get("output_evaluation_zip_path"):
+        """Zip the output files of the step, in the sandbox."""
+        if output_evaluation_zip_path := self.sandbox_file("output_evaluation_zip_path"):
             self.copy_step_output(
                 lambda path: str(path).endswith(("izone", "aln", "tsv")),
                 output_evaluation_zip_path

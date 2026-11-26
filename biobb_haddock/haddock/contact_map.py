@@ -68,8 +68,8 @@ class ContactMap(common.HaddockStepBase):
         self.cfg = {k: v for k, v in self.cfg.items()}
 
     def _handle_step_output(self):
-        """Handle how the output files from the step are copied to host."""
-        if output_contactmap_zip_path := self.io_dict["out"].get("output_contactmap_zip_path"):
+        """Zip the output files of the step, in the sandbox."""
+        if output_contactmap_zip_path := self.sandbox_file("output_contactmap_zip_path"):
             self.copy_step_output(
                 lambda path: str(path).endswith((".html", ".tsv")),
                 output_contactmap_zip_path

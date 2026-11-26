@@ -69,8 +69,9 @@ class HaddockStepBase(BiobbObject):
             fu.unzip_list(input_wf_data, new_input)  # , self.out_log)
             input_wf_data = new_input
 
-        # The run directory in the sandbox (host path)
-        self.run_dir = self.sandbox_file("output_haddock_wf_data")
+        # The run folder in the sandbox (host path): the output folder, or a folder zipped at the end
+        wf_output = self.sandbox_file("output_haddock_wf_data")
+        self.run_dir = self.create_tmp_dir() if wf_output[-4:] == ".zip" else wf_output
         if input_wf_data != self.run_dir:
             # Different I/O folder
             shutil.copytree(input_wf_data, self.run_dir, dirs_exist_ok=True)
@@ -124,14 +125,10 @@ class HaddockStepBase(BiobbObject):
         # Run Biobb block
         self.run_biobb(cwd=self.run_dir)
 
-    def copy_to_host(self) -> None:
-        """Copy the output files of the step to the host, zipping the workflow data if its output is a zip file."""
         if hasattr(self, '_handle_step_output'):
             self._handle_step_output()
-        if self.io_dict["out"]["output_haddock_wf_data"][-4:] == ".zip":
+        if wf_output[-4:] == ".zip":
             zip_wf_output(self)
-        else:
-            super().copy_to_host()
 
 
 def create_cfg(
@@ -248,7 +245,7 @@ def cfg_preset(haddock_step_name: str) -> dict[str, Any]:
 
 
 def zip_wf_output(obj):
-    """Zip all the files in the run directory and save it to the output path."""
-    dest_path = str(Path(obj.io_dict["out"]["output_haddock_wf_data"]).with_suffix(''))
+    """Zip the run folder into the workflow data output, in the sandbox."""
+    dest_path = str(Path(obj.sandbox_file("output_haddock_wf_data")).with_suffix(''))
     fu.log(f"Zipping {obj.run_dir} to {dest_path} ", obj.out_log, obj.global_log)
     shutil.make_archive(dest_path, "zip", obj.run_dir)
