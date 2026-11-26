@@ -17,7 +17,7 @@ class Haddock3ActpassToAmbig(BiobbObject):
         input_actpass2_path (str): Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/haddock_actpass2.pass>`_. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), in (edam:format_2330), pass (edam:format_2330).
         output_tbl_path (str): Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/haddock_actpass.tbl>`_. Accepted formats: tbl (edam:format_2330), txt (edam:format_2330), out (edam:format_2330).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
-            * **pass_to_act** (*bool*) - (False) Path to the haddock haddock executable binary.
+            * **pass_to_act** (*bool*) - (False) If True, the passive residues of the input files become active and vice versa.
             * **segid_one** (*str*) - (None) Segid of the first model.
             * **segid_two** (*str*) - (None) Segid of the second model.
             * **binary_path** (*str*) - ("haddock3-restraints") Path to the haddock haddock executable binary.
@@ -64,20 +64,13 @@ class Haddock3ActpassToAmbig(BiobbObject):
     def run(self) -> None:
         """Execute the :class:`Haddock3ActpassToAmbig <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig>` object."""
 
+        actpass_paths = [self.sandbox_file("input_actpass1_path"), self.sandbox_file("input_actpass2_path")]
         if self.pass_to_act:
-            with open(self.sandbox_file("input_actpass1_path"), 'r') as file1, \
-                    open(self.sandbox_file("input_actpass2_path"), 'r') as file2:
-                actpass1_lines = file1.readlines()
-                actpass2_lines = file2.readlines()
-
-            with open(self.sandbox_file("input_actpass1_path"), 'w') as file1, \
-                    open(self.sandbox_file("input_actpass2_path"), 'w') as file2:
-                file1.writelines([actpass1_lines[1], actpass1_lines[0], '\n'])
-                file2.writelines([actpass2_lines[1], actpass2_lines[0], '\n'])
+            # Swapped in temporary copies: the inputs are not changed
+            actpass_paths = [self._swap_actpass(path) for path in actpass_paths]
 
         # haddock3-restraints active_passive_to_ambig haddock_actpass.txt
-        self.cmd = [self.binary_path, "active_passive_to_ambig", self.stage_io_dict['in']
-                    ['input_actpass1_path'], self.stage_io_dict['in']['input_actpass2_path']]
+        self.cmd = [self.binary_path, "active_passive_to_ambig"] + [self.staged_path(path) for path in actpass_paths]
 
         if self.segid_one is not None:
             self.cmd.extend(["--segid-one", self.segid_one])
@@ -97,6 +90,15 @@ class Haddock3ActpassToAmbig(BiobbObject):
         if lines and "DEPRECATION NOTICE" in lines[0]:
             with open(self.sandbox_file("output_tbl_path"), 'w') as file:
                 file.writelines(lines[1:])
+
+    def _swap_actpass(self, actpass_path: str) -> str:
+        """Go from an actpass file to a temporary copy with the passive residues in the first line."""
+        with open(actpass_path) as actpass_file:
+            active, passive = (actpass_file.read().splitlines() + ["", ""])[:2]
+        swapped_path = self.create_tmp_file(".pass")
+        with open(swapped_path, "w") as swapped_file:
+            swapped_file.write(f"{passive}\n{active}\n")
+        return swapped_path
 
 
 haddock3_actpass_to_ambig = launcher(Haddock3ActpassToAmbig)

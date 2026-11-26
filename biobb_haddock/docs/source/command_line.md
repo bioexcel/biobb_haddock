@@ -572,7 +572,7 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **pass_to_act** (*boolean*): (False) Path to the haddock haddock executable binary.
+* **pass_to_act** (*boolean*): (False) If True, the passive residues of the input files become active and vice versa.
 * **segid_one** (*string*): (None) Segid of the first model.
 * **segid_two** (*string*): (None) Segid of the second model.
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
