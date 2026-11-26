@@ -2,7 +2,6 @@
 
 """Module containing the HADDOCK3 CapriEval class and the command line interface."""
 
-from os.path import abspath
 from typing import Optional
 import biobb_haddock.haddock.common as common
 from biobb_common.generic.biobb_object import launcher
@@ -30,7 +29,6 @@ class CapriEval(common.HaddockStepBase):
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -74,7 +72,7 @@ class CapriEval(common.HaddockStepBase):
     def _handle_config_arguments(self):
         """Handle configuration options from arguments."""
         if self.io_dict["in"].get("reference_pdb_path"):
-            self.cfg["reference_fname"] = abspath(self.stage_io_dict["in"].get("reference_pdb_path"))
+            self.cfg["reference_fname"] = self.run_path(self.sandbox_file("reference_pdb_path"))
 
     def _handle_step_output(self):
         """Handle how the output files from the step are copied to host."""

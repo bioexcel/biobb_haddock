@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
-from biobb_haddock.haddock.common import create_cfg, move_to_container_path, zip_wf_output
+from biobb_haddock.haddock.common import create_cfg, zip_wf_output
 
 
 class Topology(BiobbObject):
@@ -32,7 +32,6 @@ class Topology(BiobbObject):
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -77,10 +76,13 @@ class Topology(BiobbObject):
     def run(self) -> None:
         """Execute the :class:`Topology <biobb_haddock.haddock.topology>` object."""
 
-        self.run_dir = self.stage_io_dict["out"]["output_haddock_wf_data"]
-        self.run_dir = self.run_dir[:-4] if self.run_dir[-4:] == ".zip" else self.run_dir
+        # The run directory, named after the output (without .zip): relative to the sandbox, where haddock3 runs
+        run_dir = self.stage_io_dict["out"]["output_haddock_wf_data"]
+        run_dir = run_dir[:-4] if run_dir[-4:] == ".zip" else run_dir
+        # Its host path, for the Python code
+        self.run_dir = str(Path(self.stage_io_dict["unique_dir"], run_dir))
         workflow_dict = {
-            "run_dir": self.run_dir,
+            "run_dir": run_dir,
             "molecules": [self.stage_io_dict["in"]["mol1_input_pdb_path"]],
             "haddock_step_name": self.haddock_step_name,
         }
@@ -93,21 +95,17 @@ class Topology(BiobbObject):
         self.output_cfg_path = create_cfg(
             output_cfg_path=self.create_tmp_file('_haddock.cfg'),
             workflow_dict=workflow_dict,
-            input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
+            input_cfg_path=self.sandbox_file("haddock_config_path"),
             properties_cfg_dict=self.cfg,
         )
 
-        if self.container_path:
-            fu.log("Container execution enabled", self.out_log)
-            move_to_container_path(self)
-
-        self.cmd = [self.binary_path, self.output_cfg_path]
+        self.cmd = [self.binary_path, self.staged_path(self.output_cfg_path)]
 
         # Run Biobb block
         self.run_biobb()
 
         # Copy output
-        haddock_output_path = Path(f'{workflow_dict["run_dir"]}/0_{self.haddock_step_name}')
+        haddock_output_path = Path(f'{self.run_dir}/0_{self.haddock_step_name}')
         mol1_name = str(Path(self.io_dict["in"]["mol1_input_pdb_path"]).stem)
         mol1_output_file_list = list(
             haddock_output_path.glob(mol1_name + r"*_haddock.pdb*")

@@ -2,7 +2,6 @@
 
 """Module containing the haddock  class and the command line interface."""
 
-import glob
 import os
 import re
 import shutil
@@ -38,7 +37,6 @@ class Haddock3Accessibility(BiobbObject):
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -92,7 +90,7 @@ class Haddock3Accessibility(BiobbObject):
 
         # Keep only the tool's log records in the report: any other stderr
         # line (e.g. Python warnings, tracebacks) goes to the error log
-        report_path = self.stage_io_dict['out']['output_accessibility_path']
+        report_path = self.sandbox_file("output_accessibility_path")
         with open(report_path, 'r') as file:
             lines = file.readlines()
         other_lines = [line for line in lines if not REPORT_RECORD.match(line)]
@@ -104,15 +102,16 @@ class Haddock3Accessibility(BiobbObject):
         # Check chain
         target_string = f"Chain {self.chain}"
         found = False
-        with open(self.stage_io_dict['out']['output_accessibility_path'], 'r') as file:
+        with open(self.sandbox_file("output_accessibility_path"), 'r') as file:
             for line in file:
                 if target_string in line:
                     found = True
 
         if found:
-            # Rename/Copy output file to the given output file name
+            # Rename/Copy output file to the given output file name: the tool writes it in the sandbox
             file_name = os.path.basename(self.io_dict['in']['input_pdb_path'])
-            shutil.copyfile(f"{file_name[:-4]}_passive_{self.chain}.actpass", self.sandbox_file("output_actpass_path"))
+            shutil.copyfile(os.path.join(self.stage_io_dict["unique_dir"], f"{file_name[:-4]}_passive_{self.chain}.actpass"),
+                            self.sandbox_file("output_actpass_path"))
             if self.pass_to_act:
                 with open(self.sandbox_file("output_actpass_path"), 'r') as file:
                     lines = file.readlines()
@@ -121,9 +120,6 @@ class Haddock3Accessibility(BiobbObject):
                     file.write('\n\n')
         else:
             print(f"\nWARNING: Chain {self.chain} not found in input PDB file. Please check and modify the chain property accordingly.\n")
-
-        # Remove temporal files
-        self.tmp_files.extend(glob.glob('*.actpass'))
 
 
 haddock3_accessibility = launcher(Haddock3Accessibility)

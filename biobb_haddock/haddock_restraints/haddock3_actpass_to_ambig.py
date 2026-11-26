@@ -27,7 +27,6 @@ class Haddock3ActpassToAmbig(BiobbObject):
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -66,13 +65,13 @@ class Haddock3ActpassToAmbig(BiobbObject):
         """Execute the :class:`Haddock3ActpassToAmbig <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig>` object."""
 
         if self.pass_to_act:
-            with open(self.stage_io_dict['in']['input_actpass1_path'], 'r') as file1, \
-                    open(self.stage_io_dict['in']['input_actpass2_path'], 'r') as file2:
+            with open(self.sandbox_file("input_actpass1_path"), 'r') as file1, \
+                    open(self.sandbox_file("input_actpass2_path"), 'r') as file2:
                 actpass1_lines = file1.readlines()
                 actpass2_lines = file2.readlines()
 
-            with open(self.stage_io_dict['in']['input_actpass1_path'], 'w') as file1, \
-                    open(self.stage_io_dict['in']['input_actpass2_path'], 'w') as file2:
+            with open(self.sandbox_file("input_actpass1_path"), 'w') as file1, \
+                    open(self.sandbox_file("input_actpass2_path"), 'w') as file2:
                 file1.writelines([actpass1_lines[1], actpass1_lines[0], '\n'])
                 file2.writelines([actpass2_lines[1], actpass2_lines[0], '\n'])
 
@@ -93,10 +92,10 @@ class Haddock3ActpassToAmbig(BiobbObject):
         self.run_biobb()
 
         # Remove deprecation warning if present
-        with open(self.stage_io_dict['out']['output_tbl_path'], 'r') as file:
+        with open(self.sandbox_file("output_tbl_path"), 'r') as file:
             lines = file.readlines()
         if lines and "DEPRECATION NOTICE" in lines[0]:
-            with open(self.stage_io_dict['out']['output_tbl_path'], 'w') as file:
+            with open(self.sandbox_file("output_tbl_path"), 'w') as file:
                 file.writelines(lines[1:])
 
 

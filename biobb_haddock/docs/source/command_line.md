@@ -119,7 +119,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -195,7 +194,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -271,7 +269,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -356,7 +353,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -441,7 +437,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -516,7 +511,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -588,7 +582,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -659,7 +652,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -734,7 +726,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -804,7 +795,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -877,7 +867,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -962,7 +951,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -1038,7 +1026,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -1114,7 +1101,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -1196,7 +1182,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML

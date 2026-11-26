@@ -25,7 +25,6 @@ class Haddock3RestrainBodies(BiobbObject):
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -79,10 +78,10 @@ class Haddock3RestrainBodies(BiobbObject):
         self.run_biobb()
 
         # Remove deprecation warning if present
-        with open(self.stage_io_dict['out']['output_tbl_path'], 'r') as file:
+        with open(self.sandbox_file("output_tbl_path"), 'r') as file:
             lines = file.readlines()
         if lines and "DEPRECATION NOTICE" in lines[0]:
-            with open(self.stage_io_dict['out']['output_tbl_path'], 'w') as file:
+            with open(self.sandbox_file("output_tbl_path"), 'w') as file:
                 file.writelines(lines[1:])
 
 

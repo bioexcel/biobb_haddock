@@ -56,22 +56,27 @@ class HaddockStepBase(BiobbObject):
         else:
             fu.zip_list(output_zip_path, output_file_list, self.out_log)
 
+    def run_path(self, host_path: str) -> str:
+        """Go from the host path of a file in the sandbox to the path haddock3 uses: it runs in the run folder."""
+        return os.path.relpath(host_path, self.run_dir)
+
     def run(self) -> None:
         """Execute the HADDOCK step with common workflow."""
-        if self.stage_io_dict["in"]["input_haddock_wf_data"][-4:] == ".zip":
+        input_wf_data = self.sandbox_file("input_haddock_wf_data")
+        if input_wf_data[-4:] == ".zip":
             # Unzip workflow data to workflow_data_out
             new_input = fu.create_unique_dir(self.stage_io_dict["unique_dir"], '_input_unzipped')
-            fu.unzip_list(self.stage_io_dict["in"]["input_haddock_wf_data"], new_input)  # , self.out_log)
-            self.stage_io_dict["in"]["input_haddock_wf_data"] = new_input
+            fu.unzip_list(input_wf_data, new_input)  # , self.out_log)
+            input_wf_data = new_input
 
-        self.run_dir = self.stage_io_dict["out"]["output_haddock_wf_data"]
-        if self.stage_io_dict["in"]["input_haddock_wf_data"] != self.run_dir:
+        # The run directory in the sandbox (host path)
+        self.run_dir = self.sandbox_file("output_haddock_wf_data")
+        if input_wf_data != self.run_dir:
             # Different I/O folder
-            shutil.copytree(self.stage_io_dict["in"]["input_haddock_wf_data"],
-                            self.run_dir, dirs_exist_ok=True)
+            shutil.copytree(input_wf_data, self.run_dir, dirs_exist_ok=True)
         else:
             # Same I/O folder
-            os.rename(self.stage_io_dict["in"]["input_haddock_wf_data"], self.run_dir)
+            os.rename(input_wf_data, self.run_dir)
             # Check if there are more than 9 numbered folders and rename them to add leading zeros
             input_wf = self.io_dict["in"]["input_haddock_wf_data"]
             numbered_dirs = []
@@ -95,20 +100,17 @@ class HaddockStepBase(BiobbObject):
         self.output_cfg_path = create_cfg(
             output_cfg_path=self.create_tmp_file('_haddock.cfg'),
             workflow_dict=workflow_dict,
-            input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
+            input_cfg_path=self.sandbox_file("haddock_config_path"),
             properties_cfg_dict=self.cfg,
             out_log=self.out_log,
             global_log=self.global_log,
         )
 
-        if self.container_path:
-            fu.log("Container execution enabled", self.out_log)
-            move_to_container_path(self, self.run_dir)
-
-        self.cmd = [self.binary_path, self.output_cfg_path]
+        # haddock3 runs in the run folder, where the relative paths of the configuration are
+        self.cmd = [self.binary_path, self.run_path(self.output_cfg_path)]
 
         if self.haddock_step_name != "haddock3_run":
-            self.cmd.extend(["--extend-run", os.path.abspath(self.run_dir)])
+            self.cmd.extend(["--extend-run", "."])
         elif getattr(self, "restart_from", None) is not None:
             restart_from = int(self.restart_from)
             if restart_from < 0:
@@ -119,8 +121,7 @@ class HaddockStepBase(BiobbObject):
                 self.cmd.extend(["--restart", str(restart_from)])
 
         # Run Biobb block
-        with fu.change_dir(self.run_dir):
-            self.run_biobb()
+        self.run_biobb(cwd=self.run_dir)
 
     def copy_to_host(self) -> None:
         """Copy the output files of the step to the host, zipping the workflow data if its output is a zip file."""
@@ -243,26 +244,6 @@ def cfg_preset(haddock_step_name: str) -> dict[str, Any]:
         cfg_dict["tolerance"] = 20
 
     return cfg_dict
-
-
-def move_to_container_path(obj, run_dir=None):
-    """Move configuration and run directory to container path."""
-    shutil.copy2(obj.output_cfg_path, obj.stage_io_dict.get("unique_dir", ""))
-    obj.output_cfg_path = str(
-        Path(obj.container_volume_path).joinpath(
-            Path(obj.output_cfg_path).name
-        )
-    )
-    if run_dir:
-        shutil.copytree(
-            run_dir,
-            str(
-                Path(obj.stage_io_dict.get("unique_dir", "")).joinpath(
-                    Path(run_dir).name
-                )
-            ),
-        )
-        run_dir = str(Path(obj.stage_io_dict.get("unique_dir", "")).joinpath(Path(run_dir).name))
 
 
 def zip_wf_output(obj):

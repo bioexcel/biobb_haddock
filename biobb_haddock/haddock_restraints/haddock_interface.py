@@ -24,7 +24,6 @@ class HaddockRestrainInterface(BiobbObject):
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -74,10 +73,10 @@ class HaddockRestrainInterface(BiobbObject):
         self.run_biobb()
 
         # Open the file and sort the lines so the output is always the same
-        with open(self.stage_io_dict['out']['output_txt_path'], 'r') as f:
+        with open(self.sandbox_file("output_txt_path"), 'r') as f:
             lines = f.readlines()
             lines.sort()
-        with open(self.stage_io_dict['out']['output_txt_path'], 'w') as f:
+        with open(self.sandbox_file("output_txt_path"), 'w') as f:
             f.writelines(lines)
 
 

@@ -63,7 +63,7 @@ class Anarcii(BiobbObject):
         """Execute the :class:`Anarcii <utils.biobb_anarcii.Anarcii>` object."""
 
         # ANARCII appends the '.pdb' suffix to the output stem
-        output_pdb_path = self.stage_io_dict["out"]["output_pdb_path"]
+        output_pdb_path = self.sandbox_file("output_pdb_path")
         pdb_out_stem = str(Path(output_pdb_path).with_suffix(""))
 
         fu.log(
@@ -85,7 +85,7 @@ class Anarcii(BiobbObject):
                 )
                 # number() renumbers the structure and returns the numbering
                 self.results = model.number(
-                    self.stage_io_dict["in"]["input_pdb_path"], pdb_out_stem=pdb_out_stem
+                    self.sandbox_file("input_pdb_path"), pdb_out_stem=pdb_out_stem
                 )
         finally:
             root_logger.removeHandler(log_handler)
