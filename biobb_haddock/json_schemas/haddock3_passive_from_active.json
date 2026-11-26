@@ -73,7 +73,7 @@
         },
         "input_active_list_path": {
             "type": "string",
-            "description": "Path to the input file with list of active residues",
+            "description": "Path to the input file with the active residue numbers, separated by commas, spaces or new lines",
             "filetype": "input",
             "sample": null,
             "enum": [
@@ -84,17 +84,17 @@
             "file_formats": [
                 {
                     "extension": ".*\\.txt$",
-                    "description": "Path to the input file with list of active residues",
+                    "description": "Path to the input file with the active residue numbers, separated by commas, spaces or new lines",
                     "edam": "format_2330"
                 },
                 {
                     "extension": ".*\\.dat$",
-                    "description": "Path to the input file with list of active residues",
+                    "description": "Path to the input file with the active residue numbers, separated by commas, spaces or new lines",
                     "edam": "format_2330"
                 },
                 {
                     "extension": ".*\\.list$",
-                    "description": "Path to the input file with list of active residues",
+                    "description": "Path to the input file with the active residue numbers, separated by commas, spaces or new lines",
                     "edam": "format_2330"
                 }
             ]
@@ -118,7 +118,7 @@
                     "type": "string",
                     "default": "",
                     "wf_prop": false,
-                    "description": "Path to file with list of surface residues to filter."
+                    "description": "Path to a file with the surface residue numbers to consider, separated by commas, spaces or new lines."
                 },
                 "radius": {
                     "type": "number",

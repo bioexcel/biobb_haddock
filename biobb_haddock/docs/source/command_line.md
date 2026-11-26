@@ -703,21 +703,21 @@ haddock3_passive_from_active -h
     
     optional arguments:
       --input_active_list_path INPUT_ACTIVE_LIST_PATH
-                            Path to the input file with list of active residues. Accepted formats: txt, dat, list.
+                            Path to the input file with the active residue numbers, separated by commas, spaces or new lines. Accepted formats: txt, dat, list.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 * **input_pdb_path** (*string*): Path to the input PDB structure file. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/1A2P_ch.pdb). Accepted formats: PDB
 * **output_actpass_path** (*string*): Path to the output file with list of passive residues. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/1A2P_manual_actpass.txt). Accepted formats: TXT, DAT, LIST, OUT
-* **input_active_list_path** (*string*): Path to the input file with list of active residues. File type: input. [Sample file](None). Accepted formats: TXT, DAT, LIST
+* **input_active_list_path** (*string*): Path to the input file with the active residue numbers, separated by commas, spaces or new lines. File type: input. [Sample file](None). Accepted formats: TXT, DAT, LIST
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **active_list** (*string*): () List of active residues as a comma-separated string. Required if input_active_list_path is not provided.
 * **chain_id** (*string*): (None) Chain ID to consider when calculating passive residues.
-* **surface_list_path** (*string*): () Path to file with list of surface residues to filter.
+* **surface_list_path** (*string*): () Path to a file with the surface residue numbers to consider, separated by commas, spaces or new lines.
 * **radius** (*number*): (6.5) Radius in Angstroms to look for surface residues around active ones.
 * **binary_path** (*string*): (haddock3-restraints) Path to the haddock3-restraints executable binary.
 * **remove_tmp** (*boolean*): (True) Remove temporal files.

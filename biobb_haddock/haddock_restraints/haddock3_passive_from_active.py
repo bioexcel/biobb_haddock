@@ -2,6 +2,7 @@
 
 """Module containing the Haddock3PassiveFromActive class and the command line interface."""
 
+import re
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
@@ -16,11 +17,11 @@ class Haddock3PassiveFromActive(BiobbObject):
     Args:
         input_pdb_path (str): Path to the input PDB structure file. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/1A2P_ch.pdb>`_. Accepted formats: pdb (edam:format_1476).
         output_actpass_path (str): Path to the output file with list of passive residues. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/1A2P_manual_actpass.txt>`_. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), list (edam:format_2330), out (edam:format_2330).
-        input_active_list_path (str) (Optional): Path to the input file with list of active residues. File type: input. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), list (edam:format_2330).
+        input_active_list_path (str) (Optional): Path to the input file with the active residue numbers, separated by commas, spaces or new lines. File type: input. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), list (edam:format_2330).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **active_list** (*str*) - ('') List of active residues as a comma-separated string. Required if input_active_list_path is not provided.
             * **chain_id** (*str*) - (None) Chain ID to consider when calculating passive residues.
-            * **surface_list_path** (*str*) - ("") Path to file with list of surface residues to filter.
+            * **surface_list_path** (*str*) - ("") Path to a file with the surface residue numbers to consider, separated by commas, spaces or new lines.
             * **radius** (*float*) - (6.5) Radius in Angstroms to look for surface residues around active ones.
             * **binary_path** (*str*) - ("haddock3-restraints") Path to the haddock3-restraints executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
@@ -66,18 +67,17 @@ class Haddock3PassiveFromActive(BiobbObject):
     ) -> None:
         super().__init__(**locals())
 
-        # Check that either input_active_list_path or active_list is provided
-        if not input_active_list_path and not self.active_list:
-            raise ValueError(
-                "Either input_active_list_path or active_list property must be provided")
-
-        # If surface_list_path is provided overwrite the active_list
-        if self.surface_list_path and not self.active_list:
-            with open(self.surface_list_path, "r") as surface_file:
-                self.active_list = surface_file.read()
+    def prepare(self) -> None:
+        """Check that the active residues are given."""
+        if not self.io_dict["in"].get("input_active_list_path") and not self.active_list:
+            raise ValueError("Either input_active_list_path or active_list property must be provided")
 
     def run(self) -> None:
         """Execute the :class:`Haddock3PassiveFromActive <biobb_haddock.haddock_restraints.haddock3_passive_from_active>` object."""
+        active_list = self.active_list
+        if self.io_dict["in"].get("input_active_list_path"):
+            with open(self.sandbox_file("input_active_list_path")) as active_file:
+                active_list = comma_list(active_file.read())
 
         # Build command line
         # haddock3-restraints passive_from_active <pdb_file> <active_list> [-c <chain_id>] [-s <surface_list>] [-r <radius>]
@@ -85,7 +85,7 @@ class Haddock3PassiveFromActive(BiobbObject):
             self.binary_path,
             "passive_from_active",
             self.stage_io_dict['in']['input_pdb_path'],
-            f"\"{self.active_list}\""
+            f"\"{active_list}\""
         ]
 
         # Add optional parameters
@@ -93,11 +93,10 @@ class Haddock3PassiveFromActive(BiobbObject):
             self.cmd.extend(["-c", self.chain_id])
 
         if self.surface_list_path:
-            self.cmd.extend(
-                ["-s", self.stage_io_dict['in']['surface_list_path']])
+            with open(self.surface_list_path) as surface_file:
+                self.cmd.extend(["-s", comma_list(surface_file.read())])
 
-        # Radius not in this version
-        # self.cmd.extend(["-r", str(self.radius)])
+        self.cmd.extend(["-r", str(self.radius)])
 
         # Redirect only stdout (the result): stderr (warnings, errors) goes to the error log
         self.cmd.append(">")
@@ -111,11 +110,16 @@ class Haddock3PassiveFromActive(BiobbObject):
             lines = file.readlines()
         fu.log('Result: ' + '\n'.join(lines), self.out_log, self.global_log)
         with open(self.sandbox_file("output_actpass_path"), 'w') as file:
-            file.write(self.active_list.replace(",", " ")+"\n")
+            file.write(active_list.replace(",", " ")+"\n")
             if lines and "DEPRECATION NOTICE" in lines[0]:
                 file.writelines(lines[1:])
             else:
                 file.writelines(lines)
+
+
+def comma_list(text: str) -> str:
+    """Go from residue numbers separated by commas, spaces or new lines to a comma-separated list."""
+    return ",".join(number for number in re.split(r"[\s,]+", text) if number)
 
 
 haddock3_passive_from_active = launcher(Haddock3PassiveFromActive)
