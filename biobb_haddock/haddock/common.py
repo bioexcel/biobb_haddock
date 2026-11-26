@@ -3,6 +3,7 @@
 import shutil
 import logging
 import os
+import re
 import jsonpickle
 from pathlib import Path
 from typing import Any, Optional
@@ -73,23 +74,7 @@ class HaddockStepBase(BiobbObject):
         wf_output = self.sandbox_file("output_haddock_wf_data")
         self.run_dir = self.create_tmp_dir() if wf_output[-4:] == ".zip" else wf_output
         if input_wf_data != self.run_dir:
-            # Different I/O folder
             shutil.copytree(input_wf_data, self.run_dir, dirs_exist_ok=True)
-        else:
-            # Same I/O folder
-            os.rename(input_wf_data, self.run_dir)
-            # Check if there are more than 9 numbered folders and rename them to add leading zeros
-            input_wf = self.io_dict["in"]["input_haddock_wf_data"]
-            numbered_dirs = []
-            for item in os.listdir(input_wf):
-                item_path = os.path.join(input_wf, item)
-                if os.path.isdir(item_path) and item[0].isdigit():
-                    numbered_dirs.append(item)
-
-            if len(numbered_dirs) in [10, 100, 1000] and not self.disable_sandbox:
-                for dirname in numbered_dirs:
-                    os.rename(os.path.join(input_wf, dirname),
-                              os.path.join(input_wf, f"0{dirname}"))
 
         workflow_dict = {"haddock_step_name": self.haddock_step_name}
         workflow_dict.update(self.global_cfg)
@@ -129,6 +114,15 @@ class HaddockStepBase(BiobbObject):
             self._handle_step_output()
         if wf_output[-4:] == ".zip":
             zip_wf_output(self)
+
+    def copy_to_host(self) -> None:
+        """Copy the outputs to the host, first renaming in an existing output folder the step folders
+        that haddock3 renumbered (0_topoaa to 00_topoaa): the copy only adds files."""
+        output_wf = Path(self.io_dict["out"]["output_haddock_wf_data"])
+        if output_wf.suffix != ".zip" and output_wf.is_dir() and output_wf.resolve() != Path(self.run_dir).resolve():
+            for folder in ("", "data"):
+                rename_step_folders(output_wf / folder, Path(self.run_dir) / folder, self.out_log, self.global_log)
+        super().copy_to_host()
 
 
 def create_cfg(
@@ -242,6 +236,25 @@ def cfg_preset(haddock_step_name: str) -> dict[str, Any]:
         cfg_dict["tolerance"] = 20
 
     return cfg_dict
+
+
+def step_folders(folder: Path) -> dict[tuple[int, str], str]:
+    """Go from a folder to its step folders (ie: 01_rigidbody) by step number and module name."""
+    if not folder.is_dir():
+        return {}
+    steps = (re.fullmatch(r"(\d+)_(.+)", path.name) for path in folder.iterdir() if path.is_dir())
+    return {(int(step[1]), step[2]): step[0] for step in steps if step}
+
+
+def rename_step_folders(output_folder: Path, run_folder: Path, out_log: Optional[logging.Logger] = None,
+                        global_log: Optional[logging.Logger] = None) -> None:
+    """Give the step folders of **output_folder** the names they have in **run_folder**."""
+    run_steps = step_folders(run_folder)
+    for key, name in step_folders(output_folder).items():
+        new_name = run_steps.get(key)
+        if new_name and new_name != name and not (output_folder / new_name).exists():
+            fu.log(f"Renaming {output_folder / name} to {new_name}, as haddock3 did", out_log, global_log)
+            (output_folder / name).rename(output_folder / new_name)
 
 
 def zip_wf_output(obj):
