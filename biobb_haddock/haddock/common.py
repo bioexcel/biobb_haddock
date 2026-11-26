@@ -11,13 +11,6 @@ import biobb_common.tools.file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
 from .haddock3_config import load, save
 
-haddock_2_wf = {
-    'ambig_fname': 'ambig_restraints_table_path',
-    'unambig_fname': 'unambig_restraints_table_path',
-    'hbond_fname': 'hb_restraints_table_path',
-}
-
-
 # Restraint tables of the docking and refinement steps: {argument: HADDOCK3 parameter}
 RESTRAINT_FILES = {
     "ambig_restraints_table_path": "ambig_fname",
@@ -196,20 +189,12 @@ def create_cfg(
                     # If the value is not a dictionary, treat it as a top-level property
                     fu.log(f"CFG: {key} = {value}", out_log, global_log)
                     cfg_dict[key] = value
-        # Add workflow_dict properties to cfg_dict
-        for key, value in cfg_dict.items():
-            if isinstance(value, dict):
-                for sub_key, sub_value in value.items():
-                    mapped_key = haddock_2_wf.get(sub_key)
-                    if mapped_key and mapped_key in workflow_dict:
-                        sub_value = workflow_dict[mapped_key]
-                        cfg_dict[key][sub_key] = sub_value
         if haddock_step_name == "haddock3_run" and "run_dir" not in cfg_dict:
             cfg_dict["run_dir"] = "run"
 
     # Add molecules and run_dir if provided
     for key, value in workflow_dict.items():
-        if key == 'haddock_step_name' or key in haddock_2_wf.values():
+        if key == 'haddock_step_name':
             continue
         fu.log(f"CFG: {key} = {value}", out_log, global_log)
         cfg_dict[key] = value
