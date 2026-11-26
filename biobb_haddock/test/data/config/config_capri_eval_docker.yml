@@ -1,0 +1,4 @@
+properties:
+  container_image: quay.io/biocontainers/haddock_biobb:2025.11--py311h9a48388_1
+  container_path: docker
+  container_user_id: '1001'

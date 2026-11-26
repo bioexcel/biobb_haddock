@@ -1,0 +1,6 @@
+{
+  "properties": {
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/haddock_biobb:2025.11--py311h9a48388_1"
+  }
+}
