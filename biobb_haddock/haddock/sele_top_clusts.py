@@ -4,6 +4,7 @@
 
 from typing import Optional
 import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
 class SeleTopClusts(common.HaddockStepBase):
@@ -20,14 +21,13 @@ class SeleTopClusts(common.HaddockStepBase):
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cfg** (*dict*) - ({}) Haddock configuration options specification.
             * **global_cfg** (*dict*) - ({"postprocess": False}) `Global configuration options <https://www.bonvinlab.org/haddock3-user-manual/global_parameters.html>`_ specification.
-            * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
+            * **binary_path** (*str*) - ("haddock3") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -51,6 +51,9 @@ class SeleTopClusts(common.HaddockStepBase):
             * schema: http://edamontology.org/EDAM.owl
     """
 
+    haddock_step_name = "seletopclusts"
+    step_zip = "output_selection_zip_path"
+
     def __init__(
         self,
         input_haddock_wf_data: str,
@@ -60,61 +63,11 @@ class SeleTopClusts(common.HaddockStepBase):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_haddock_wf_data": input_haddock_wf_data,
-                "haddock_config_path": haddock_config_path
-            },
-            "out": {
-                "output_haddock_wf_data": output_haddock_wf_data,
-                "output_selection_zip_path": output_selection_zip_path
-            },
-        }
-
-        # Properties specific for BB
-        self.haddock_step_name = "seletopclusts"
-        # Handle configuration options from propierties
-        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
-        # Global HADDOCK configuration options
-        self.global_cfg = properties.get("global_cfg", dict(postprocess=False))
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "haddock3")
-        # Check the properties
-        self.check_init(properties)
-
-    def _handle_step_output(self):
-        """Handle how the output files from the step are copied to host."""
-        if output_selection_zip_path := self.io_dict["out"].get("output_selection_zip_path"):
-            self.copy_step_output(
-                lambda path: str(path.name) not in ["io.json", "params.cfg"],
-                output_selection_zip_path
-            )
+        super().__init__(**locals())
 
 
-def sele_top_clusts(
-    input_haddock_wf_data: str,
-    output_haddock_wf_data: str,
-    output_selection_zip_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`SeleTopClusts <biobb_haddock.haddock.sele_top_clusts>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.sele_top_clusts.launch>` method."""
-    # Launch method inherited from HaddockStepBase
-    return SeleTopClusts(**dict(locals())).launch()
-
-
-sele_top_clusts.__doc__ = SeleTopClusts.__doc__
-main = SeleTopClusts.get_main(sele_top_clusts, "Wrapper of the HADDOCK3 SeleTopClusts module.")
+sele_top_clusts = launcher(SeleTopClusts)
 
 
 if __name__ == "__main__":
-    main()
+    SeleTopClusts.main()

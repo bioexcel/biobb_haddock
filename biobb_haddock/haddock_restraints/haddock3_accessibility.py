@@ -2,15 +2,13 @@
 
 """Module containing the haddock  class and the command line interface."""
 
-import glob
 import os
 import re
 import shutil
 from typing import Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
 # calc_accessibility writes its report as Python log records, e.g.
 # "16/11/2026 12:49:38 L227 INFO - Chain: A - 150 residues"
@@ -32,14 +30,13 @@ class Haddock3Accessibility(BiobbObject):
             * **cutoff** (*float*) - (0.4) Relative cutoff for sidechain accessibility.
             * **probe_radius** (*float*) - (1.4) Probe radius for the accessibility calculation.
             * **pass_to_act** (*bool*) - (False) If True, the passive residues become active in the actpass file and vice versa.
-            * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
+            * **binary_path** (*str*) - ("haddock3-restraints") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -71,43 +68,10 @@ class Haddock3Accessibility(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
+        super().__init__(**locals())
 
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_pdb_path": input_pdb_path,
-            },
-            "out": {
-                "output_accessibility_path": output_accessibility_path,
-                "output_actpass_path": output_actpass_path,
-            },
-        }
-
-        # Properties specific for BB
-        self.chain = properties.get("chain", "A")
-        self.cutoff = properties.get("cutoff", 0.4)
-        self.probe_radius = properties.get("probe_radius", 1.4)
-        self.pass_to_act = properties.get("pass_to_act", False)
-
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "haddock3-restraints")
-
-        # Check the properties
-        self.check_init(properties)
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`Haddock3Accessibility <biobb_haddock.haddock_restraints.haddock3_accessibility>` object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # haddock3-restraints calc_accessibility 1UBQ.pdb --export_to_actpass
         self.cmd = [self.binary_path, "calc_accessibility", self.stage_io_dict['in']['input_pdb_path']]
@@ -116,6 +80,7 @@ class Haddock3Accessibility(BiobbObject):
             self.cmd.append("--export_to_actpass")
 
         self.cmd.append(f"-c {self.cutoff}")
+        self.cmd.append(f"--probe_radius {self.probe_radius}")
         # calc_accessibility writes its report with Python logging, i.e. to stderr,
         # so here stderr (not stdout) is redirected to the report file
         self.cmd.append("2>")
@@ -126,7 +91,7 @@ class Haddock3Accessibility(BiobbObject):
 
         # Keep only the tool's log records in the report: any other stderr
         # line (e.g. Python warnings, tracebacks) goes to the error log
-        report_path = self.stage_io_dict['out']['output_accessibility_path']
+        report_path = self.sandbox_file("output_accessibility_path")
         with open(report_path, 'r') as file:
             lines = file.readlines()
         other_lines = [line for line in lines if not REPORT_RECORD.match(line)]
@@ -138,49 +103,28 @@ class Haddock3Accessibility(BiobbObject):
         # Check chain
         target_string = f"Chain {self.chain}"
         found = False
-        with open(self.stage_io_dict['out']['output_accessibility_path'], 'r') as file:
+        with open(self.sandbox_file("output_accessibility_path"), 'r') as file:
             for line in file:
                 if target_string in line:
                     found = True
 
         if found:
-            # Rename/Copy output file to the given output file name
+            # Rename/Copy output file to the given output file name: the tool writes it in the sandbox
             file_name = os.path.basename(self.io_dict['in']['input_pdb_path'])
-            shutil.copyfile(f"{file_name[:-4]}_passive_{self.chain}.actpass", self.io_dict["out"]["output_actpass_path"])
+            shutil.copyfile(os.path.join(self.stage_io_dict["unique_dir"], f"{file_name[:-4]}_passive_{self.chain}.actpass"),
+                            self.sandbox_file("output_actpass_path"))
             if self.pass_to_act:
-                with open(self.io_dict["out"]["output_actpass_path"], 'r') as file:
+                with open(self.sandbox_file("output_actpass_path"), 'r') as file:
                     lines = file.readlines()
-                with open(self.io_dict["out"]["output_actpass_path"], 'w') as file:
+                with open(self.sandbox_file("output_actpass_path"), 'w') as file:
                     file.write(lines[1])
                     file.write('\n\n')
         else:
             print(f"\nWARNING: Chain {self.chain} not found in input PDB file. Please check and modify the chain property accordingly.\n")
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.tmp_files.extend(glob.glob('*.actpass'))
-        self.remove_tmp_files()
-
-        return self.return_code
-
-
-def haddock3_accessibility(
-    input_pdb_path: str,
-    output_accessibility_path: str,
-    output_actpass_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3Accessibility <biobb_haddock.haddock_restraints.haddock3_accessibility>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_accessibility.launch>` method."""
-    return Haddock3Accessibility(**dict(locals())).launch()
-
-
-haddock3_accessibility.__doc__ = Haddock3Accessibility.__doc__
-main = Haddock3Accessibility.get_main(haddock3_accessibility, "Wrapper of the Haddock-Restraints Accessibility module.")
+haddock3_accessibility = launcher(Haddock3Accessibility)
 
 
 if __name__ == "__main__":
-    main()
+    Haddock3Accessibility.main()

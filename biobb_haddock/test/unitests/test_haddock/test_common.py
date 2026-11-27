@@ -33,8 +33,7 @@ class TestCreateCfg():
     def test_create_cfg_run(self):
         create_cfg(
             output_cfg_path=str(self.paths['output_cfg']),
-            workflow_dict={'haddock_step_name': 'haddock3_run', 'run_dir': 'test_dir',
-                           'ambig_restraints_table_path': 'test_tbl'},
+            workflow_dict={'haddock_step_name': 'haddock3_run', 'run_dir': 'test_dir'},
             input_cfg_path=self.paths['input_cfg_run'],
             properties_cfg_dict=self.properties['cfg_run'],
         )
@@ -46,4 +45,3 @@ class TestCreateCfg():
         assert cfg['run_dir'] == 'test_dir'             # From workflow_dict
         assert cfg['topoaa.1']['iniseed'] == 1          # From input_cfg
         assert cfg['topoaa.1']['tolerance'] == 5        # From properties_cfg_dict
-        assert cfg['rigidbody.1']['ambig_fname'] == 'test_tbl'

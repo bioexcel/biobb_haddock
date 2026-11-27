@@ -8,9 +8,8 @@ import logging
 from pathlib import Path
 from typing import Optional, Union
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 from anarcii import Anarcii as AnarciiModel
 
 
@@ -58,38 +57,13 @@ class Anarcii(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
+        super().__init__(**locals())
 
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_pdb_path": input_pdb_path},
-            "out": {"output_pdb_path": output_pdb_path},
-        }
-
-        # Properties specific for BB
-        self.seq_type = properties.get("seq_type", "antibody")
-        self.mode = properties.get("mode", "accuracy")
-        self.verbose = properties.get("verbose", True)
-
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`Anarcii <utils.biobb_anarcii.Anarcii>` object."""
 
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
-
         # ANARCII appends the '.pdb' suffix to the output stem
-        output_pdb_path = self.stage_io_dict["out"]["output_pdb_path"]
+        output_pdb_path = self.sandbox_file("output_pdb_path")
         pdb_out_stem = str(Path(output_pdb_path).with_suffix(""))
 
         fu.log(
@@ -109,10 +83,8 @@ class Anarcii(BiobbObject):
                 model = AnarciiModel(
                     seq_type=self.seq_type, mode=self.mode, verbose=self.verbose
                 )
-                # number() renumbers the structure and returns the numbering
-                self.results = model.number(
-                    self.stage_io_dict["in"]["input_pdb_path"], pdb_out_stem=pdb_out_stem
-                )
+                # number() writes the renumbered structure
+                model.number(self.sandbox_file("input_pdb_path"), pdb_out_stem=pdb_out_stem)
         finally:
             root_logger.removeHandler(log_handler)
 
@@ -120,30 +92,9 @@ class Anarcii(BiobbObject):
         if captured:
             fu.log("ANARCII output:\n%s" % captured, self.out_log, self.global_log)
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=True)
-        return self.return_code
-
-
-def biobb_anarcii(
-    input_pdb_path: Union[str, Path],
-    output_pdb_path: Union[str, Path],
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Anarcii <utils.biobb_anarcii.Anarcii>` class and
-    execute the :meth:`launch() <utils.biobb_anarcii.Anarcii.launch>` method."""
-    return Anarcii(**dict(locals())).launch()
-
-
-biobb_anarcii.__doc__ = Anarcii.__doc__
-main = Anarcii.get_main(biobb_anarcii, "Wrapper for the ANARCII antibody numbering tool.")
+biobb_anarcii = launcher(Anarcii)
 
 
 if __name__ == "__main__":
-    main()
+    Anarcii.main()

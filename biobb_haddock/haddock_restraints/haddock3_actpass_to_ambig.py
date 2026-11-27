@@ -3,8 +3,7 @@
 """Module containing the haddock  class and the command line interface."""
 
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class Haddock3ActpassToAmbig(BiobbObject):
@@ -18,17 +17,16 @@ class Haddock3ActpassToAmbig(BiobbObject):
         input_actpass2_path (str): Path to the second input HADDOCK active-passive file containing active (in the first line) and passive (second line) residues. File type: input. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/haddock_actpass2.pass>`_. Accepted formats: txt (edam:format_2330), dat (edam:format_2330), in (edam:format_2330), pass (edam:format_2330).
         output_tbl_path (str): Path to the output HADDOCK tbl file with Ambiguous Interaction Restraints (AIR) information. File type: output. `Sample file <https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/haddock_actpass.tbl>`_. Accepted formats: tbl (edam:format_2330), txt (edam:format_2330), out (edam:format_2330).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
-            * **pass_to_act** (*bool*) - (False) Path to the haddock haddock executable binary.
+            * **pass_to_act** (*bool*) - (False) If True, the passive residues of the input files become active and vice versa.
             * **segid_one** (*str*) - (None) Segid of the first model.
             * **segid_two** (*str*) - (None) Segid of the second model.
-            * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
+            * **binary_path** (*str*) - ("haddock3-restraints") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -61,55 +59,18 @@ class Haddock3ActpassToAmbig(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
+        super().__init__(**locals())
 
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_actpass1_path": input_actpass1_path,
-                "input_actpass2_path": input_actpass2_path,
-            },
-            "out": {
-                "output_tbl_path": output_tbl_path,
-            },
-        }
-
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "haddock3-restraints")
-        self.pass_to_act = properties.get("pass_to_act", False)
-        self.segid_one = properties.get("segid_one", None)
-        self.segid_two = properties.get("segid_two", None)
-
-        # Check the properties
-        self.check_init(properties)
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`Haddock3ActpassToAmbig <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig>` object."""
 
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
-
+        actpass_paths = [self.sandbox_file("input_actpass1_path"), self.sandbox_file("input_actpass2_path")]
         if self.pass_to_act:
-            with open(self.stage_io_dict['in']['input_actpass1_path'], 'r') as file1, \
-                    open(self.stage_io_dict['in']['input_actpass2_path'], 'r') as file2:
-                actpass1_lines = file1.readlines()
-                actpass2_lines = file2.readlines()
-
-            with open(self.stage_io_dict['in']['input_actpass1_path'], 'w') as file1, \
-                    open(self.stage_io_dict['in']['input_actpass2_path'], 'w') as file2:
-                file1.writelines([actpass1_lines[1], actpass1_lines[0], '\n'])
-                file2.writelines([actpass2_lines[1], actpass2_lines[0], '\n'])
+            # Swapped in temporary copies: the inputs are not changed
+            actpass_paths = [self._swap_actpass(path) for path in actpass_paths]
 
         # haddock3-restraints active_passive_to_ambig haddock_actpass.txt
-        self.cmd = [self.binary_path, "active_passive_to_ambig", self.stage_io_dict['in']
-                    ['input_actpass1_path'], self.stage_io_dict['in']['input_actpass2_path']]
+        self.cmd = [self.binary_path, "active_passive_to_ambig"] + [self.staged_path(path) for path in actpass_paths]
 
         if self.segid_one is not None:
             self.cmd.extend(["--segid-one", self.segid_one])
@@ -124,39 +85,24 @@ class Haddock3ActpassToAmbig(BiobbObject):
         self.run_biobb()
 
         # Remove deprecation warning if present
-        with open(self.stage_io_dict['out']['output_tbl_path'], 'r') as file:
+        with open(self.sandbox_file("output_tbl_path"), 'r') as file:
             lines = file.readlines()
         if lines and "DEPRECATION NOTICE" in lines[0]:
-            with open(self.stage_io_dict['out']['output_tbl_path'], 'w') as file:
+            with open(self.sandbox_file("output_tbl_path"), 'w') as file:
                 file.writelines(lines[1:])
 
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        return self.return_code
-
-
-def haddock3_actpass_to_ambig(
-    input_actpass1_path: str,
-    input_actpass2_path: str,
-    output_tbl_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3ActpassToAmbig <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_actpass_to_ambig.launch>` method."""
-    return Haddock3ActpassToAmbig(**dict(locals())).launch()
+    def _swap_actpass(self, actpass_path: str) -> str:
+        """Go from an actpass file to a temporary copy with the passive residues in the first line."""
+        with open(actpass_path) as actpass_file:
+            active, passive = (actpass_file.read().splitlines() + ["", ""])[:2]
+        swapped_path = self.create_tmp_file(".pass")
+        with open(swapped_path, "w") as swapped_file:
+            swapped_file.write(f"{passive}\n{active}\n")
+        return swapped_path
 
 
-haddock3_actpass_to_ambig.__doc__ = Haddock3ActpassToAmbig.__doc__
-main = Haddock3ActpassToAmbig.get_main(
-    haddock3_actpass_to_ambig,
-    "Wrapper of the Haddock-Restraints active_passive_to_ambig module."
-)
+haddock3_actpass_to_ambig = launcher(Haddock3ActpassToAmbig)
 
 
 if __name__ == "__main__":
-    main()
+    Haddock3ActpassToAmbig.main()

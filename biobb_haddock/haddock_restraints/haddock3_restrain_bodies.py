@@ -3,8 +3,7 @@
 """Module containing the haddock class and the command line interface."""
 
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class Haddock3RestrainBodies(BiobbObject):
@@ -26,7 +25,6 @@ class Haddock3RestrainBodies(BiobbObject):
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -57,38 +55,10 @@ class Haddock3RestrainBodies(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
+        super().__init__(**locals())
 
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_structure_path": input_structure_path
-            },
-            "out": {
-                "output_tbl_path": output_tbl_path,
-            },
-        }
-
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "haddock3-restraints")
-        self.exclude = properties.get("exclude", None)
-        self.verbose = properties.get("verbose", 0)
-
-        # Check the properties
-        self.check_init(properties)
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`Haddock3RestrainBodies <biobb_haddock.haddock_restraints.haddock3_restrain_bodies>` object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # haddock3-restraints restrain_bodies <structure> [--exclude] [--verbose]
         self.cmd = [self.binary_path, "restrain_bodies",
@@ -108,35 +78,15 @@ class Haddock3RestrainBodies(BiobbObject):
         self.run_biobb()
 
         # Remove deprecation warning if present
-        with open(self.stage_io_dict['out']['output_tbl_path'], 'r') as file:
+        with open(self.sandbox_file("output_tbl_path"), 'r') as file:
             lines = file.readlines()
         if lines and "DEPRECATION NOTICE" in lines[0]:
-            with open(self.stage_io_dict['out']['output_tbl_path'], 'w') as file:
+            with open(self.sandbox_file("output_tbl_path"), 'w') as file:
                 file.writelines(lines[1:])
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        return self.return_code
-
-
-def haddock3_restrain_bodies(
-    input_structure_path: str,
-    output_tbl_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Haddock3RestrainBodies <biobb_haddock.haddock_restraints.haddock3_restrain_bodies>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock_restraints.haddock3_restrain_bodies.launch>` method."""
-    return Haddock3RestrainBodies(**dict(locals())).launch()
-
-
-haddock3_restrain_bodies.__doc__ = Haddock3RestrainBodies.__doc__
-main = Haddock3RestrainBodies.get_main(haddock3_restrain_bodies, "Wrapper of the HADDOCK3 restrain_bodies module.")
+haddock3_restrain_bodies = launcher(Haddock3RestrainBodies)
 
 
 if __name__ == "__main__":
-    main()
+    Haddock3RestrainBodies.main()

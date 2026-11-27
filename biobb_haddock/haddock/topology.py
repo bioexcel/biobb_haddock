@@ -4,13 +4,11 @@
 
 from pathlib import Path
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
-from biobb_haddock.haddock.common import create_cfg, move_to_container_path, zip_wf_output
+import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
-class Topology(BiobbObject):
+class Topology(common.HaddockStepBase):
     """
     | biobb_haddock Topology
     | Wrapper class for the HADDOCK3 Topology module.
@@ -26,14 +24,13 @@ class Topology(BiobbObject):
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cfg** (*dict*) - ({}) Haddock configuration options specification.
             * **global_cfg** (*dict*) - ({"postprocess": False}) `Global configuration options <https://www.bonvinlab.org/haddock3-user-manual/global_parameters.html>`_ specification.
-            * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
+            * **binary_path** (*str*) - ("haddock3") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -57,6 +54,8 @@ class Topology(BiobbObject):
             * schema: http://edamontology.org/EDAM.owl
     """
 
+    haddock_step_name = "topoaa"
+
     def __init__(
         self,
         mol1_input_pdb_path: str,
@@ -68,127 +67,31 @@ class Topology(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
+        super().__init__(**locals())
 
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
+    def run(self) -> None:
+        """Start a HADDOCK3 run with the topologies of the molecules: haddock3 creates the run folder, named
+        after the output (without .zip), in the sandbox where it runs."""
+        # The run folder relative to the sandbox, and its host path for the Python code
+        run_dir = self.stage_io_dict["out"]["output_haddock_wf_data"]
+        run_dir = run_dir[:-4] if run_dir[-4:] == ".zip" else run_dir
+        self.run_dir = str(Path(self.stage_io_dict["unique_dir"], run_dir))
+        molecules = [self.stage_io_dict["in"][mol] for mol in ("mol1_input_pdb_path", "mol2_input_pdb_path")
+                     if self.io_dict["in"].get(mol)]
+        self.write_cfg(run_dir=run_dir, molecules=molecules)
 
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "mol1_input_pdb_path": mol1_input_pdb_path,
-                "mol2_input_pdb_path": mol2_input_pdb_path,
-                "haddock_config_path": haddock_config_path,
-            },
-            "out": {
-                "output_haddock_wf_data": output_haddock_wf_data,
-                "mol1_output_top_zip_path": mol1_output_top_zip_path,
-                "mol2_output_top_zip_path": mol2_output_top_zip_path,
-            },
-        }
-
-        # Properties specific for BB
-        self.haddock_step_name = "topoaa"
-        # Handle configuration options from propierties
-        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
-        # Global HADDOCK configuration options
-        self.global_cfg = properties.get("global_cfg", dict(postprocess=False))
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "haddock3")
-        # Check the properties
-        self.check_init(properties)
-
-    @launchlogger
-    def launch(self) -> int:
-        """Execute the :class:`Topology <biobb_haddock.haddock.topology>` object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
-
-        self.run_dir = self.stage_io_dict["out"]["output_haddock_wf_data"]
-        self.run_dir = self.run_dir[:-4] if self.run_dir[-4:] == ".zip" else self.run_dir
-        workflow_dict = {
-            "run_dir": self.run_dir,
-            "molecules": [self.stage_io_dict["in"]["mol1_input_pdb_path"]],
-            "haddock_step_name": self.haddock_step_name,
-        }
-        workflow_dict.update(self.global_cfg)
-
-        if mol2_input_pdb_path := self.stage_io_dict["in"].get("mol2_input_pdb_path"):
-            workflow_dict["molecules"].append(mol2_input_pdb_path)
-
-        # Create workflow configuration
-        self.output_cfg_path = create_cfg(
-            output_cfg_path=self.create_tmp_file('_haddock.cfg'),
-            workflow_dict=workflow_dict,
-            input_cfg_path=self.stage_io_dict["in"].get("haddock_config_path"),
-            properties_cfg_dict=self.cfg,
-        )
-
-        if self.container_path:
-            fu.log("Container execution enabled", self.out_log)
-            move_to_container_path(self)
-
-        self.cmd = [self.binary_path, self.output_cfg_path]
-
-        # Run Biobb block
+        self.cmd = [self.binary_path, self.staged_path(self.output_cfg_path)]
         self.run_biobb()
 
-        # Copy output
-        haddock_output_path = Path(f'{workflow_dict["run_dir"]}/0_{self.haddock_step_name}')
-        mol1_name = str(Path(self.io_dict["in"]["mol1_input_pdb_path"]).stem)
-        mol1_output_file_list = list(
-            haddock_output_path.glob(mol1_name + r"*_haddock.pdb*")
-        )
-        fu.zip_list(
-            self.io_dict["out"]["mol1_output_top_zip_path"],
-            mol1_output_file_list,
-        )
-
-        if self.io_dict["out"].get("mol1_output_top_zip_path"):
-            mol2_name = str(Path(self.io_dict["in"]["mol2_input_pdb_path"]).stem)
-            mol2_output_file_list = list(
-                haddock_output_path.glob(mol2_name + r"*_haddock.pdb*")
-            )
-            fu.zip_list(
-                self.io_dict["out"]["mol2_output_top_zip_path"],
-                mol2_output_file_list,
-                self.out_log,
-            )
-
-        # Create zip output
+        for mol in ("mol1", "mol2"):
+            if input_pdb := self.io_dict["in"].get(f"{mol}_input_pdb_path"):
+                self.zip_step_files(f"{mol}_output_top_zip_path", [f"{Path(input_pdb).stem}*_haddock.pdb*"])
         if self.stage_io_dict["out"]["output_haddock_wf_data"][-4:] == ".zip":
-            zip_wf_output(self)
-
-        # Copy files to host
-        self.copy_to_host()
-        # Remove temporary files
-        self.remove_tmp_files()
-
-        return self.return_code
+            common.zip_wf_output(self)
 
 
-def topology(
-    mol1_input_pdb_path: str,
-    output_haddock_wf_data: str,
-    mol1_output_top_zip_path: Optional[str] = None,
-    mol2_input_pdb_path: Optional[str] = None,
-    mol2_output_top_zip_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`Topology <biobb_haddock.haddock.topology>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.topology.launch>` method."""
-    return Topology(**dict(locals())).launch()
-
-
-topology.__doc__ = Topology.__doc__
-main = Topology.get_main(topology, "Wrapper of the HADDOCK3 Topology module.")
+topology = launcher(Topology)
 
 
 if __name__ == "__main__":
-    main()
+    Topology.main()

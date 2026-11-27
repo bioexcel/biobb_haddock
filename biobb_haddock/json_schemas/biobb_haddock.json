@@ -4,9 +4,9 @@
     "github": "https://github.com/bioexcel/biobb_haddock",
     "readthedocs": "https://biobb-haddock.readthedocs.io/en/latest/",
     "conda": "https://anaconda.org/bioconda/biobb_haddock",
-    "docker": "https://quay.io/biocontainers/biobb_haddock:5.3.3--pyh106432d_0",
-    "singularity": "https://depot.galaxyproject.org/singularity/biobb_haddock:5.3.3--pyh106432d_0",
-    "version": "5.3.3",
+    "docker": "https://quay.io/biocontainers/biobb_haddock:5.4.0--pyh106432d_0",
+    "singularity": "https://depot.galaxyproject.org/singularity/biobb_haddock:5.4.0--pyh106432d_0",
+    "version": "5.4.0",
     "rest": true,
     "tools": [
         {
@@ -147,12 +147,12 @@
         }
     ],
     "dep_pypi": [
-        "install_requires=['biobb_common==5.3.1']",
-        "python_requires='>=3.10'"
+        "install_requires=['biobb_common==5.4.0']",
+        "python_requires='>=3.11'"
     ],
     "dep_conda": [
-        "python >=3.10",
-        "biobb_common ==5.3.1",
+        "python >=3.11",
+        "biobb_common ==5.4.0",
         "haddock_biobb ==2025.11",
         "anarcii >=2.0.0"
     ],

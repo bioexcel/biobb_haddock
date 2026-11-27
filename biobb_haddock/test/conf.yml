@@ -29,6 +29,29 @@ topology:
   properties:
     remove_tmp: False
 
+topology_docker:
+  paths:
+    mol1_input_pdb_path: file:test_data_dir/haddock/e2aP_1F3G.pdb
+    mol2_input_pdb_path: file:test_data_dir/haddock/hpr_ensemble.pdb
+    output_haddock_wf_data: haddock_wf_data_topology.zip
+    mol1_output_top_zip_path: mol1_top.zip
+    mol2_output_top_zip_path: mol2_top.zip
+  properties:
+    container_path: docker
+    container_image: quay.io/biocontainers/haddock_biobb:2025.11--py311h9a48388_1
+    container_user_id: "1001"
+
+topology_singularity:
+  paths:
+    mol1_input_pdb_path: file:test_data_dir/haddock/e2aP_1F3G.pdb
+    mol2_input_pdb_path: file:test_data_dir/haddock/hpr_ensemble.pdb
+    output_haddock_wf_data: haddock_wf_data_topology.zip
+    mol1_output_top_zip_path: mol1_top.zip
+    mol2_output_top_zip_path: mol2_top.zip
+  properties:
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/haddock_biobb:2025.11--py311h9a48388_1
+
 rigid_body:
   paths:
     input_haddock_wf_data: file:test_data_dir/haddock/haddock_wf_data_topology.zip
@@ -52,6 +75,27 @@ capri_eval:
   properties:
     remove_tmp: False
 
+capri_eval_docker:
+  paths:
+    input_haddock_wf_data: file:test_data_dir/haddock/haddock_wf_data_rigid.zip
+    output_haddock_wf_data: haddock_wf_data_caprieval
+    reference_pdb_path: file:test_data_dir/haddock/e2a-hpr_1GGR.pdb
+    output_evaluation_zip_path: caprieval_output.zip
+  properties:
+    container_path: docker
+    container_image: quay.io/biocontainers/haddock_biobb:2025.11--py311h9a48388_1
+    container_user_id: "1001"
+
+capri_eval_singularity:
+  paths:
+    input_haddock_wf_data: file:test_data_dir/haddock/haddock_wf_data_rigid.zip
+    output_haddock_wf_data: haddock_wf_data_caprieval
+    reference_pdb_path: file:test_data_dir/haddock/e2a-hpr_1GGR.pdb
+    output_evaluation_zip_path: caprieval_output.zip
+  properties:
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/haddock_biobb:2025.11--py311h9a48388_1
+
 sele_top:
   paths:
     input_haddock_wf_data: file:test_data_dir/haddock/haddock_wf_data_caprieval.zip
@@ -65,7 +109,7 @@ sele_top:
 em_ref:
   paths:
     input_haddock_wf_data: file:test_data_dir/haddock/haddock_wf_data_caprieval.zip
-    restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
+    ambig_restraints_table_path: file:test_data_dir/haddock/e2a-hpr_air.tbl
 
     refinement_output_zip_path: refinement_output.zip
     output_haddock_wf_data: haddock_wf_data

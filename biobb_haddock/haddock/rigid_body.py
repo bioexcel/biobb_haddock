@@ -2,9 +2,9 @@
 
 """Module containing the HADDOCK3 RigidBody class and the command line interface."""
 
-from os.path import abspath
 from typing import Optional
 import biobb_haddock.haddock.common as common
+from biobb_common.generic.biobb_object import launcher
 
 
 class RigidBody(common.HaddockStepBase):
@@ -24,14 +24,13 @@ class RigidBody(common.HaddockStepBase):
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cfg** (*dict*) - ({}) Haddock configuration options specification.
             * **global_cfg** (*dict*) - ({"postprocess": False}) `Global configuration options <https://www.bonvinlab.org/haddock3-user-manual/global_parameters.html>`_ specification.
-            * **binary_path** (*str*) - ("haddock") Path to the haddock haddock executable binary.
+            * **binary_path** (*str*) - ("haddock3") Path to the haddock haddock executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -55,6 +54,11 @@ class RigidBody(common.HaddockStepBase):
             * schema: http://edamontology.org/EDAM.owl
     """
 
+    haddock_step_name = "rigidbody"
+    cfg_files = common.RESTRAINT_FILES
+    step_zip = "docking_output_zip_path"
+    step_zip_files = ("rigidbody*.pdb*",)
+
     def __init__(
         self,
         input_haddock_wf_data: str,
@@ -67,76 +71,11 @@ class RigidBody(common.HaddockStepBase):
         properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_haddock_wf_data": input_haddock_wf_data,
-                "ambig_restraints_table_path": ambig_restraints_table_path,
-                "unambig_restraints_table_path": unambig_restraints_table_path,
-                "hb_restraints_table_path": hb_restraints_table_path,
-                "haddock_config_path": haddock_config_path,
-            },
-            "out": {
-                "output_haddock_wf_data": output_haddock_wf_data,
-                "docking_output_zip_path": docking_output_zip_path,
-            },
-        }
-
-        # Properties specific for BB
-        self.haddock_step_name = "rigidbody"
-        # Handle configuration options from properties
-        self.cfg = {k: v for k, v in properties.get("cfg", dict()).items()}
-        # Global HADDOCK configuration options
-        self.global_cfg = properties.get("global_cfg", dict(postprocess=False))
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "haddock3")
-        # Check the properties
-        self.check_init(properties)
-
-    def _handle_config_arguments(self):
-        """Handle configuration options from arguments."""
-        if self.io_dict["in"].get("ambig_restraints_table_path"):
-            self.cfg["ambig_fname"] = abspath(self.stage_io_dict["in"].get("ambig_restraints_table_path"))
-        if self.io_dict["in"].get("unambig_restraints_table_path"):
-            self.cfg["unambig_fname"] = abspath(self.stage_io_dict["in"].get("unambig_restraints_table_path"))
-        if self.io_dict["in"].get("hb_restraints_table_path"):
-            self.cfg["hbond_fname"] = abspath(self.stage_io_dict["in"].get("hb_restraints_table_path"))
-
-    def _handle_step_output(self):
-        """Handle how the output files from the step are copied to host."""
-        if docking_output_zip_path := self.io_dict["out"].get("docking_output_zip_path"):
-            self.copy_step_output(
-                lambda path: path.match(self.haddock_step_name + r"*.pdb*"),
-                docking_output_zip_path
-            )
+        super().__init__(**locals())
 
 
-def rigid_body(
-    input_haddock_wf_data: str,
-    output_haddock_wf_data: str,
-    docking_output_zip_path: Optional[str] = None,
-    ambig_restraints_table_path: Optional[str] = None,
-    unambig_restraints_table_path: Optional[str] = None,
-    hb_restraints_table_path: Optional[str] = None,
-    haddock_config_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`RigidBody <biobb_haddock.haddock.rigid_body>` class and
-    execute the :meth:`launch() <biobb_haddock.haddock.rigid_body.launch>` method."""
-    # Launch method inherited from HaddockStepBase
-    return RigidBody(**dict(locals())).launch()
-
-
-rigid_body.__doc__ = RigidBody.__doc__
-main = RigidBody.get_main(rigid_body, "Wrapper of the HADDOCK3 RigidBody module.")
+rigid_body = launcher(RigidBody)
 
 
 if __name__ == "__main__":
-    main()
+    RigidBody.main()

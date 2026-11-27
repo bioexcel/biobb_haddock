@@ -119,7 +119,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -195,7 +194,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -271,7 +269,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -356,7 +353,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -441,7 +437,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -516,7 +511,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -578,7 +572,7 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **pass_to_act** (*boolean*): (False) Path to the haddock haddock executable binary.
+* **pass_to_act** (*boolean*): (False) If True, the passive residues of the input files become active and vice versa.
 * **segid_one** (*string*): (None) Segid of the first model.
 * **segid_two** (*string*): (None) Segid of the second model.
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
@@ -588,7 +582,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -659,7 +652,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -711,21 +703,21 @@ haddock3_passive_from_active -h
     
     optional arguments:
       --input_active_list_path INPUT_ACTIVE_LIST_PATH
-                            Path to the input file with list of active residues. Accepted formats: txt, dat, list.
+                            Path to the input file with the active residue numbers, separated by commas, spaces or new lines. Accepted formats: txt, dat, list.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 * **input_pdb_path** (*string*): Path to the input PDB structure file. File type: input. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/data/haddock_restraints/1A2P_ch.pdb). Accepted formats: PDB
 * **output_actpass_path** (*string*): Path to the output file with list of passive residues. File type: output. [Sample file](https://raw.githubusercontent.com/bioexcel/biobb_haddock/master/biobb_haddock/test/reference/haddock_restraints/1A2P_manual_actpass.txt). Accepted formats: TXT, DAT, LIST, OUT
-* **input_active_list_path** (*string*): Path to the input file with list of active residues. File type: input. [Sample file](None). Accepted formats: TXT, DAT, LIST
+* **input_active_list_path** (*string*): Path to the input file with the active residue numbers, separated by commas, spaces or new lines. File type: input. [Sample file](None). Accepted formats: TXT, DAT, LIST
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **active_list** (*string*): () List of active residues as a comma-separated string. Required if input_active_list_path is not provided.
 * **chain_id** (*string*): (None) Chain ID to consider when calculating passive residues.
-* **surface_list_path** (*string*): () Path to file with list of surface residues to filter.
+* **surface_list_path** (*string*): () Path to a file with the surface residue numbers to consider, separated by commas, spaces or new lines.
 * **radius** (*number*): (6.5) Radius in Angstroms to look for surface residues around active ones.
 * **binary_path** (*string*): (haddock3-restraints) Path to the haddock3-restraints executable binary.
 * **remove_tmp** (*boolean*): (True) Remove temporal files.
@@ -734,7 +726,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -804,7 +795,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -869,6 +859,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **cfg** (*object*): ({}) Haddock configuration options specification.
+* **global_cfg** (*object*): ({'postprocess': True}) Global configuration options specification.
 * **restart_from** (*integer*): (None) Restart the run from a given step, this maps to the HADDOCK3 --restart option. Step folders from the selected step onward will be deleted. Use 0 to start the run from scratch, reusing an existing non-empty run_dir.
 * **binary_path** (*string*): (haddock) Path to the haddock haddock executable binary.
 * **remove_tmp** (*boolean*): (True) Remove temporal files.
@@ -877,7 +868,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -962,7 +952,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -1038,7 +1027,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -1114,7 +1102,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -1196,7 +1183,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Path to the binary executable of your container.
 * **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
