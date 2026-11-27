@@ -2,11 +2,21 @@
 
 ## Unreleased
 
+## What's new in version [5.4.0](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.4.0)?
+
 ### Changes
 
+* [UPDATE] Update to biobb_common 5.4.0.
 * [UPDATE] haddock3_run docs and JSON schema: the `global_cfg` property (HADDOCK3 global parameters, `{"postprocess": True}` by default) is documented; the block already used it.
 * [FIX] topology: `mol1_output_top_zip_path` can be left out, as documented; the block failed without it.
 * [FIX] haddock3_accessibility: the `probe_radius` property now reaches haddock3-restraints. It was ignored, so the accessibility was always computed with a 1.4 Å probe.
+* [FIX] topology: a single molecule (no `mol2_input_pdb_path`) and a run without `mol2_output_top_zip_path` work; the block zipped the second molecule whenever `mol1_output_top_zip_path` was given and failed.
+* [FIX] haddock3_passive_from_active: the residues of `input_active_list_path` reach haddock3-restraints (the command got an empty list), `surface_list_path` works (it raised a `KeyError`) and the `radius` property is passed.
+* [FIX] haddock3_actpass_to_ambig: `pass_to_act` works. It rewrote the staged input files (the user's files with `disable_sandbox`) with an extra empty line, which haddock3 2025.11 rejects; the residues are now swapped in temporary copies. `pass_to_act` is documented.
+* [FIX] HADDOCK3 step blocks: with an output folder of the same name as the input folder, the step folders of the input folder are no longer renamed before the run (`0_topoaa` to `00_topoaa`); the ones haddock3 renumbers are renamed in the output folder, also in `data/`.
+* [FIX] haddock3_accessibility no longer deletes the `*.actpass` files of the folder it runs from.
+* [UPDATE] `container_working_dir` removed from the docs and the JSON schemas: the commands run in the sandbox, mounted in `container_volume_path` in containers.
+* [UPDATE] Python 3.11 to 3.13.
 
 ## What's new in version [5.3.3](https://github.com/bioexcel/biobb_haddock/releases/tag/v5.3.3)?
 
